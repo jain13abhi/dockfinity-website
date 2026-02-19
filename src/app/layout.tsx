@@ -46,6 +46,7 @@ export default function RootLayout({
         >
           <div className="relative flex flex-col min-h-screen">
             <Header />
+            {/* Main content wrapper with padding-top to account for fixed header */}
             <main className="flex-grow pt-20">
               {children}
             </main>
