@@ -1,104 +1,165 @@
 import { Container } from "@/components/ui/container";
-import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Code2, Cpu, Laptop, Rocket } from "lucide-react";
+import { CheckCircle2, Code2, Cpu, Laptop, Rocket, ArrowRight, Server, BrainCircuit, Cloud } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
     title: "Dockware Labs | Dockfinity",
-    description: "Enterprise SaaS, Automation, and Custom Software Engineering.",
+    description: "Enterprise SaaS, AI automation, and custom software engineering — the technology arm of Dockfinity.",
 };
+
+const services = [
+    { icon: Code2, title: "Custom ERP & CRM", desc: "Tailored operational software that fits your workflows, not the other way around." },
+    { icon: BrainCircuit, title: "AI & Automation", desc: "Intelligent agents and workflow automation that eliminate manual bottlenecks at scale." },
+    { icon: Laptop, title: "SaaS Development", desc: "End-to-end product engineering from architecture to deployment and ongoing iteration." },
+    { icon: Cloud, title: "Cloud Infrastructure", desc: "Scalable, secure AWS/Azure architecture that grows with your business demands." },
+];
+
+const process = [
+    { step: "01", title: "Discovery", desc: "We deep-dive into your operations to understand every bottleneck, inefficiency, and opportunity." },
+    { step: "02", title: "Architecture", desc: "We design robust, scalable systems using modern tech stacks tailored to your specific context." },
+    { step: "03", title: "Development", desc: "Agile sprints with frequent deliverables, continuous testing, and complete transparency." },
+    { step: "04", title: "Deployment", desc: "Smooth rollout with CI/CD pipelines, post-launch support, and performance monitoring." },
+];
 
 export default function DockwareLabsPage() {
     return (
         <>
-            <Section className="bg-primary text-primary-foreground pt-32 pb-24 relative overflow-hidden">
-                <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,white,transparent)]" />
+            {/* ── HERO ── */}
+            <section className="relative pt-36 pb-24 bg-foreground text-background overflow-hidden">
+                <div className="absolute inset-0 bg-grid-pattern opacity-[0.06] pointer-events-none" />
+                <div className="absolute top-0 left-1/4 w-[600px] h-[500px] bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
+
                 <Container className="relative z-10">
-                    <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-                        <div className="inline-flex items-center justify-center p-4 bg-white/10 rounded-2xl mb-8 backdrop-blur-md border border-white/10">
-                            <Code2 className="w-12 h-12" />
+                    <div className="max-w-4xl">
+                        <div className="flex items-center gap-3 mb-8">
+                            <div className="w-14 h-14 bg-blue-500/20 rounded-2xl flex items-center justify-center">
+                                <Cpu className="w-7 h-7 text-blue-400" />
+                            </div>
+                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-blue-500/20 text-blue-400 border border-blue-500/30 font-mono">
+                                SaaS · Automation · AI
+                            </span>
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight tracking-tighter">Dockware Labs</h1>
-                        <p className="text-xl md:text-2xl text-primary-foreground/80 leading-relaxed max-w-2xl">
-                            We engineer intelligent software systems that automate complexity and drive business growth.
+
+                        <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-6">
+                            Dockware<br />
+                            <span className="text-blue-400">Labs.</span>
+                        </h1>
+                        <p className="text-xl md:text-2xl text-background/70 max-w-2xl leading-relaxed font-light">
+                            We engineer intelligent software systems that automate complexity, eliminate inefficiencies, and drive measurable business growth.
                         </p>
                     </div>
                 </Container>
-            </Section>
+            </section>
 
-            <Section>
+
+            {/* ── WHAT WE DO ── */}
+            <section className="py-20 md:py-28">
                 <Container>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                        <div>
-                            <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">What We Do</h2>
-                            <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                                Dockware Labs is the technology arm of Dockfinity. We partner with enterprises to build custom software solutions, from internal automation tools to customer-facing SaaS platforms. Our focus is on scalability, security, and performance.
-                            </p>
-                            <p className="text-lg text-muted-foreground leading-relaxed">
-                                We don't just write code; we architect systems that solve real business problems.
-                            </p>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                        <div className="space-y-6">
+                            <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-500 font-mono">What We Do</p>
+                            <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight">
+                                Systems That Solve.<br />Software That Scales.
+                            </h2>
+                            <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+                                <p>
+                                    Dockware Labs is the technology arm of Dockfinity. We partner with enterprises to build custom software solutions — from internal automation tools to customer-facing SaaS platforms.
+                                </p>
+                                <p>
+                                    Our focus is unwavering: scalability, security, and performance. We don&apos;t just write code — we architect systems that solve real business problems and compound value over time.
+                                </p>
+                            </div>
+
+                            <div className="p-6 bg-blue-500/5 border border-blue-500/20 rounded-2xl">
+                                <p className="text-sm font-medium text-foreground flex items-start gap-3">
+                                    <Server className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
+                                    ISO 27001:2022 certified. All software we build adheres to enterprise-grade security and quality standards.
+                                </p>
+                            </div>
                         </div>
-                        <div className="bg-secondary/30 p-8 rounded-3xl border border-border/50">
-                            <h3 className="text-xl font-bold mb-6 flex items-center gap-3">
-                                <Cpu className="w-6 h-6 text-primary" /> Core Competencies
-                            </h3>
-                            <ul className="space-y-5">
-                                <li className="flex items-start gap-4">
-                                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                                    <span><strong>Custom ERP/CRM:</strong> Tailored operational software.</span>
-                                </li>
-                                <li className="flex items-start gap-4">
-                                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                                    <span><strong>AI & Automation:</strong> Workflow automation and intelligent agents.</span>
-                                </li>
-                                <li className="flex items-start gap-4">
-                                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                                    <span><strong>SaaS Development:</strong> End-to-end product engineering.</span>
-                                </li>
-                                <li className="flex items-start gap-4">
-                                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                                    <span><strong>Cloud Infrastructure:</strong> Scalable AWS/Azure architecture.</span>
-                                </li>
-                            </ul>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {services.map((s) => (
+                                <div
+                                    key={s.title}
+                                    className="p-6 bg-card rounded-2xl border border-border/50 border-t-2 border-t-blue-500/60 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                                >
+                                    <div className="w-11 h-11 bg-blue-500/10 rounded-xl flex items-center justify-center mb-4">
+                                        <s.icon className="w-5 h-5 text-blue-500" />
+                                    </div>
+                                    <h3 className="font-display font-bold text-base mb-2">{s.title}</h3>
+                                    <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </Container>
-            </Section>
+            </section>
 
-            <Section className="bg-secondary/20 border-y border-border/40">
-                <Container>
-                    <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center tracking-tight">How We Work</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                        {[
-                            { icon: Laptop, title: "Discovery", desc: "We deep dive into your business processes to identify bottlenecks." },
-                            { icon: Code2, title: "Architecture", desc: "Designing robust, scalable systems using modern tech stacks." },
-                            { icon: Cpu, title: "Development", desc: "Agile sprints with frequent deliverables and testing." },
-                            { icon: Rocket, title: "Deployment", desc: "Smooth rollout with CI/CD and ongoing support." },
-                        ].map((step, i) => (
-                            <div key={i} className="flex flex-col items-center text-center p-8 bg-background rounded-3xl border border-border/50 shadow-lg shadow-primary/5 hover:-translate-y-1 transition-transform duration-300">
-                                <div className="w-14 h-14 bg-primary/5 text-primary rounded-2xl flex items-center justify-center mb-6">
-                                    <step.icon className="w-7 h-7" />
+
+            {/* ── PROCESS ── */}
+            <section className="py-20 md:py-28 bg-secondary/30 relative overflow-hidden">
+                <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
+                <Container className="relative z-10">
+                    <div className="text-center mb-16">
+                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-500 font-mono mb-3">Our Process</p>
+                        <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight">How We Work</h2>
+                    </div>
+
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        {process.map((p) => (
+                            <div
+                                key={p.step}
+                                className="relative p-7 bg-card rounded-2xl border border-border/50 hover:border-blue-500/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+                            >
+                                <div className="font-display text-6xl font-bold text-blue-500/10 group-hover:text-blue-500/20 transition-colors mb-4">
+                                    {p.step}
                                 </div>
-                                <h3 className="font-bold text-xl mb-3">{step.title}</h3>
-                                <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
+                                <h3 className="font-display text-xl font-bold mb-2">{p.title}</h3>
+                                <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
                             </div>
                         ))}
                     </div>
                 </Container>
-            </Section>
+            </section>
 
-            <Section>
-                <Container className="text-center max-w-3xl bg-muted/20 p-12 md:p-16 rounded-[2.5rem] border border-border/50">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">Ready to upgrade your tech stack?</h2>
-                    <p className="text-muted-foreground mb-10 text-xl font-light">
-                        Let's discuss how we can automate your operations and prepare your business for scale.
+
+            {/* ── TECH STACK NOTE ── */}
+            <section className="py-20">
+                <Container>
+                    <div className="max-w-2xl mx-auto text-center">
+                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-500 font-mono mb-3">What We Use</p>
+                        <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-4">Built on Modern Foundations</h2>
+                        <p className="text-muted-foreground mb-10">We work with the technology stack that best fits your needs — not the one that&apos;s most comfortable for us.</p>
+                        <div className="flex flex-wrap justify-center gap-3">
+                            {["React / Next.js", "Node.js", "Python", "AWS / Azure", "PostgreSQL", "Redis", "Docker", "Kubernetes", "REST & GraphQL", "CI/CD Pipelines"].map((tech) => (
+                                <span key={tech} className="px-4 py-2 rounded-full bg-secondary border border-border/60 text-sm font-medium text-foreground font-mono">
+                                    {tech}
+                                </span>
+                            ))}
+                        </div>
+                    </div>
+                </Container>
+            </section>
+
+
+            {/* ── CTA ── */}
+            <section className="py-20 bg-foreground text-background relative overflow-hidden">
+                <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
+                <Container className="relative z-10 text-center">
+                    <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">
+                        Ready to Upgrade Your Tech Stack?
+                    </h2>
+                    <p className="text-xl text-background/60 max-w-xl mx-auto mb-8 font-light">
+                        Let&apos;s map your business operations and design a software architecture that actually scales.
                     </p>
-                    <Button size="lg" className="rounded-full px-10 h-12 text-base" asChild>
-                        <Link href="/contact">Book a Consultation</Link>
+                    <Button className="rounded-full px-10 h-14 text-base font-semibold bg-blue-500 text-white hover:bg-blue-600 shadow-lg hover:shadow-blue-500/25 transition-all duration-300" asChild>
+                        <Link href="/contact">Book a Consultation <ArrowRight className="ml-2 w-4 h-4" /></Link>
                     </Button>
                 </Container>
-            </Section>
+            </section>
         </>
     );
 }

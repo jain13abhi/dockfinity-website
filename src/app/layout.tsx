@@ -1,17 +1,26 @@
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
+import { Inter, JetBrains_Mono, Syne } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 
-// Premium Font Pairing
+// Display / Heading Font — Syne (bold, distinctive, modern)
+const syne = Syne({
+  subsets: ['latin'],
+  variable: '--font-display',
+  display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
+});
+
+// Body Font — Inter (clean, readable)
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
 });
 
+// Mono Font — JetBrains Mono (labels, code, badges)
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
@@ -21,10 +30,16 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: {
     template: '%s | Dockfinity Private Limited',
-    default: 'Dockfinity Private Limited',
+    default: 'Dockfinity — Building Tomorrow\'s Enterprise',
   },
-  description: 'Building the Future of Enterprise. A technology-first holding company.',
+  description: 'Dockfinity Private Limited is a technology-first holding company engineering the next generation of SaaS, financial intelligence, and corporate experiences.',
   metadataBase: new URL('https://dockfinity.com'),
+  keywords: ['Dockfinity', 'holding company', 'SaaS', 'enterprise software', 'corporate gifting', 'financial education', 'India startup'],
+  openGraph: {
+    title: 'Dockfinity Private Limited',
+    description: 'Building Tomorrow\'s Enterprise — SaaS, Financial Intelligence & Corporate Experiences.',
+    type: 'website',
+  },
 };
 
 export default function RootLayout({
@@ -34,9 +49,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${inter.variable} ${jetbrainsMono.variable} font-sans antialiased min-h-screen bg-background text-foreground relative selection:bg-primary selection:text-primary-foreground`}>
-        {/* Global Details - Fixed Textures */}
-        <div className="fixed inset-0 z-[-1] bg-noise-subtle mix-blend-overlay pointer-events-none" />
+      <body className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable} font-sans antialiased min-h-screen bg-background text-foreground relative selection:bg-brand selection:text-brand-foreground`}>
+        {/* Global noise texture */}
+        <div className="fixed inset-0 z-[-1] bg-noise-subtle mix-blend-overlay pointer-events-none" aria-hidden="true" />
 
         <ThemeProvider
           attribute="class"

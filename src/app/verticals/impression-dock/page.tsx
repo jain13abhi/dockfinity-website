@@ -1,105 +1,157 @@
 import { Container } from "@/components/ui/container";
-import { Section } from "@/components/ui/section";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, Gift, Printer, Package, Palette } from "lucide-react";
+import { ArrowRight, Gift, Printer, Package, Palette, Truck, Star } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
     title: "Impression Dock | Dockfinity",
-    description: "Corporate gifting, printing, and personalization services.",
+    description: "Premium corporate gifting, custom merchandise, and high-quality offset printing solutions.",
 };
+
+const services = [
+    { icon: Gift, title: "Corporate Gifting", desc: "Curated premium gift boxes and hampers for clients, employees, and events." },
+    { icon: Palette, title: "Custom Merchandise", desc: "T-shirts, hoodies, bottles, and more — precision-branded with your identity." },
+    { icon: Printer, title: "Offset & Digital Print", desc: "High-quality brochures, business cards, packaging, and large-format prints." },
+    { icon: Truck, title: "End-to-End Fulfillment", desc: "Warehousing, kitting, and direct shipping to your office or individual recipients." },
+];
+
+const process = [
+    { step: "01", title: "Design & Consult", desc: "Work with our creative team to select products, finalize designs, and align with your brand guidelines." },
+    { step: "02", title: "Sourcing", desc: "We source premium-quality materials from our vetted, trusted vendor network across India." },
+    { step: "03", title: "Production", desc: "Precision printing and brand application on every item — zero compromise on quality." },
+    { step: "04", title: "Delivery", desc: "Kitting, packing, and shipping directly to your office or individual addresses across India." },
+];
 
 export default function ImpressionDockPage() {
     return (
         <>
-            <Section className="bg-primary text-primary-foreground pt-32 pb-24 relative overflow-hidden">
-                <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent opacity-60" />
-                <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,white,transparent)]" />
+            {/* HERO */}
+            <section className="relative pt-36 pb-24 bg-foreground text-background overflow-hidden">
+                <div className="absolute inset-0 bg-grid-pattern opacity-[0.06] pointer-events-none" />
+                <div className="absolute bottom-0 left-1/3 w-[600px] h-[500px] bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+
                 <Container className="relative z-10">
-                    <div className="flex flex-col items-center text-center max-w-4xl mx-auto">
-                        <div className="inline-flex items-center justify-center p-4 bg-white/10 rounded-2xl mb-8 backdrop-blur-md border border-white/10">
-                            <Gift className="w-12 h-12" />
+                    <div className="max-w-4xl">
+                        <div className="flex items-center gap-3 mb-8">
+                            <div className="w-14 h-14 bg-amber-500/20 rounded-2xl flex items-center justify-center">
+                                <Gift className="w-7 h-7 text-amber-400" />
+                            </div>
+                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-amber-500/20 text-amber-400 border border-amber-500/30 font-mono">
+                                Gifting · Printing · Merch
+                            </span>
                         </div>
-                        <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight tracking-tighter">Impression Dock</h1>
-                        <p className="text-xl md:text-2xl text-primary-foreground/80 leading-relaxed max-w-2xl">
-                            Curated corporate gifting and premium printing solutions that leave a mark.
+
+                        <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-6">
+                            Impression<br />
+                            <span className="text-amber-400">Dock.</span>
+                        </h1>
+                        <p className="text-xl md:text-2xl text-background/70 max-w-2xl leading-relaxed font-light">
+                            Curated corporate gifting and premium printing solutions that leave a mark — on every stakeholder, every time.
                         </p>
                     </div>
                 </Container>
-            </Section>
+            </section>
 
-            <Section>
+            {/* SERVICES */}
+            <section className="py-20 md:py-28">
                 <Container>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
-                        <div>
-                            <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">What We Do</h2>
-                            <p className="text-lg text-muted-foreground leading-relaxed mb-6">
-                                Impression Dock helps brands connect with employees and clients through tangible experiences. We specialize in end-to-end merchandising, from design and sourcing to printing and logistics.
-                            </p>
-                            <p className="text-lg text-muted-foreground leading-relaxed">
-                                Whether it's onboarding kits or event swag, we ensure high-quality delivery.
-                            </p>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                        <div className="space-y-6">
+                            <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-500 font-mono">What We Do</p>
+                            <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight">
+                                Your Brand,<br />Made Tangible.
+                            </h2>
+                            <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
+                                <p>
+                                    Impression Dock helps brands connect with employees and clients through tangible, premium experiences. We specialize in end-to-end merchandising — from design and sourcing to printing and last-mile logistics.
+                                </p>
+                                <p>
+                                    Whether it is an onboarding kit for new hires, festive hampers for clients, or event merchandise at scale — we ensure every item reflects the quality of your brand.
+                                </p>
+                            </div>
+
+                            <div className="flex flex-col sm:flex-row gap-4 pt-2">
+                                <Button className="rounded-full px-8 font-semibold bg-amber-500 text-white hover:bg-amber-600 shadow-sm" asChild>
+                                    <Link href="/contact">Request a Catalog <ArrowRight className="ml-2 w-4 h-4" /></Link>
+                                </Button>
+                            </div>
                         </div>
-                        <div className="bg-secondary/30 p-8 rounded-3xl border border-border/50">
-                            <h3 className="text-xl font-bold mb-6 flex items-center gap-3">
-                                <Package className="w-6 h-6 text-primary" /> Our Services
-                            </h3>
-                            <ul className="space-y-5">
-                                <li className="flex items-start gap-4">
-                                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                                    <span><strong>Corporate Gifting:</strong> Premium, curated gift boxes and hampers.</span>
-                                </li>
-                                <li className="flex items-start gap-4">
-                                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                                    <span><strong>Custom Merch:</strong> T-shirts, hoodies, bottles with branding.</span>
-                                </li>
-                                <li className="flex items-start gap-4">
-                                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                                    <span><strong>Offset & Digital Impact:</strong> Brochures, business cards, larger formats.</span>
-                                </li>
-                                <li className="flex items-start gap-4">
-                                    <CheckCircle2 className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                                    <span><strong>Fulfillment:</strong> Warehousing and shipping directly to recipients.</span>
-                                </li>
-                            </ul>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            {services.map((s) => (
+                                <div key={s.title} className="p-6 bg-card rounded-2xl border border-border/50 border-t-2 border-t-amber-500/60 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                                    <div className="w-11 h-11 bg-amber-500/10 rounded-xl flex items-center justify-center mb-4">
+                                        <s.icon className="w-5 h-5 text-amber-500" />
+                                    </div>
+                                    <h3 className="font-display font-bold text-base mb-2">{s.title}</h3>
+                                    <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </Container>
-            </Section>
+            </section>
 
-            <Section className="bg-secondary/20 border-y border-border/40">
-                <Container>
-                    <h2 className="text-3xl md:text-4xl font-bold mb-16 text-center tracking-tight">How It Works</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-                        {[
-                            { icon: Palette, title: "Design", desc: "Consult with our team to choose products and finalize designs." },
-                            { icon: Package, title: "Sourcing", desc: "We source high-quality materials from trusted vendors." },
-                            { icon: Printer, title: "Production", desc: "Precision printing and branding on your selected items." },
-                            { icon: Gift, title: "Delivery", desc: "Kitting and shipping to your office or individual addresses." },
-                        ].map((step, i) => (
-                            <div key={i} className="flex flex-col items-center text-center p-8 bg-background rounded-3xl border border-border/50 shadow-lg shadow-primary/5 hover:-translate-y-1 transition-transform duration-300">
-                                <div className="w-14 h-14 bg-primary/5 text-primary rounded-2xl flex items-center justify-center mb-6">
-                                    <step.icon className="w-7 h-7" />
-                                </div>
-                                <h3 className="font-bold text-xl mb-3">{step.title}</h3>
-                                <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
+            {/* PROCESS */}
+            <section className="py-20 md:py-28 bg-secondary/30 relative overflow-hidden">
+                <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
+                <Container className="relative z-10">
+                    <div className="text-center mb-16">
+                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-500 font-mono mb-3">How It Works</p>
+                        <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight">From Concept to Delivery</h2>
+                    </div>
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                        {process.map((p) => (
+                            <div key={p.step} className="p-7 bg-card rounded-2xl border border-border/50 hover:border-amber-500/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group">
+                                <div className="font-display text-6xl font-bold text-amber-500/10 group-hover:text-amber-500/20 transition-colors mb-4">{p.step}</div>
+                                <h3 className="font-display text-xl font-bold mb-2">{p.title}</h3>
+                                <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
                             </div>
                         ))}
                     </div>
                 </Container>
-            </Section>
+            </section>
 
-            <Section>
-                <Container className="text-center max-w-3xl bg-muted/20 p-12 md:p-16 rounded-[2.5rem] border border-border/50">
-                    <h2 className="text-3xl md:text-4xl font-bold mb-6 tracking-tight">Make an impression</h2>
-                    <p className="text-muted-foreground mb-10 text-xl font-light">
-                        Get a quote for your next corporate event or gifting requirement.
+            {/* WHY US */}
+            <section className="py-20">
+                <Container>
+                    <div className="max-w-3xl mx-auto text-center">
+                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-500 font-mono mb-3">Why Impression Dock</p>
+                        <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-8">Quality You Can Feel</h2>
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
+                            {[
+                                { icon: Star, label: "Premium Materials", desc: "Sourced from trusted vendor networks across India" },
+                                { icon: Package, label: "B2B Bulk Orders", desc: "Scalable fulfillment from 50 to 50,000 units" },
+                                { icon: Truck, label: "Pan-India Delivery", desc: "3–7 business day domestic shipping" },
+                            ].map((w) => (
+                                <div key={w.label} className="p-6 bg-card rounded-2xl border border-border/50">
+                                    <div className="w-10 h-10 bg-amber-500/10 rounded-xl flex items-center justify-center mx-auto mb-3">
+                                        <w.icon className="w-5 h-5 text-amber-500" />
+                                    </div>
+                                    <div className="font-display font-bold mb-1">{w.label}</div>
+                                    <p className="text-sm text-muted-foreground">{w.desc}</p>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </Container>
+            </section>
+
+            {/* CTA */}
+            <section className="py-20 bg-foreground text-background relative overflow-hidden">
+                <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-amber-500/15 rounded-full blur-3xl pointer-events-none" />
+                <Container className="relative z-10 text-center">
+                    <Gift className="w-10 h-10 text-amber-500 mx-auto mb-6" />
+                    <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">Make an Impression.</h2>
+                    <p className="text-xl text-background/60 max-w-xl mx-auto mb-8 font-light">
+                        Get a custom quote for your next corporate event, onboarding program, or gifting campaign.
                     </p>
-                    <Button size="lg" className="rounded-full px-10 h-12 text-base" asChild>
-                        <Link href="/contact">Request Catalog</Link>
+                    <Button className="rounded-full px-10 h-14 text-base font-semibold bg-amber-500 text-white hover:bg-amber-600 shadow-lg transition-all duration-300" asChild>
+                        <Link href="/contact">Request Catalog <ArrowRight className="ml-2 w-4 h-4" /></Link>
                     </Button>
                 </Container>
-            </Section>
+            </section>
         </>
     );
 }
