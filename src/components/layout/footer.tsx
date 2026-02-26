@@ -1,89 +1,141 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
+import { Mail, Phone, MapPin } from "lucide-react";
+
+const verticalLinks = [
+    { name: "Dockware Labs", href: "/verticals/dockware-labs", color: "hover:text-blue-400" },
+    { name: "Trading Dock", href: "/verticals/trading-dock", color: "hover:text-emerald-400" },
+    { name: "Impression Dock", href: "/verticals/impression-dock", color: "hover:text-amber-400" },
+];
+
+const companyLinks = [
+    { name: "About Us", href: "/about" },
+    { name: "All Verticals", href: "/verticals" },
+    { name: "Contact", href: "/contact" },
+];
+
+const legalLinks = [
+    { name: "Privacy Policy", href: "/privacy-policy" },
+    { name: "Terms of Service", href: "/terms" },
+    { name: "Refund Policy", href: "/refund-policy" },
+    { name: "Shipping Policy", href: "/shipping-policy" },
+];
+
+const certs = [
+    { label: "DPIIT", sub: "Startup India" },
+    { label: "ISO 9001", sub: "Quality" },
+    { label: "ISO 27001", sub: "Security" },
+    { label: "ISO 20000-1", sub: "IT Mgmt" },
+];
 
 export function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="bg-muted/30 mt-auto">
-            <Container className="py-12 md:py-16">
-                <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-                    <div className="col-span-1 md:col-span-1 space-y-4">
-                        <Link href="/" className="font-outfit font-bold text-xl tracking-tighter block uppercase">
-                            DOCKFINITY
-                        </Link>
-                        <p className="text-muted-foreground text-sm leading-relaxed">
-                            Dockfinity Private Limited is a technology-first group building ventures across Software, Trading Education, and Custom Gifting.
-                        </p>
-                        <div className="text-xs text-muted-foreground space-y-1">
-                            <p><span className="font-semibold text-foreground">CIN:</span> U66190DL2025PTC454662</p>
-                            <p><span className="font-semibold text-foreground">GSTIN:</span> 07AAMCD0054C1Z3</p>
-                            <p><span className="font-semibold text-foreground">UDYAM:</span> UDYAM-DL-06-0174779</p>
-                        </div>
-                    </div>
+        <footer className="bg-foreground text-background mt-auto">
 
-                    <div>
-                        <h3 className="font-semibold mb-6 text-sm uppercase tracking-wider text-foreground">Verticals</h3>
-                        <ul className="space-y-4 text-sm text-muted-foreground">
-                            <li><Link href="/verticals/dockware-labs" className="hover:text-primary transition-colors">Dockware Labs</Link></li>
-                            <li><Link href="/verticals/trading-dock" className="hover:text-primary transition-colors">Trading Dock</Link></li>
-                            <li><Link href="/verticals/impression-dock" className="hover:text-primary transition-colors">Impression Dock</Link></li>
-                        </ul>
-                    </div>
+            {/* Main footer body */}
+            <Container className="pt-16 pb-10">
+                <div className="grid grid-cols-1 md:grid-cols-12 gap-12 mb-12">
 
-                    <div>
-                        <h3 className="font-semibold mb-6 text-sm uppercase tracking-wider text-foreground">Company</h3>
-                        <ul className="space-y-4 text-sm text-muted-foreground">
-                            <li><Link href="/about" className="hover:text-primary transition-colors">About Us</Link></li>
-                            <li><Link href="/contact" className="hover:text-primary transition-colors">Contact</Link></li>
-                            <li><Link href="/verticals" className="hover:text-primary transition-colors">All Verticals</Link></li>
-                        </ul>
-                    </div>
-
-                    <div>
-                        <h3 className="font-semibold mb-6 text-sm uppercase tracking-wider text-foreground">Contact</h3>
-                        <div className="space-y-4 text-sm text-muted-foreground">
-                            <p>
-                                G-30/394-395, 2nd Floor, Sector-3,<br />
-                                Rohini, North West Delhi,<br />
-                                Delhi - 110085, India
+                    {/* Brand column */}
+                    <div className="md:col-span-4 space-y-6">
+                        <div>
+                            <Link href="/" className="inline-flex items-center gap-3 group mb-4">
+                                <div className="w-8 h-8 rounded-lg bg-brand flex items-center justify-center">
+                                    <span className="text-brand-foreground text-xs font-bold font-mono">D</span>
+                                </div>
+                                <span className="font-display font-bold text-xl tracking-tight text-background group-hover:text-background/80 transition-colors">
+                                    DOCKFINITY
+                                </span>
+                            </Link>
+                            <p className="text-background/60 text-sm leading-relaxed mt-3">
+                                A technology-first holding company building and scaling ventures across enterprise software, financial education, and premium corporate experiences.
                             </p>
-                            <div className="space-y-1">
-                                <p><a href="tel:+919911721100" className="hover:text-primary transition-colors">+91 99117 21100</a></p>
-                                <p><a href="mailto:dockfinity@gmail.com" className="hover:text-primary transition-colors">dockfinity@gmail.com</a></p>
+                        </div>
+
+                        {/* Registration details */}
+                        <div className="space-y-1.5 text-xs text-background/40 font-mono">
+                            <p><span className="text-background/60">CIN</span> · U66190DL2025PTC454662</p>
+                            <p><span className="text-background/60">GSTIN</span> · 07AAMCD0054C1Z3</p>
+                            <p><span className="text-background/60">UDYAM</span> · UDYAM-DL-06-0174779</p>
+                        </div>
+
+                        {/* Contact quick links */}
+                        <div className="space-y-2 text-sm">
+                            <a href="tel:+919911721100" className="flex items-center gap-2 text-background/60 hover:text-background transition-colors group">
+                                <Phone className="w-3.5 h-3.5 shrink-0 group-hover:text-brand transition-colors" />
+                                +91 99117 21100
+                            </a>
+                            <a href="mailto:dockfinity@gmail.com" className="flex items-center gap-2 text-background/60 hover:text-background transition-colors group">
+                                <Mail className="w-3.5 h-3.5 shrink-0 group-hover:text-brand transition-colors" />
+                                dockfinity@gmail.com
+                            </a>
+                            <div className="flex items-start gap-2 text-background/60">
+                                <MapPin className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+                                <span>Sector-3, Rohini, New Delhi — 110085, India</span>
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="pt-8 pb-8">
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-xs text-muted-foreground text-center md:text-left mb-8">
-                        <div className="bg-card border border-border p-3 rounded-md">
-                            <span className="block font-bold text-foreground">DPIIT Recognized</span>
-                            Startup India
-                        </div>
-                        <div className="bg-card border border-border p-3 rounded-md">
-                            <span className="block font-bold text-foreground">ISO 9001:2015</span>
-                            Quality Management
-                        </div>
-                        <div className="bg-card border border-border p-3 rounded-md">
-                            <span className="block font-bold text-foreground">ISO 27001:2022</span>
-                            Info Security
-                        </div>
-                        <div className="bg-card border border-border p-3 rounded-md">
-                            <span className="block font-bold text-foreground">ISO 20000-1:2018</span>
-                            IT Service Mgmt
+                    {/* Links columns */}
+                    <div className="md:col-span-2">
+                        <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-background/40 font-mono mb-5">Verticals</h3>
+                        <ul className="space-y-3">
+                            {verticalLinks.map((link) => (
+                                <li key={link.name}>
+                                    <Link
+                                        href={link.href}
+                                        className={`text-sm text-background/60 transition-colors ${link.color}`}
+                                    >
+                                        {link.name}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div className="md:col-span-2">
+                        <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-background/40 font-mono mb-5">Company</h3>
+                        <ul className="space-y-3">
+                            {companyLinks.map((link) => (
+                                <li key={link.name}>
+                                    <Link
+                                        href={link.href}
+                                        className="text-sm text-background/60 hover:text-background transition-colors"
+                                    >
+                                        {link.name}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div className="md:col-span-4">
+                        <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-background/40 font-mono mb-5">Certifications</h3>
+                        <div className="grid grid-cols-2 gap-3">
+                            {certs.map((c) => (
+                                <div key={c.label} className="px-4 py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/8 transition-colors">
+                                    <div className="text-sm font-bold text-background">{c.label}</div>
+                                    <div className="text-xs text-background/40">{c.sub}</div>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
 
-                <div className="pt-8 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-muted-foreground">
+                {/* Divider */}
+                <div className="h-px bg-white/10 mb-6" />
+
+                {/* Bottom bar */}
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-background/40">
                     <p>© {currentYear} Dockfinity Private Limited. All rights reserved.</p>
-                    <div className="flex gap-6 flex-wrap justify-center">
-                        <Link href="/privacy-policy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
-                        <Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
-                        <Link href="/refund-policy" className="hover:text-foreground transition-colors">Refund Policy</Link>
-                        <Link href="/shipping-policy" className="hover:text-foreground transition-colors">Shipping Policy</Link>
+                    <div className="flex flex-wrap gap-4 justify-center">
+                        {legalLinks.map((link) => (
+                            <Link key={link.name} href={link.href} className="hover:text-background/70 transition-colors">
+                                {link.name}
+                            </Link>
+                        ))}
                     </div>
                 </div>
             </Container>

@@ -5,13 +5,21 @@ import { usePathname } from "next/navigation";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { useState, useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 const navigation = [
     { name: "About", href: "/about" },
-    { name: "Verticals", href: "/verticals" },
+    {
+        name: "Verticals",
+        href: "/verticals",
+        children: [
+            { name: "Dockware Labs", href: "/verticals/dockware-labs", desc: "Enterprise SaaS & Automation", color: "text-blue-500" },
+            { name: "Trading Dock", href: "/verticals/trading-dock", desc: "Market Analytics & Education", color: "text-emerald-500" },
+            { name: "Impression Dock", href: "/verticals/impression-dock", desc: "Corporate Gifting & Printing", color: "text-amber-500" },
+        ],
+    },
     { name: "Contact", href: "/contact" },
 ];
 
@@ -19,86 +27,177 @@ export function Header() {
     const pathname = usePathname();
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
+    const [verticalsOpen, setVerticalsOpen] = useState(false);
 
     useEffect(() => {
-        const handleScroll = () => {
-            setScrolled(window.scrollY > 10);
-        };
+        const handleScroll = () => setScrolled(window.scrollY > 12);
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
+    // Close mobile menu on route change
+    useEffect(() => {
+        setIsOpen(false);
+        setVerticalsOpen(false);
+    }, [pathname]);
+
     return (
         <header
             className={cn(
-                "fixed top-0 w-full z-50 transition-all duration-300 border-b border-transparent",
-                scrolled ? "bg-background/80 backdrop-blur-md border-border/40 shadow-sm" : "bg-transparent"
+                "fixed top-0 w-full z-50 transition-all duration-500",
+                scrolled
+                    ? "bg-background/90 backdrop-blur-xl border-b border-border/50 shadow-sm"
+                    : "bg-transparent"
             )}
         >
             <Container className="h-16 md:h-20 flex items-center justify-between">
-                <Link href="/" className="flex items-center space-x-2 group">
-                    <span className="font-outfit font-bold text-xl md:text-2xl tracking-tighter text-foreground group-hover:text-primary transition-colors">
+
+                {/* Logo */}
+                <Link href="/" className="flex items-center gap-3 group">
+                    <div className="w-8 h-8 rounded-lg bg-foreground flex items-center justify-center group-hover:bg-brand transition-colors duration-300">
+                        <span className="text-background text-xs font-bold font-mono">D</span>
+                    </div>
+                    <span className="font-display font-bold text-xl tracking-tight text-foreground group-hover:text-foreground/80 transition-colors">
                         DOCKFINITY
                     </span>
                 </Link>
 
                 {/* Desktop Nav */}
-                <nav className="hidden md:flex items-center gap-8">
+                <nav className="hidden md:flex items-center gap-1">
                     {navigation.map((item) => (
-                        <Link
-                            key={item.name}
-                            href={item.href}
-                            className={cn(
-                                "text-sm font-medium transition-colors hover:text-primary relative after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:w-0 after:bg-primary after:transition-all hover:after:w-full",
-                                pathname === item.href ? "text-foreground after:w-full" : "text-muted-foreground"
-                            )}
-                        >
-                            {item.name}
-                        </Link>
-                    ))}
-                    <div className="flex items-center gap-4">
-                        <ThemeToggle />
-                        <Button asChild size="sm" className="hidden lg:inline-flex rounded-full px-6 font-semibold">
-                            <Link href="/contact">Get in Touch</Link>
-                        </Button>
-                    </div>
-                </nav>
+                        item.children ? (
+                            <div
+                                key={item.name}
+                                className="relative"
+                                onMouseEnter={() => setVerticalsOpen(true)}
+                                onMouseLeave={() => setVerticalsOpen(false)}
+                            >
+                                <button
+                                    className={cn(
+                                        "flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
+                                        pathname.startsWith("/verticals")
+                                            ? "text-foreground bg-secondary"
+                                            : "text-muted-foreground hover:text-foreground hover:bg-secondary/70"
+                                    )}
+                                >
+                                    {item.name}
+                                    <ChevronDown className={cn("w-3.5 h-3.5 transition-transform duration-200", verticalsOpen && "rotate-180")} />
+                                </button>
 
-                {/* Mobile Menu Toggle */}
-                <div className="flex md:hidden items-center gap-4">
-                    <ThemeToggle />
-                    <button
-                        onClick={() => setIsOpen(!isOpen)}
-                        className="p-2 -mr-2 text-muted-foreground hover:text-foreground"
-                    >
-                        {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-                    </button>
-                </div>
-            </Container>
-
-            {/* Mobile Nav */}
-            {isOpen && (
-                <div className="md:hidden absolute top-full left-0 w-full bg-background border-b border-border p-4 shadow-lg animate-in slide-in-from-top-5">
-                    <div className="flex flex-col space-y-4">
-                        {navigation.map((item) => (
+                                {/* Dropdown */}
+                                {verticalsOpen && (
+                                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-card/95 backdrop-blur-xl border border-border rounded-2xl shadow-xl p-2 animate-in fade-in slide-in-from-top-2 duration-200">
+                                        {item.children.map((child) => (
+                                            <Link
+                                                key={child.name}
+                                                href={child.href}
+                                                className="flex items-start gap-3 px-4 py-3 rounded-xl hover:bg-secondary/70 transition-colors group"
+                                            >
+                                                <div className="mt-0.5">
+                                                    <div className="text-sm font-semibold text-foreground group-hover:text-foreground mb-0.5">
+                                                        {child.name}
+                                                    </div>
+                                                    <div className={cn("text-xs", child.color)}>{child.desc}</div>
+                                                </div>
+                                            </Link>
+                                        ))}
+                                        <div className="mt-1 pt-1 border-t border-border/50">
+                                            <Link
+                                                href="/verticals"
+                                                className="flex items-center gap-2 px-4 py-2.5 rounded-xl hover:bg-secondary/70 transition-colors text-xs text-muted-foreground hover:text-foreground font-medium"
+                                            >
+                                                View all verticals →
+                                            </Link>
+                                        </div>
+                                    </div>
+                                )}
+                            </div>
+                        ) : (
                             <Link
                                 key={item.name}
                                 href={item.href}
                                 className={cn(
-                                    "text-base font-medium transition-colors hover:text-primary p-2 rounded-md hover:bg-muted",
-                                    pathname === item.href ? "text-foreground bg-muted/50" : "text-muted-foreground"
+                                    "px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
+                                    pathname === item.href
+                                        ? "text-foreground bg-secondary"
+                                        : "text-muted-foreground hover:text-foreground hover:bg-secondary/70"
                                 )}
-                                onClick={() => setIsOpen(false)}
                             >
                                 {item.name}
                             </Link>
-                        ))}
-                        <div className="pt-2">
-                            <Button asChild className="w-full rounded-full">
-                                <Link href="/contact" onClick={() => setIsOpen(false)}>Get in Touch</Link>
-                            </Button>
+                        )
+                    ))}
+                </nav>
+
+                {/* Desktop Actions */}
+                <div className="hidden md:flex items-center gap-3">
+                    <ThemeToggle />
+                    <Button asChild size="sm" className="rounded-full px-6 font-semibold bg-foreground text-background hover:bg-foreground/90 shadow-sm">
+                        <Link href="/contact">Get in Touch</Link>
+                    </Button>
+                </div>
+
+                {/* Mobile Toggle */}
+                <div className="flex md:hidden items-center gap-3">
+                    <ThemeToggle />
+                    <button
+                        onClick={() => setIsOpen(!isOpen)}
+                        className="p-2 -mr-1 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary/70 transition-colors"
+                        aria-label="Toggle menu"
+                    >
+                        {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+                    </button>
+                </div>
+            </Container>
+
+            {/* Mobile Menu */}
+            {isOpen && (
+                <div className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border shadow-lg">
+                    <Container className="py-4">
+                        <div className="flex flex-col gap-1">
+                            {navigation.map((item) => (
+                                item.children ? (
+                                    <div key={item.name}>
+                                        <div className="px-3 py-2 text-xs font-bold uppercase tracking-wider text-muted-foreground font-mono mt-2 mb-1">
+                                            Verticals
+                                        </div>
+                                        {item.children.map((child) => (
+                                            <Link
+                                                key={child.name}
+                                                href={child.href}
+                                                onClick={() => setIsOpen(false)}
+                                                className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-secondary/70 transition-colors"
+                                            >
+                                                <div>
+                                                    <div className="text-sm font-semibold text-foreground">{child.name}</div>
+                                                    <div className={cn("text-xs", child.color)}>{child.desc}</div>
+                                                </div>
+                                            </Link>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <Link
+                                        key={item.name}
+                                        href={item.href}
+                                        onClick={() => setIsOpen(false)}
+                                        className={cn(
+                                            "px-4 py-3 rounded-xl text-base font-medium transition-colors",
+                                            pathname === item.href
+                                                ? "text-foreground bg-secondary"
+                                                : "text-muted-foreground hover:text-foreground hover:bg-secondary/70"
+                                        )}
+                                    >
+                                        {item.name}
+                                    </Link>
+                                )
+                            ))}
+                            <div className="pt-3 mt-2 border-t border-border/50">
+                                <Button asChild className="w-full rounded-full font-semibold bg-foreground text-background hover:bg-foreground/90">
+                                    <Link href="/contact" onClick={() => setIsOpen(false)}>Get in Touch</Link>
+                                </Button>
+                            </div>
                         </div>
-                    </div>
+                    </Container>
                 </div>
             )}
         </header>
