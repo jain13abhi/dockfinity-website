@@ -1,16 +1,18 @@
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono, Syne } from 'next/font/google';
+import { Inter, JetBrains_Mono, Fraunces } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 
-// Display / Heading Font — Syne (bold, distinctive, modern)
-const syne = Syne({
+// Display / Heading Font — Fraunces (ink-trap serif, institutional gravitas)
+const fraunces = Fraunces({
   subsets: ['latin'],
   variable: '--font-display',
   display: 'swap',
-  weight: ['400', '500', '600', '700', '800'],
+  weight: 'variable',
+  style: ['normal', 'italic'],
+  axes: ['SOFT', 'opsz'],
 });
 
 // Body Font — Inter (clean, readable)
@@ -49,10 +51,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable} font-sans antialiased min-h-screen bg-background text-foreground relative selection:bg-brand selection:text-brand-foreground`}>
-        {/* Global noise texture */}
-        <div className="fixed inset-0 z-[-1] bg-noise-subtle mix-blend-overlay pointer-events-none" aria-hidden="true" />
-
+      <body className={`${fraunces.variable} ${inter.variable} ${jetbrainsMono.variable} font-sans antialiased min-h-screen bg-background text-foreground relative`}>
         <ThemeProvider
           attribute="class"
           defaultTheme="system"

@@ -14,24 +14,24 @@ const contactDetails = [
         label: "Registered Office",
         value: "G-30/394-395, 2nd Floor, Sector-3,\nRohini, North West Delhi,\nDelhi - 110085, India",
         href: null,
-        color: "text-blue-500",
-        bg: "bg-blue-500/10",
+        color: "text-blue-600",
+        bg: "bg-blue-600/10",
     },
     {
         icon: Phone,
         label: "Phone",
         value: "+91 99117 21100",
         href: "tel:+919911721100",
-        color: "text-emerald-500",
-        bg: "bg-emerald-500/10",
+        color: "text-emerald-600",
+        bg: "bg-emerald-600/10",
     },
     {
         icon: Mail,
         label: "Email",
         value: "dockfinity@gmail.com",
         href: "mailto:dockfinity@gmail.com",
-        color: "text-amber-500",
-        bg: "bg-amber-500/10",
+        color: "text-amber-600",
+        bg: "bg-amber-600/10",
     },
     {
         icon: Clock,
@@ -66,11 +66,11 @@ export default function ContactPage() {
             {/* ── PAGE HERO ── */}
             <section className="relative pt-36 pb-20 overflow-hidden">
                 <div className="absolute inset-0 bg-grid-pattern pointer-events-none" />
-                <div className="absolute top-0 left-1/3 w-[500px] h-[400px] glow-orb-amber rounded-full blur-3xl opacity-20 pointer-events-none" />
+                <div className="absolute top-0 left-1/3 w-[500px] h-[400px] glow-orb-amber rounded-sm blur-3xl opacity-20 pointer-events-none" />
 
                 <Container className="relative z-10">
                     <div className="max-w-3xl">
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary border border-border/60 text-xs font-bold uppercase tracking-widest text-muted-foreground font-mono mb-6">
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-sm bg-secondary border border-border/60 text-xs font-bold uppercase tracking-widest text-muted-foreground font-mono mb-6">
                             Let&apos;s Talk
                         </div>
                         <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-5">
@@ -95,9 +95,9 @@ export default function ContactPage() {
                             {contactDetails.map((c) => (
                                 <div
                                     key={c.label}
-                                    className="flex items-start gap-4 p-5 bg-card rounded-2xl border border-border/50 hover:border-border hover:shadow-md transition-all duration-300"
+                                    className="flex items-start gap-4 p-5 bg-card rounded border border-border/50 hover:border-border hover:shadow-md transition-all duration-300"
                                 >
-                                    <div className={`w-11 h-11 ${c.bg} rounded-xl flex items-center justify-center shrink-0`}>
+                                    <div className={`w-11 h-11 ${c.bg} rounded-sm flex items-center justify-center shrink-0`}>
                                         <c.icon className={`w-5 h-5 ${c.color}`} />
                                     </div>
                                     <div>
@@ -114,19 +114,19 @@ export default function ContactPage() {
                             ))}
 
                             {/* Trust badge */}
-                            <div className="p-6 bg-secondary/50 rounded-2xl border border-border/50">
+                            <div className="p-6 bg-secondary/50 rounded border border-border/50">
                                 <h3 className="font-display font-bold text-base mb-2">Official Channel</h3>
                                 <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                                     This is the only official website of Dockfinity Private Limited. All communications go through our listed channels only.
                                 </p>
                                 <div className="flex flex-wrap gap-2">
-                                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border border-emerald-500/20">
+                                    <span className="inline-flex items-center px-3 py-1 rounded-sm text-xs font-semibold bg-emerald-600/10 text-emerald-600 dark:text-emerald-400 border border-emerald-600/20">
                                         ✓ CIN Registered
                                     </span>
-                                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                                    <span className="inline-flex items-center px-3 py-1 rounded-sm text-xs font-semibold bg-blue-600/10 text-blue-600 dark:text-blue-400 border border-blue-600/20">
                                         ✓ GST Active
                                     </span>
-                                    <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20">
+                                    <span className="inline-flex items-center px-3 py-1 rounded-sm text-xs font-semibold bg-amber-600/10 text-amber-600 dark:text-amber-400 border border-amber-600/20">
                                         ✓ DPIIT Recognized
                                     </span>
                                 </div>
@@ -135,17 +135,17 @@ export default function ContactPage() {
 
                         {/* Right: Contact form */}
                         <div className="lg:col-span-3">
-                            <div className="bg-card p-8 md:p-10 rounded-2xl border border-border/50 shadow-xl shadow-foreground/5">
+                            <div className="bg-card p-8 md:p-10 rounded border border-border/50 shadow-xl shadow-foreground/5">
                                 {isSuccess ? (
                                     <div className="flex flex-col items-center justify-center py-16 text-center animate-in fade-in zoom-in duration-300">
-                                        <div className="w-20 h-20 bg-emerald-500/10 rounded-full flex items-center justify-center mb-6">
-                                            <CheckCircle2 className="w-10 h-10 text-emerald-500" />
+                                        <div className="w-20 h-20 bg-emerald-600/10 rounded-sm flex items-center justify-center mb-6">
+                                            <CheckCircle2 className="w-10 h-10 text-emerald-600" />
                                         </div>
                                         <h3 className="font-display text-2xl font-bold mb-3">Message Sent!</h3>
                                         <p className="text-muted-foreground mb-8 max-w-xs leading-relaxed">
                                             Thank you for reaching out. Our team will respond within 1–2 business days.
                                         </p>
-                                        <Button onClick={() => setIsSuccess(false)} variant="outline" className="rounded-full px-8">
+                                        <Button onClick={() => setIsSuccess(false)} variant="outline" className="rounded-sm px-8">
                                             Send Another Message
                                         </Button>
                                     </div>
@@ -160,17 +160,17 @@ export default function ContactPage() {
                                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                 <div className="space-y-2">
                                                     <label htmlFor="name" className="text-sm font-semibold text-foreground">Full Name *</label>
-                                                    <Input id="name" name="name" placeholder="Rahul Sharma" required className="h-12 rounded-xl border-border/60" />
+                                                    <Input id="name" name="name" placeholder="Rahul Sharma" required className="h-12 rounded-sm border-border/60" />
                                                 </div>
                                                 <div className="space-y-2">
                                                     <label htmlFor="phone" className="text-sm font-semibold text-foreground">Phone Number *</label>
-                                                    <Input id="phone" name="phone" placeholder="+91 9XXXXXXXXX" required className="h-12 rounded-xl border-border/60" />
+                                                    <Input id="phone" name="phone" placeholder="+91 9XXXXXXXXX" required className="h-12 rounded-sm border-border/60" />
                                                 </div>
                                             </div>
 
                                             <div className="space-y-2">
                                                 <label htmlFor="email" className="text-sm font-semibold text-foreground">Business Email *</label>
-                                                <Input id="email" name="email" type="email" placeholder="rahul@company.com" required className="h-12 rounded-xl border-border/60" />
+                                                <Input id="email" name="email" type="email" placeholder="rahul@company.com" required className="h-12 rounded-sm border-border/60" />
                                             </div>
 
                                             <div className="space-y-2">
@@ -179,7 +179,7 @@ export default function ContactPage() {
                                                     <select
                                                         id="subject"
                                                         name="subject"
-                                                        className="flex h-12 w-full items-center justify-between rounded-xl border border-border/60 bg-background px-4 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 appearance-none text-foreground"
+                                                        className="flex h-12 w-full items-center justify-between rounded-sm border border-border/60 bg-background px-4 py-2 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 appearance-none text-foreground"
                                                         required
                                                         defaultValue=""
                                                     >
@@ -207,14 +207,14 @@ export default function ContactPage() {
                                                     placeholder="Tell us about your project, requirement, or question..."
                                                     rows={5}
                                                     required
-                                                    className="resize-none rounded-xl border-border/60"
+                                                    className="resize-none rounded-sm border-border/60"
                                                 />
                                             </div>
 
                                             <Button
                                                 type="submit"
                                                 size="lg"
-                                                className="w-full h-13 text-base font-semibold rounded-xl bg-foreground text-background hover:bg-foreground/90 shadow-lg hover:shadow-xl transition-all duration-300"
+                                                className="w-full h-13 text-base font-semibold rounded-sm bg-foreground text-background hover:bg-foreground/90 shadow-lg hover:shadow-xl transition-all duration-300"
                                                 disabled={isSubmitting}
                                             >
                                                 {isSubmitting ? (

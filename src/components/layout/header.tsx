@@ -15,9 +15,9 @@ const navigation = [
         name: "Verticals",
         href: "/verticals",
         children: [
-            { name: "Dockware Labs", href: "/verticals/dockware-labs", desc: "Enterprise SaaS & Automation", color: "text-blue-500" },
-            { name: "Trading Dock", href: "/verticals/trading-dock", desc: "Market Analytics & Education", color: "text-emerald-500" },
-            { name: "Impression Dock", href: "/verticals/impression-dock", desc: "Corporate Gifting & Printing", color: "text-amber-500" },
+            { name: "Dockware Labs", href: "/verticals/dockware-labs", desc: "Enterprise SaaS & Automation", color: "text-blue-600" },
+            { name: "Trading Dock", href: "/verticals/trading-dock", desc: "Market Analytics & Education", color: "text-emerald-600" },
+            { name: "Impression Dock", href: "/verticals/impression-dock", desc: "Corporate Gifting & Printing", color: "text-amber-600" },
         ],
     },
     { name: "Contact", href: "/contact" },
@@ -44,20 +44,20 @@ export function Header() {
     return (
         <header
             className={cn(
-                "fixed top-0 w-full z-50 transition-all duration-500",
+                "fixed top-0 w-full z-50 border-b transition-colors duration-300",
                 scrolled
-                    ? "bg-background/90 backdrop-blur-xl border-b border-border/50 shadow-sm"
-                    : "bg-transparent"
+                    ? "bg-background border-border shadow-sm"
+                    : "bg-background/95 border-border/40"
             )}
         >
             <Container className="h-16 md:h-20 flex items-center justify-between">
 
                 {/* Logo */}
                 <Link href="/" className="flex items-center gap-3 group">
-                    <div className="w-8 h-8 rounded-lg bg-foreground flex items-center justify-center group-hover:bg-brand transition-colors duration-300">
-                        <span className="text-background text-xs font-bold font-mono">D</span>
+                    <div className="w-8 h-8 border border-foreground flex items-center justify-center group-hover:bg-brand group-hover:border-brand transition-colors duration-300">
+                        <span className="text-foreground text-xs font-bold font-mono group-hover:text-brand-foreground">D</span>
                     </div>
-                    <span className="font-display font-bold text-xl tracking-tight text-foreground group-hover:text-foreground/80 transition-colors">
+                    <span className="font-mono font-semibold text-lg tracking-[0.15em] text-foreground group-hover:text-foreground/80 transition-colors">
                         DOCKFINITY
                     </span>
                 </Link>
@@ -86,12 +86,12 @@ export function Header() {
 
                                 {/* Dropdown */}
                                 {verticalsOpen && (
-                                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-card/95 backdrop-blur-xl border border-border rounded-2xl shadow-xl p-2 animate-in fade-in slide-in-from-top-2 duration-200">
+                                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-popover border border-border shadow-lg p-2 animate-in fade-in slide-in-from-top-2 duration-200">
                                         {item.children.map((child) => (
                                             <Link
                                                 key={child.name}
                                                 href={child.href}
-                                                className="flex items-start gap-3 px-4 py-3 rounded-xl hover:bg-secondary/70 transition-colors group"
+                                                className="flex items-start gap-3 px-4 py-3 rounded-sm hover:bg-secondary/70 transition-colors group"
                                             >
                                                 <div className="mt-0.5">
                                                     <div className="text-sm font-semibold text-foreground group-hover:text-foreground mb-0.5">
@@ -104,7 +104,7 @@ export function Header() {
                                         <div className="mt-1 pt-1 border-t border-border/50">
                                             <Link
                                                 href="/verticals"
-                                                className="flex items-center gap-2 px-4 py-2.5 rounded-xl hover:bg-secondary/70 transition-colors text-xs text-muted-foreground hover:text-foreground font-medium"
+                                                className="flex items-center gap-2 px-4 py-2.5 rounded-sm hover:bg-secondary/70 transition-colors text-xs text-muted-foreground hover:text-foreground font-medium"
                                             >
                                                 View all verticals →
                                             </Link>
@@ -132,7 +132,7 @@ export function Header() {
                 {/* Desktop Actions */}
                 <div className="hidden md:flex items-center gap-3">
                     <ThemeToggle />
-                    <Button asChild size="sm" className="rounded-full px-6 font-semibold bg-foreground text-background hover:bg-foreground/90 shadow-sm">
+                    <Button asChild size="sm" className="rounded-sm px-6 font-semibold bg-foreground text-background hover:bg-foreground/90 shadow-sm">
                         <Link href="/contact">Get in Touch</Link>
                     </Button>
                 </div>
@@ -152,7 +152,7 @@ export function Header() {
 
             {/* Mobile Menu */}
             {isOpen && (
-                <div className="md:hidden bg-background/95 backdrop-blur-xl border-b border-border shadow-lg">
+                <div className="md:hidden bg-background border-b border-border shadow-lg">
                     <Container className="py-4">
                         <div className="flex flex-col gap-1">
                             {navigation.map((item) => (
@@ -166,7 +166,7 @@ export function Header() {
                                                 key={child.name}
                                                 href={child.href}
                                                 onClick={() => setIsOpen(false)}
-                                                className="flex items-center gap-3 px-4 py-3 rounded-xl hover:bg-secondary/70 transition-colors"
+                                                className="flex items-center gap-3 px-4 py-3 rounded-sm hover:bg-secondary/70 transition-colors"
                                             >
                                                 <div>
                                                     <div className="text-sm font-semibold text-foreground">{child.name}</div>
@@ -181,7 +181,7 @@ export function Header() {
                                         href={item.href}
                                         onClick={() => setIsOpen(false)}
                                         className={cn(
-                                            "px-4 py-3 rounded-xl text-base font-medium transition-colors",
+                                            "px-4 py-3 rounded-sm text-base font-medium transition-colors",
                                             pathname === item.href
                                                 ? "text-foreground bg-secondary"
                                                 : "text-muted-foreground hover:text-foreground hover:bg-secondary/70"
@@ -192,7 +192,7 @@ export function Header() {
                                 )
                             ))}
                             <div className="pt-3 mt-2 border-t border-border/50">
-                                <Button asChild className="w-full rounded-full font-semibold bg-foreground text-background hover:bg-foreground/90">
+                                <Button asChild className="w-full rounded-sm font-semibold bg-foreground text-background hover:bg-foreground/90">
                                     <Link href="/contact" onClick={() => setIsOpen(false)}>Get in Touch</Link>
                                 </Button>
                             </div>

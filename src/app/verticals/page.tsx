@@ -19,12 +19,12 @@ const verticals = [
         href: "/verticals/dockware-labs",
         icon: Cpu,
         accent: "blue",
-        accentClass: "text-blue-500",
-        bgClass: "bg-blue-500/10",
-        borderClass: "border-blue-500/20",
-        gradientFrom: "from-blue-500/10",
-        badgeClass: "bg-blue-500/10 text-blue-600 dark:text-blue-400 border-blue-500/20",
-        topBorder: "via-blue-500/50",
+        accentClass: "text-blue-600",
+        bgClass: "bg-blue-600/10",
+        borderClass: "border-blue-600/20",
+        gradientFrom: "from-blue-600/10",
+        badgeClass: "bg-blue-600/10 text-blue-600 dark:text-blue-400 border-blue-600/20",
+        topBorder: "via-blue-600/50",
     },
     {
         id: "trading-dock",
@@ -36,12 +36,12 @@ const verticals = [
         href: "/verticals/trading-dock",
         icon: BarChart3,
         accent: "emerald",
-        accentClass: "text-emerald-500",
-        bgClass: "bg-emerald-500/10",
-        borderClass: "border-emerald-500/20",
-        gradientFrom: "from-emerald-500/10",
-        badgeClass: "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 border-emerald-500/20",
-        topBorder: "via-emerald-500/50",
+        accentClass: "text-emerald-600",
+        bgClass: "bg-emerald-600/10",
+        borderClass: "border-emerald-600/20",
+        gradientFrom: "from-emerald-600/10",
+        badgeClass: "bg-emerald-600/10 text-emerald-600 dark:text-emerald-400 border-emerald-600/20",
+        topBorder: "via-emerald-600/50",
     },
     {
         id: "impression-dock",
@@ -53,12 +53,12 @@ const verticals = [
         href: "/verticals/impression-dock",
         icon: Gift,
         accent: "amber",
-        accentClass: "text-amber-500",
-        bgClass: "bg-amber-500/10",
-        borderClass: "border-amber-500/20",
-        gradientFrom: "from-amber-500/10",
-        badgeClass: "bg-amber-500/10 text-amber-600 dark:text-amber-400 border-amber-500/20",
-        topBorder: "via-amber-500/50",
+        accentClass: "text-amber-600",
+        bgClass: "bg-amber-600/10",
+        borderClass: "border-amber-600/20",
+        gradientFrom: "from-amber-600/10",
+        badgeClass: "bg-amber-600/10 text-amber-600 dark:text-amber-400 border-amber-600/20",
+        topBorder: "via-amber-600/50",
     },
 ];
 
@@ -69,7 +69,7 @@ export default function VerticalsPage() {
             <section className="relative pt-36 pb-20 overflow-hidden">
                 <div className="absolute inset-0 bg-grid-pattern pointer-events-none" />
                 <Container className="relative z-10 text-center">
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary border border-border/60 text-xs font-bold uppercase tracking-widest text-muted-foreground font-mono mb-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-sm bg-secondary border border-border/60 text-xs font-bold uppercase tracking-widest text-muted-foreground font-mono mb-6">
                         Business Ecosystem
                     </div>
                     <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight mb-5">
@@ -89,7 +89,7 @@ export default function VerticalsPage() {
                         {verticals.map((v, i) => (
                             <div
                                 key={v.id}
-                                className={`relative rounded-2xl border border-border/50 bg-card overflow-hidden hover:border-border hover:shadow-2xl transition-all duration-500 group`}
+                                className={`relative rounded border border-border/50 bg-card overflow-hidden hover:border-border hover:shadow-2xl transition-all duration-500 group`}
                             >
                                 {/* Top accent line */}
                                 <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent ${v.topBorder} to-transparent`} />
@@ -99,10 +99,10 @@ export default function VerticalsPage() {
                                     {/* Content */}
                                     <div className="p-10 md:p-12 space-y-6">
                                         <div className="flex items-center gap-4">
-                                            <div className={`w-14 h-14 ${v.bgClass} rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
+                                            <div className={`w-14 h-14 ${v.bgClass} rounded flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
                                                 <v.icon className={`w-7 h-7 ${v.accentClass}`} />
                                             </div>
-                                            <span className={`inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider ${v.badgeClass} border font-mono`}>
+                                            <span className={`inline-flex items-center px-3 py-1 rounded-sm text-xs font-bold uppercase tracking-wider ${v.badgeClass} border font-mono`}>
                                                 {v.tagline}
                                             </span>
                                         </div>
@@ -123,7 +123,7 @@ export default function VerticalsPage() {
                                         </ul>
 
                                         <div className="pt-2">
-                                            <Button className={`rounded-full px-8 font-semibold bg-foreground text-background hover:bg-foreground/90 shadow-sm`} asChild>
+                                            <Button className={`rounded-sm px-8 font-semibold bg-foreground text-background hover:bg-foreground/90 shadow-sm`} asChild>
                                                 <Link href={v.href}>
                                                     Explore {v.name} <ArrowRight className="ml-2 h-4 w-4" />
                                                 </Link>
@@ -153,7 +153,7 @@ export default function VerticalsPage() {
             {/* ── CTA ── */}
             <section className="py-20 bg-foreground text-background relative overflow-hidden">
                 <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-brand/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-brand/10 rounded-sm blur-3xl pointer-events-none" />
                 <Container className="relative z-10 text-center">
                     <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">
                         Have a Custom Requirement?
@@ -161,7 +161,7 @@ export default function VerticalsPage() {
                     <p className="text-lg text-background/60 max-w-xl mx-auto mb-8 font-light">
                         Our distinct verticals allow us to offer comprehensive, end-to-end solutions for businesses of all sizes. Let&apos;s build something together.
                     </p>
-                    <Button className="rounded-full px-10 h-14 text-base font-semibold bg-brand text-brand-foreground hover:bg-brand/90 shadow-lg" asChild>
+                    <Button className="rounded-sm px-10 h-14 text-base font-semibold bg-brand text-brand-foreground hover:bg-brand/90 shadow-lg" asChild>
                         <Link href="/contact">Contact Our Team <ArrowRight className="ml-2 w-4 h-4" /></Link>
                     </Button>
                 </Container>

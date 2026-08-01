@@ -5,50 +5,57 @@
   --font-mono: var(--font-mono);
   --font-display: var(--font-display);
 
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
 
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
 
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
 
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
 
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
 
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
 
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
 
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
 
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
 
-  /* Brand Accent — Premium Amber/Gold */
-  --color-brand: var(--brand);
-  --color-brand-foreground: var(--brand-foreground);
+  /* Brand — Seal (oxblood). Fills only: buttons, badges, the seal mark.
+     Always paired with brand-foreground text — do not use as text color
+     directly on the page background in dark mode (see --brand-text). */
+  --color-brand: hsl(var(--brand));
+  --color-brand-foreground: hsl(var(--brand-foreground));
+
+  /* Seal color lifted for direct text/icon use on dark backgrounds,
+     where --brand itself fails contrast (2.0:1 vs Registrar Ink). */
+  --color-brand-text: hsl(var(--brand-text));
+
+  /* Seal-on-panel — for the bg-foreground/text-background inverted
+     section, which flips opposite to the page mode. */
+  --color-brand-panel-text: hsl(var(--brand-panel-text));
 
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
 
-  --animate-fade-in: fade-in 0.7s ease-out;
-  --animate-slide-up: slide-up 0.7s ease-out;
-  --animate-pulse-slow: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  --animate-reveal: reveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-  --animate-marquee: marquee 30s linear infinite;
-  --animate-shimmer: shimmer 2s linear infinite;
-  --animate-float: float 6s ease-in-out infinite;
-  --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
+  --animate-fade-in: fade-in 0.6s ease-out;
+  --animate-slide-up: slide-up 0.6s ease-out;
+  --animate-reveal: reveal 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  --animate-draw: draw 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+  --animate-stamp: stamp 0.5s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
 
   @keyframes fade-in {
     from { opacity: 0; }
@@ -56,112 +63,109 @@
   }
 
   @keyframes slide-up {
-    from { transform: translateY(24px); opacity: 0; }
+    from { transform: translateY(16px); opacity: 0; }
     to { transform: translateY(0); opacity: 1; }
-  }
-
-  @keyframes pulse-slow {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.4; }
   }
 
   @keyframes reveal {
     to { opacity: 1; transform: translateY(0); }
   }
 
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
+  @keyframes draw {
+    to { transform: scaleX(1); }
   }
 
-  @keyframes shimmer {
-    from { background-position: -200% center; }
-    to { background-position: 200% center; }
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0px); }
-    50% { transform: translateY(-12px); }
-  }
-
-  @keyframes glow-pulse {
-    0%, 100% { box-shadow: 0 0 20px 4px rgba(217, 119, 6, 0.15); }
-    50% { box-shadow: 0 0 40px 8px rgba(217, 119, 6, 0.3); }
+  @keyframes stamp {
+    from { opacity: 0; transform: scale(0.92) rotate(-3deg); }
+    to { opacity: 1; transform: scale(1) rotate(0deg); }
   }
 }
 
 @layer base {
   :root {
-    /* Clean Premium White */
-    --background: 0 0% 100%;
-    --foreground: 224 71% 4%;
+    /* Ledger Paper — cool off-white, not warm cream */
+    --background: 90 10% 96%;
+    --foreground: 160 23% 10%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 224 71% 4%;
+    --card: 90 14% 98%;
+    --card-foreground: 160 23% 10%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 224 71% 4%;
+    --popover: 90 14% 98%;
+    --popover-foreground: 160 23% 10%;
 
-    /* Deep Midnight Navy */
-    --primary: 224 71% 4%;
-    --primary-foreground: 210 40% 98%;
+    /* Registrar Ink */
+    --primary: 160 23% 10%;
+    --primary-foreground: 90 10% 96%;
 
-    --secondary: 220 14% 96%;
-    --secondary-foreground: 224 71% 4%;
+    --secondary: 90 8% 91%;
+    --secondary-foreground: 160 23% 10%;
 
-    --muted: 220 14% 96%;
-    --muted-foreground: 220 9% 46%;
+    --muted: 90 8% 91%;
+    --muted-foreground: 160 8% 38%;
 
-    --accent: 220 14% 96%;
-    --accent-foreground: 224 71% 4%;
+    --accent: 90 8% 91%;
+    --accent-foreground: 160 23% 10%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 4 68% 42%;
+    --destructive-foreground: 90 10% 96%;
 
-    --border: 220 13% 91%;
-    --input: 220 13% 91%;
-    --ring: 224 71% 4%;
+    --border: 90 10% 85%;
+    --input: 90 10% 85%;
+    --ring: 160 23% 10%;
 
-    /* Brand: Premium Amber Gold */
-    --brand: 38 92% 50%;
-    --brand-foreground: 224 71% 4%;
+    /* Seal — oxblood. 7.6:1 on Ledger Paper (AAA) as text; 8.2:1 as a
+       fill with brand-foreground text. */
+    --brand: 5 57% 35%;
+    --brand-foreground: 90 10% 96%;
+    --brand-text: 5 57% 35%;
 
-    --radius: 0.5rem;
+    /* For the bg-foreground/text-background inverted panel (the Seal
+       section): that panel is Ink in light mode, so it needs the lifted
+       coral — the opposite flip direction from --brand-text. */
+    --brand-panel-text: 11 64% 58%;
+
+    --radius: 0.25rem;
   }
 
   .dark {
-    /* Deep Midnight */
-    --background: 224 71% 4%;
-    --foreground: 210 40% 98%;
+    /* Registrar Ink */
+    --background: 160 23% 10%;
+    --foreground: 90 8% 93%;
 
-    --card: 222 47% 7%;
-    --card-foreground: 210 40% 98%;
+    --card: 160 20% 13%;
+    --card-foreground: 90 8% 93%;
 
-    --popover: 222 47% 7%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 160 20% 13%;
+    --popover-foreground: 90 8% 93%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 224 71% 4%;
+    --primary: 90 8% 93%;
+    --primary-foreground: 160 23% 10%;
 
-    --secondary: 215 28% 10%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 160 16% 16%;
+    --secondary-foreground: 90 8% 93%;
 
-    --muted: 215 28% 10%;
-    --muted-foreground: 217 10% 60%;
+    --muted: 160 16% 16%;
+    --muted-foreground: 90 6% 65%;
 
-    --accent: 215 28% 10%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 160 16% 16%;
+    --accent-foreground: 90 8% 93%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 4 55% 48%;
+    --destructive-foreground: 90 8% 93%;
 
-    --border: 215 28% 14%;
-    --input: 215 28% 14%;
-    --ring: 38 92% 50%;
+    --border: 160 12% 22%;
+    --input: 160 12% 22%;
+    --ring: 90 8% 93%;
 
-    /* Brand stays warm gold in dark too */
-    --brand: 38 92% 50%;
-    --brand-foreground: 224 71% 4%;
+    /* Seal fill stays the same oxblood — still 8.2:1 with brand-foreground.
+       Seal-as-text needs the lifted variant: 4.86:1 vs Registrar Ink (AA). */
+    --brand: 5 57% 35%;
+    --brand-foreground: 90 10% 96%;
+    --brand-text: 11 64% 58%;
+
+    /* Inverted panel is Paper in dark mode — needs the deep oxblood,
+       opposite flip direction from --brand-text. */
+    --brand-panel-text: 5 57% 35%;
   }
 }
 
@@ -171,12 +175,15 @@
     font-feature-settings: "rlig" 1, "calt" 1;
     overflow-x: hidden;
     width: 100%;
-    transform: none !important;
-    writing-mode: horizontal-tb !important;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-display), var(--font-sans), sans-serif;
+    font-family: var(--font-display), var(--font-sans), serif;
+  }
+
+  ::selection {
+    background: hsl(var(--brand) / 0.85);
+    color: hsl(var(--brand-foreground));
   }
 }
 
@@ -184,120 +191,49 @@
 
   /* ─── Typography ─────────────────────────────────────── */
   .text-balance { text-wrap: balance; }
-  .font-display { font-family: var(--font-display), var(--font-sans), sans-serif; }
+  .font-display { font-family: var(--font-display), var(--font-sans), serif; }
 
-  /* Gradient text — primary */
-  .text-gradient {
-    background: linear-gradient(135deg, hsl(var(--foreground)) 0%, hsl(var(--muted-foreground)) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  /* Ledger figures — tabular mono, the registry's voice */
+  .font-ledger {
+    font-family: var(--font-mono), monospace;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.04em;
   }
 
-  /* Gradient text — brand gold */
-  .text-gradient-brand {
-    background: linear-gradient(135deg, #f59e0b 0%, #d97706 60%, #b45309 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+  .stat-number {
+    font-family: var(--font-mono), monospace;
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1;
   }
 
-  /* Shimmer text */
-  .text-shimmer {
-    background: linear-gradient(
-      90deg,
-      hsl(var(--foreground)) 0%,
-      hsl(38 92% 60%) 40%,
-      hsl(var(--foreground)) 80%
-    );
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    animation: shimmer 4s linear infinite;
-  }
-
-  /* ─── Backgrounds ────────────────────────────────────── */
-  .bg-grid-pattern {
-    background-size: 40px 40px;
+  /* ─── Registry backdrop ──────────────────────────────── */
+  .bg-ledger-grid {
+    background-size: 64px 64px;
     background-image:
-      linear-gradient(to right, rgb(0 0 0 / 0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(0 0 0 / 0.04) 1px, transparent 1px);
-    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+      linear-gradient(to right, hsl(var(--foreground) / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--foreground) / 0.05) 1px, transparent 1px);
   }
 
-  .dark .bg-grid-pattern {
-    background-image:
-      linear-gradient(to right, rgb(255 255 255 / 0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(255 255 255 / 0.04) 1px, transparent 1px);
+  /* ─── Hairline rule that draws itself open on reveal ──── */
+  .hairline-draw {
+    transform: scaleX(0);
+    transform-origin: left;
   }
 
-  .bg-grid-dense {
-    background-size: 20px 20px;
-    background-image:
-      linear-gradient(to right, rgb(0 0 0 / 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(0 0 0 / 0.03) 1px, transparent 1px);
-  }
-
-  .dark .bg-grid-dense {
-    background-image:
-      linear-gradient(to right, rgb(255 255 255 / 0.04) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(255 255 255 / 0.04) 1px, transparent 1px);
-  }
-
-  .bg-noise-subtle {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.025'/%3E%3C/svg%3E");
-    pointer-events: none;
-    position: absolute;
-    inset: 0;
-    z-index: 0;
-  }
-
-  /* Hero glow orbs */
-  .glow-orb-blue {
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
-  }
-  .glow-orb-amber {
-    background: radial-gradient(circle, rgba(217, 119, 6, 0.12) 0%, transparent 70%);
-  }
-  .glow-orb-primary {
-    background: radial-gradient(circle, hsl(var(--primary) / 0.08) 0%, transparent 70%);
-  }
-
-  /* ─── Borders ─────────────────────────────────────────── */
-  .border-gradient {
-    border: 1px solid transparent;
-    background:
-      linear-gradient(hsl(var(--card)), hsl(var(--card))) padding-box,
-      linear-gradient(135deg, hsl(var(--border)), transparent, hsl(var(--border))) border-box;
-  }
-
-  .border-brand-glow {
-    box-shadow: 0 0 0 1px hsl(var(--brand) / 0.3), 0 0 20px hsl(var(--brand) / 0.1);
-  }
-
-  /* ─── Glassmorphism ──────────────────────────────────── */
-  .glass-panel {
-    @apply bg-white/60 dark:bg-white/5 backdrop-blur-xl border border-white/20 dark:border-white/8;
-  }
-
-  .glass-dark {
-    background: rgba(2, 6, 23, 0.8);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  /* ─── Animations ─────────────────────────────────────── */
-  .animate-reveal {
-    animation: reveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  /* ─── Seal stamp entrance ─────────────────────────────── */
+  .animate-stamp {
+    animation: stamp 0.5s cubic-bezier(0.2, 0.8, 0.3, 1) forwards;
     opacity: 0;
-    transform: translateY(20px);
   }
 
-  .animate-float { animation: float 6s ease-in-out infinite; }
-  .animate-marquee { animation: marquee 30s linear infinite; }
-  .animate-shimmer-text { animation: shimmer 4s linear infinite; }
-  .animate-glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
+  /* ─── Reveal ───────────────────────────────────────────── */
+  .animate-reveal {
+    animation: reveal 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+    opacity: 0;
+    transform: translateY(14px);
+  }
 
   .delay-75  { animation-delay: 75ms; }
   .delay-100 { animation-delay: 100ms; }
@@ -307,37 +243,21 @@
   .delay-400 { animation-delay: 400ms; }
   .delay-500 { animation-delay: 500ms; }
 
-  @keyframes reveal {
-    to { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .animate-reveal, .animate-stamp, .hairline-draw {
+      animation: none !important;
+      transform: none !important;
+      opacity: 1 !important;
+    }
   }
 
-  /* ─── Cards ──────────────────────────────────────────── */
-  .card-hover {
-    @apply transition-all duration-300 hover:-translate-y-1 hover:shadow-xl;
+  /* ─── Cards / entries ────────────────────────────────── */
+  .entry-hover {
+    @apply transition-colors duration-200 hover:border-foreground/30;
   }
 
-  /* Vertical accent cards */
-  .card-blue {
-    border-top: 3px solid #3b82f6;
-  }
-  .card-emerald {
-    border-top: 3px solid #10b981;
-  }
-  .card-amber {
-    border-top: 3px solid #f59e0b;
-  }
-
-  /* ─── Section dividers ───────────────────────────────── */
-  .section-divider {
-    height: 1px;
-    background: linear-gradient(90deg, transparent, hsl(var(--border)), transparent);
-  }
-
-  /* ─── Stat number style ─────────────────────────────── */
-  .stat-number {
-    font-family: var(--font-display), var(--font-sans), sans-serif;
-    font-weight: 700;
-    letter-spacing: -0.04em;
-    line-height: 1;
-  }
+  /* Vertical identity — a thin registry tab, not a filled chip */
+  .tab-blue { border-left: 2px solid #2563a8; }
+  .tab-emerald { border-left: 2px solid #157a5c; }
+  .tab-amber { border-left: 2px solid #9a6a12; }
 }

@@ -25,7 +25,7 @@ export default function ShippingPolicyPage() {
                         This Shipping Policy applies primarily to the tangible goods provided by our vertical <strong>Impression Dock</strong> (Corporate Gifting & Printing).
                     </p>
 
-                    <div className="p-6 bg-secondary/30 border border-border rounded-2xl my-8 flex gap-4">
+                    <div className="p-6 bg-secondary/30 border border-border rounded my-8 flex gap-4">
                         <Truck className="w-6 h-6 text-primary shrink-0 mt-1" />
                         <div>
                             <h3 className="font-bold text-lg mb-2 mt-0">B2B Focus</h3>
