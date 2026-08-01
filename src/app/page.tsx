@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
+import { HeroSceneLoader } from "@/components/three/hero-scene-loader";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -76,10 +77,14 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════ */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-20 md:pt-36 md:pb-32">
 
-        {/* Background glow orbs */}
-        <div className="absolute top-0 left-1/4 w-[700px] h-[700px] glow-orb-blue rounded-full blur-3xl opacity-30 pointer-events-none" />
+        {/* Background glow */}
         <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] glow-orb-amber rounded-full blur-3xl opacity-20 pointer-events-none" />
         <div className="absolute inset-0 bg-grid-pattern opacity-100 pointer-events-none" />
+
+        {/* Cinematic 3D core — the "infinity dock" and its three orbiting verticals */}
+        <div className="absolute inset-0 pointer-events-none">
+          <HeroSceneLoader />
+        </div>
 
         <Container className="relative z-10">
           <div className="flex flex-col items-center text-center max-w-6xl mx-auto">
