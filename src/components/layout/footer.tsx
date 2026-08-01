@@ -42,10 +42,10 @@ export function Footer() {
                     <div className="md:col-span-4 space-y-6">
                         <div>
                             <Link href="/" className="inline-flex items-center gap-3 group mb-4">
-                                <div className="w-8 h-8 border border-background/60 flex items-center justify-center group-hover:bg-brand group-hover:border-brand transition-colors">
-                                    <span className="text-background text-xs font-bold font-mono group-hover:text-brand-foreground">D</span>
+                                <div className="w-8 h-8 rounded-lg bg-brand flex items-center justify-center">
+                                    <span className="text-brand-foreground text-xs font-bold font-mono">D</span>
                                 </div>
-                                <span className="font-mono font-semibold text-lg tracking-[0.15em] text-background group-hover:text-background/80 transition-colors">
+                                <span className="font-display font-bold text-xl tracking-tight text-background group-hover:text-background/80 transition-colors">
                                     DOCKFINITY
                                 </span>
                             </Link>
@@ -113,11 +113,11 @@ export function Footer() {
 
                     <div className="md:col-span-4">
                         <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-background/40 font-mono mb-5">Certifications</h3>
-                        <div className="border-t border-background/10">
+                        <div className="grid grid-cols-2 gap-3">
                             {certs.map((c) => (
-                                <div key={c.label} className="flex items-center justify-between py-2.5 border-b border-background/10 font-mono text-xs">
-                                    <span className="text-background font-semibold tracking-wide">{c.label}</span>
-                                    <span className="text-background/40">{c.sub}</span>
+                                <div key={c.label} className="px-4 py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/8 transition-colors">
+                                    <div className="text-sm font-bold text-background">{c.label}</div>
+                                    <div className="text-xs text-background/40">{c.sub}</div>
                                 </div>
                             ))}
                         </div>
