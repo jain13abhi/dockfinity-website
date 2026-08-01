@@ -53,7 +53,7 @@ export default function PrivacyPolicyPage() {
 
                     <h2 className="text-2xl font-bold tracking-tight mt-12 mb-6 text-foreground">4. Disclosure of Your Personal Data</h2>
                     <p>
-                        We may share your personal data with internal third parties (our verticals Dockware Labs, Trading Dock, Impression Dock) and external third parties (service providers acting as processors) for the purposes set out in this policy. We require all third parties to respect the security of your personal data and to treat it in accordance with the law.
+                        We may share your personal data with internal third parties (our verticals Dockware Labs, Trading Dock, Impressio Dock) and external third parties (service providers acting as processors) for the purposes set out in this policy. We require all third parties to respect the security of your personal data and to treat it in accordance with the law.
                     </p>
 
                     <h2 className="text-2xl font-bold tracking-tight mt-12 mb-6 text-foreground">5. Data Security</h2>

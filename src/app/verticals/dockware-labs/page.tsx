@@ -27,21 +27,20 @@ export default function DockwareLabsPage() {
         <>
             {/* ── HERO ── */}
             <section className="relative pt-36 pb-24 bg-foreground text-background overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern opacity-[0.06] pointer-events-none" />
-                <div className="absolute top-0 left-1/4 w-[600px] h-[500px] bg-blue-600/10 rounded-sm blur-3xl pointer-events-none" />
+                <div className="absolute inset-0 bg-ledger-grid opacity-[0.08] pointer-events-none" />
 
                 <Container className="relative z-10">
                     <div className="max-w-4xl">
                         <div className="flex items-center gap-3 mb-8">
-                            <div className="w-14 h-14 bg-blue-600/20 rounded flex items-center justify-center">
+                            <div className="w-14 h-14 border border-background/30 flex items-center justify-center">
                                 <Cpu className="w-7 h-7 text-blue-400" />
                             </div>
-                            <span className="inline-flex items-center px-3 py-1 rounded-sm text-xs font-bold uppercase tracking-widest bg-blue-600/20 text-blue-400 border border-blue-600/30 font-mono">
+                            <span className="inline-flex items-center px-3 py-1 text-xs font-bold uppercase tracking-widest border border-background/30 text-background/80 font-mono">
                                 SaaS · Automation · AI
                             </span>
                         </div>
 
-                        <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-6">
+                        <h1 className="font-display text-5xl md:text-7xl font-semibold tracking-tight leading-[1.05] mb-6">
                             Dockware<br />
                             <span className="text-blue-400">Labs.</span>
                         </h1>
@@ -71,7 +70,7 @@ export default function DockwareLabsPage() {
                                 </p>
                             </div>
 
-                            <div className="p-6 bg-blue-600/5 border border-blue-600/20 rounded">
+                            <div className="p-6 border border-border">
                                 <p className="text-sm font-medium text-foreground flex items-start gap-3">
                                     <Server className="w-5 h-5 text-blue-600 shrink-0 mt-0.5" />
                                     ISO 27001:2022 certified. All software we build adheres to enterprise-grade security and quality standards.
@@ -83,9 +82,9 @@ export default function DockwareLabsPage() {
                             {services.map((s) => (
                                 <div
                                     key={s.title}
-                                    className="p-6 bg-card rounded border border-border/50 border-t-2 border-t-blue-600/60 hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                                    className="p-6 bg-card border border-border border-t-2 border-t-blue-600/60 entry-hover"
                                 >
-                                    <div className="w-11 h-11 bg-blue-600/10 rounded-sm flex items-center justify-center mb-4">
+                                    <div className="w-11 h-11 border border-border flex items-center justify-center mb-4">
                                         <s.icon className="w-5 h-5 text-blue-600" />
                                     </div>
                                     <h3 className="font-display font-bold text-base mb-2">{s.title}</h3>
@@ -100,7 +99,7 @@ export default function DockwareLabsPage() {
 
             {/* ── PROCESS ── */}
             <section className="py-20 md:py-28 bg-secondary/30 relative overflow-hidden">
-                <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
+                <div className="absolute inset-0 bg-ledger-grid opacity-50 pointer-events-none" />
                 <Container className="relative z-10">
                     <div className="text-center mb-16">
                         <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-600 font-mono mb-3">Our Process</p>
@@ -111,9 +110,9 @@ export default function DockwareLabsPage() {
                         {process.map((p) => (
                             <div
                                 key={p.step}
-                                className="relative p-7 bg-card rounded border border-border/50 hover:border-blue-600/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group"
+                                className="relative p-7 bg-card border border-border hover:border-blue-600/40 transition-colors duration-200 group"
                             >
-                                <div className="font-display text-6xl font-bold text-blue-600/10 group-hover:text-blue-600/20 transition-colors mb-4">
+                                <div className="font-mono text-2xl font-semibold text-blue-600 mb-4">
                                     {p.step}
                                 </div>
                                 <h3 className="font-display text-xl font-bold mb-2">{p.title}</h3>
@@ -146,10 +145,9 @@ export default function DockwareLabsPage() {
 
             {/* ── CTA ── */}
             <section className="py-20 bg-foreground text-background relative overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-blue-600/15 rounded-sm blur-3xl pointer-events-none" />
+                <div className="absolute inset-0 bg-ledger-grid opacity-[0.08] pointer-events-none" />
                 <Container className="relative z-10 text-center">
-                    <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">
+                    <h2 className="font-display text-4xl md:text-5xl font-semibold tracking-tight mb-4">
                         Ready to Upgrade Your Tech Stack?
                     </h2>
                     <p className="text-xl text-background/60 max-w-xl mx-auto mb-8 font-light">

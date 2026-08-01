@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { submitContactForm } from "@/app/actions";
 import { useState, useRef } from "react";
-import { Mail, MapPin, Phone, Clock, Loader2, CheckCircle2, ArrowRight } from "lucide-react";
+import { Mail, MapPin, Phone, Clock, Loader2, CheckCircle2, ArrowRight, ShieldCheck } from "lucide-react";
 
 const contactDetails = [
     {
@@ -14,32 +14,24 @@ const contactDetails = [
         label: "Registered Office",
         value: "G-30/394-395, 2nd Floor, Sector-3,\nRohini, North West Delhi,\nDelhi - 110085, India",
         href: null,
-        color: "text-blue-600",
-        bg: "bg-blue-600/10",
     },
     {
         icon: Phone,
         label: "Phone",
         value: "+91 99117 21100",
         href: "tel:+919911721100",
-        color: "text-emerald-600",
-        bg: "bg-emerald-600/10",
     },
     {
         icon: Mail,
         label: "Email",
         value: "dockfinity@gmail.com",
         href: "mailto:dockfinity@gmail.com",
-        color: "text-amber-600",
-        bg: "bg-amber-600/10",
     },
     {
         icon: Clock,
         label: "Business Hours",
         value: "Monday – Friday\n10:00 AM – 6:00 PM IST",
         href: null,
-        color: "text-violet-500",
-        bg: "bg-violet-500/10",
     },
 ];
 
@@ -65,17 +57,15 @@ export default function ContactPage() {
         <>
             {/* ── PAGE HERO ── */}
             <section className="relative pt-36 pb-20 overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern pointer-events-none" />
-                <div className="absolute top-0 left-1/3 w-[500px] h-[400px] glow-orb-amber rounded-sm blur-3xl opacity-20 pointer-events-none" />
+                <div className="absolute inset-0 bg-ledger-grid opacity-60 pointer-events-none" />
 
                 <Container className="relative z-10">
                     <div className="max-w-3xl">
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-sm bg-secondary border border-border/60 text-xs font-bold uppercase tracking-widest text-muted-foreground font-mono mb-6">
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-secondary border border-border text-xs font-bold uppercase tracking-widest text-muted-foreground font-mono mb-6">
                             Let&apos;s Talk
                         </div>
-                        <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-5">
-                            Start a{" "}
-                            <span className="text-gradient-brand">Conversation.</span>
+                        <h1 className="font-display text-5xl md:text-7xl font-semibold tracking-tight leading-[1.05] mb-5">
+                            Start a Conversation.
                         </h1>
                         <p className="text-xl text-muted-foreground max-w-2xl leading-relaxed font-light">
                             Whether you&apos;re exploring a partnership, need enterprise software, or have a gifting requirement — our team is ready to help.
@@ -95,10 +85,10 @@ export default function ContactPage() {
                             {contactDetails.map((c) => (
                                 <div
                                     key={c.label}
-                                    className="flex items-start gap-4 p-5 bg-card rounded border border-border/50 hover:border-border hover:shadow-md transition-all duration-300"
+                                    className="flex items-start gap-4 p-5 bg-card border border-border entry-hover"
                                 >
-                                    <div className={`w-11 h-11 ${c.bg} rounded-sm flex items-center justify-center shrink-0`}>
-                                        <c.icon className={`w-5 h-5 ${c.color}`} />
+                                    <div className="w-11 h-11 border border-border flex items-center justify-center shrink-0">
+                                        <c.icon className="w-5 h-5 text-brand" />
                                     </div>
                                     <div>
                                         <div className="text-xs font-bold uppercase tracking-wider text-muted-foreground font-mono mb-1">{c.label}</div>
@@ -114,20 +104,20 @@ export default function ContactPage() {
                             ))}
 
                             {/* Trust badge */}
-                            <div className="p-6 bg-secondary/50 rounded border border-border/50">
-                                <h3 className="font-display font-bold text-base mb-2">Official Channel</h3>
+                            <div className="p-6 bg-secondary/40 border border-border">
+                                <h3 className="font-display font-semibold text-base mb-2">Official Channel</h3>
                                 <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
                                     This is the only official website of Dockfinity Private Limited. All communications go through our listed channels only.
                                 </p>
-                                <div className="flex flex-wrap gap-2">
-                                    <span className="inline-flex items-center px-3 py-1 rounded-sm text-xs font-semibold bg-emerald-600/10 text-emerald-600 dark:text-emerald-400 border border-emerald-600/20">
-                                        ✓ CIN Registered
+                                <div className="flex flex-wrap gap-x-5 gap-y-2 font-mono text-xs">
+                                    <span className="inline-flex items-center gap-1.5 text-foreground font-semibold">
+                                        <ShieldCheck className="w-3.5 h-3.5 text-brand" /> CIN Registered
                                     </span>
-                                    <span className="inline-flex items-center px-3 py-1 rounded-sm text-xs font-semibold bg-blue-600/10 text-blue-600 dark:text-blue-400 border border-blue-600/20">
-                                        ✓ GST Active
+                                    <span className="inline-flex items-center gap-1.5 text-foreground font-semibold">
+                                        <ShieldCheck className="w-3.5 h-3.5 text-brand" /> GST Active
                                     </span>
-                                    <span className="inline-flex items-center px-3 py-1 rounded-sm text-xs font-semibold bg-amber-600/10 text-amber-600 dark:text-amber-400 border border-amber-600/20">
-                                        ✓ DPIIT Recognized
+                                    <span className="inline-flex items-center gap-1.5 text-foreground font-semibold">
+                                        <ShieldCheck className="w-3.5 h-3.5 text-brand" /> DPIIT Recognized
                                     </span>
                                 </div>
                             </div>
@@ -135,13 +125,13 @@ export default function ContactPage() {
 
                         {/* Right: Contact form */}
                         <div className="lg:col-span-3">
-                            <div className="bg-card p-8 md:p-10 rounded border border-border/50 shadow-xl shadow-foreground/5">
+                            <div className="bg-card p-8 md:p-10 border border-border">
                                 {isSuccess ? (
                                     <div className="flex flex-col items-center justify-center py-16 text-center animate-in fade-in zoom-in duration-300">
-                                        <div className="w-20 h-20 bg-emerald-600/10 rounded-sm flex items-center justify-center mb-6">
-                                            <CheckCircle2 className="w-10 h-10 text-emerald-600" />
+                                        <div className="w-20 h-20 border border-border flex items-center justify-center mb-6">
+                                            <CheckCircle2 className="w-10 h-10 text-brand" />
                                         </div>
-                                        <h3 className="font-display text-2xl font-bold mb-3">Message Sent!</h3>
+                                        <h3 className="font-display text-2xl font-semibold mb-3">Message Sent!</h3>
                                         <p className="text-muted-foreground mb-8 max-w-xs leading-relaxed">
                                             Thank you for reaching out. Our team will respond within 1–2 business days.
                                         </p>
@@ -187,7 +177,7 @@ export default function ContactPage() {
                                                         <option value="General Inquiry">General Inquiry</option>
                                                         <option value="Dockware Labs">Dockware Labs — Software & Automation</option>
                                                         <option value="Trading Dock">Trading Dock — Analytics & Education</option>
-                                                        <option value="Impression Dock">Impression Dock — Gifting & Printing</option>
+                                                        <option value="Impressio Dock">Impressio Dock — Gifting & Printing</option>
                                                         <option value="Partnership">Strategic Partnership</option>
                                                         <option value="Investment">Investment Inquiry</option>
                                                     </select>

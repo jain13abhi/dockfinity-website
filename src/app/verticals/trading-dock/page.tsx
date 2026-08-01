@@ -26,21 +26,20 @@ export default function TradingDockPage() {
         <>
             {/* HERO */}
             <section className="relative pt-36 pb-24 bg-foreground text-background overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern opacity-[0.06] pointer-events-none" />
-                <div className="absolute top-0 right-1/4 w-[600px] h-[500px] bg-emerald-600/10 rounded-sm blur-3xl pointer-events-none" />
+                <div className="absolute inset-0 bg-ledger-grid opacity-[0.08] pointer-events-none" />
 
                 <Container className="relative z-10">
                     <div className="max-w-4xl">
                         <div className="flex items-center gap-3 mb-8">
-                            <div className="w-14 h-14 bg-emerald-600/20 rounded flex items-center justify-center">
+                            <div className="w-14 h-14 border border-background/30 flex items-center justify-center">
                                 <BarChart3 className="w-7 h-7 text-emerald-400" />
                             </div>
-                            <span className="inline-flex items-center px-3 py-1 rounded-sm text-xs font-bold uppercase tracking-widest bg-emerald-600/20 text-emerald-400 border border-emerald-600/30 font-mono">
+                            <span className="inline-flex items-center px-3 py-1 text-xs font-bold uppercase tracking-widest border border-background/30 text-background/80 font-mono">
                                 Finance · Analytics · Education
                             </span>
                         </div>
 
-                        <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-6">
+                        <h1 className="font-display text-5xl md:text-7xl font-semibold tracking-tight leading-[1.05] mb-6">
                             Trading<br />
                             <span className="text-emerald-400">Dock.</span>
                         </h1>
@@ -52,7 +51,7 @@ export default function TradingDockPage() {
             </section>
 
             {/* COMPLIANCE */}
-            <div className="bg-amber-600/10 border-y border-amber-600/20 py-4">
+            <div className="border-y border-border bg-secondary/40 py-4">
                 <Container>
                     <div className="flex items-start gap-3 text-sm">
                         <AlertTriangle className="w-4 h-4 text-amber-600 shrink-0 mt-0.5" />
@@ -87,8 +86,8 @@ export default function TradingDockPage() {
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                             {offerings.map((o) => (
-                                <div key={o.title} className="p-6 bg-card rounded border border-border/50 border-t-2 border-t-emerald-600/60 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                                    <div className="w-11 h-11 bg-emerald-600/10 rounded-sm flex items-center justify-center mb-4">
+                                <div key={o.title} className="p-6 bg-card border border-border border-t-2 border-t-emerald-600/60 entry-hover">
+                                    <div className="w-11 h-11 border border-border flex items-center justify-center mb-4">
                                         <o.icon className="w-5 h-5 text-emerald-600" />
                                     </div>
                                     <h3 className="font-display font-bold text-base mb-2">{o.title}</h3>
@@ -102,7 +101,7 @@ export default function TradingDockPage() {
 
             {/* APPROACH */}
             <section className="py-20 md:py-28 bg-secondary/30 relative overflow-hidden">
-                <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
+                <div className="absolute inset-0 bg-ledger-grid opacity-50 pointer-events-none" />
                 <Container className="relative z-10">
                     <div className="text-center mb-16">
                         <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-600 font-mono mb-3">Our Framework</p>
@@ -110,8 +109,8 @@ export default function TradingDockPage() {
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
                         {approach.map((a) => (
-                            <div key={a.step} className="p-8 bg-card rounded border border-border/50 hover:border-emerald-600/30 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 group text-center">
-                                <div className="font-display text-7xl font-bold text-emerald-600/10 group-hover:text-emerald-600/20 transition-colors mb-4">{a.step}</div>
+                            <div key={a.step} className="p-8 bg-card border border-border hover:border-emerald-600/40 transition-colors duration-200 group text-center">
+                                <div className="font-mono text-2xl font-semibold text-emerald-600 mb-4">{a.step}</div>
                                 <h3 className="font-display text-2xl font-bold mb-3 text-emerald-600">{a.title}</h3>
                                 <p className="text-sm text-muted-foreground leading-relaxed">{a.desc}</p>
                             </div>
@@ -122,8 +121,7 @@ export default function TradingDockPage() {
 
             {/* CTA */}
             <section className="py-20 bg-foreground text-background relative overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-emerald-600/15 rounded-sm blur-3xl pointer-events-none" />
+                <div className="absolute inset-0 bg-ledger-grid opacity-[0.08] pointer-events-none" />
                 <Container className="relative z-10 text-center">
                     <TrendingUp className="w-10 h-10 text-emerald-600 mx-auto mb-6" />
                     <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">Start Your Trading Education</h2>

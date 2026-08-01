@@ -22,7 +22,7 @@ export default function ShippingPolicyPage() {
 
                 <div className="prose prose-lg dark:prose-invert max-w-none">
                     <p className="lead text-xl text-foreground/80">
-                        This Shipping Policy applies primarily to the tangible goods provided by our vertical <strong>Impression Dock</strong> (Corporate Gifting & Printing).
+                        This Shipping Policy applies primarily to the tangible goods provided by our vertical <strong>Impressio Dock</strong> (Corporate Gifting & Printing).
                     </p>
 
                     <div className="p-6 bg-secondary/30 border border-border rounded my-8 flex gap-4">

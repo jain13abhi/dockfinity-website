@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { CheckCircle2, ShieldCheck, Target, Globe2, ArrowRight, Lightbulb, Users2 } from "lucide-react";
+import { ShieldCheck, Target, Globe2, ArrowRight, Lightbulb, Users2 } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
@@ -13,22 +13,16 @@ const values = [
         icon: ShieldCheck,
         title: "Integrity",
         description: "We operate with radical transparency. Every commitment we make is backed by contractual accountability and international compliance frameworks.",
-        color: "text-blue-600",
-        bg: "bg-blue-600/10",
     },
     {
         icon: Lightbulb,
         title: "Innovation",
         description: "We challenge the status quo constantly. Our teams are built to ask better questions and build smarter solutions — faster than the market expects.",
-        color: "text-amber-600",
-        bg: "bg-amber-600/10",
     },
     {
         icon: Target,
         title: "Excellence",
         description: "We ship nothing short of our best. From enterprise software to custom gifting, every touchpoint reflects our obsession with quality.",
-        color: "text-emerald-600",
-        bg: "bg-emerald-600/10",
     },
 ];
 
@@ -36,7 +30,7 @@ const milestones = [
     { year: "2025", event: "Dockfinity Private Limited incorporated", sub: "CIN: U66190DL2025PTC454662" },
     { year: "2025", event: "DPIIT Startup India recognition awarded", sub: "Government of India" },
     { year: "2025", event: "Triple ISO Certification achieved", sub: "27001 · 9001 · 20000-1" },
-    { year: "2025", event: "All three verticals operationalized", sub: "Dockware Labs · Trading Dock · Impression Dock" },
+    { year: "2025", event: "All three verticals operationalized", sub: "Dockware Labs · Trading Dock · Impressio Dock" },
 ];
 
 export default function AboutPage() {
@@ -44,17 +38,15 @@ export default function AboutPage() {
         <>
             {/* ── PAGE HERO ── */}
             <section className="relative pt-36 pb-24 overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern pointer-events-none" />
-                <div className="absolute top-0 right-0 w-[500px] h-[500px] glow-orb-amber rounded-sm blur-3xl opacity-20 pointer-events-none" />
+                <div className="absolute inset-0 bg-ledger-grid opacity-60 pointer-events-none" />
 
                 <Container className="relative z-10">
                     <div className="max-w-4xl">
-                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-sm bg-secondary border border-border/60 text-xs font-bold uppercase tracking-widest text-muted-foreground font-mono mb-6">
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-secondary border border-border text-xs font-bold uppercase tracking-widest text-muted-foreground font-mono mb-6">
                             Since 2025
                         </div>
-                        <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-[1.0] mb-6">
-                            We Are{" "}
-                            <span className="text-gradient-brand">Dockfinity.</span>
+                        <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tight leading-[1.0] mb-6">
+                            We Are Dockfinity.
                         </h1>
                         <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl leading-relaxed font-light">
                             A forward-thinking holding company dedicated to building, scaling, and governing technology-driven ventures that solve real business problems.
@@ -78,7 +70,7 @@ export default function AboutPage() {
                                     Founded in 2025, Dockfinity serves as the strategic and governance backbone for a growing portfolio of specialized business units. We are not a consultancy — we are builders.
                                 </p>
                                 <p>
-                                    From enterprise SaaS at <strong className="text-foreground">Dockware Labs</strong>, to institutional-grade financial education at <strong className="text-foreground">Trading Dock</strong>, to premium corporate gifting at <strong className="text-foreground">Impression Dock</strong> — every vertical is built to be the best in its category.
+                                    From enterprise SaaS at <strong className="text-foreground">Dockware Labs</strong>, to institutional-grade financial education at <strong className="text-foreground">Trading Dock</strong>, to premium corporate gifting at <strong className="text-foreground">Impressio Dock</strong> — every vertical is built to be the best in its category.
                                 </p>
                             </div>
 
@@ -94,12 +86,12 @@ export default function AboutPage() {
 
                         <div className="space-y-4">
                             {/* Mission */}
-                            <div className="p-7 bg-card rounded border border-border/50 hover:border-border hover:shadow-lg transition-all duration-300">
+                            <div className="p-7 bg-card border border-border entry-hover">
                                 <div className="flex items-center gap-3 mb-3">
-                                    <div className="w-10 h-10 bg-blue-600/10 rounded-sm flex items-center justify-center">
-                                        <Target className="w-5 h-5 text-blue-600" />
+                                    <div className="w-10 h-10 border border-border flex items-center justify-center">
+                                        <Target className="w-5 h-5 text-brand" />
                                     </div>
-                                    <h3 className="font-display text-xl font-bold">Our Mission</h3>
+                                    <h3 className="font-display text-xl font-semibold">Our Mission</h3>
                                 </div>
                                 <p className="text-muted-foreground leading-relaxed">
                                     To empower businesses and individuals through technology, financial education, and premium experiences — creating measurable value at every touchpoint.
@@ -107,12 +99,12 @@ export default function AboutPage() {
                             </div>
 
                             {/* Vision */}
-                            <div className="p-7 bg-card rounded border border-border/50 hover:border-border hover:shadow-lg transition-all duration-300">
+                            <div className="p-7 bg-card border border-border entry-hover">
                                 <div className="flex items-center gap-3 mb-3">
-                                    <div className="w-10 h-10 bg-amber-600/10 rounded-sm flex items-center justify-center">
-                                        <Globe2 className="w-5 h-5 text-amber-600" />
+                                    <div className="w-10 h-10 border border-border flex items-center justify-center">
+                                        <Globe2 className="w-5 h-5 text-brand" />
                                     </div>
-                                    <h3 className="font-display text-xl font-bold">Our Vision</h3>
+                                    <h3 className="font-display text-xl font-semibold">Our Vision</h3>
                                 </div>
                                 <p className="text-muted-foreground leading-relaxed">
                                     To build a self-sustaining ecosystem of high-growth ventures that collectively define a new standard of enterprise excellence in India and beyond.
@@ -120,8 +112,8 @@ export default function AboutPage() {
                             </div>
 
                             {/* Governance note */}
-                            <div className="p-5 bg-secondary/50 rounded border border-border/50 flex items-start gap-3">
-                                <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0 mt-0.5" />
+                            <div className="p-5 bg-secondary/40 border border-border flex items-start gap-3">
+                                <ShieldCheck className="w-5 h-5 text-brand shrink-0 mt-0.5" />
                                 <p className="text-sm text-muted-foreground leading-relaxed">
                                     <strong className="text-foreground">Governance first.</strong> Dockfinity provides strategic direction, compliance oversight, and resource allocation across all verticals — ensuring every entity operates to the highest standards.
                                 </p>
@@ -134,7 +126,7 @@ export default function AboutPage() {
 
             {/* ── CORE VALUES ── */}
             <section className="py-20 md:py-28 bg-secondary/30 relative overflow-hidden">
-                <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
+                <div className="absolute inset-0 bg-ledger-grid opacity-50 pointer-events-none" />
                 <Container className="relative z-10">
                     <div className="text-center mb-16">
                         <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand font-mono mb-3">Core Values</p>
@@ -147,12 +139,12 @@ export default function AboutPage() {
                         {values.map((v) => (
                             <div
                                 key={v.title}
-                                className="p-8 bg-card rounded border border-border/50 hover:border-border hover:shadow-xl hover:-translate-y-1 transition-all duration-300"
+                                className="p-8 bg-card border border-border entry-hover"
                             >
-                                <div className={`w-12 h-12 ${v.bg} rounded flex items-center justify-center mb-5`}>
-                                    <v.icon className={`w-6 h-6 ${v.color}`} />
+                                <div className="w-12 h-12 border border-border flex items-center justify-center mb-5">
+                                    <v.icon className="w-6 h-6 text-brand" />
                                 </div>
-                                <h3 className="font-display text-2xl font-bold mb-3">{v.title}</h3>
+                                <h3 className="font-display text-2xl font-semibold mb-3">{v.title}</h3>
                                 <p className="text-muted-foreground leading-relaxed">{v.description}</p>
                             </div>
                         ))}
@@ -212,12 +204,11 @@ export default function AboutPage() {
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="relative p-8 rounded border border-border/50 bg-card hover:border-border hover:shadow-lg transition-all duration-300 group overflow-hidden">
-                            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-blue-600/50 to-transparent" />
-                            <span className="inline-flex items-center px-3 py-1 rounded-sm text-xs font-bold uppercase tracking-wider bg-blue-600/10 text-blue-600 border border-blue-600/20 mb-5 font-mono">
+                        <div className="p-8 border border-border border-l-2 border-l-blue-600 bg-card entry-hover group">
+                            <span className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-muted-foreground mb-5 font-mono">
                                 Associate Company
                             </span>
-                            <h3 className="font-display text-2xl font-bold tracking-tight mb-3 group-hover:text-brand transition-colors duration-300">
+                            <h3 className="font-display text-2xl font-semibold tracking-tight mb-3 group-hover:text-brand transition-colors duration-300">
                                 Metaloc India Private Limited
                             </h3>
                             <p className="text-muted-foreground leading-relaxed">
@@ -225,12 +216,11 @@ export default function AboutPage() {
                             </p>
                         </div>
 
-                        <div className="relative p-8 rounded border border-border/50 bg-card hover:border-border hover:shadow-lg transition-all duration-300 group overflow-hidden">
-                            <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-amber-600/50 to-transparent" />
-                            <span className="inline-flex items-center px-3 py-1 rounded-sm text-xs font-bold uppercase tracking-wider bg-amber-600/10 text-amber-600 border border-amber-600/20 mb-5 font-mono">
+                        <div className="p-8 border border-border border-l-2 border-l-amber-600 bg-card entry-hover group">
+                            <span className="inline-flex items-center text-xs font-bold uppercase tracking-wider text-muted-foreground mb-5 font-mono">
                                 Associate Company
                             </span>
-                            <h3 className="font-display text-2xl font-bold tracking-tight mb-3 group-hover:text-brand transition-colors duration-300">
+                            <h3 className="font-display text-2xl font-semibold tracking-tight mb-3 group-hover:text-brand transition-colors duration-300">
                                 Patra Corporations Private Limited
                             </h3>
                             <p className="text-muted-foreground leading-relaxed">
@@ -244,7 +234,7 @@ export default function AboutPage() {
 
             {/* ── CTA ── */}
             <section className="py-20 bg-foreground text-background relative overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
+                <div className="absolute inset-0 bg-ledger-grid opacity-[0.05] pointer-events-none" />
                 <Container className="relative z-10 text-center">
                     <Users2 className="w-10 h-10 text-brand mx-auto mb-6" />
                     <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">

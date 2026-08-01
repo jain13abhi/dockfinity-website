@@ -11,6 +11,7 @@ export const metadata = {
 const verticals = [
     {
         id: "dockware-labs",
+        entryNo: "01",
         name: "Dockware Labs",
         tagline: "SaaS · Automation · AI",
         headline: "The Enterprise Software Engine.",
@@ -18,16 +19,12 @@ const verticals = [
         features: ["Custom ERP & CRM Systems", "AI-Powered Workflow Automation", "End-to-End SaaS Development", "Scalable Cloud Infrastructure"],
         href: "/verticals/dockware-labs",
         icon: Cpu,
-        accent: "blue",
         accentClass: "text-blue-600",
-        bgClass: "bg-blue-600/10",
-        borderClass: "border-blue-600/20",
-        gradientFrom: "from-blue-600/10",
-        badgeClass: "bg-blue-600/10 text-blue-600 dark:text-blue-400 border-blue-600/20",
-        topBorder: "via-blue-600/50",
+        tabClass: "tab-blue",
     },
     {
         id: "trading-dock",
+        entryNo: "02",
         name: "Trading Dock",
         tagline: "Finance · Analytics · Education",
         headline: "Where Data Meets Decision.",
@@ -35,30 +32,21 @@ const verticals = [
         features: ["Real-Time Market Dashboards", "Technical Analysis Education", "Strategy Backtesting Tools", "Community of Disciplined Traders"],
         href: "/verticals/trading-dock",
         icon: BarChart3,
-        accent: "emerald",
         accentClass: "text-emerald-600",
-        bgClass: "bg-emerald-600/10",
-        borderClass: "border-emerald-600/20",
-        gradientFrom: "from-emerald-600/10",
-        badgeClass: "bg-emerald-600/10 text-emerald-600 dark:text-emerald-400 border-emerald-600/20",
-        topBorder: "via-emerald-600/50",
+        tabClass: "tab-emerald",
     },
     {
-        id: "impression-dock",
-        name: "Impression Dock",
+        id: "impressio-dock",
+        entryNo: "03",
+        name: "Impressio Dock",
         tagline: "Gifting · Printing · Merch",
         headline: "Tangible Impressions. Lasting Brands.",
-        description: "Impression Dock helps businesses make their brand felt — literally. From curated corporate gift boxes to high-quality offset printing and custom merchandise, we handle the entire lifecycle: design, sourcing, production, and last-mile delivery.",
+        description: "Impressio Dock helps businesses make their brand felt — literally. From curated corporate gift boxes to high-quality offset printing and custom merchandise, we handle the entire lifecycle: design, sourcing, production, and last-mile delivery.",
         features: ["Premium Corporate Gift Boxes", "Custom-Branded Merchandise", "Offset & Digital Print Media", "End-to-End Fulfillment Logistics"],
-        href: "/verticals/impression-dock",
+        href: "/verticals/impressio-dock",
         icon: Gift,
-        accent: "amber",
         accentClass: "text-amber-600",
-        bgClass: "bg-amber-600/10",
-        borderClass: "border-amber-600/20",
-        gradientFrom: "from-amber-600/10",
-        badgeClass: "bg-amber-600/10 text-amber-600 dark:text-amber-400 border-amber-600/20",
-        topBorder: "via-amber-600/50",
+        tabClass: "tab-amber",
     },
 ];
 
@@ -67,15 +55,15 @@ export default function VerticalsPage() {
         <>
             {/* ── PAGE HERO ── */}
             <section className="relative pt-36 pb-20 overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern pointer-events-none" />
+                <div className="absolute inset-0 bg-ledger-grid opacity-60 pointer-events-none" />
                 <Container className="relative z-10 text-center">
-                    <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-sm bg-secondary border border-border/60 text-xs font-bold uppercase tracking-widest text-muted-foreground font-mono mb-6">
+                    <div className="inline-flex items-center gap-2 px-3 py-1.5 bg-secondary border border-border text-xs font-bold uppercase tracking-widest text-muted-foreground font-mono mb-6">
                         Business Ecosystem
                     </div>
-                    <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight mb-5">
-                        Our <span className="text-gradient-brand">Verticals</span>
+                    <h1 className="font-display text-5xl md:text-7xl font-semibold tracking-tight mb-5">
+                        Our Verticals
                     </h1>
-                    <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto font-light leading-relaxed">
+                    <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
                         Three specialized business units. Independent teams. One unified governance. A combined force unlike anything in the market.
                     </p>
                 </Container>
@@ -85,32 +73,26 @@ export default function VerticalsPage() {
             {/* ── VERTICALS ── */}
             <section className="pb-24 md:pb-32">
                 <Container>
-                    <div className="space-y-8">
-                        {verticals.map((v, i) => (
+                    <div className="space-y-6">
+                        {verticals.map((v) => (
                             <div
                                 key={v.id}
-                                className={`relative rounded border border-border/50 bg-card overflow-hidden hover:border-border hover:shadow-2xl transition-all duration-500 group`}
+                                className={`border border-border bg-card entry-hover ${v.tabClass}`}
                             >
-                                {/* Top accent line */}
-                                <div className={`absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent ${v.topBorder} to-transparent`} />
-
-                                <div className={`grid grid-cols-1 lg:grid-cols-2 gap-0 ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}>
+                                <div className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 lg:gap-16 p-10 md:p-12">
 
                                     {/* Content */}
-                                    <div className="p-10 md:p-12 space-y-6">
-                                        <div className="flex items-center gap-4">
-                                            <div className={`w-14 h-14 ${v.bgClass} rounded flex items-center justify-center group-hover:scale-110 transition-transform duration-300`}>
-                                                <v.icon className={`w-7 h-7 ${v.accentClass}`} />
-                                            </div>
-                                            <span className={`inline-flex items-center px-3 py-1 rounded-sm text-xs font-bold uppercase tracking-wider ${v.badgeClass} border font-mono`}>
-                                                {v.tagline}
-                                            </span>
+                                    <div className="space-y-6">
+                                        <div className="flex items-center justify-between">
+                                            <span className="font-mono text-xs text-muted-foreground">ENTITY NO. {v.entryNo}</span>
+                                            <v.icon className={`w-6 h-6 ${v.accentClass}`} />
                                         </div>
 
                                         <div>
-                                            <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-2">{v.name}</h2>
-                                            <p className={`text-lg font-medium ${v.accentClass} mb-4`}>{v.headline}</p>
-                                            <p className="text-muted-foreground leading-relaxed">{v.description}</p>
+                                            <span className={`text-[10px] font-bold uppercase tracking-[0.2em] font-mono ${v.accentClass}`}>{v.tagline}</span>
+                                            <h2 className="font-display text-3xl md:text-4xl font-semibold tracking-tight mt-2 mb-2">{v.name}</h2>
+                                            <p className="text-lg font-medium text-foreground/80 mb-4">{v.headline}</p>
+                                            <p className="text-muted-foreground leading-relaxed max-w-xl">{v.description}</p>
                                         </div>
 
                                         <ul className="space-y-2">
@@ -123,7 +105,7 @@ export default function VerticalsPage() {
                                         </ul>
 
                                         <div className="pt-2">
-                                            <Button className={`rounded-sm px-8 font-semibold bg-foreground text-background hover:bg-foreground/90 shadow-sm`} asChild>
+                                            <Button className="px-8 font-semibold bg-foreground text-background hover:bg-foreground/90 shadow-sm" asChild>
                                                 <Link href={v.href}>
                                                     Explore {v.name} <ArrowRight className="ml-2 h-4 w-4" />
                                                 </Link>
@@ -131,15 +113,10 @@ export default function VerticalsPage() {
                                         </div>
                                     </div>
 
-                                    {/* Visual panel */}
-                                    <div className={`relative ${v.gradientFrom} to-transparent bg-gradient-to-br flex items-center justify-center p-12 min-h-[300px]`}>
-                                        <div className="absolute inset-0 bg-grid-dense opacity-40" />
-                                        <div className="relative z-10 text-center">
-                                            <v.icon className={`w-24 h-24 ${v.accentClass} opacity-20 mx-auto mb-4 group-hover:opacity-40 transition-opacity duration-500`} />
-                                            <div className={`font-display text-5xl font-bold ${v.accentClass} opacity-10 group-hover:opacity-20 transition-opacity duration-500 tracking-tight`}>
-                                                {v.name.split(" ")[0]}
-                                            </div>
-                                        </div>
+                                    {/* Registry mark */}
+                                    <div className="hidden lg:flex flex-col items-center justify-center border-l border-border pl-16 w-48">
+                                        <v.icon className={`w-10 h-10 ${v.accentClass} mb-4`} />
+                                        <span className="font-mono text-6xl font-semibold text-border">{v.entryNo}</span>
                                     </div>
 
                                 </div>
@@ -151,17 +128,15 @@ export default function VerticalsPage() {
 
 
             {/* ── CTA ── */}
-            <section className="py-20 bg-foreground text-background relative overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-brand/10 rounded-sm blur-3xl pointer-events-none" />
-                <Container className="relative z-10 text-center">
-                    <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">
+            <section className="py-20 bg-foreground text-background">
+                <Container className="text-center">
+                    <h2 className="font-display text-4xl md:text-5xl font-semibold tracking-tight mb-4">
                         Have a Custom Requirement?
                     </h2>
-                    <p className="text-lg text-background/60 max-w-xl mx-auto mb-8 font-light">
+                    <p className="text-lg text-background/60 max-w-xl mx-auto mb-8">
                         Our distinct verticals allow us to offer comprehensive, end-to-end solutions for businesses of all sizes. Let&apos;s build something together.
                     </p>
-                    <Button className="rounded-sm px-10 h-14 text-base font-semibold bg-brand text-brand-foreground hover:bg-brand/90 shadow-lg" asChild>
+                    <Button variant="brand" className="px-10 h-14 text-base font-semibold" asChild>
                         <Link href="/contact">Contact Our Team <ArrowRight className="ml-2 w-4 h-4" /></Link>
                     </Button>
                 </Container>

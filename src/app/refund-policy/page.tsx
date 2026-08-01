@@ -44,7 +44,7 @@ export default function RefundPolicyPage() {
                         <li><strong>Exceptions:</strong> In the rare event of a technical failure where access could not be provided, a full refund will be processed within 7-10 working days.</li>
                     </ul>
 
-                    <h2 className="text-2xl font-bold tracking-tight mt-12 mb-6 text-foreground">3. Impression Dock (Corporate Gifting & Printing)</h2>
+                    <h2 className="text-2xl font-bold tracking-tight mt-12 mb-6 text-foreground">3. Impressio Dock (Corporate Gifting & Printing)</h2>
                     <p>
                         Since our products are custom-manufactured and branded:
                     </p>

@@ -226,8 +226,8 @@ export default function Home() {
               </div>
             </Link>
 
-            {/* Impression Dock */}
-            <Link href="/verticals/impression-dock" className="group border-r border-b border-border tab-amber">
+            {/* Impressio Dock */}
+            <Link href="/verticals/impressio-dock" className="group border-r border-b border-border tab-amber">
               <div className="h-full p-8 flex flex-col transition-colors duration-200 hover:bg-secondary/30">
                 <div className="flex items-center justify-between mb-6">
                   <span className="font-mono text-xs text-muted-foreground">ENTITY NO. 03</span>
@@ -237,13 +237,13 @@ export default function Home() {
                 <div className="mb-2">
                   <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-600 font-mono">Gifting · Printing · Merch</span>
                 </div>
-                <h3 className="font-display text-2xl font-semibold mb-3 tracking-tight">Impression Dock</h3>
+                <h3 className="font-display text-2xl font-semibold mb-3 tracking-tight">Impressio Dock</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed flex-grow">
                   Premium corporate gifting, custom merchandise, and offset printing solutions. We help brands leave a tangible, lasting mark on every stakeholder.
                 </p>
 
                 <div className="mt-8 pt-6 border-t border-border flex items-center justify-between">
-                  <span className="text-xs font-bold text-foreground uppercase tracking-wider">Explore Impression</span>
+                  <span className="text-xs font-bold text-foreground uppercase tracking-wider">Explore Impressio</span>
                   <ArrowRight className="w-4 h-4 text-foreground transition-transform duration-200 group-hover:translate-x-1" />
                 </div>
               </div>
