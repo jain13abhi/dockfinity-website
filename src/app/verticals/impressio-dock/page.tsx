@@ -26,27 +26,26 @@ export default function ImpressioDockPage() {
     return (
         <>
             {/* HERO */}
-            <section className="relative pt-28 pb-16 bg-panel text-panel-foreground overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern opacity-[0.06] pointer-events-none" />
+            <section className="relative pt-28 pb-16 overflow-hidden">
+                <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
                 <div className="absolute bottom-0 left-1/3 w-[600px] h-[500px] bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-                <div className="absolute bottom-0 inset-x-0 h-24 fade-seam-bottom pointer-events-none" />
 
                 <Container className="relative z-10">
                     <div className="max-w-4xl">
                         <div className="flex items-center gap-3 mb-8">
-                            <div className="w-14 h-14 bg-amber-500/20 rounded-2xl flex items-center justify-center">
-                                <Gift className="w-7 h-7 text-amber-400" />
+                            <div className="w-14 h-14 bg-amber-500/10 rounded-2xl flex items-center justify-center">
+                                <Gift className="w-7 h-7 text-amber-500" />
                             </div>
-                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-amber-500/20 text-amber-400 border border-amber-500/30 font-mono">
+                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 font-mono">
                                 Gifting · Printing · Merch
                             </span>
                         </div>
 
                         <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-6">
                             Impressio<br />
-                            <span className="text-amber-400">Dock.</span>
+                            <span className="text-amber-500">Dock.</span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-panel-foreground/70 max-w-2xl leading-relaxed font-light">
+                        <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed font-light">
                             Curated corporate gifting and premium printing solutions that leave a mark — on every stakeholder, every time.
                         </p>
                     </div>
