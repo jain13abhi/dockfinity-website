@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 
 const verticalLinks = [
     { name: "Dockware Labs", href: "/verticals/dockware-labs", color: "hover:text-blue-400" },
@@ -71,10 +71,6 @@ export function Footer() {
                                 <Mail className="w-3.5 h-3.5 shrink-0 group-hover:text-brand transition-colors" />
                                 dockfinity@gmail.com
                             </a>
-                            <div className="flex items-start gap-2 text-background/60">
-                                <MapPin className="w-3.5 h-3.5 shrink-0 mt-0.5" />
-                                <span>Sector-3, Rohini, New Delhi — 110085, India</span>
-                            </div>
                         </div>
                     </div>
 

@@ -6,17 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { submitContactForm } from "@/app/actions";
 import { useState, useRef } from "react";
-import { Mail, MapPin, Phone, Clock, Loader2, CheckCircle2, ArrowRight } from "lucide-react";
+import { Mail, Phone, Clock, Loader2, CheckCircle2, ArrowRight } from "lucide-react";
 
 const contactDetails = [
-    {
-        icon: MapPin,
-        label: "Registered Office",
-        value: "G-30/394-395, 2nd Floor, Sector-3,\nRohini, North West Delhi,\nDelhi - 110085, India",
-        href: null,
-        color: "text-blue-500",
-        bg: "bg-blue-500/10",
-    },
     {
         icon: Phone,
         label: "Phone",
