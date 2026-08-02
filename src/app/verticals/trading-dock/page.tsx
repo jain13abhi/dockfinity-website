@@ -66,7 +66,7 @@ export default function TradingDockPage() {
             {/* OFFERINGS */}
             <section className="py-14 md:py-20">
                 <Container>
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-14">
                         <div className="space-y-6">
                             <p className="text-xs font-bold uppercase tracking-[0.2em] text-emerald-500 font-mono">What We Offer</p>
                             <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight">
@@ -85,17 +85,37 @@ export default function TradingDockPage() {
                             </Button>
                         </div>
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            {offerings.map((o) => (
-                                <div key={o.title} className="p-6 bg-card rounded-2xl border border-border/50 border-t-2 border-t-emerald-500/60 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-                                    <div className="w-11 h-11 bg-emerald-500/10 rounded-xl flex items-center justify-center mb-4">
-                                        <o.icon className="w-5 h-5 text-emerald-500" />
-                                    </div>
-                                    <h3 className="font-display font-bold text-base mb-2">{o.title}</h3>
-                                    <p className="text-sm text-muted-foreground leading-relaxed">{o.desc}</p>
+                        {/* Chart mockup illustration */}
+                        <div className="relative animate-float">
+                            <div className="absolute -top-4 -right-4 w-28 h-28 bg-emerald-500/15 rounded-full blur-2xl pointer-events-none" />
+                            <div className="relative rounded-2xl border border-border/50 bg-card shadow-2xl shadow-emerald-500/10 overflow-hidden p-6">
+                                <div className="flex items-center justify-between mb-6">
+                                    <div className="h-3 w-24 rounded-full bg-secondary" />
+                                    <span className="text-xs font-mono font-bold text-emerald-500">+12.4%</span>
                                 </div>
-                            ))}
+                                <div className="flex items-end gap-2 h-32">
+                                    {[40, 65, 45, 80, 55, 95, 70].map((h, i) => (
+                                        <div
+                                            key={i}
+                                            className={`flex-1 rounded-t-md ${i === 5 ? "bg-emerald-500" : "bg-emerald-500/15"}`}
+                                            style={{ height: `${h}%` }}
+                                        />
+                                    ))}
+                                </div>
+                            </div>
                         </div>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        {offerings.map((o) => (
+                            <div key={o.title} className="p-6 bg-card rounded-2xl border border-border/50 hover:border-emerald-500/30 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                                <div className="w-11 h-11 bg-emerald-500/10 rounded-xl flex items-center justify-center mb-4">
+                                    <o.icon className="w-5 h-5 text-emerald-500" />
+                                </div>
+                                <h3 className="font-display font-bold text-base mb-2">{o.title}</h3>
+                                <p className="text-sm text-muted-foreground leading-relaxed">{o.desc}</p>
+                            </div>
+                        ))}
                     </div>
                 </Container>
             </section>
