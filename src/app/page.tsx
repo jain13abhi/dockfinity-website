@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import { HeroSceneLoader } from "@/components/three/hero-scene-loader";
+import { SealMedallionLoader } from "@/components/three/seal-medallion-loader";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -362,21 +363,26 @@ export default function Home() {
             </div>
 
             {/* Stat cluster */}
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { value: "100%", label: "Compliance Rate" },
-                { value: "3×", label: "ISO Certifications" },
-                { value: "2025", label: "Incorporated" },
-                { value: "∞", label: "Commitment" },
-              ].map((s) => (
-                <div
-                  key={s.label}
-                  className="flex flex-col items-center justify-center text-center p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/8 transition-colors backdrop-blur-sm"
-                >
-                  <span className="stat-number text-5xl text-brand mb-2">{s.value}</span>
-                  <span className="text-sm text-background/60 font-mono uppercase tracking-wider">{s.label}</span>
-                </div>
-              ))}
+            <div className="space-y-6">
+              <div className="w-40 h-40 md:w-48 md:h-48 mx-auto pointer-events-none">
+                <SealMedallionLoader />
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { value: "100%", label: "Compliance Rate" },
+                  { value: "3×", label: "ISO Certifications" },
+                  { value: "2025", label: "Incorporated" },
+                  { value: "∞", label: "Commitment" },
+                ].map((s) => (
+                  <div
+                    key={s.label}
+                    className="flex flex-col items-center justify-center text-center p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/8 transition-colors backdrop-blur-sm"
+                  >
+                    <span className="stat-number text-5xl text-brand mb-2">{s.value}</span>
+                    <span className="text-sm text-background/60 font-mono uppercase tracking-wider">{s.label}</span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </Container>

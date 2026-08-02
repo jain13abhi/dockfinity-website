@@ -1,21 +1,15 @@
 "use client";
 
-import { useRef, useEffect, useSyncExternalStore } from "react";
+import { useRef, useEffect } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import * as THREE from "three";
+import { useTheme } from "next-themes";
+import { useReducedMotion } from "./use-reduced-motion";
 
-/* ─── prefers-reduced-motion, subscribed via the browser's own store ─── */
-function subscribeReducedMotion(callback: () => void) {
-  const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-  mq.addEventListener("change", callback);
-  return () => mq.removeEventListener("change", callback);
-}
-function getReducedMotionSnapshot() {
-  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-}
-function useReducedMotion() {
-  return useSyncExternalStore(subscribeReducedMotion, getReducedMotionSnapshot, () => false);
-}
+/* Distance (px) of scroll over which the hero fully recedes. Not tied to
+   the hero section's actual height — just how much scroll it takes for
+   the "dissolve away" motion to complete. */
+const SCROLL_RECEDE_RANGE = 700;
 
 /* ─── Particle field positions — pure, computed once at module load ─── */
 const PARTICLE_POSITIONS = (() => {
@@ -44,6 +38,7 @@ function OrbitNode({
   color,
   size,
   reduced,
+  isDark,
 }: {
   radius: number;
   speed: number;
@@ -52,6 +47,7 @@ function OrbitNode({
   color: string;
   size: number;
   reduced: boolean;
+  isDark: boolean;
 }) {
   const ref = useRef<THREE.Mesh>(null);
   const angleRef = useRef(offset);
@@ -73,8 +69,8 @@ function OrbitNode({
       <meshStandardMaterial
         color={color}
         emissive={color}
-        emissiveIntensity={0.6}
-        roughness={0.3}
+        emissiveIntensity={isDark ? 0.6 : 0.3}
+        roughness={isDark ? 0.3 : 0.35}
         metalness={0.4}
       />
     </mesh>
@@ -82,10 +78,13 @@ function OrbitNode({
 }
 
 /* ─── Central core ────────────────────────────────────────
-   A torus knot — the infinite loop the brand name gestures
-   at — rendered as a faceted amber wireframe-over-glass form.
+   A torus knot — the infinite loop the brand name gestures at.
+   Dark mode: a faceted amber-glow form against near-black.
+   Light mode: a polished bronze sculpture with dark ink linework —
+   metal-and-glow reads as premium on black but muddy on white, so
+   the material swaps rather than the whole scene disappearing.
 ──────────────────────────────────────────────────────────── */
-function Core({ reduced }: { reduced: boolean }) {
+function Core({ reduced, isDark }: { reduced: boolean; isDark: boolean }) {
   const group = useRef<THREE.Group>(null);
 
   useFrame((_, delta) => {
@@ -99,23 +98,28 @@ function Core({ reduced }: { reduced: boolean }) {
       <mesh>
         <torusKnotGeometry args={[1.15, 0.34, 220, 32, 2, 3]} />
         <meshStandardMaterial
-          color="#0a0e1a"
-          emissive="#d97706"
-          emissiveIntensity={0.15}
-          roughness={0.15}
-          metalness={0.85}
+          color={isDark ? "#0a0e1a" : "#b45309"}
+          emissive={isDark ? "#d97706" : "#78350f"}
+          emissiveIntensity={isDark ? 0.15 : 0.05}
+          roughness={isDark ? 0.15 : 0.28}
+          metalness={isDark ? 0.85 : 0.75}
         />
       </mesh>
       <mesh scale={1.001}>
         <torusKnotGeometry args={[1.15, 0.34, 220, 32, 2, 3]} />
-        <meshBasicMaterial color="#f59e0b" wireframe transparent opacity={0.08} />
+        <meshBasicMaterial
+          color={isDark ? "#f59e0b" : "#1c1917"}
+          wireframe
+          transparent
+          opacity={isDark ? 0.08 : 0.12}
+        />
       </mesh>
     </group>
   );
 }
 
 /* ─── Ambient particle field ─────────────────────────────── */
-function Particles() {
+function Particles({ isDark }: { isDark: boolean }) {
   const ref = useRef<THREE.Points>(null);
 
   useFrame((_, delta) => {
@@ -127,13 +131,32 @@ function Particles() {
       <bufferGeometry>
         <bufferAttribute attach="attributes-position" args={[PARTICLE_POSITIONS, 3]} />
       </bufferGeometry>
-      <pointsMaterial color="#f59e0b" size={0.02} transparent opacity={0.35} sizeAttenuation />
+      <pointsMaterial
+        color={isDark ? "#f59e0b" : "#57534e"}
+        size={0.02}
+        transparent
+        opacity={isDark ? 0.35 : 0.25}
+        sizeAttenuation
+      />
     </points>
   );
 }
 
-/* ─── Mouse-parallax rig ─────────────────────────────────── */
-function Rig({ children, reduced }: { children: React.ReactNode; reduced: boolean }) {
+/* ─── Mouse-parallax + scroll-recede rig ─────────────────────
+   scrollRef holds a 0→1 progress value, mutated directly by a
+   plain scroll listener (see HeroScene) rather than React state,
+   so scrolling never triggers a re-render — only the animation
+   frame reads it.
+──────────────────────────────────────────────────────────── */
+function Rig({
+  children,
+  reduced,
+  scrollRef,
+}: {
+  children: React.ReactNode;
+  reduced: boolean;
+  scrollRef: React.RefObject<number>;
+}) {
   const group = useRef<THREE.Group>(null);
   const target = useRef({ x: 0, y: 0 });
 
@@ -147,45 +170,87 @@ function Rig({ children, reduced }: { children: React.ReactNode; reduced: boolea
     return () => window.removeEventListener("mousemove", onMove);
   }, [reduced]);
 
-  useFrame(() => {
+  useFrame((_, delta) => {
     if (!group.current) return;
+    const s = scrollRef.current;
     group.current.rotation.y = THREE.MathUtils.lerp(group.current.rotation.y, target.current.x * 0.25, 0.04);
     group.current.rotation.x = THREE.MathUtils.lerp(group.current.rotation.x, target.current.y * 0.15, 0.04);
+    if (!reduced) group.current.rotation.z += delta * s * 0.6;
+    const scale = 1 - s * 0.45;
+    group.current.scale.setScalar(scale);
   });
 
   return <group ref={group}>{children}</group>;
 }
 
-function Scene({ reduced }: { reduced: boolean }) {
+function Scene({
+  reduced,
+  scrollRef,
+  isDark,
+}: {
+  reduced: boolean;
+  scrollRef: React.RefObject<number>;
+  isDark: boolean;
+}) {
   return (
     <>
-      <ambientLight intensity={0.5} />
-      <pointLight position={[4, 3, 5]} intensity={40} color="#f59e0b" />
-      <pointLight position={[-4, -2, -3]} intensity={15} color="#3b82f6" />
+      <ambientLight intensity={isDark ? 0.5 : 0.95} />
+      <pointLight position={[4, 3, 5]} intensity={isDark ? 40 : 24} color="#f59e0b" />
+      <pointLight position={[-4, -2, -3]} intensity={isDark ? 15 : 10} color="#3b82f6" />
 
-      <Rig reduced={reduced}>
-        <Core reduced={reduced} />
-        <OrbitNode radius={2.3} speed={0.35} offset={0} tilt={0.5} color="#3b82f6" size={0.16} reduced={reduced} />
-        <OrbitNode radius={2.6} speed={0.27} offset={2.1} tilt={-0.3} color="#10b981" size={0.14} reduced={reduced} />
-        <OrbitNode radius={2.1} speed={0.42} offset={4.2} tilt={0.15} color="#f59e0b" size={0.15} reduced={reduced} />
-        <Particles />
+      <Rig reduced={reduced} scrollRef={scrollRef}>
+        <Core reduced={reduced} isDark={isDark} />
+        <OrbitNode radius={2.3} speed={0.35} offset={0} tilt={0.5} color="#3b82f6" size={0.16} reduced={reduced} isDark={isDark} />
+        <OrbitNode radius={2.6} speed={0.27} offset={2.1} tilt={-0.3} color="#10b981" size={0.14} reduced={reduced} isDark={isDark} />
+        <OrbitNode radius={2.1} speed={0.42} offset={4.2} tilt={0.15} color="#f59e0b" size={0.15} reduced={reduced} isDark={isDark} />
+        <Particles isDark={isDark} />
       </Rig>
     </>
   );
 }
 
 export function HeroScene() {
+  // This component only ever renders client-side (loaded via next/dynamic
+  // with ssr:false), so resolvedTheme here can never disagree with
+  // server-rendered HTML — there isn't any to disagree with.
+  const { resolvedTheme } = useTheme();
   const reduced = useReducedMotion();
+  const scrollRef = useRef(0);
+  const wrapperRef = useRef<HTMLDivElement>(null);
+
+  // Before next-themes resolves (first tick on the client), default to
+  // the dark treatment rather than rendering nothing.
+  const isDark = resolvedTheme !== "light";
+
+  // In light mode the shape sits directly behind the headline, and even
+  // the brightened material reads as too dominant at full strength —
+  // dialed back to a watermark-like presence so the text stays legible.
+  const baseOpacity = isDark ? 1 : 0.4;
+
+  useEffect(() => {
+    const onScroll = () => {
+      const progress = Math.min(Math.max(window.scrollY / SCROLL_RECEDE_RANGE, 0), 1);
+      scrollRef.current = progress;
+      if (wrapperRef.current) {
+        wrapperRef.current.style.opacity = String(baseOpacity * (1 - progress * 0.85));
+      }
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [baseOpacity]);
 
   return (
-    <Canvas
-      dpr={[1, 1.5]}
-      camera={{ position: [0, 0, 6], fov: 45 }}
-      gl={{ antialias: true, alpha: true }}
-      performance={{ min: 0.4 }}
-      className="!absolute inset-0"
-    >
-      <Scene reduced={reduced} />
-    </Canvas>
+    <div ref={wrapperRef} className="absolute inset-0">
+      <Canvas
+        dpr={[1, 1.5]}
+        camera={{ position: [0, 0, 6], fov: 45 }}
+        gl={{ antialias: true, alpha: true }}
+        performance={{ min: 0.4 }}
+        className="!absolute inset-0"
+      >
+        <Scene reduced={reduced} scrollRef={scrollRef} isDark={isDark} />
+      </Canvas>
+    </div>
   );
 }
