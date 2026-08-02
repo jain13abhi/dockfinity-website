@@ -26,9 +26,10 @@ export default function ImpressioDockPage() {
     return (
         <>
             {/* HERO */}
-            <section className="relative pt-36 pb-24 bg-foreground text-background overflow-hidden">
+            <section className="relative pt-28 pb-16 bg-foreground text-background overflow-hidden">
                 <div className="absolute inset-0 bg-grid-pattern opacity-[0.06] pointer-events-none" />
                 <div className="absolute bottom-0 left-1/3 w-[600px] h-[500px] bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute bottom-0 inset-x-0 h-24 fade-seam-bottom pointer-events-none" />
 
                 <Container className="relative z-10">
                     <div className="max-w-4xl">
@@ -53,7 +54,7 @@ export default function ImpressioDockPage() {
             </section>
 
             {/* SERVICES */}
-            <section className="py-20 md:py-28">
+            <section className="py-14 md:py-20">
                 <Container>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                         <div className="space-y-6">
@@ -93,7 +94,7 @@ export default function ImpressioDockPage() {
             </section>
 
             {/* PROCESS */}
-            <section className="py-20 md:py-28 bg-secondary/30 relative overflow-hidden">
+            <section className="py-14 md:py-20 bg-secondary/30 relative overflow-hidden">
                 <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
                 <Container className="relative z-10">
                     <div className="text-center mb-16">
@@ -138,9 +139,10 @@ export default function ImpressioDockPage() {
             </section>
 
             {/* CTA */}
-            <section className="py-20 bg-foreground text-background relative overflow-hidden">
+            <section className="py-16 bg-foreground text-background relative overflow-hidden">
                 <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-amber-500/15 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute top-0 inset-x-0 h-20 fade-seam-top pointer-events-none" />
                 <Container className="relative z-10 text-center">
                     <Gift className="w-10 h-10 text-amber-500 mx-auto mb-6" />
                     <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">Make an Impression.</h2>

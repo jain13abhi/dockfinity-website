@@ -56,7 +56,7 @@ export default function ContactPage() {
     return (
         <>
             {/* ── PAGE HERO ── */}
-            <section className="relative pt-36 pb-20 overflow-hidden">
+            <section className="relative pt-28 pb-14 overflow-hidden">
                 <div className="absolute inset-0 bg-grid-pattern pointer-events-none" />
                 <div className="absolute top-0 left-1/3 w-[500px] h-[400px] glow-orb-amber rounded-full blur-3xl opacity-20 pointer-events-none" />
 
@@ -78,7 +78,7 @@ export default function ContactPage() {
 
 
             {/* ── MAIN CONTENT ── */}
-            <section className="pb-24 md:pb-32">
+            <section className="pb-16 md:pb-24">
                 <Container>
                     <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
 

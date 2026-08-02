@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function TermsPage() {
     return (
-        <Section className="py-24 md:py-32">
+        <Section className="py-16 md:py-24">
             <Container className="max-w-4xl">
                 <div className="mb-8">
                     <Link href="/" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-4">

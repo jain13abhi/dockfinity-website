@@ -66,7 +66,7 @@ export default function VerticalsPage() {
     return (
         <>
             {/* ── PAGE HERO ── */}
-            <section className="relative pt-36 pb-20 overflow-hidden">
+            <section className="relative pt-28 pb-14 overflow-hidden">
                 <div className="absolute inset-0 bg-grid-pattern pointer-events-none" />
                 <Container className="relative z-10 text-center">
                     <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary border border-border/60 text-xs font-bold uppercase tracking-widest text-muted-foreground font-mono mb-6">
@@ -83,7 +83,7 @@ export default function VerticalsPage() {
 
 
             {/* ── VERTICALS ── */}
-            <section className="pb-24 md:pb-32">
+            <section className="pb-16 md:pb-24">
                 <Container>
                     <div className="space-y-8">
                         {verticals.map((v, i) => (
@@ -151,9 +151,10 @@ export default function VerticalsPage() {
 
 
             {/* ── CTA ── */}
-            <section className="py-20 bg-foreground text-background relative overflow-hidden">
+            <section className="py-16 bg-foreground text-background relative overflow-hidden">
                 <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-brand/10 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute top-0 inset-x-0 h-20 fade-seam-top pointer-events-none" />
                 <Container className="relative z-10 text-center">
                     <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">
                         Have a Custom Requirement?

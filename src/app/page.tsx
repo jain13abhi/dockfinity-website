@@ -1,7 +1,5 @@
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
-import { HeroSceneLoader } from "@/components/three/hero-scene-loader";
-import { SealMedallionLoader } from "@/components/three/seal-medallion-loader";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -76,16 +74,12 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════ */}
       {/*  HERO                                             */}
       {/* ══════════════════════════════════════════════════ */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-20 md:pt-36 md:pb-32">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-14 md:pt-32 md:pb-20">
 
-        {/* Background glow */}
+        {/* Background glow orbs */}
+        <div className="absolute top-0 left-1/4 w-[700px] h-[700px] glow-orb-blue rounded-full blur-3xl opacity-30 pointer-events-none" />
         <div className="absolute bottom-0 right-1/4 w-[600px] h-[600px] glow-orb-amber rounded-full blur-3xl opacity-20 pointer-events-none" />
         <div className="absolute inset-0 bg-grid-pattern opacity-100 pointer-events-none" />
-
-        {/* Cinematic 3D core — the "infinity dock" and its three orbiting verticals */}
-        <div className="absolute inset-0 pointer-events-none">
-          <HeroSceneLoader />
-        </div>
 
         <Container className="relative z-10">
           <div className="flex flex-col items-center text-center max-w-6xl mx-auto">
@@ -181,7 +175,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════ */}
       {/*  VERTICALS                                        */}
       {/* ══════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32">
+      <section className="py-16 md:py-24">
         <Container>
 
           {/* Section header */}
@@ -291,7 +285,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════ */}
       {/*  THE DOCKFINITY ADVANTAGE                        */}
       {/* ══════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-secondary/30 relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-secondary/30 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
 
         <Container className="relative z-10">
@@ -328,9 +322,11 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════ */}
       {/*  CERTIFICATIONS DARK BAND                        */}
       {/* ══════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 bg-foreground text-background relative overflow-hidden">
+      <section className="py-14 md:py-16 bg-foreground text-background relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-[0.06] pointer-events-none" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 inset-x-0 h-24 fade-seam-top pointer-events-none" />
+        <div className="absolute bottom-0 inset-x-0 h-24 fade-seam-bottom pointer-events-none" />
 
         <Container className="relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -363,26 +359,21 @@ export default function Home() {
             </div>
 
             {/* Stat cluster */}
-            <div className="space-y-6">
-              <div className="w-40 h-40 md:w-48 md:h-48 mx-auto pointer-events-none">
-                <SealMedallionLoader />
-              </div>
-              <div className="grid grid-cols-2 gap-4">
-                {[
-                  { value: "100%", label: "Compliance Rate" },
-                  { value: "3×", label: "ISO Certifications" },
-                  { value: "2025", label: "Incorporated" },
-                  { value: "∞", label: "Commitment" },
-                ].map((s) => (
-                  <div
-                    key={s.label}
-                    className="flex flex-col items-center justify-center text-center p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/8 transition-colors backdrop-blur-sm"
-                  >
-                    <span className="stat-number text-5xl text-brand mb-2">{s.value}</span>
-                    <span className="text-sm text-background/60 font-mono uppercase tracking-wider">{s.label}</span>
-                  </div>
-                ))}
-              </div>
+            <div className="grid grid-cols-2 gap-4">
+              {[
+                { value: "100%", label: "Compliance Rate" },
+                { value: "3×", label: "ISO Certifications" },
+                { value: "2025", label: "Incorporated" },
+                { value: "∞", label: "Commitment" },
+              ].map((s) => (
+                <div
+                  key={s.label}
+                  className="flex flex-col items-center justify-center text-center p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/8 transition-colors backdrop-blur-sm"
+                >
+                  <span className="stat-number text-5xl text-brand mb-2">{s.value}</span>
+                  <span className="text-sm text-background/60 font-mono uppercase tracking-wider">{s.label}</span>
+                </div>
+              ))}
             </div>
           </div>
         </Container>
@@ -392,7 +383,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════ */}
       {/*  FINAL CTA                                        */}
       {/* ══════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 relative overflow-hidden">
+      <section className="py-16 md:py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] glow-orb-amber rounded-full blur-3xl opacity-30 pointer-events-none" />
 

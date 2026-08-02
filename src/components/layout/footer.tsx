@@ -32,7 +32,8 @@ export function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="bg-foreground text-background mt-auto">
+        <footer className="bg-foreground text-background mt-auto relative">
+            <div className="absolute top-0 inset-x-0 h-20 fade-seam-top pointer-events-none" />
 
             {/* Main footer body */}
             <Container className="pt-16 pb-10">
