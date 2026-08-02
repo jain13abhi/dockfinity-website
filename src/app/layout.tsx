@@ -1,9 +1,26 @@
 import type { Metadata } from 'next';
 import { Inter, JetBrains_Mono, Syne } from 'next/font/google';
+import Script from 'next/script';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+
+// Seeds the theme localStorage key from the visitor's local clock before
+// next-themes' own script runs, so a first-time visitor (no stored
+// preference yet) gets dark ~7pm-7am and light otherwise — the manual
+// toggle still always wins from that point on, exactly like it already
+// overrides the OS-preference default. Never touches an existing choice.
+const THEME_TIME_SEED_SCRIPT = `
+(function () {
+  try {
+    if (localStorage.getItem('theme')) return;
+    var hour = new Date().getHours();
+    var isNight = hour >= 19 || hour < 7;
+    localStorage.setItem('theme', isNight ? 'dark' : 'light');
+  } catch (e) {}
+})();
+`;
 
 // Display / Heading Font — Syne (bold, distinctive, modern)
 const syne = Syne({
@@ -50,6 +67,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable} font-sans antialiased min-h-screen bg-background text-foreground relative selection:bg-brand selection:text-brand-foreground`}>
+        <Script id="theme-time-seed" strategy="beforeInteractive">
+          {THEME_TIME_SEED_SCRIPT}
+        </Script>
+
         {/* Global noise texture */}
         <div className="fixed inset-0 z-[-1] bg-noise-subtle mix-blend-overlay pointer-events-none" aria-hidden="true" />
 

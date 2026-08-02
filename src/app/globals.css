@@ -1,41 +1,54 @@
 @import "tailwindcss";
 
+/* next-themes toggles a `.dark` class on <html> (attribute="class"), but
+   Tailwind v4's built-in `dark:` variant defaults to the
+   prefers-color-scheme media query. Without this override, every `dark:`
+   utility in the codebase tracks the OS theme instead of the site's own
+   toggle. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
   --font-display: var(--font-display);
 
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-background: hsl(var(--background));
+  --color-foreground: hsl(var(--foreground));
 
-  --color-primary: var(--primary);
-  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: hsl(var(--primary));
+  --color-primary-foreground: hsl(var(--primary-foreground));
 
-  --color-secondary: var(--secondary);
-  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: hsl(var(--secondary));
+  --color-secondary-foreground: hsl(var(--secondary-foreground));
 
-  --color-muted: var(--muted);
-  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: hsl(var(--muted));
+  --color-muted-foreground: hsl(var(--muted-foreground));
 
-  --color-accent: var(--accent);
-  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: hsl(var(--accent));
+  --color-accent-foreground: hsl(var(--accent-foreground));
 
-  --color-card: var(--card);
-  --color-card-foreground: var(--card-foreground);
+  --color-card: hsl(var(--card));
+  --color-card-foreground: hsl(var(--card-foreground));
 
-  --color-popover: var(--popover);
-  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: hsl(var(--popover));
+  --color-popover-foreground: hsl(var(--popover-foreground));
 
-  --color-destructive: var(--destructive);
-  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive: hsl(var(--destructive));
+  --color-destructive-foreground: hsl(var(--destructive-foreground));
 
-  --color-border: var(--border);
-  --color-input: var(--input);
-  --color-ring: var(--ring);
+  --color-border: hsl(var(--border));
+  --color-input: hsl(var(--input));
+  --color-ring: hsl(var(--ring));
 
   /* Brand Accent — Premium Amber/Gold */
-  --color-brand: var(--brand);
-  --color-brand-foreground: var(--brand-foreground);
+  --color-brand: hsl(var(--brand));
+  --color-brand-foreground: hsl(var(--brand-foreground));
+
+  /* Fixed dark accent band — stays dark navy/light text in BOTH themes.
+     Unlike foreground/background (which flip), this is for section bands
+     (footer, CTA strips) that must never invert into a light block in dark mode. */
+  --color-panel: hsl(var(--panel));
+  --color-panel-foreground: hsl(var(--panel-foreground));
 
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
@@ -126,6 +139,11 @@
     --brand: 38 92% 50%;
     --brand-foreground: 224 71% 4%;
 
+    /* Fixed dark panel — intentionally NOT redefined in .dark below,
+       so accent bands stay dark navy/light text regardless of theme. */
+    --panel: 224 71% 4%;
+    --panel-foreground: 210 40% 98%;
+
     --radius: 0.5rem;
   }
 
@@ -134,22 +152,22 @@
     --background: 224 71% 4%;
     --foreground: 210 40% 98%;
 
-    --card: 222 47% 7%;
+    --card: 222 40% 10%;
     --card-foreground: 210 40% 98%;
 
-    --popover: 222 47% 7%;
+    --popover: 222 40% 10%;
     --popover-foreground: 210 40% 98%;
 
     --primary: 210 40% 98%;
     --primary-foreground: 224 71% 4%;
 
-    --secondary: 215 28% 10%;
+    --secondary: 217 33% 13%;
     --secondary-foreground: 210 40% 98%;
 
-    --muted: 215 28% 10%;
-    --muted-foreground: 217 10% 60%;
+    --muted: 217 33% 13%;
+    --muted-foreground: 217 10% 62%;
 
-    --accent: 215 28% 10%;
+    --accent: 217 33% 13%;
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -237,6 +255,7 @@
     background-image:
       linear-gradient(to right, rgb(0 0 0 / 0.03) 1px, transparent 1px),
       linear-gradient(to bottom, rgb(0 0 0 / 0.03) 1px, transparent 1px);
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
   }
 
   .dark .bg-grid-dense {
@@ -253,15 +272,35 @@
     z-index: 0;
   }
 
-  /* Hero glow orbs */
+  /* Hero glow orbs — subtler in light mode (structure/shadow carry depth
+     there), richer and more saturated in dark mode (ambient glow carries
+     depth there). Same shared class, different feel per mode on purpose. */
   .glow-orb-blue {
-    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.10) 0%, transparent 70%);
+  }
+  .dark .glow-orb-blue {
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.22) 0%, transparent 70%);
   }
   .glow-orb-amber {
-    background: radial-gradient(circle, rgba(217, 119, 6, 0.12) 0%, transparent 70%);
+    background: radial-gradient(circle, rgba(217, 119, 6, 0.08) 0%, transparent 70%);
+  }
+  .dark .glow-orb-amber {
+    background: radial-gradient(circle, rgba(217, 119, 6, 0.20) 0%, transparent 70%);
   }
   .glow-orb-primary {
     background: radial-gradient(circle, hsl(var(--primary) / 0.08) 0%, transparent 70%);
+  }
+
+  /* ─── Section-seam fades ──────────────────────────────
+     Blends the hard edge where a section using bg-foreground/
+     text-background (an inverted band) meets the plain page
+     background above/below it, in whichever direction --background
+     currently resolves. */
+  .fade-seam-top {
+    background: linear-gradient(to bottom, hsl(var(--background)), transparent);
+  }
+  .fade-seam-bottom {
+    background: linear-gradient(to top, hsl(var(--background)), transparent);
   }
 
   /* ─── Borders ─────────────────────────────────────────── */

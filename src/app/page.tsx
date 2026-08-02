@@ -74,7 +74,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════ */}
       {/*  HERO                                             */}
       {/* ══════════════════════════════════════════════════ */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-28 pb-20 md:pt-36 md:pb-32">
+      <section className="relative flex items-center justify-center overflow-hidden pt-24 pb-14 md:pt-28 md:pb-16">
 
         {/* Background glow orbs */}
         <div className="absolute top-0 left-1/4 w-[700px] h-[700px] glow-orb-blue rounded-full blur-3xl opacity-30 pointer-events-none" />
@@ -175,7 +175,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════ */}
       {/*  VERTICALS                                        */}
       {/* ══════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32">
+      <section className="py-16 md:py-24">
         <Container>
 
           {/* Section header */}
@@ -251,8 +251,8 @@ export default function Home() {
               </div>
             </Link>
 
-            {/* Impression Dock */}
-            <Link href="/verticals/impression-dock" className="group">
+            {/* Impressio Dock */}
+            <Link href="/verticals/impressio-dock" className="group">
               <div className="h-full bg-card rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/5 hover:-translate-y-2 border border-border/50 flex flex-col relative overflow-hidden card-amber">
                 <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
 
@@ -263,13 +263,13 @@ export default function Home() {
                 <div className="mb-2">
                   <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-amber-500 font-mono">Gifting · Printing · Merch</span>
                 </div>
-                <h3 className="font-display text-2xl font-bold mb-3 tracking-tight">Impression Dock</h3>
+                <h3 className="font-display text-2xl font-bold mb-3 tracking-tight">Impressio Dock</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed flex-grow">
                   Premium corporate gifting, custom merchandise, and offset printing solutions. We help brands leave a tangible, lasting mark on every stakeholder.
                 </p>
 
                 <div className="mt-8 pt-6 border-t border-border/50 flex items-center justify-between">
-                  <span className="text-xs font-bold text-amber-500 uppercase tracking-wider">Explore Impression</span>
+                  <span className="text-xs font-bold text-amber-500 uppercase tracking-wider">Explore Impressio</span>
                   <div className="w-8 h-8 rounded-full bg-amber-500/10 group-hover:bg-amber-500 flex items-center justify-center transition-all duration-300">
                     <ArrowRight className="w-4 h-4 text-amber-500 group-hover:text-white transition-colors duration-300 group-hover:translate-x-0.5" />
                   </div>
@@ -285,8 +285,10 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════ */}
       {/*  THE DOCKFINITY ADVANTAGE                        */}
       {/* ══════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 bg-secondary/30 relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-secondary/30 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
+        <div className="absolute top-0 inset-x-0 h-20 fade-seam-top pointer-events-none" />
+        <div className="absolute bottom-0 inset-x-0 h-20 fade-seam-bottom pointer-events-none" />
 
         <Container className="relative z-10">
           <div className="text-center mb-16">
@@ -322,9 +324,11 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════ */}
       {/*  CERTIFICATIONS DARK BAND                        */}
       {/* ══════════════════════════════════════════════════ */}
-      <section className="py-20 md:py-28 bg-foreground text-background relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.06] pointer-events-none" />
+      <section className="py-14 md:py-16 bg-secondary/30 relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 inset-x-0 h-24 fade-seam-top pointer-events-none" />
+        <div className="absolute bottom-0 inset-x-0 h-24 fade-seam-bottom pointer-events-none" />
 
         <Container className="relative z-10">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
@@ -336,7 +340,7 @@ export default function Home() {
                   International Standards.<br />Uncompromising Quality.
                 </h2>
               </div>
-              <p className="text-lg text-background/70 leading-relaxed font-light">
+              <p className="text-lg text-muted-foreground leading-relaxed font-light">
                 Trust is our most valuable currency. We adhere to the highest international standards of security, quality, and IT service management — so your business is always in safe hands.
               </p>
 
@@ -349,8 +353,8 @@ export default function Home() {
                 ].map((c) => (
                   <div key={c.cert} className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-brand shrink-0" />
-                    <span className="font-semibold text-background">{c.cert}</span>
-                    <span className="text-background/50 text-sm">— {c.desc}</span>
+                    <span className="font-semibold text-foreground">{c.cert}</span>
+                    <span className="text-muted-foreground text-sm">— {c.desc}</span>
                   </div>
                 ))}
               </div>
@@ -366,10 +370,10 @@ export default function Home() {
               ].map((s) => (
                 <div
                   key={s.label}
-                  className="flex flex-col items-center justify-center text-center p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/8 transition-colors backdrop-blur-sm"
+                  className="flex flex-col items-center justify-center text-center p-8 rounded-2xl border border-border/50 bg-card hover:border-border transition-colors"
                 >
                   <span className="stat-number text-5xl text-brand mb-2">{s.value}</span>
-                  <span className="text-sm text-background/60 font-mono uppercase tracking-wider">{s.label}</span>
+                  <span className="text-sm text-muted-foreground font-mono uppercase tracking-wider">{s.label}</span>
                 </div>
               ))}
             </div>
@@ -381,7 +385,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════ */}
       {/*  FINAL CTA                                        */}
       {/* ══════════════════════════════════════════════════ */}
-      <section className="py-24 md:py-32 relative overflow-hidden">
+      <section className="py-16 md:py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-pattern opacity-50 pointer-events-none" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] glow-orb-amber rounded-full blur-3xl opacity-30 pointer-events-none" />
 

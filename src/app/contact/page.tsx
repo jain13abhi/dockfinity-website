@@ -6,17 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { submitContactForm } from "@/app/actions";
 import { useState, useRef } from "react";
-import { Mail, MapPin, Phone, Clock, Loader2, CheckCircle2, ArrowRight } from "lucide-react";
+import { Mail, Phone, Clock, Loader2, CheckCircle2, ArrowRight } from "lucide-react";
 
 const contactDetails = [
-    {
-        icon: MapPin,
-        label: "Registered Office",
-        value: "G-30/394-395, 2nd Floor, Sector-3,\nRohini, North West Delhi,\nDelhi - 110085, India",
-        href: null,
-        color: "text-blue-500",
-        bg: "bg-blue-500/10",
-    },
     {
         icon: Phone,
         label: "Phone",
@@ -64,7 +56,7 @@ export default function ContactPage() {
     return (
         <>
             {/* ── PAGE HERO ── */}
-            <section className="relative pt-36 pb-20 overflow-hidden">
+            <section className="relative pt-28 pb-14 overflow-hidden">
                 <div className="absolute inset-0 bg-grid-pattern pointer-events-none" />
                 <div className="absolute top-0 left-1/3 w-[500px] h-[400px] glow-orb-amber rounded-full blur-3xl opacity-20 pointer-events-none" />
 
@@ -86,7 +78,7 @@ export default function ContactPage() {
 
 
             {/* ── MAIN CONTENT ── */}
-            <section className="pb-24 md:pb-32">
+            <section className="pb-16 md:pb-24">
                 <Container>
                     <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
 
@@ -187,7 +179,7 @@ export default function ContactPage() {
                                                         <option value="General Inquiry">General Inquiry</option>
                                                         <option value="Dockware Labs">Dockware Labs — Software & Automation</option>
                                                         <option value="Trading Dock">Trading Dock — Analytics & Education</option>
-                                                        <option value="Impression Dock">Impression Dock — Gifting & Printing</option>
+                                                        <option value="Impressio Dock">Impressio Dock — Gifting & Printing</option>
                                                         <option value="Partnership">Strategic Partnership</option>
                                                         <option value="Investment">Investment Inquiry</option>
                                                     </select>

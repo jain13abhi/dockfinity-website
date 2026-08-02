@@ -26,26 +26,26 @@ export default function DockwareLabsPage() {
     return (
         <>
             {/* ── HERO ── */}
-            <section className="relative pt-36 pb-24 bg-foreground text-background overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern opacity-[0.06] pointer-events-none" />
+            <section className="relative pt-28 pb-16 overflow-hidden">
+                <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
                 <div className="absolute top-0 left-1/4 w-[600px] h-[500px] bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
 
                 <Container className="relative z-10">
                     <div className="max-w-4xl">
                         <div className="flex items-center gap-3 mb-8">
-                            <div className="w-14 h-14 bg-blue-500/20 rounded-2xl flex items-center justify-center">
-                                <Cpu className="w-7 h-7 text-blue-400" />
+                            <div className="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center">
+                                <Cpu className="w-7 h-7 text-blue-500" />
                             </div>
-                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-blue-500/20 text-blue-400 border border-blue-500/30 font-mono">
+                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 font-mono">
                                 SaaS · Automation · AI
                             </span>
                         </div>
 
                         <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-6">
                             Dockware<br />
-                            <span className="text-blue-400">Labs.</span>
+                            <span className="text-blue-500">Labs.</span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-background/70 max-w-2xl leading-relaxed font-light">
+                        <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed font-light">
                             We engineer intelligent software systems that automate complexity, eliminate inefficiencies, and drive measurable business growth.
                         </p>
                     </div>
@@ -54,7 +54,7 @@ export default function DockwareLabsPage() {
 
 
             {/* ── WHAT WE DO ── */}
-            <section className="py-20 md:py-28">
+            <section className="py-14 md:py-20">
                 <Container>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                         <div className="space-y-6">
@@ -99,8 +99,10 @@ export default function DockwareLabsPage() {
 
 
             {/* ── PROCESS ── */}
-            <section className="py-20 md:py-28 bg-secondary/30 relative overflow-hidden">
+            <section className="py-14 md:py-20 bg-secondary/30 relative overflow-hidden">
                 <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
+                <div className="absolute top-0 inset-x-0 h-20 fade-seam-top pointer-events-none" />
+                <div className="absolute bottom-0 inset-x-0 h-20 fade-seam-bottom pointer-events-none" />
                 <Container className="relative z-10">
                     <div className="text-center mb-16">
                         <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-500 font-mono mb-3">Our Process</p>
@@ -145,14 +147,16 @@ export default function DockwareLabsPage() {
 
 
             {/* ── CTA ── */}
-            <section className="py-20 bg-foreground text-background relative overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
+            <section className="py-16 bg-secondary/30 relative overflow-hidden">
+                <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute top-0 inset-x-0 h-20 fade-seam-top pointer-events-none" />
+                <div className="absolute bottom-0 inset-x-0 h-20 fade-seam-bottom pointer-events-none" />
                 <Container className="relative z-10 text-center">
                     <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">
                         Ready to Upgrade Your Tech Stack?
                     </h2>
-                    <p className="text-xl text-background/60 max-w-xl mx-auto mb-8 font-light">
+                    <p className="text-xl text-muted-foreground max-w-xl mx-auto mb-8 font-light">
                         Let&apos;s map your business operations and design a software architecture that actually scales.
                     </p>
                     <Button className="rounded-full px-10 h-14 text-base font-semibold bg-blue-500 text-white hover:bg-blue-600 shadow-lg hover:shadow-blue-500/25 transition-all duration-300" asChild>

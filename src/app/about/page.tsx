@@ -36,14 +36,14 @@ const milestones = [
     { year: "2025", event: "Dockfinity Private Limited incorporated", sub: "CIN: U66190DL2025PTC454662" },
     { year: "2025", event: "DPIIT Startup India recognition awarded", sub: "Government of India" },
     { year: "2025", event: "Triple ISO Certification achieved", sub: "27001 · 9001 · 20000-1" },
-    { year: "2025", event: "All three verticals operationalized", sub: "Dockware Labs · Trading Dock · Impression Dock" },
+    { year: "2025", event: "All three verticals operationalized", sub: "Dockware Labs · Trading Dock · Impressio Dock" },
 ];
 
 export default function AboutPage() {
     return (
         <>
             {/* ── PAGE HERO ── */}
-            <section className="relative pt-36 pb-24 overflow-hidden">
+            <section className="relative pt-28 pb-16 overflow-hidden">
                 <div className="absolute inset-0 bg-grid-pattern pointer-events-none" />
                 <div className="absolute top-0 right-0 w-[500px] h-[500px] glow-orb-amber rounded-full blur-3xl opacity-20 pointer-events-none" />
 
@@ -65,7 +65,7 @@ export default function AboutPage() {
 
 
             {/* ── WHO WE ARE ── */}
-            <section className="py-20 md:py-28">
+            <section className="py-14 md:py-20">
                 <Container>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                         <div className="space-y-6">
@@ -78,7 +78,7 @@ export default function AboutPage() {
                                     Founded in 2025, Dockfinity serves as the strategic and governance backbone for a growing portfolio of specialized business units. We are not a consultancy — we are builders.
                                 </p>
                                 <p>
-                                    From enterprise SaaS at <strong className="text-foreground">Dockware Labs</strong>, to institutional-grade financial education at <strong className="text-foreground">Trading Dock</strong>, to premium corporate gifting at <strong className="text-foreground">Impression Dock</strong> — every vertical is built to be the best in its category.
+                                    From enterprise SaaS at <strong className="text-foreground">Dockware Labs</strong>, to institutional-grade financial education at <strong className="text-foreground">Trading Dock</strong>, to premium corporate gifting at <strong className="text-foreground">Impressio Dock</strong> — every vertical is built to be the best in its category.
                                 </p>
                             </div>
 
@@ -133,8 +133,10 @@ export default function AboutPage() {
 
 
             {/* ── CORE VALUES ── */}
-            <section className="py-20 md:py-28 bg-secondary/30 relative overflow-hidden">
+            <section className="py-14 md:py-20 bg-secondary/30 relative overflow-hidden">
                 <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
+                <div className="absolute top-0 inset-x-0 h-20 fade-seam-top pointer-events-none" />
+                <div className="absolute bottom-0 inset-x-0 h-20 fade-seam-bottom pointer-events-none" />
                 <Container className="relative z-10">
                     <div className="text-center mb-16">
                         <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand font-mono mb-3">Core Values</p>
@@ -162,7 +164,7 @@ export default function AboutPage() {
 
 
             {/* ── MILESTONES ── */}
-            <section className="py-20 md:py-28">
+            <section className="py-14 md:py-20">
                 <Container>
                     <div className="max-w-3xl mx-auto">
                         <div className="text-center mb-16">
@@ -201,7 +203,7 @@ export default function AboutPage() {
 
 
             {/* ── ASSOCIATE COMPANIES ── */}
-            <section className="py-20 md:py-28 bg-secondary/30">
+            <section className="py-14 md:py-20 bg-secondary/30">
                 <Container>
                     <div className="mb-12">
                         <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand font-mono mb-3">Group Structure</p>
@@ -243,14 +245,16 @@ export default function AboutPage() {
 
 
             {/* ── CTA ── */}
-            <section className="py-20 bg-foreground text-background relative overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
+            <section className="py-16 bg-secondary/30 relative overflow-hidden">
+                <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
+                <div className="absolute top-0 inset-x-0 h-20 fade-seam-top pointer-events-none" />
+                <div className="absolute bottom-0 inset-x-0 h-20 fade-seam-bottom pointer-events-none" />
                 <Container className="relative z-10 text-center">
                     <Users2 className="w-10 h-10 text-brand mx-auto mb-6" />
                     <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">
                         Join the Dockfinity Network
                     </h2>
-                    <p className="text-lg text-background/60 max-w-xl mx-auto mb-8 font-light">
+                    <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8 font-light">
                         Whether you&apos;re a potential partner, client, or investor — we&apos;d love to connect and explore how we can build something extraordinary together.
                     </p>
                     <Button className="rounded-full px-10 h-14 text-base font-semibold bg-brand text-brand-foreground hover:bg-brand/90 shadow-lg hover:shadow-xl transition-all duration-300" asChild>

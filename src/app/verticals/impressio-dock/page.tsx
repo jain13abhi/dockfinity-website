@@ -4,7 +4,7 @@ import { ArrowRight, Gift, Printer, Package, Palette, Truck, Star } from "lucide
 import Link from "next/link";
 
 export const metadata = {
-    title: "Impression Dock | Dockfinity",
+    title: "Impressio Dock | Dockfinity",
     description: "Premium corporate gifting, custom merchandise, and high-quality offset printing solutions.",
 };
 
@@ -22,30 +22,30 @@ const process = [
     { step: "04", title: "Delivery", desc: "Kitting, packing, and shipping directly to your office or individual addresses across India." },
 ];
 
-export default function ImpressionDockPage() {
+export default function ImpressioDockPage() {
     return (
         <>
             {/* HERO */}
-            <section className="relative pt-36 pb-24 bg-foreground text-background overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern opacity-[0.06] pointer-events-none" />
+            <section className="relative pt-28 pb-16 overflow-hidden">
+                <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
                 <div className="absolute bottom-0 left-1/3 w-[600px] h-[500px] bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
                 <Container className="relative z-10">
                     <div className="max-w-4xl">
                         <div className="flex items-center gap-3 mb-8">
-                            <div className="w-14 h-14 bg-amber-500/20 rounded-2xl flex items-center justify-center">
-                                <Gift className="w-7 h-7 text-amber-400" />
+                            <div className="w-14 h-14 bg-amber-500/10 rounded-2xl flex items-center justify-center">
+                                <Gift className="w-7 h-7 text-amber-500" />
                             </div>
-                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-amber-500/20 text-amber-400 border border-amber-500/30 font-mono">
+                            <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold uppercase tracking-widest bg-amber-500/10 text-amber-600 dark:text-amber-400 border border-amber-500/20 font-mono">
                                 Gifting · Printing · Merch
                             </span>
                         </div>
 
                         <h1 className="font-display text-5xl md:text-7xl font-bold tracking-tight leading-[1.05] mb-6">
-                            Impression<br />
-                            <span className="text-amber-400">Dock.</span>
+                            Impressio<br />
+                            <span className="text-amber-500">Dock.</span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-background/70 max-w-2xl leading-relaxed font-light">
+                        <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed font-light">
                             Curated corporate gifting and premium printing solutions that leave a mark — on every stakeholder, every time.
                         </p>
                     </div>
@@ -53,7 +53,7 @@ export default function ImpressionDockPage() {
             </section>
 
             {/* SERVICES */}
-            <section className="py-20 md:py-28">
+            <section className="py-14 md:py-20">
                 <Container>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
                         <div className="space-y-6">
@@ -63,7 +63,7 @@ export default function ImpressionDockPage() {
                             </h2>
                             <div className="space-y-4 text-lg text-muted-foreground leading-relaxed">
                                 <p>
-                                    Impression Dock helps brands connect with employees and clients through tangible, premium experiences. We specialize in end-to-end merchandising — from design and sourcing to printing and last-mile logistics.
+                                    Impressio Dock helps brands connect with employees and clients through tangible, premium experiences. We specialize in end-to-end merchandising — from design and sourcing to printing and last-mile logistics.
                                 </p>
                                 <p>
                                     Whether it is an onboarding kit for new hires, festive hampers for clients, or event merchandise at scale — we ensure every item reflects the quality of your brand.
@@ -93,8 +93,10 @@ export default function ImpressionDockPage() {
             </section>
 
             {/* PROCESS */}
-            <section className="py-20 md:py-28 bg-secondary/30 relative overflow-hidden">
+            <section className="py-14 md:py-20 bg-secondary/30 relative overflow-hidden">
                 <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
+                <div className="absolute top-0 inset-x-0 h-20 fade-seam-top pointer-events-none" />
+                <div className="absolute bottom-0 inset-x-0 h-20 fade-seam-bottom pointer-events-none" />
                 <Container className="relative z-10">
                     <div className="text-center mb-16">
                         <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-500 font-mono mb-3">How It Works</p>
@@ -116,7 +118,7 @@ export default function ImpressionDockPage() {
             <section className="py-20">
                 <Container>
                     <div className="max-w-3xl mx-auto text-center">
-                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-500 font-mono mb-3">Why Impression Dock</p>
+                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-500 font-mono mb-3">Why Impressio Dock</p>
                         <h2 className="font-display text-3xl md:text-4xl font-bold tracking-tight mb-8">Quality You Can Feel</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
                             {[
@@ -138,13 +140,15 @@ export default function ImpressionDockPage() {
             </section>
 
             {/* CTA */}
-            <section className="py-20 bg-foreground text-background relative overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
+            <section className="py-16 bg-secondary/30 relative overflow-hidden">
+                <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-amber-500/15 rounded-full blur-3xl pointer-events-none" />
+                <div className="absolute top-0 inset-x-0 h-20 fade-seam-top pointer-events-none" />
+                <div className="absolute bottom-0 inset-x-0 h-20 fade-seam-bottom pointer-events-none" />
                 <Container className="relative z-10 text-center">
                     <Gift className="w-10 h-10 text-amber-500 mx-auto mb-6" />
                     <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">Make an Impression.</h2>
-                    <p className="text-xl text-background/60 max-w-xl mx-auto mb-8 font-light">
+                    <p className="text-xl text-muted-foreground max-w-xl mx-auto mb-8 font-light">
                         Get a custom quote for your next corporate event, onboarding program, or gifting campaign.
                     </p>
                     <Button className="rounded-full px-10 h-14 text-base font-semibold bg-amber-500 text-white hover:bg-amber-600 shadow-lg transition-all duration-300" asChild>

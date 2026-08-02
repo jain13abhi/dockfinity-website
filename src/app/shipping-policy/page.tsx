@@ -10,7 +10,7 @@ export const metadata = {
 
 export default function ShippingPolicyPage() {
     return (
-        <Section className="py-24 md:py-32">
+        <Section className="py-16 md:py-24">
             <Container className="max-w-4xl">
                 <div className="mb-8">
                     <Link href="/" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-4">
@@ -22,7 +22,7 @@ export default function ShippingPolicyPage() {
 
                 <div className="prose prose-lg dark:prose-invert max-w-none">
                     <p className="lead text-xl text-foreground/80">
-                        This Shipping Policy applies primarily to the tangible goods provided by our vertical <strong>Impression Dock</strong> (Corporate Gifting & Printing).
+                        This Shipping Policy applies primarily to the tangible goods provided by our vertical <strong>Impressio Dock</strong> (Corporate Gifting & Printing).
                     </p>
 
                     <div className="p-6 bg-secondary/30 border border-border rounded-2xl my-8 flex gap-4">

@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
@@ -17,7 +18,7 @@ const navigation = [
         children: [
             { name: "Dockware Labs", href: "/verticals/dockware-labs", desc: "Enterprise SaaS & Automation", color: "text-blue-500" },
             { name: "Trading Dock", href: "/verticals/trading-dock", desc: "Market Analytics & Education", color: "text-emerald-500" },
-            { name: "Impression Dock", href: "/verticals/impression-dock", desc: "Corporate Gifting & Printing", color: "text-amber-500" },
+            { name: "Impressio Dock", href: "/verticals/impressio-dock", desc: "Corporate Gifting & Printing", color: "text-amber-500" },
         ],
     },
     { name: "Contact", href: "/contact" },
@@ -53,10 +54,9 @@ export function Header() {
             <Container className="h-16 md:h-20 flex items-center justify-between">
 
                 {/* Logo */}
-                <Link href="/" className="flex items-center gap-3 group">
-                    <div className="w-8 h-8 rounded-lg bg-foreground flex items-center justify-center group-hover:bg-brand transition-colors duration-300">
-                        <span className="text-background text-xs font-bold font-mono">D</span>
-                    </div>
+                <Link href="/" className="flex items-center gap-2.5 group">
+                    <Image src="/logo-mark-navy.png" alt="" width={55} height={32} className="h-8 w-auto dark:hidden group-hover:opacity-80 transition-opacity" priority />
+                    <Image src="/logo-mark-white.png" alt="" width={55} height={32} className="h-8 w-auto hidden dark:block group-hover:opacity-80 transition-opacity" priority />
                     <span className="font-display font-bold text-xl tracking-tight text-foreground group-hover:text-foreground/80 transition-colors">
                         DOCKFINITY
                     </span>
@@ -86,28 +86,30 @@ export function Header() {
 
                                 {/* Dropdown */}
                                 {verticalsOpen && (
-                                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-card/95 backdrop-blur-xl border border-border rounded-2xl shadow-xl p-2 animate-in fade-in slide-in-from-top-2 duration-200">
-                                        {item.children.map((child) => (
-                                            <Link
-                                                key={child.name}
-                                                href={child.href}
-                                                className="flex items-start gap-3 px-4 py-3 rounded-xl hover:bg-secondary/70 transition-colors group"
-                                            >
-                                                <div className="mt-0.5">
-                                                    <div className="text-sm font-semibold text-foreground group-hover:text-foreground mb-0.5">
-                                                        {child.name}
+                                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-72 animate-in fade-in slide-in-from-top-2 duration-200">
+                                        <div className="bg-card/95 backdrop-blur-xl border border-border rounded-2xl shadow-xl p-2">
+                                            {item.children.map((child) => (
+                                                <Link
+                                                    key={child.name}
+                                                    href={child.href}
+                                                    className="flex items-start gap-3 px-4 py-3 rounded-xl hover:bg-secondary/70 transition-colors group"
+                                                >
+                                                    <div className="mt-0.5">
+                                                        <div className="text-sm font-semibold text-foreground group-hover:text-foreground mb-0.5">
+                                                            {child.name}
+                                                        </div>
+                                                        <div className={cn("text-xs", child.color)}>{child.desc}</div>
                                                     </div>
-                                                    <div className={cn("text-xs", child.color)}>{child.desc}</div>
-                                                </div>
-                                            </Link>
-                                        ))}
-                                        <div className="mt-1 pt-1 border-t border-border/50">
-                                            <Link
-                                                href="/verticals"
-                                                className="flex items-center gap-2 px-4 py-2.5 rounded-xl hover:bg-secondary/70 transition-colors text-xs text-muted-foreground hover:text-foreground font-medium"
-                                            >
-                                                View all verticals →
-                                            </Link>
+                                                </Link>
+                                            ))}
+                                            <div className="mt-1 pt-1 border-t border-border/50">
+                                                <Link
+                                                    href="/verticals"
+                                                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl hover:bg-secondary/70 transition-colors text-xs text-muted-foreground hover:text-foreground font-medium"
+                                                >
+                                                    View all verticals →
+                                                </Link>
+                                            </div>
                                         </div>
                                     </div>
                                 )}
