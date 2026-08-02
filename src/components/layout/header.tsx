@@ -86,28 +86,30 @@ export function Header() {
 
                                 {/* Dropdown */}
                                 {verticalsOpen && (
-                                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 w-72 bg-card/95 backdrop-blur-xl border border-border rounded-2xl shadow-xl p-2 animate-in fade-in slide-in-from-top-2 duration-200">
-                                        {item.children.map((child) => (
-                                            <Link
-                                                key={child.name}
-                                                href={child.href}
-                                                className="flex items-start gap-3 px-4 py-3 rounded-xl hover:bg-secondary/70 transition-colors group"
-                                            >
-                                                <div className="mt-0.5">
-                                                    <div className="text-sm font-semibold text-foreground group-hover:text-foreground mb-0.5">
-                                                        {child.name}
+                                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-72 animate-in fade-in slide-in-from-top-2 duration-200">
+                                        <div className="bg-card/95 backdrop-blur-xl border border-border rounded-2xl shadow-xl p-2">
+                                            {item.children.map((child) => (
+                                                <Link
+                                                    key={child.name}
+                                                    href={child.href}
+                                                    className="flex items-start gap-3 px-4 py-3 rounded-xl hover:bg-secondary/70 transition-colors group"
+                                                >
+                                                    <div className="mt-0.5">
+                                                        <div className="text-sm font-semibold text-foreground group-hover:text-foreground mb-0.5">
+                                                            {child.name}
+                                                        </div>
+                                                        <div className={cn("text-xs", child.color)}>{child.desc}</div>
                                                     </div>
-                                                    <div className={cn("text-xs", child.color)}>{child.desc}</div>
-                                                </div>
-                                            </Link>
-                                        ))}
-                                        <div className="mt-1 pt-1 border-t border-border/50">
-                                            <Link
-                                                href="/verticals"
-                                                className="flex items-center gap-2 px-4 py-2.5 rounded-xl hover:bg-secondary/70 transition-colors text-xs text-muted-foreground hover:text-foreground font-medium"
-                                            >
-                                                View all verticals →
-                                            </Link>
+                                                </Link>
+                                            ))}
+                                            <div className="mt-1 pt-1 border-t border-border/50">
+                                                <Link
+                                                    href="/verticals"
+                                                    className="flex items-center gap-2 px-4 py-2.5 rounded-xl hover:bg-secondary/70 transition-colors text-xs text-muted-foreground hover:text-foreground font-medium"
+                                                >
+                                                    View all verticals →
+                                                </Link>
+                                            </div>
                                         </div>
                                     </div>
                                 )}
