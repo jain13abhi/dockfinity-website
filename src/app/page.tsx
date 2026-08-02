@@ -74,7 +74,7 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════ */}
       {/*  HERO                                             */}
       {/* ══════════════════════════════════════════════════ */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-24 pb-14 md:pt-32 md:pb-20">
+      <section className="relative flex items-center justify-center overflow-hidden pt-24 pb-14 md:pt-28 md:pb-16">
 
         {/* Background glow orbs */}
         <div className="absolute top-0 left-1/4 w-[700px] h-[700px] glow-orb-blue rounded-full blur-3xl opacity-30 pointer-events-none" />
@@ -287,6 +287,8 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════ */}
       <section className="py-16 md:py-24 bg-secondary/30 relative overflow-hidden">
         <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
+        <div className="absolute top-0 inset-x-0 h-20 fade-seam-top pointer-events-none" />
+        <div className="absolute bottom-0 inset-x-0 h-20 fade-seam-bottom pointer-events-none" />
 
         <Container className="relative z-10">
           <div className="text-center mb-16">

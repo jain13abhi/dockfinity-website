@@ -248,6 +248,7 @@
     background-image:
       linear-gradient(to right, rgb(0 0 0 / 0.03) 1px, transparent 1px),
       linear-gradient(to bottom, rgb(0 0 0 / 0.03) 1px, transparent 1px);
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
   }
 
   .dark .bg-grid-dense {

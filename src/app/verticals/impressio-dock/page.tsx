@@ -95,6 +95,8 @@ export default function ImpressioDockPage() {
             {/* PROCESS */}
             <section className="py-14 md:py-20 bg-secondary/30 relative overflow-hidden">
                 <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
+                <div className="absolute top-0 inset-x-0 h-20 fade-seam-top pointer-events-none" />
+                <div className="absolute bottom-0 inset-x-0 h-20 fade-seam-bottom pointer-events-none" />
                 <Container className="relative z-10">
                     <div className="text-center mb-16">
                         <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-500 font-mono mb-3">How It Works</p>
