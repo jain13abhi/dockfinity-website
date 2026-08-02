@@ -338,6 +338,13 @@
   .animate-shimmer-text { animation: shimmer 4s linear infinite; }
   .animate-glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
 
+  /* Loading-skeleton style bar for the browser-mockup illustration */
+  .shimmer-bar {
+    background: linear-gradient(90deg, hsl(var(--secondary)) 25%, rgba(59, 130, 246, 0.35) 50%, hsl(var(--secondary)) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 2.5s linear infinite;
+  }
+
   .delay-75  { animation-delay: 75ms; }
   .delay-100 { animation-delay: 100ms; }
   .delay-150 { animation-delay: 150ms; }

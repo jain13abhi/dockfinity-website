@@ -73,10 +73,37 @@ export default function DigitalServicesPage() {
             {/* WEBSITES */}
             <section className="py-14 md:py-20">
                 <Container>
-                    <div className="max-w-2xl mb-12">
-                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-500 font-mono mb-3">Websites</p>
-                        <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">A Site That Works as Hard as You Do.</h2>
-                        <p className="text-lg text-muted-foreground leading-relaxed">Fast, clean, and built to convert — not just to look nice.</p>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-14">
+                        <div>
+                            <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-500 font-mono mb-3">Websites</p>
+                            <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">A Site That Works as Hard as You Do.</h2>
+                            <p className="text-lg text-muted-foreground leading-relaxed">Fast, clean, and built to convert — not just to look nice.</p>
+                        </div>
+
+                        {/* Browser mockup illustration */}
+                        <div className="relative animate-float">
+                            <div className="absolute -top-4 -right-4 w-28 h-28 bg-blue-500/15 rounded-full blur-2xl pointer-events-none" />
+                            <div className="relative rounded-2xl border border-border/50 bg-card shadow-2xl shadow-blue-500/10 overflow-hidden">
+                                <div className="flex items-center gap-2 px-4 py-3 border-b border-border/50 bg-secondary/50">
+                                    <span className="w-2.5 h-2.5 rounded-full bg-red-400/60" />
+                                    <span className="w-2.5 h-2.5 rounded-full bg-amber-400/60" />
+                                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/60" />
+                                    <div className="ml-3 flex-1 h-5 rounded-full bg-background/80 border border-border/40 flex items-center px-3">
+                                        <span className="text-[10px] text-muted-foreground font-mono">yourbusiness.com</span>
+                                    </div>
+                                </div>
+                                <div className="p-6 space-y-4">
+                                    <div className="h-3 w-2/3 rounded-full shimmer-bar" />
+                                    <div className="h-3 w-1/2 rounded-full bg-secondary" />
+                                    <div className="grid grid-cols-3 gap-3 pt-2">
+                                        <div className="h-16 rounded-lg bg-secondary" />
+                                        <div className="h-16 rounded-lg bg-blue-500/10 border border-blue-500/20" />
+                                        <div className="h-16 rounded-lg bg-secondary" />
+                                    </div>
+                                    <div className="h-8 w-28 rounded-full bg-blue-500 mt-2" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {websiteServices.map((s) => (

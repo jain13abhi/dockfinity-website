@@ -13,26 +13,39 @@ const pillars = [
         icon: Server,
         title: "Enterprise Solutions",
         desc: "Custom ERP and CRM systems, plus our own in-house SaaS products — software engineered to run your business, not just support it.",
+        tags: ["Custom ERP & CRM", "In-house SaaS products", "Cloud infrastructure"],
+        href: "/verticals/dockware-labs/enterprise-solutions",
+        linkLabel: "Explore Enterprise Solutions",
     },
     {
         icon: Smartphone,
         title: "App Development",
         desc: "Mobile and web applications built for real users, from first version to scale.",
+        tags: ["Mobile apps", "Web applications", "MVP to scale"],
+        href: "/verticals/dockware-labs/app-development",
+        linkLabel: "Explore App Development",
     },
     {
         icon: Cpu,
         title: "Automation & IoT",
         desc: "Workflow automation, AI agents, and IoT-driven systems that connect your physical and digital operations.",
+        tags: ["Workflow automation", "AI agents", "IoT & smart hardware"],
+        href: "/verticals/dockware-labs/automation-iot",
+        linkLabel: "Explore Automation & IoT",
     },
     {
         icon: LifeBuoy,
         title: "IT Consulting & Managed Support",
         desc: "Ongoing technical advisory and managed support so your systems stay reliable, secure, and current.",
+        tags: ["Technical advisory", "Managed support", "System audits"],
+        href: "/verticals/dockware-labs/it-consulting",
+        linkLabel: "Explore IT Consulting",
     },
     {
         icon: Globe,
         title: "Digital Presence",
         desc: "Websites and digital marketing that get your business found — and get you leads.",
+        tags: ["Websites", "SEO & marketing", "Social & ads"],
         href: "/digital-services",
         linkLabel: "Explore Digital Services",
     },
@@ -102,13 +115,20 @@ export default function DockwareLabsPage() {
                         {pillars.map((p) => (
                             <div
                                 key={p.title}
-                                className="p-6 bg-card rounded-2xl border border-border/50 border-t-2 border-t-blue-500/60 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col"
+                                className="p-6 bg-card rounded-2xl border border-border/50 hover:border-blue-500/30 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col"
                             >
                                 <div className="w-11 h-11 bg-blue-500/10 rounded-xl flex items-center justify-center mb-4">
                                     <p.icon className="w-5 h-5 text-blue-500" />
                                 </div>
                                 <h3 className="font-display font-bold text-base mb-2">{p.title}</h3>
-                                <p className="text-sm text-muted-foreground leading-relaxed">{p.desc}</p>
+                                <p className="text-sm text-muted-foreground leading-relaxed mb-4">{p.desc}</p>
+                                <div className="flex flex-wrap gap-1.5 mt-auto">
+                                    {p.tags.map((tag) => (
+                                        <span key={tag} className="text-[11px] font-medium text-muted-foreground bg-secondary/70 px-2 py-1 rounded-md">
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
                                 {p.href && (
                                     <Link href={p.href} className="mt-4 inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-blue-500 hover:text-blue-600 transition-colors">
                                         {p.linkLabel} <ArrowRight className="w-3.5 h-3.5" />
