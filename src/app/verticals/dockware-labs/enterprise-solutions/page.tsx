@@ -63,10 +63,41 @@ export default function EnterpriseSolutionsPage() {
             {/* CAPABILITIES */}
             <section className="py-14 md:py-20">
                 <Container>
-                    <div className="max-w-2xl mb-12">
-                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-500 font-mono mb-3">What We Build</p>
-                        <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">Systems Built Around Your Operations.</h2>
-                        <p className="text-lg text-muted-foreground leading-relaxed">We don&apos;t sell you a template and call it done — we architect systems that solve your specific problems.</p>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-14">
+                        <div>
+                            <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-500 font-mono mb-3">What We Build</p>
+                            <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">Systems Built Around Your Operations.</h2>
+                            <p className="text-lg text-muted-foreground leading-relaxed">We don&apos;t sell you a template and call it done — we architect systems that solve your specific problems.</p>
+                        </div>
+
+                        {/* Dashboard mockup illustration */}
+                        <div className="relative animate-float">
+                            <div className="absolute -top-4 -right-4 w-28 h-28 bg-blue-500/15 rounded-full blur-2xl pointer-events-none" />
+                            <div className="relative rounded-2xl border border-border/50 bg-card shadow-2xl shadow-blue-500/10 overflow-hidden p-6">
+                                <div className="grid grid-cols-3 gap-3 mb-5">
+                                    <div className="p-3 rounded-lg bg-blue-500/10 border border-blue-500/20">
+                                        <div className="h-2 w-8 rounded-full bg-blue-500/40 mb-2" />
+                                        <div className="h-4 w-12 rounded-full shimmer-bar" />
+                                    </div>
+                                    <div className="p-3 rounded-lg bg-secondary">
+                                        <div className="h-2 w-8 rounded-full bg-border mb-2" />
+                                        <div className="h-4 w-10 rounded-full bg-border" />
+                                    </div>
+                                    <div className="p-3 rounded-lg bg-secondary">
+                                        <div className="h-2 w-8 rounded-full bg-border mb-2" />
+                                        <div className="h-4 w-10 rounded-full bg-border" />
+                                    </div>
+                                </div>
+                                <div className="space-y-2.5">
+                                    {[true, false, true, false].map((wide, i) => (
+                                        <div key={i} className="flex items-center gap-3">
+                                            <div className="w-6 h-6 rounded bg-secondary shrink-0" />
+                                            <div className={`h-2.5 rounded-full bg-secondary ${wide ? "w-3/4" : "w-1/2"}`} />
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                         {capabilities.map((c) => (

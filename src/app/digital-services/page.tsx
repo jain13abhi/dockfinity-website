@@ -2,7 +2,7 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import {
     Globe, ArrowRight, ArrowLeft, ShoppingCart, LayoutTemplate, RefreshCw, Wrench,
-    Search, MapPin, Share2, Megaphone, MessageCircle, Palette, CheckCircle,
+    Search, MapPin, Share2, Megaphone, MessageCircle, Palette, CheckCircle, Heart,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -125,21 +125,45 @@ export default function DigitalServicesPage() {
                 <div className="absolute top-0 inset-x-0 h-20 fade-seam-top pointer-events-none" />
                 <div className="absolute bottom-0 inset-x-0 h-20 fade-seam-bottom pointer-events-none" />
                 <Container className="relative z-10">
-                    <div className="max-w-2xl mb-12">
-                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-500 font-mono mb-3">Marketing</p>
-                        <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">Be Where Your Customers Are Looking.</h2>
-                        <p className="text-lg text-muted-foreground leading-relaxed">A website alone isn&apos;t enough — we help people actually find it.</p>
-                    </div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-5 max-w-3xl">
-                        {marketingServices.map((s) => (
-                            <div key={s.title} className="flex items-start gap-3">
-                                <s.icon className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
-                                <div>
-                                    <h3 className="font-semibold text-foreground text-sm mb-0.5">{s.title}</h3>
-                                    <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                        <div>
+                            <div className="max-w-xl mb-10">
+                                <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-500 font-mono mb-3">Marketing</p>
+                                <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">Be Where Your Customers Are Looking.</h2>
+                                <p className="text-lg text-muted-foreground leading-relaxed">A website alone isn&apos;t enough — we help people actually find it.</p>
+                            </div>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-5">
+                                {marketingServices.map((s) => (
+                                    <div key={s.title} className="flex items-start gap-3">
+                                        <s.icon className="w-5 h-5 text-blue-500 shrink-0 mt-0.5" />
+                                        <div>
+                                            <h3 className="font-semibold text-foreground text-sm mb-0.5">{s.title}</h3>
+                                            <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Social post mockup illustration */}
+                        <div className="relative animate-float flex justify-center lg:justify-end">
+                            <div className="absolute -bottom-4 right-8 w-28 h-28 bg-blue-500/15 rounded-full blur-2xl pointer-events-none" />
+                            <div className="relative w-full max-w-xs rounded-2xl border border-border/50 bg-card shadow-2xl shadow-blue-500/10 overflow-hidden">
+                                <div className="flex items-center gap-3 p-4 border-b border-border/50">
+                                    <div className="w-9 h-9 rounded-full bg-blue-500/20 shrink-0" />
+                                    <div className="flex-1 space-y-1.5">
+                                        <div className="h-2.5 w-2/3 rounded-full bg-secondary" />
+                                        <div className="h-2 w-1/3 rounded-full bg-secondary/70" />
+                                    </div>
+                                </div>
+                                <div className="h-32 shimmer-bar" />
+                                <div className="flex items-center gap-4 p-4">
+                                    <Heart className="w-4 h-4 text-blue-500" />
+                                    <MessageCircle className="w-4 h-4 text-muted-foreground" />
+                                    <Share2 className="w-4 h-4 text-muted-foreground" />
                                 </div>
                             </div>
-                        ))}
+                        </div>
                     </div>
                 </Container>
             </section>

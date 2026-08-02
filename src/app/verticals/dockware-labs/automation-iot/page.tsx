@@ -62,10 +62,30 @@ export default function AutomationIotPage() {
             {/* CAPABILITIES */}
             <section className="py-14 md:py-20">
                 <Container>
-                    <div className="max-w-2xl mb-12">
-                        <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-500 font-mono mb-3">What We Build</p>
-                        <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">Software That Talks to the Real World.</h2>
-                        <p className="text-lg text-muted-foreground leading-relaxed">Automation that stops at a dashboard isn&apos;t enough — we connect it to what&apos;s actually happening on the ground.</p>
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-14">
+                        <div>
+                            <p className="text-xs font-bold uppercase tracking-[0.2em] text-blue-500 font-mono mb-3">What We Build</p>
+                            <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">Software That Talks to the Real World.</h2>
+                            <p className="text-lg text-muted-foreground leading-relaxed">Automation that stops at a dashboard isn&apos;t enough — we connect it to what&apos;s actually happening on the ground.</p>
+                        </div>
+
+                        {/* Connected-nodes mockup illustration */}
+                        <div className="relative animate-float">
+                            <div className="relative rounded-2xl border border-border/50 bg-card shadow-2xl shadow-blue-500/10 overflow-hidden p-10 flex items-center justify-center">
+                                <svg viewBox="0 0 200 140" className="w-full max-w-xs text-blue-500">
+                                    <line x1="30" y1="30" x2="100" y2="70" stroke="currentColor" strokeOpacity="0.25" strokeWidth="1.5" />
+                                    <line x1="170" y1="30" x2="100" y2="70" stroke="currentColor" strokeOpacity="0.25" strokeWidth="1.5" />
+                                    <line x1="30" y1="110" x2="100" y2="70" stroke="currentColor" strokeOpacity="0.25" strokeWidth="1.5" />
+                                    <line x1="170" y1="110" x2="100" y2="70" stroke="currentColor" strokeOpacity="0.25" strokeWidth="1.5" />
+                                    <circle cx="30" cy="30" r="6" fill="currentColor" fillOpacity="0.4" />
+                                    <circle cx="170" cy="30" r="6" fill="currentColor" fillOpacity="0.4" />
+                                    <circle cx="30" cy="110" r="6" fill="currentColor" fillOpacity="0.4" />
+                                    <circle cx="170" cy="110" r="6" fill="currentColor" fillOpacity="0.4" />
+                                    <circle cx="100" cy="70" r="14" fill="currentColor" fillOpacity="0.25" className="animate-ping origin-center" />
+                                    <circle cx="100" cy="70" r="9" fill="currentColor" />
+                                </svg>
+                            </div>
+                        </div>
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         {capabilities.map((c) => (
