@@ -1,5 +1,12 @@
 @import "tailwindcss";
 
+/* next-themes toggles a `.dark` class on <html> (attribute="class"), but
+   Tailwind v4's built-in `dark:` variant defaults to the
+   prefers-color-scheme media query. Without this override, every `dark:`
+   utility in the codebase tracks the OS theme instead of the site's own
+   toggle. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --font-sans: var(--font-sans);
   --font-mono: var(--font-mono);
