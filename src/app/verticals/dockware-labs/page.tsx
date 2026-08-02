@@ -26,7 +26,7 @@ export default function DockwareLabsPage() {
     return (
         <>
             {/* ── HERO ── */}
-            <section className="relative pt-28 pb-16 bg-foreground text-background overflow-hidden">
+            <section className="relative pt-28 pb-16 bg-panel text-panel-foreground overflow-hidden">
                 <div className="absolute inset-0 bg-grid-pattern opacity-[0.06] pointer-events-none" />
                 <div className="absolute top-0 left-1/4 w-[600px] h-[500px] bg-blue-500/10 rounded-full blur-3xl pointer-events-none" />
                 <div className="absolute bottom-0 inset-x-0 h-24 fade-seam-bottom pointer-events-none" />
@@ -46,7 +46,7 @@ export default function DockwareLabsPage() {
                             Dockware<br />
                             <span className="text-blue-400">Labs.</span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-background/70 max-w-2xl leading-relaxed font-light">
+                        <p className="text-xl md:text-2xl text-panel-foreground/70 max-w-2xl leading-relaxed font-light">
                             We engineer intelligent software systems that automate complexity, eliminate inefficiencies, and drive measurable business growth.
                         </p>
                     </div>
@@ -146,7 +146,7 @@ export default function DockwareLabsPage() {
 
 
             {/* ── CTA ── */}
-            <section className="py-16 bg-foreground text-background relative overflow-hidden">
+            <section className="py-16 bg-panel text-panel-foreground relative overflow-hidden">
                 <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
                 <div className="absolute top-0 inset-x-0 h-20 fade-seam-top pointer-events-none" />
@@ -154,7 +154,7 @@ export default function DockwareLabsPage() {
                     <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">
                         Ready to Upgrade Your Tech Stack?
                     </h2>
-                    <p className="text-xl text-background/60 max-w-xl mx-auto mb-8 font-light">
+                    <p className="text-xl text-panel-foreground/60 max-w-xl mx-auto mb-8 font-light">
                         Let&apos;s map your business operations and design a software architecture that actually scales.
                     </p>
                     <Button className="rounded-full px-10 h-14 text-base font-semibold bg-blue-500 text-white hover:bg-blue-600 shadow-lg hover:shadow-blue-500/25 transition-all duration-300" asChild>

@@ -243,7 +243,7 @@ export default function AboutPage() {
 
 
             {/* ── CTA ── */}
-            <section className="py-16 bg-foreground text-background relative overflow-hidden">
+            <section className="py-16 bg-panel text-panel-foreground relative overflow-hidden">
                 <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
                 <div className="absolute top-0 inset-x-0 h-20 fade-seam-top pointer-events-none" />
                 <Container className="relative z-10 text-center">
@@ -251,7 +251,7 @@ export default function AboutPage() {
                     <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">
                         Join the Dockfinity Network
                     </h2>
-                    <p className="text-lg text-background/60 max-w-xl mx-auto mb-8 font-light">
+                    <p className="text-lg text-panel-foreground/60 max-w-xl mx-auto mb-8 font-light">
                         Whether you&apos;re a potential partner, client, or investor — we&apos;d love to connect and explore how we can build something extraordinary together.
                     </p>
                     <Button className="rounded-full px-10 h-14 text-base font-semibold bg-brand text-brand-foreground hover:bg-brand/90 shadow-lg hover:shadow-xl transition-all duration-300" asChild>

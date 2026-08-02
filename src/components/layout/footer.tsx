@@ -32,7 +32,7 @@ export function Footer() {
     const currentYear = new Date().getFullYear();
 
     return (
-        <footer className="bg-foreground text-background mt-auto relative">
+        <footer className="bg-panel text-panel-foreground mt-auto relative">
             <div className="absolute top-0 inset-x-0 h-20 fade-seam-top pointer-events-none" />
 
             {/* Main footer body */}
@@ -46,29 +46,29 @@ export function Footer() {
                                 <div className="w-8 h-8 rounded-lg bg-brand flex items-center justify-center">
                                     <span className="text-brand-foreground text-xs font-bold font-mono">D</span>
                                 </div>
-                                <span className="font-display font-bold text-xl tracking-tight text-background group-hover:text-background/80 transition-colors">
+                                <span className="font-display font-bold text-xl tracking-tight text-panel-foreground group-hover:text-panel-foreground/80 transition-colors">
                                     DOCKFINITY
                                 </span>
                             </Link>
-                            <p className="text-background/60 text-sm leading-relaxed mt-3">
+                            <p className="text-panel-foreground/60 text-sm leading-relaxed mt-3">
                                 A technology-first holding company building and scaling ventures across enterprise software, financial education, and premium corporate experiences.
                             </p>
                         </div>
 
                         {/* Registration details */}
-                        <div className="space-y-1.5 text-xs text-background/40 font-mono">
-                            <p><span className="text-background/60">CIN</span> · U66190DL2025PTC454662</p>
-                            <p><span className="text-background/60">GSTIN</span> · 07AAMCD0054C1Z3</p>
-                            <p><span className="text-background/60">UDYAM</span> · UDYAM-DL-06-0174779</p>
+                        <div className="space-y-1.5 text-xs text-panel-foreground/40 font-mono">
+                            <p><span className="text-panel-foreground/60">CIN</span> · U66190DL2025PTC454662</p>
+                            <p><span className="text-panel-foreground/60">GSTIN</span> · 07AAMCD0054C1Z3</p>
+                            <p><span className="text-panel-foreground/60">UDYAM</span> · UDYAM-DL-06-0174779</p>
                         </div>
 
                         {/* Contact quick links */}
                         <div className="space-y-2 text-sm">
-                            <a href="tel:+919911721100" className="flex items-center gap-2 text-background/60 hover:text-background transition-colors group">
+                            <a href="tel:+919911721100" className="flex items-center gap-2 text-panel-foreground/60 hover:text-panel-foreground transition-colors group">
                                 <Phone className="w-3.5 h-3.5 shrink-0 group-hover:text-brand transition-colors" />
                                 +91 99117 21100
                             </a>
-                            <a href="mailto:dockfinity@gmail.com" className="flex items-center gap-2 text-background/60 hover:text-background transition-colors group">
+                            <a href="mailto:dockfinity@gmail.com" className="flex items-center gap-2 text-panel-foreground/60 hover:text-panel-foreground transition-colors group">
                                 <Mail className="w-3.5 h-3.5 shrink-0 group-hover:text-brand transition-colors" />
                                 dockfinity@gmail.com
                             </a>
@@ -77,13 +77,13 @@ export function Footer() {
 
                     {/* Links columns */}
                     <div className="md:col-span-2">
-                        <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-background/40 font-mono mb-5">Verticals</h3>
+                        <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-panel-foreground/40 font-mono mb-5">Verticals</h3>
                         <ul className="space-y-3">
                             {verticalLinks.map((link) => (
                                 <li key={link.name}>
                                     <Link
                                         href={link.href}
-                                        className={`text-sm text-background/60 transition-colors ${link.color}`}
+                                        className={`text-sm text-panel-foreground/60 transition-colors ${link.color}`}
                                     >
                                         {link.name}
                                     </Link>
@@ -93,13 +93,13 @@ export function Footer() {
                     </div>
 
                     <div className="md:col-span-2">
-                        <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-background/40 font-mono mb-5">Company</h3>
+                        <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-panel-foreground/40 font-mono mb-5">Company</h3>
                         <ul className="space-y-3">
                             {companyLinks.map((link) => (
                                 <li key={link.name}>
                                     <Link
                                         href={link.href}
-                                        className="text-sm text-background/60 hover:text-background transition-colors"
+                                        className="text-sm text-panel-foreground/60 hover:text-panel-foreground transition-colors"
                                     >
                                         {link.name}
                                     </Link>
@@ -109,12 +109,12 @@ export function Footer() {
                     </div>
 
                     <div className="md:col-span-4">
-                        <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-background/40 font-mono mb-5">Certifications</h3>
+                        <h3 className="text-xs font-bold uppercase tracking-[0.2em] text-panel-foreground/40 font-mono mb-5">Certifications</h3>
                         <div className="grid grid-cols-2 gap-3">
                             {certs.map((c) => (
                                 <div key={c.label} className="px-4 py-3 rounded-xl border border-white/10 bg-white/5 hover:bg-white/8 transition-colors">
-                                    <div className="text-sm font-bold text-background">{c.label}</div>
-                                    <div className="text-xs text-background/40">{c.sub}</div>
+                                    <div className="text-sm font-bold text-panel-foreground">{c.label}</div>
+                                    <div className="text-xs text-panel-foreground/40">{c.sub}</div>
                                 </div>
                             ))}
                         </div>
@@ -125,11 +125,11 @@ export function Footer() {
                 <div className="h-px bg-white/10 mb-6" />
 
                 {/* Bottom bar */}
-                <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-background/40">
+                <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-panel-foreground/40">
                     <p>© {currentYear} Dockfinity Private Limited. All rights reserved.</p>
                     <div className="flex flex-wrap gap-4 justify-center">
                         {legalLinks.map((link) => (
-                            <Link key={link.name} href={link.href} className="hover:text-background/70 transition-colors">
+                            <Link key={link.name} href={link.href} className="hover:text-panel-foreground/70 transition-colors">
                                 {link.name}
                             </Link>
                         ))}

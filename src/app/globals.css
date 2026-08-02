@@ -37,6 +37,12 @@
   --color-brand: hsl(var(--brand));
   --color-brand-foreground: hsl(var(--brand-foreground));
 
+  /* Fixed dark accent band — stays dark navy/light text in BOTH themes.
+     Unlike foreground/background (which flip), this is for section bands
+     (footer, CTA strips) that must never invert into a light block in dark mode. */
+  --color-panel: hsl(var(--panel));
+  --color-panel-foreground: hsl(var(--panel-foreground));
+
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
@@ -125,6 +131,11 @@
     /* Brand: Premium Amber Gold */
     --brand: 38 92% 50%;
     --brand-foreground: 224 71% 4%;
+
+    /* Fixed dark panel — intentionally NOT redefined in .dark below,
+       so accent bands stay dark navy/light text regardless of theme. */
+    --panel: 224 71% 4%;
+    --panel-foreground: 210 40% 98%;
 
     --radius: 0.5rem;
   }
