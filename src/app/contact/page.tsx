@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { submitContactForm } from "@/app/actions";
 import { useState, useRef } from "react";
-import { Mail, Phone, Clock, Loader2, CheckCircle2, ArrowRight } from "lucide-react";
+import { Mail, Phone, Clock, Loader2, CheckCircle2, AlertCircle, ArrowRight } from "lucide-react";
 
 const contactDetails = [
     {
@@ -38,16 +38,23 @@ const contactDetails = [
 export default function ContactPage() {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [isSuccess, setIsSuccess] = useState(false);
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
 
     async function handleSubmit(formData: FormData) {
         setIsSubmitting(true);
+        setErrorMessage(null);
         try {
             await submitContactForm(formData);
             setIsSuccess(true);
             formRef.current?.reset();
         } catch (error) {
             console.error("Error submitting form", error);
+            setErrorMessage(
+                error instanceof Error
+                    ? error.message
+                    : "Something went wrong. Please email us directly at dockfinity@gmail.com or call +91 99117 21100."
+            );
         } finally {
             setIsSubmitting(false);
         }
@@ -147,6 +154,13 @@ export default function ContactPage() {
                                             <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand font-mono mb-2">Contact Form</p>
                                             <h2 className="font-display text-2xl font-bold">Send Us a Message</h2>
                                         </div>
+
+                                        {errorMessage && (
+                                            <div className="mb-6 flex items-start gap-3 p-4 rounded-xl bg-destructive/10 border border-destructive/20">
+                                                <AlertCircle className="w-5 h-5 text-destructive shrink-0 mt-0.5" />
+                                                <p className="text-sm text-destructive leading-relaxed">{errorMessage}</p>
+                                            </div>
+                                        )}
 
                                         <form ref={formRef} action={handleSubmit} className="space-y-5">
                                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
