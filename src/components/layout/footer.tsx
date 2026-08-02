@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Mail, Phone } from "lucide-react";
 
@@ -42,10 +43,9 @@ export function Footer() {
                     {/* Brand column */}
                     <div className="md:col-span-4 space-y-6">
                         <div>
-                            <Link href="/" className="inline-flex items-center gap-3 group mb-4">
-                                <div className="w-8 h-8 rounded-lg bg-brand flex items-center justify-center">
-                                    <span className="text-brand-foreground text-xs font-bold font-mono">D</span>
-                                </div>
+                            <Link href="/" className="inline-flex items-center gap-2.5 group mb-4">
+                                <Image src="/logo-mark-navy.png" alt="" width={55} height={32} className="h-8 w-auto dark:hidden" />
+                                <Image src="/logo-mark-white.png" alt="" width={55} height={32} className="h-8 w-auto hidden dark:block" />
                                 <span className="font-display font-bold text-xl tracking-tight text-foreground group-hover:text-foreground/80 transition-colors">
                                     DOCKFINITY
                                 </span>
