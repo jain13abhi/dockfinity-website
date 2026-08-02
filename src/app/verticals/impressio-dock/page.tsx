@@ -140,14 +140,15 @@ export default function ImpressioDockPage() {
             </section>
 
             {/* CTA */}
-            <section className="py-16 bg-panel text-panel-foreground relative overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
+            <section className="py-16 bg-secondary/30 relative overflow-hidden">
+                <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-amber-500/15 rounded-full blur-3xl pointer-events-none" />
                 <div className="absolute top-0 inset-x-0 h-20 fade-seam-top pointer-events-none" />
+                <div className="absolute bottom-0 inset-x-0 h-20 fade-seam-bottom pointer-events-none" />
                 <Container className="relative z-10 text-center">
                     <Gift className="w-10 h-10 text-amber-500 mx-auto mb-6" />
                     <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">Make an Impression.</h2>
-                    <p className="text-xl text-panel-foreground/60 max-w-xl mx-auto mb-8 font-light">
+                    <p className="text-xl text-muted-foreground max-w-xl mx-auto mb-8 font-light">
                         Get a custom quote for your next corporate event, onboarding program, or gifting campaign.
                     </p>
                     <Button className="rounded-full px-10 h-14 text-base font-semibold bg-amber-500 text-white hover:bg-amber-600 shadow-lg transition-all duration-300" asChild>

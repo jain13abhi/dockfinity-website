@@ -324,8 +324,8 @@ export default function Home() {
       {/* ══════════════════════════════════════════════════ */}
       {/*  CERTIFICATIONS DARK BAND                        */}
       {/* ══════════════════════════════════════════════════ */}
-      <section className="py-14 md:py-16 bg-panel text-panel-foreground relative overflow-hidden">
-        <div className="absolute inset-0 bg-grid-pattern opacity-[0.06] pointer-events-none" />
+      <section className="py-14 md:py-16 bg-secondary/30 relative overflow-hidden">
+        <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-brand/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute top-0 inset-x-0 h-24 fade-seam-top pointer-events-none" />
         <div className="absolute bottom-0 inset-x-0 h-24 fade-seam-bottom pointer-events-none" />
@@ -340,7 +340,7 @@ export default function Home() {
                   International Standards.<br />Uncompromising Quality.
                 </h2>
               </div>
-              <p className="text-lg text-panel-foreground/70 leading-relaxed font-light">
+              <p className="text-lg text-muted-foreground leading-relaxed font-light">
                 Trust is our most valuable currency. We adhere to the highest international standards of security, quality, and IT service management — so your business is always in safe hands.
               </p>
 
@@ -353,8 +353,8 @@ export default function Home() {
                 ].map((c) => (
                   <div key={c.cert} className="flex items-center gap-3">
                     <CheckCircle className="w-5 h-5 text-brand shrink-0" />
-                    <span className="font-semibold text-panel-foreground">{c.cert}</span>
-                    <span className="text-panel-foreground/50 text-sm">— {c.desc}</span>
+                    <span className="font-semibold text-foreground">{c.cert}</span>
+                    <span className="text-muted-foreground text-sm">— {c.desc}</span>
                   </div>
                 ))}
               </div>
@@ -370,10 +370,10 @@ export default function Home() {
               ].map((s) => (
                 <div
                   key={s.label}
-                  className="flex flex-col items-center justify-center text-center p-8 rounded-2xl border border-white/10 bg-white/5 hover:bg-white/8 transition-colors backdrop-blur-sm"
+                  className="flex flex-col items-center justify-center text-center p-8 rounded-2xl border border-border/50 bg-card hover:border-border transition-colors"
                 >
                   <span className="stat-number text-5xl text-brand mb-2">{s.value}</span>
-                  <span className="text-sm text-panel-foreground/60 font-mono uppercase tracking-wider">{s.label}</span>
+                  <span className="text-sm text-muted-foreground font-mono uppercase tracking-wider">{s.label}</span>
                 </div>
               ))}
             </div>

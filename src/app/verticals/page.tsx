@@ -151,15 +151,16 @@ export default function VerticalsPage() {
 
 
             {/* ── CTA ── */}
-            <section className="py-16 bg-panel text-panel-foreground relative overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
+            <section className="py-16 bg-secondary/30 relative overflow-hidden">
+                <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[300px] bg-brand/10 rounded-full blur-3xl pointer-events-none" />
                 <div className="absolute top-0 inset-x-0 h-20 fade-seam-top pointer-events-none" />
+                <div className="absolute bottom-0 inset-x-0 h-20 fade-seam-bottom pointer-events-none" />
                 <Container className="relative z-10 text-center">
                     <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">
                         Have a Custom Requirement?
                     </h2>
-                    <p className="text-lg text-panel-foreground/60 max-w-xl mx-auto mb-8 font-light">
+                    <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8 font-light">
                         Our distinct verticals allow us to offer comprehensive, end-to-end solutions for businesses of all sizes. Let&apos;s build something together.
                     </p>
                     <Button className="rounded-full px-10 h-14 text-base font-semibold bg-brand text-brand-foreground hover:bg-brand/90 shadow-lg" asChild>

@@ -147,15 +147,16 @@ export default function DockwareLabsPage() {
 
 
             {/* ── CTA ── */}
-            <section className="py-16 bg-panel text-panel-foreground relative overflow-hidden">
-                <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />
+            <section className="py-16 bg-secondary/30 relative overflow-hidden">
+                <div className="absolute inset-0 bg-grid-dense opacity-50 pointer-events-none" />
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-blue-500/15 rounded-full blur-3xl pointer-events-none" />
                 <div className="absolute top-0 inset-x-0 h-20 fade-seam-top pointer-events-none" />
+                <div className="absolute bottom-0 inset-x-0 h-20 fade-seam-bottom pointer-events-none" />
                 <Container className="relative z-10 text-center">
                     <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">
                         Ready to Upgrade Your Tech Stack?
                     </h2>
-                    <p className="text-xl text-panel-foreground/60 max-w-xl mx-auto mb-8 font-light">
+                    <p className="text-xl text-muted-foreground max-w-xl mx-auto mb-8 font-light">
                         Let&apos;s map your business operations and design a software architecture that actually scales.
                     </p>
                     <Button className="rounded-full px-10 h-14 text-base font-semibold bg-blue-500 text-white hover:bg-blue-600 shadow-lg hover:shadow-blue-500/25 transition-all duration-300" asChild>
