@@ -178,6 +178,7 @@ export default function ContactPage() {
                                                         <option value="" disabled>Select a topic...</option>
                                                         <option value="General Inquiry">General Inquiry</option>
                                                         <option value="Dockware Labs">Dockware Labs — Software & Automation</option>
+                                                        <option value="Digital Services">Digital Services — Websites & Marketing</option>
                                                         <option value="Trading Dock">Trading Dock — Analytics & Education</option>
                                                         <option value="Impressio Dock">Impressio Dock — Gifting & Printing</option>
                                                         <option value="Partnership">Strategic Partnership</option>
