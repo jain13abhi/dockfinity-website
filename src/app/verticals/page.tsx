@@ -1,6 +1,6 @@
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, Cpu, BarChart3, Gift, ChevronRight } from "lucide-react";
+import { ArrowRight, Cpu, BarChart3, Gift, ChevronRight, Globe } from "lucide-react";
 import Link from "next/link";
 
 export const metadata = {
@@ -146,6 +146,25 @@ export default function VerticalsPage() {
                             </div>
                         ))}
                     </div>
+
+                    {/* Digital Services callout — part of Dockware Labs */}
+                    <Link
+                        href="/digital-services"
+                        className="mt-8 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 rounded-2xl border border-border/50 bg-card hover:border-blue-500/30 hover:shadow-lg transition-all duration-300 group"
+                    >
+                        <div className="flex items-center gap-4">
+                            <div className="w-11 h-11 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center shrink-0">
+                                <Globe className="w-5 h-5" />
+                            </div>
+                            <div>
+                                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-500 font-mono">Also from Dockware Labs</span>
+                                <p className="font-display font-bold text-foreground">Digital Services — websites, SEO, and marketing for your business.</p>
+                            </div>
+                        </div>
+                        <span className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-500 shrink-0 group-hover:gap-2.5 transition-all">
+                            Explore Digital Services <ArrowRight className="w-4 h-4" />
+                        </span>
+                    </Link>
                 </Container>
             </section>
 

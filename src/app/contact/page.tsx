@@ -134,7 +134,7 @@ export default function ContactPage() {
 
                         {/* Right: Contact form */}
                         <div className="lg:col-span-3">
-                            <div className="bg-card p-8 md:p-10 rounded-2xl border border-border/50 shadow-xl shadow-foreground/5">
+                            <div className="bg-card p-8 md:p-10 rounded-2xl border border-border/50 shadow-xl shadow-foreground/5" aria-live="polite" aria-atomic="false">
                                 {isSuccess ? (
                                     <div className="flex flex-col items-center justify-center py-16 text-center animate-in fade-in zoom-in duration-300">
                                         <div className="w-20 h-20 bg-emerald-500/10 rounded-full flex items-center justify-center mb-6">
@@ -221,7 +221,7 @@ export default function ContactPage() {
                                             <Button
                                                 type="submit"
                                                 size="lg"
-                                                className="w-full h-13 text-base font-semibold rounded-xl bg-foreground text-background hover:bg-foreground/90 shadow-lg hover:shadow-xl transition-all duration-300"
+                                                className="w-full h-14 text-base font-semibold rounded-xl bg-foreground text-background hover:bg-foreground/90 shadow-lg hover:shadow-xl transition-all duration-300"
                                                 disabled={isSubmitting}
                                             >
                                                 {isSubmitting ? (

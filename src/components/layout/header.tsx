@@ -7,7 +7,7 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { Menu, X, ChevronDown } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { cn } from "@/lib/utils";
 
 const navigation = [
@@ -17,6 +17,7 @@ const navigation = [
         href: "/verticals",
         children: [
             { name: "Dockware Labs", href: "/verticals/dockware-labs", desc: "Enterprise SaaS & Automation", color: "text-blue-500" },
+            { name: "Digital Services", href: "/digital-services", desc: "Websites & Marketing", color: "text-blue-500" },
             { name: "Trading Dock", href: "/verticals/trading-dock", desc: "Market Analytics & Education", color: "text-emerald-500" },
             { name: "Impressio Dock", href: "/verticals/impressio-dock", desc: "Corporate Gifting & Printing", color: "text-amber-500" },
         ],
@@ -29,6 +30,8 @@ export function Header() {
     const [isOpen, setIsOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
     const [verticalsOpen, setVerticalsOpen] = useState(false);
+    const verticalsRef = useRef<HTMLDivElement>(null);
+    const verticalsTriggerRef = useRef<HTMLButtonElement>(null);
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 12);
@@ -41,6 +44,31 @@ export function Header() {
         setIsOpen(false);
         setVerticalsOpen(false);
     }, [pathname]);
+
+    // Close the Verticals menu on Escape and on outside click —
+    // it previously only responded to hover, so keyboard and touch
+    // users had no way to open or dismiss it.
+    useEffect(() => {
+        if (!verticalsOpen) return;
+
+        function handleKeyDown(e: KeyboardEvent) {
+            if (e.key === "Escape") {
+                setVerticalsOpen(false);
+                verticalsTriggerRef.current?.focus();
+            }
+        }
+        function handleClickOutside(e: MouseEvent) {
+            if (verticalsRef.current && !verticalsRef.current.contains(e.target as Node)) {
+                setVerticalsOpen(false);
+            }
+        }
+        document.addEventListener("keydown", handleKeyDown);
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("keydown", handleKeyDown);
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [verticalsOpen]);
 
     return (
         <header
@@ -68,11 +96,23 @@ export function Header() {
                         item.children ? (
                             <div
                                 key={item.name}
+                                ref={verticalsRef}
                                 className="relative"
                                 onMouseEnter={() => setVerticalsOpen(true)}
                                 onMouseLeave={() => setVerticalsOpen(false)}
+                                onBlur={(e) => {
+                                    if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                                        setVerticalsOpen(false);
+                                    }
+                                }}
                             >
                                 <button
+                                    ref={verticalsTriggerRef}
+                                    type="button"
+                                    aria-expanded={verticalsOpen}
+                                    aria-haspopup="true"
+                                    aria-controls="verticals-menu"
+                                    onClick={() => setVerticalsOpen((v) => !v)}
                                     className={cn(
                                         "flex items-center gap-1 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200",
                                         pathname.startsWith("/verticals")
@@ -86,7 +126,7 @@ export function Header() {
 
                                 {/* Dropdown */}
                                 {verticalsOpen && (
-                                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-72 animate-in fade-in slide-in-from-top-2 duration-200">
+                                    <div id="verticals-menu" className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-72 animate-in fade-in slide-in-from-top-2 duration-200">
                                         <div className="bg-card/95 backdrop-blur-xl border border-border rounded-2xl shadow-xl p-2">
                                             {item.children.map((child) => (
                                                 <Link

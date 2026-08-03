@@ -45,9 +45,12 @@ export default function ImpressioDockPage() {
                             Impressio<br />
                             <span className="text-amber-500">Dock.</span>
                         </h1>
-                        <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed font-light">
+                        <p className="text-xl md:text-2xl text-muted-foreground max-w-2xl leading-relaxed font-light mb-6">
                             Curated corporate gifting and premium printing solutions that leave a mark — on every stakeholder, every time.
                         </p>
+                        <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-secondary border border-border/60 text-xs font-semibold text-muted-foreground">
+                            Currently onboarding early partners — get in touch to discuss your requirement
+                        </div>
                     </div>
                 </Container>
             </section>
@@ -72,7 +75,7 @@ export default function ImpressioDockPage() {
 
                             <div className="flex flex-col sm:flex-row gap-4 pt-2">
                                 <Button className="rounded-full px-8 font-semibold bg-amber-500 text-white hover:bg-amber-600 shadow-sm" asChild>
-                                    <Link href="/contact">Request a Catalog <ArrowRight className="ml-2 w-4 h-4" /></Link>
+                                    <Link href="/contact">Get in Touch <ArrowRight className="ml-2 w-4 h-4" /></Link>
                                 </Button>
                             </div>
                         </div>
@@ -123,8 +126,8 @@ export default function ImpressioDockPage() {
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 text-center">
                             {[
                                 { icon: Star, label: "Premium Materials", desc: "Sourced from trusted vendor networks across India" },
-                                { icon: Package, label: "B2B Bulk Orders", desc: "Scalable fulfillment from 50 to 50,000 units" },
-                                { icon: Truck, label: "Pan-India Delivery", desc: "3–7 business day domestic shipping" },
+                                { icon: Package, label: "B2B Bulk Orders", desc: "Scalable fulfillment, from small batches to bulk orders" },
+                                { icon: Truck, label: "Pan-India Delivery", desc: "Timelines confirmed per order" },
                             ].map((w) => (
                                 <div key={w.label} className="p-6 bg-card rounded-2xl border border-border/50">
                                     <div className="w-10 h-10 bg-amber-500/10 rounded-xl flex items-center justify-center mx-auto mb-3">
@@ -152,7 +155,7 @@ export default function ImpressioDockPage() {
                         Get a custom quote for your next corporate event, onboarding program, or gifting campaign.
                     </p>
                     <Button className="rounded-full px-10 h-14 text-base font-semibold bg-amber-500 text-white hover:bg-amber-600 shadow-lg transition-all duration-300" asChild>
-                        <Link href="/contact">Request Catalog <ArrowRight className="ml-2 w-4 h-4" /></Link>
+                        <Link href="/contact">Get in Touch <ArrowRight className="ml-2 w-4 h-4" /></Link>
                     </Button>
                 </Container>
             </section>
