@@ -3,7 +3,7 @@
 import { Resend } from 'resend'
 import { google } from 'googleapis'
 
-const NOTIFY_EMAIL = 'dockfinity@gmail.com'
+const NOTIFY_EMAIL = process.env.CONTACT_NOTIFY_EMAIL || 'dockfinity@gmail.com'
 const SHEET_TAB = process.env.GOOGLE_SHEET_TAB_NAME || 'Sheet1'
 const PHONE_DIGITS_PATTERN = /^\d{10}$/
 
