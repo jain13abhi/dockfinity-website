@@ -4,6 +4,7 @@ import { Resend } from 'resend'
 import { google } from 'googleapis'
 
 const NOTIFY_EMAIL = process.env.CONTACT_NOTIFY_EMAIL || 'dockfinity@gmail.com'
+const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'Dockfinity Website <onboarding@resend.dev>'
 const SHEET_TAB = process.env.GOOGLE_SHEET_TAB_NAME || 'Sheet1'
 const PHONE_DIGITS_PATTERN = /^\d{10}$/
 
@@ -42,9 +43,15 @@ export async function submitContactForm(formData: FormData) {
 
     const submission: ContactSubmission = { name, email, phone, subject, message }
 
-    const [emailResult, sheetResult] = await Promise.allSettled([
+    // All three run in parallel and are awaited before returning — a
+    // serverless function can be frozen the instant it responds, so any
+    // fire-and-forget send here risks never completing. Only the first two
+    // determine whether the submission counts as a success; the visitor's
+    // own confirmation email is best-effort and never blocks or fails it.
+    const [emailResult, sheetResult, ackResult] = await Promise.allSettled([
         sendNotificationEmail(submission),
         appendToGoogleSheet(submission),
+        sendAcknowledgmentEmail(submission),
     ])
 
     if (emailResult.status === 'rejected') {
@@ -52,6 +59,9 @@ export async function submitContactForm(formData: FormData) {
     }
     if (sheetResult.status === 'rejected') {
         console.error('Google Sheets logging failed', sheetResult.reason)
+    }
+    if (ackResult.status === 'rejected') {
+        console.error('Acknowledgment email failed', ackResult.reason)
     }
 
     // Treat the submission as successful if it landed anywhere — losing a
@@ -96,7 +106,7 @@ async function sendNotificationEmail({ name, email, phone, subject, message }: C
     const resend = new Resend(apiKey)
 
     const { error } = await resend.emails.send({
-        from: 'Dockfinity Website <onboarding@resend.dev>',
+        from: FROM_EMAIL,
         to: NOTIFY_EMAIL,
         replyTo: email,
         subject: `New enquiry: ${subject} — ${name}`,
@@ -114,6 +124,42 @@ async function sendNotificationEmail({ name, email, phone, subject, message }: C
     if (error) {
         throw new Error(error.message)
     }
+}
+
+async function sendAcknowledgmentEmail({ name, email, subject }: ContactSubmission) {
+    const apiKey = process.env.RESEND_API_KEY
+    if (!apiKey) {
+        return
+    }
+
+    // The shared onboarding@resend.dev sandbox address can only send to the
+    // Resend account's own signup email, not to an arbitrary visitor — this
+    // requires a verified custom domain (i.e. RESEND_FROM_EMAIL configured
+    // to a dockfinity.com address) to actually reach the visitor's inbox.
+    if (FROM_EMAIL.includes('onboarding@resend.dev')) {
+        return
+    }
+
+    const resend = new Resend(apiKey)
+
+    await resend.emails.send({
+        from: FROM_EMAIL,
+        to: email,
+        replyTo: NOTIFY_EMAIL,
+        subject: `We've received your message — Dockfinity`,
+        text: [
+            `Hi ${name},`,
+            '',
+            `Thank you for reaching out to Dockfinity regarding "${subject}". We've received your message and our team will get back to you within 1–2 business days.`,
+            '',
+            'For urgent queries, you can also reach us directly:',
+            'Phone: +91 99117 21100',
+            'Email: dockfinity@gmail.com',
+            '',
+            'Best regards,',
+            'Team Dockfinity',
+        ].join('\n'),
+    })
 }
 
 async function appendToGoogleSheet({ name, email, phone, subject, message }: ContactSubmission) {
