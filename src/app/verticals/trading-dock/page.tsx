@@ -81,7 +81,7 @@ export default function TradingDockPage() {
                                 </p>
                             </div>
                             <Button className="rounded-full px-8 font-semibold bg-emerald-500 text-white hover:bg-emerald-600 shadow-sm" asChild>
-                                <Link href="/contact">Get Access <ArrowRight className="ml-2 w-4 h-4" /></Link>
+                                <Link href="/contact">Get in Touch <ArrowRight className="ml-2 w-4 h-4" /></Link>
                             </Button>
                         </div>
 
@@ -152,10 +152,10 @@ export default function TradingDockPage() {
                     <TrendingUp className="w-10 h-10 text-emerald-500 mx-auto mb-6" />
                     <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">Start Your Trading Education</h2>
                     <p className="text-xl text-muted-foreground max-w-xl mx-auto mb-8 font-light">
-                        Join thousands of traders using our analytics platform and educational resources to develop a disciplined approach to the markets.
+                        Build a disciplined, rule-based approach to the markets with our analytics tools and structured educational resources.
                     </p>
                     <Button className="rounded-full px-10 h-14 text-base font-semibold bg-emerald-500 text-white hover:bg-emerald-600 shadow-lg transition-all duration-300" asChild>
-                        <Link href="/contact">Get Access <ArrowRight className="ml-2 w-4 h-4" /></Link>
+                        <Link href="/contact">Get in Touch <ArrowRight className="ml-2 w-4 h-4" /></Link>
                     </Button>
                 </Container>
             </section>

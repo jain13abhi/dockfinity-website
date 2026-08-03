@@ -5,6 +5,7 @@ import { Mail, Phone } from "lucide-react";
 
 const verticalLinks = [
     { name: "Dockware Labs", href: "/verticals/dockware-labs", color: "hover:text-blue-400" },
+    { name: "Digital Services", href: "/digital-services", color: "hover:text-blue-400" },
     { name: "Trading Dock", href: "/verticals/trading-dock", color: "hover:text-emerald-400" },
     { name: "Impressio Dock", href: "/verticals/impressio-dock", color: "hover:text-amber-400" },
 ];

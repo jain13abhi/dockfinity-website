@@ -5,8 +5,6 @@ import {
   ArrowRight,
   Globe,
   ShieldCheck,
-  Terminal,
-  TrendingUp,
   Gift,
   ChevronRight,
   Cpu,
@@ -156,19 +154,19 @@ export default function Home() {
 
 
       {/* ══════════════════════════════════════════════════ */}
-      {/*  TRUST MARQUEE                                    */}
+      {/*  TRUST STRIP                                      */}
       {/* ══════════════════════════════════════════════════ */}
-      <div className="border-y border-border/50 bg-secondary/30 py-5 overflow-hidden">
-        <div className="flex animate-marquee whitespace-nowrap gap-0" style={{ width: "max-content" }}>
-          {[...trustItems, ...trustItems].map((item, i) => (
-            <div key={i} className="inline-flex items-center gap-2 px-10">
-              <ShieldCheck className="w-4 h-4 text-brand shrink-0" />
-              <span className="text-sm font-semibold text-foreground">{item.label}</span>
-              <span className="text-xs text-muted-foreground">— {item.sub}</span>
-              <span className="ml-8 text-border/80">·</span>
-            </div>
-          ))}
-        </div>
+      <div className="border-y border-border/50 bg-secondary/30 py-5">
+        <Container>
+          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3">
+            {trustItems.map((item) => (
+              <div key={item.label} className="inline-flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-brand shrink-0" />
+                <span className="text-sm font-semibold text-foreground">{item.label}</span>
+              </div>
+            ))}
+          </div>
+        </Container>
       </div>
 
 
@@ -201,7 +199,7 @@ export default function Home() {
 
             {/* Dockware Labs */}
             <Link href="/verticals/dockware-labs" className="group">
-              <div className="h-full bg-card rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/5 hover:-translate-y-2 border border-border/50 flex flex-col relative overflow-hidden card-blue">
+              <div className="h-full bg-card rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/5 hover:-translate-y-2 border border-border/50 hover:border-blue-500/30 flex flex-col relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
 
                 <div className="w-14 h-14 bg-blue-500/10 text-blue-500 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-500 group-hover:text-white transition-all duration-300 shadow-sm">
@@ -227,7 +225,7 @@ export default function Home() {
 
             {/* Trading Dock */}
             <Link href="/verticals/trading-dock" className="group">
-              <div className="h-full bg-card rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-500/5 hover:-translate-y-2 border border-border/50 flex flex-col relative overflow-hidden card-emerald">
+              <div className="h-full bg-card rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-emerald-500/5 hover:-translate-y-2 border border-border/50 hover:border-emerald-500/30 flex flex-col relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
 
                 <div className="w-14 h-14 bg-emerald-500/10 text-emerald-500 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300 shadow-sm">
@@ -253,7 +251,7 @@ export default function Home() {
 
             {/* Impressio Dock */}
             <Link href="/verticals/impressio-dock" className="group">
-              <div className="h-full bg-card rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/5 hover:-translate-y-2 border border-border/50 flex flex-col relative overflow-hidden card-amber">
+              <div className="h-full bg-card rounded-2xl p-8 transition-all duration-300 hover:shadow-2xl hover:shadow-amber-500/5 hover:-translate-y-2 border border-border/50 hover:border-amber-500/30 flex flex-col relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-b from-amber-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl" />
 
                 <div className="w-14 h-14 bg-amber-500/10 text-amber-500 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-amber-500 group-hover:text-white transition-all duration-300 shadow-sm">
@@ -278,6 +276,25 @@ export default function Home() {
             </Link>
 
           </div>
+
+          {/* Digital Services callout — part of Dockware Labs */}
+          <Link
+            href="/digital-services"
+            className="mt-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 p-6 rounded-2xl border border-border/50 bg-card hover:border-blue-500/30 hover:shadow-lg transition-all duration-300 group"
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-11 h-11 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center shrink-0">
+                <Globe className="w-5 h-5" />
+              </div>
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-blue-500 font-mono">Also from Dockware Labs</span>
+                <p className="font-display font-bold text-foreground">Need a website or digital marketing? Explore Digital Services.</p>
+              </div>
+            </div>
+            <span className="inline-flex items-center gap-1.5 text-sm font-bold text-blue-500 shrink-0 group-hover:gap-2.5 transition-all">
+              Get a Free Quote <ArrowRight className="w-4 h-4" />
+            </span>
+          </Link>
         </Container>
       </section>
 
@@ -331,49 +348,28 @@ export default function Home() {
         <div className="absolute bottom-0 inset-x-0 h-24 fade-seam-bottom pointer-events-none" />
 
         <Container className="relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-
-            <div className="space-y-8">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand font-mono mb-4">Compliance & Standards</p>
-                <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight leading-[1.1]">
-                  International Standards.<br />Uncompromising Quality.
-                </h2>
-              </div>
-              <p className="text-lg text-muted-foreground leading-relaxed font-light">
-                Trust is our most valuable currency. We adhere to the highest international standards of security, quality, and IT service management — so your business is always in safe hands.
-              </p>
-
-              <div className="space-y-3">
-                {[
-                  { cert: "ISO 27001:2022", desc: "Information Security Management" },
-                  { cert: "ISO 9001:2015", desc: "Quality Management System" },
-                  { cert: "ISO 20000-1:2018", desc: "IT Service Management" },
-                  { cert: "DPIIT Recognized", desc: "Startup India, Govt of India" },
-                ].map((c) => (
-                  <div key={c.cert} className="flex items-center gap-3">
-                    <CheckCircle className="w-5 h-5 text-brand shrink-0" />
-                    <span className="font-semibold text-foreground">{c.cert}</span>
-                    <span className="text-muted-foreground text-sm">— {c.desc}</span>
-                  </div>
-                ))}
-              </div>
+          <div className="max-w-2xl mx-auto text-center space-y-8">
+            <div>
+              <p className="text-xs font-bold uppercase tracking-[0.2em] text-brand font-mono mb-4">Compliance & Standards</p>
+              <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight leading-[1.1]">
+                International Standards.<br />Uncompromising Quality.
+              </h2>
             </div>
+            <p className="text-lg text-muted-foreground leading-relaxed font-light">
+              Trust is our most valuable currency. We adhere to the highest international standards of security, quality, and IT service management — so your business is always in safe hands.
+            </p>
 
-            {/* Stat cluster */}
-            <div className="grid grid-cols-2 gap-4">
+            <div className="space-y-3 text-left inline-block">
               {[
-                { value: "100%", label: "Compliance Rate" },
-                { value: "3×", label: "ISO Certifications" },
-                { value: "2025", label: "Incorporated" },
-                { value: "∞", label: "Commitment" },
-              ].map((s) => (
-                <div
-                  key={s.label}
-                  className="flex flex-col items-center justify-center text-center p-8 rounded-2xl border border-border/50 bg-card hover:border-border transition-colors"
-                >
-                  <span className="stat-number text-5xl text-brand mb-2">{s.value}</span>
-                  <span className="text-sm text-muted-foreground font-mono uppercase tracking-wider">{s.label}</span>
+                { cert: "ISO 27001:2022", desc: "Information Security Management" },
+                { cert: "ISO 9001:2015", desc: "Quality Management System" },
+                { cert: "ISO 20000-1:2018", desc: "IT Service Management" },
+                { cert: "DPIIT Recognized", desc: "Startup India, Govt of India" },
+              ].map((c) => (
+                <div key={c.cert} className="flex items-center gap-3">
+                  <CheckCircle className="w-5 h-5 text-brand shrink-0" />
+                  <span className="font-semibold text-foreground">{c.cert}</span>
+                  <span className="text-muted-foreground text-sm">— {c.desc}</span>
                 </div>
               ))}
             </div>

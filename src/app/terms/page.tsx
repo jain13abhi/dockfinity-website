@@ -16,7 +16,7 @@ export default function TermsPage() {
                     <Link href="/" className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground transition-colors mb-4">
                         <ArrowLeft className="w-4 h-4 mr-2" /> Back to Home
                     </Link>
-                    <h1 className="text-4xl md:text-5xl font-bold tracking-tight tracking-tight mb-4">Terms of Service</h1>
+                    <h1 className="font-display text-4xl md:text-5xl font-bold tracking-tight mb-4">Terms of Service</h1>
                     <p className="text-muted-foreground">Effective Date: {new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
                 </div>
 

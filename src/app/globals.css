@@ -44,12 +44,6 @@
   --color-brand: hsl(var(--brand));
   --color-brand-foreground: hsl(var(--brand-foreground));
 
-  /* Fixed dark accent band — stays dark navy/light text in BOTH themes.
-     Unlike foreground/background (which flip), this is for section bands
-     (footer, CTA strips) that must never invert into a light block in dark mode. */
-  --color-panel: hsl(var(--panel));
-  --color-panel-foreground: hsl(var(--panel-foreground));
-
   --radius-lg: var(--radius);
   --radius-md: calc(var(--radius) - 2px);
   --radius-sm: calc(var(--radius) - 4px);
@@ -58,7 +52,6 @@
   --animate-slide-up: slide-up 0.7s ease-out;
   --animate-pulse-slow: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   --animate-reveal: reveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
-  --animate-marquee: marquee 30s linear infinite;
   --animate-shimmer: shimmer 2s linear infinite;
   --animate-float: float 6s ease-in-out infinite;
   --animate-glow-pulse: glow-pulse 3s ease-in-out infinite;
@@ -80,11 +73,6 @@
 
   @keyframes reveal {
     to { opacity: 1; transform: translateY(0); }
-  }
-
-  @keyframes marquee {
-    from { transform: translateX(0); }
-    to { transform: translateX(-50%); }
   }
 
   @keyframes shimmer {
@@ -138,11 +126,6 @@
     /* Brand: Premium Amber Gold */
     --brand: 38 92% 50%;
     --brand-foreground: 224 71% 4%;
-
-    /* Fixed dark panel — intentionally NOT redefined in .dark below,
-       so accent bands stay dark navy/light text regardless of theme. */
-    --panel: 224 71% 4%;
-    --panel-foreground: 210 40% 98%;
 
     --radius: 0.5rem;
   }
@@ -313,29 +296,6 @@
     background: linear-gradient(to top, hsl(var(--background)), transparent);
   }
 
-  /* ─── Borders ─────────────────────────────────────────── */
-  .border-gradient {
-    border: 1px solid transparent;
-    background:
-      linear-gradient(hsl(var(--card)), hsl(var(--card))) padding-box,
-      linear-gradient(135deg, hsl(var(--border)), transparent, hsl(var(--border))) border-box;
-  }
-
-  .border-brand-glow {
-    box-shadow: 0 0 0 1px hsl(var(--brand) / 0.3), 0 0 20px hsl(var(--brand) / 0.1);
-  }
-
-  /* ─── Glassmorphism ──────────────────────────────────── */
-  .glass-panel {
-    @apply bg-white/60 dark:bg-white/5 backdrop-blur-xl border border-white/20 dark:border-white/8;
-  }
-
-  .glass-dark {
-    background: rgba(2, 6, 23, 0.8);
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
   /* ─── Animations ─────────────────────────────────────── */
   .animate-reveal {
     animation: reveal 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
@@ -344,7 +304,6 @@
   }
 
   .animate-float { animation: float 6s ease-in-out infinite; }
-  .animate-marquee { animation: marquee 30s linear infinite; }
   .animate-shimmer-text { animation: shimmer 4s linear infinite; }
   .animate-glow-pulse { animation: glow-pulse 3s ease-in-out infinite; }
 
