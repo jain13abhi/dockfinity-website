@@ -156,7 +156,7 @@ export default function ContactPage() {
                                         </div>
 
                                         {errorMessage && (
-                                            <div className="mb-6 flex items-start gap-3 p-4 rounded-xl bg-destructive/10 border border-destructive/20">
+                                            <div role="alert" className="mb-6 flex items-start gap-3 p-4 rounded-xl bg-destructive/10 border border-destructive/20">
                                                 <AlertCircle className="w-5 h-5 text-destructive shrink-0 mt-0.5" />
                                                 <p className="text-sm text-destructive leading-relaxed">{errorMessage}</p>
                                             </div>
@@ -166,17 +166,17 @@ export default function ContactPage() {
                                             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                 <div className="space-y-2">
                                                     <label htmlFor="name" className="text-sm font-semibold text-foreground">Full Name *</label>
-                                                    <Input id="name" name="name" placeholder="Rahul Sharma" required className="h-12 rounded-xl border-border/60" />
+                                                    <Input id="name" name="name" autoComplete="name" placeholder="Rahul Sharma" required className="h-12 rounded-xl border-border/60" />
                                                 </div>
                                                 <div className="space-y-2">
                                                     <label htmlFor="phone" className="text-sm font-semibold text-foreground">Phone Number *</label>
-                                                    <Input id="phone" name="phone" placeholder="+91 9XXXXXXXXX" required className="h-12 rounded-xl border-border/60" />
+                                                    <Input id="phone" name="phone" type="tel" autoComplete="tel" placeholder="+91 9XXXXXXXXX" required className="h-12 rounded-xl border-border/60" />
                                                 </div>
                                             </div>
 
                                             <div className="space-y-2">
                                                 <label htmlFor="email" className="text-sm font-semibold text-foreground">Business Email *</label>
-                                                <Input id="email" name="email" type="email" placeholder="rahul@company.com" required className="h-12 rounded-xl border-border/60" />
+                                                <Input id="email" name="email" type="email" autoComplete="email" placeholder="rahul@company.com" required className="h-12 rounded-xl border-border/60" />
                                             </div>
 
                                             <div className="space-y-2">
