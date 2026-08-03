@@ -1,6 +1,8 @@
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import { Inter, JetBrains_Mono, Syne } from 'next/font/google';
 import Script from 'next/script';
+import { Analytics } from '@vercel/analytics/next';
+import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 import { Header } from "@/components/layout/header";
@@ -59,6 +61,36 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#f8f7f4' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+  ],
+};
+
+const ORGANIZATION_JSON_LD = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'Dockfinity Private Limited',
+  legalName: 'Dockfinity Private Limited',
+  url: 'https://dockfinity.com',
+  logo: 'https://dockfinity.com/logo-mark-navy.png',
+  identifier: [
+    { '@type': 'PropertyValue', name: 'CIN', value: 'U66190DL2025PTC454662' },
+    { '@type': 'PropertyValue', name: 'GSTIN', value: '07AAMCD0054C1Z3' },
+    { '@type': 'PropertyValue', name: 'UDYAM', value: 'UDYAM-DL-06-0174779' },
+  ],
+  contactPoint: [
+    {
+      '@type': 'ContactPoint',
+      telephone: '+91-99117-21100',
+      email: 'dockfinity@gmail.com',
+      contactType: 'customer service',
+      areaServed: 'IN',
+    },
+  ],
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -66,6 +98,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(ORGANIZATION_JSON_LD) }}
+        />
+      </head>
       <body className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable} font-sans antialiased min-h-screen bg-background text-foreground relative selection:bg-brand selection:text-brand-foreground`}>
         <Script id="theme-time-seed" strategy="beforeInteractive">
           {THEME_TIME_SEED_SCRIPT}
@@ -88,6 +126,8 @@ export default function RootLayout({
             <Footer />
           </div>
         </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
