@@ -6,7 +6,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { submitContactForm } from "@/app/actions";
 import { useState, useRef } from "react";
+import Script from "next/script";
 import { Mail, Phone, Clock, Loader2, CheckCircle2, AlertCircle, ArrowRight } from "lucide-react";
+
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY;
 
 const contactDetails = [
     {
@@ -41,6 +44,10 @@ export default function ContactPage() {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
     const formRef = useRef<HTMLFormElement>(null);
 
+    function resetTurnstile() {
+        (window as unknown as { turnstile?: { reset: () => void } }).turnstile?.reset();
+    }
+
     async function handleSubmit(formData: FormData) {
         setIsSubmitting(true);
         setErrorMessage(null);
@@ -48,6 +55,7 @@ export default function ContactPage() {
             await submitContactForm(formData);
             setIsSuccess(true);
             formRef.current?.reset();
+            resetTurnstile();
         } catch (error) {
             console.error("Error submitting form", error);
             setErrorMessage(
@@ -55,6 +63,7 @@ export default function ContactPage() {
                     ? error.message
                     : "Something went wrong. Please email us directly at dockfinity@gmail.com or call +91 99117 21100."
             );
+            resetTurnstile();
         } finally {
             setIsSubmitting(false);
         }
@@ -62,6 +71,10 @@ export default function ContactPage() {
 
     return (
         <>
+            {TURNSTILE_SITE_KEY && (
+                <Script src="https://challenges.cloudflare.com/turnstile/v0/api.js" strategy="lazyOnload" async defer />
+            )}
+
             {/* ── PAGE HERO ── */}
             <section className="relative pt-28 pb-14 overflow-hidden">
                 <div className="absolute inset-0 bg-grid-pattern pointer-events-none" />
@@ -170,7 +183,17 @@ export default function ContactPage() {
                                                 </div>
                                                 <div className="space-y-2">
                                                     <label htmlFor="phone" className="text-sm font-semibold text-foreground">Phone Number *</label>
-                                                    <Input id="phone" name="phone" type="tel" autoComplete="tel" placeholder="+91 9XXXXXXXXX" required className="h-12 rounded-xl border-border/60" />
+                                                    <Input
+                                                        id="phone"
+                                                        name="phone"
+                                                        type="tel"
+                                                        autoComplete="tel"
+                                                        placeholder="+91 9XXXXXXXXX"
+                                                        required
+                                                        pattern="^[+]?[0-9\s\-]{10,15}$"
+                                                        title="Enter a valid phone number, e.g. +91 98765 43210"
+                                                        className="h-12 rounded-xl border-border/60"
+                                                    />
                                                 </div>
                                             </div>
 
@@ -214,9 +237,15 @@ export default function ContactPage() {
                                                     placeholder="Tell us about your project, requirement, or question..."
                                                     rows={5}
                                                     required
+                                                    minLength={10}
+                                                    title="Please enter at least 10 characters"
                                                     className="resize-none rounded-xl border-border/60"
                                                 />
                                             </div>
+
+                                            {TURNSTILE_SITE_KEY && (
+                                                <div className="cf-turnstile" data-sitekey={TURNSTILE_SITE_KEY} data-theme="auto" />
+                                            )}
 
                                             <Button
                                                 type="submit"

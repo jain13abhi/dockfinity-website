@@ -5,6 +5,7 @@ import { google } from 'googleapis'
 
 const NOTIFY_EMAIL = 'dockfinity@gmail.com'
 const SHEET_TAB = process.env.GOOGLE_SHEET_TAB_NAME || 'Sheet1'
+const PHONE_DIGITS_PATTERN = /^\d{10}$/
 
 type ContactSubmission = {
     name: string
@@ -24,6 +25,20 @@ export async function submitContactForm(formData: FormData) {
     if (!name || !email || !phone || !message || !subject) {
         throw new Error('Please fill in all required fields.')
     }
+
+    let phoneDigits = phone.replace(/\D/g, '')
+    if (phoneDigits.length === 12 && phoneDigits.startsWith('91')) {
+        phoneDigits = phoneDigits.slice(2)
+    }
+    if (!PHONE_DIGITS_PATTERN.test(phoneDigits)) {
+        throw new Error('Please enter a valid phone number.')
+    }
+
+    if (message.length < 10) {
+        throw new Error('Please enter a message with at least 10 characters.')
+    }
+
+    await verifyTurnstile(String(formData.get('cf-turnstile-response') ?? ''))
 
     const submission: ContactSubmission = { name, email, phone, subject, message }
 
@@ -47,6 +62,29 @@ export async function submitContactForm(formData: FormData) {
     }
 
     return { success: true }
+}
+
+async function verifyTurnstile(token: string) {
+    const secretKey = process.env.TURNSTILE_SECRET_KEY
+    if (!secretKey) {
+        // Not configured yet — skip rather than break the form for every visitor.
+        return
+    }
+
+    if (!token) {
+        throw new Error('Please complete the verification challenge and try again.')
+    }
+
+    const response = await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams({ secret: secretKey, response: token }),
+    })
+
+    const result = await response.json()
+    if (!result.success) {
+        throw new Error('Verification failed. Please try again.')
+    }
 }
 
 async function sendNotificationEmail({ name, email, phone, subject, message }: ContactSubmission) {
