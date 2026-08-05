@@ -26,7 +26,7 @@ export default function DockwareLabsSubdomainPage() {
               <div className="w-12 h-12 rounded-2xl bg-blue-500/10 border border-blue-500/30 flex items-center justify-center shadow-lg shadow-blue-500/10">
                 <Cpu className="w-6 h-6 text-blue-500" />
               </div>
-              <span className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-mono font-semibold uppercase tracking-widest bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+              <span className="inline-flex items-center px-3.5 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
                 Enterprise Software · Apps · Automation · Support
               </span>
             </div>
@@ -40,7 +40,7 @@ export default function DockwareLabsSubdomainPage() {
             </h1>
 
             {/* Sub-line naming the 5 business lines */}
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl leading-relaxed font-light mb-8">
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl leading-relaxed font-normal mb-8">
               Dockware Labs is Dockfinity&apos;s technology arm. We architect custom enterprise software, mobile apps, automation pipelines, IoT hardware systems, managed IT support, and high-performance digital presence.
             </p>
 
@@ -64,16 +64,16 @@ export default function DockwareLabsSubdomainPage() {
             </div>
 
             {/* Live System Telemetry Strip */}
-            <div className="mt-12 flex flex-wrap items-center gap-4 text-xs font-mono text-muted-foreground">
-              <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-card/80 backdrop-blur-sm border border-border">
+            <div className="mt-12 flex flex-wrap items-center gap-4 text-xs font-mono font-medium text-muted-foreground">
+              <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-card/80 backdrop-blur-sm border border-border/80 text-foreground">
                 <ShieldCheck className="w-4 h-4 text-blue-500 shrink-0" />
                 <span>ISO 27001:2022 Certified</span>
               </div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-card/80 backdrop-blur-sm border border-border">
+              <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-card/80 backdrop-blur-sm border border-border/80 text-foreground">
                 <Activity className="w-4 h-4 text-emerald-500 shrink-0" />
                 <span>SLA-Backed Systems Support</span>
               </div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-card/80 backdrop-blur-sm border border-border">
+              <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-card/80 backdrop-blur-sm border border-border/80 text-foreground">
                 <Terminal className="w-4 h-4 text-blue-500 shrink-0" />
                 <span>Custom Architecture Stack</span>
               </div>

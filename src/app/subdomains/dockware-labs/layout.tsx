@@ -1,22 +1,6 @@
 import "@/app/globals.css";
-import { Inter, Syne, JetBrains_Mono } from "next/font/google";
 import { DockwareNav } from "@/components/dockware-labs/nav";
 import { DockwareFooter } from "@/components/dockware-labs/footer";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
-
-const syne = Syne({
-  subsets: ["latin"],
-  variable: "--font-display",
-});
-
-const jetbrains = JetBrains_Mono({
-  subsets: ["latin"],
-  variable: "--font-mono",
-});
 
 export const metadata = {
   title: "Dockware Labs | Technology & Software Division of Dockfinity",
@@ -37,9 +21,7 @@ export default function DockwareLabsSubdomainLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div
-      className={`${inter.variable} ${syne.variable} ${jetbrains.variable} font-sans bg-background text-foreground min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white`}
-    >
+    <div className="font-sans bg-background text-foreground min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white">
       <DockwareNav />
       <main className="flex-1 pt-20">{children}</main>
       <DockwareFooter />

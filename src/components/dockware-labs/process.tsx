@@ -34,7 +34,7 @@ export function DockwareProcess() {
           <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
             How We Work
           </h2>
-          <p className="text-muted-foreground font-light">
+          <p className="text-muted-foreground font-normal leading-relaxed text-base">
             Pragmatic software engineering focused on reliability, security, and measurable outcomes.
           </p>
         </div>
@@ -45,13 +45,13 @@ export function DockwareProcess() {
               key={s.step}
               className="p-7 rounded-2xl bg-card/75 backdrop-blur-md border border-border/80 relative group hover:border-blue-500/40 transition-all duration-300 shadow-sm"
             >
-              <div className="font-mono text-5xl font-bold text-blue-500/20 group-hover:text-blue-500/40 transition-colors mb-4">
+              <div className="font-mono text-5xl font-bold text-blue-500/25 group-hover:text-blue-500/40 transition-colors mb-4">
                 {s.step}
               </div>
-              <h3 className="font-display text-lg font-bold text-foreground mb-2">
+              <h3 className="font-display text-lg font-bold tracking-tight text-foreground mb-2">
                 {s.title}
               </h3>
-              <p className="text-sm text-muted-foreground leading-relaxed font-light">
+              <p className="text-sm text-muted-foreground leading-relaxed font-normal">
                 {s.desc}
               </p>
             </div>

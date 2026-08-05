@@ -42,7 +42,7 @@ const PILLARS = [
   },
   {
     id: "digital-presence",
-    layerCode: "04 // INTERACTION LAYER",
+    layerCode: "05 // INTERACTION LAYER",
     title: "Digital Presence & Experiences",
     icon: Globe,
     desc: "Custom website design and digital brand platforms that give enterprise capabilities a high-credibility digital storefront. High-performance, SEO-optimized, and conversion-focused.",
@@ -66,7 +66,7 @@ export function DockwarePillars({ onPillarHover }: PillarsProps) {
           <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-6">
             Five Capabilities.<br />One Focused Technology Arm.
           </h2>
-          <p className="text-lg text-muted-foreground leading-relaxed font-light">
+          <p className="text-lg text-muted-foreground leading-relaxed font-normal">
             Dockware Labs delivers complete technical scope — from backend ERP databases and custom mobile apps to smart automation, security support, and digital web presence.
           </p>
         </div>
@@ -83,10 +83,10 @@ export function DockwarePillars({ onPillarHover }: PillarsProps) {
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
-                    <span className="text-[11px] font-mono text-blue-500 font-medium">
+                    <span className="text-[11px] font-mono text-blue-500 font-semibold tracking-wider">
                       {p.layerCode}
                     </span>
-                    <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20">
+                    <span className="text-[10px] font-mono uppercase tracking-wider px-2.5 py-1 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 font-semibold">
                       {p.badge}
                     </span>
                   </div>
@@ -95,10 +95,10 @@ export function DockwarePillars({ onPillarHover }: PillarsProps) {
                     <IconComponent className="w-6 h-6 text-blue-500" />
                   </div>
 
-                  <h3 className="font-display text-xl font-bold text-foreground mb-3 group-hover:text-blue-500 transition-colors">
+                  <h3 className="font-display text-xl font-bold text-foreground tracking-tight mb-3 group-hover:text-blue-500 transition-colors">
                     {p.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed mb-6 font-light">
+                  <p className="text-sm text-muted-foreground leading-relaxed font-normal mb-6">
                     {p.desc}
                   </p>
                 </div>
@@ -108,7 +108,7 @@ export function DockwarePillars({ onPillarHover }: PillarsProps) {
                     {p.capabilities.map((cap) => (
                       <span
                         key={cap}
-                        className="text-[11px] font-mono text-muted-foreground bg-secondary/80 px-2.5 py-1 rounded-md border border-border/50"
+                        className="text-[11px] font-mono font-medium tracking-wide text-foreground bg-secondary/90 px-2.5 py-1 rounded-md border border-border/60"
                       >
                         {cap}
                       </span>
