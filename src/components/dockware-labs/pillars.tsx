@@ -1,7 +1,7 @@
 "use client";
 
 import { Container } from "@/components/ui/container";
-import { Server, Smartphone, Cpu, LifeBuoy, Globe } from "lucide-react";
+import { Server, Smartphone, Cpu, LifeBuoy, Globe, ArrowRight } from "lucide-react";
 
 const PILLARS = [
   {
@@ -53,9 +53,10 @@ const PILLARS = [
 
 interface PillarsProps {
   onPillarHover: (index: number | null) => void;
+  onPillarSelect?: (pillarId: string) => void;
 }
 
-export function DockwarePillars({ onPillarHover }: PillarsProps) {
+export function DockwarePillars({ onPillarHover, onPillarSelect }: PillarsProps) {
   return (
     <section id="services" className="py-20 relative">
       <Container>
@@ -67,7 +68,7 @@ export function DockwarePillars({ onPillarHover }: PillarsProps) {
             Five Capabilities.<br />One Focused Technology Arm.
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed font-normal">
-            Dockware Labs delivers complete technical scope — from backend ERP databases and custom mobile apps to smart automation, security support, and digital web presence.
+            Dockware Labs delivers complete technical scope. Click any pillar below to inspect deep-dive architecture specs, deliverables, and SLAs.
           </p>
         </div>
 
@@ -77,9 +78,10 @@ export function DockwarePillars({ onPillarHover }: PillarsProps) {
             return (
               <div
                 key={p.id}
+                onClick={() => onPillarSelect?.(p.id)}
                 onMouseEnter={() => onPillarHover(idx)}
                 onMouseLeave={() => onPillarHover(null)}
-                className="group relative p-8 rounded-2xl bg-card/75 backdrop-blur-md border border-border/80 hover:border-blue-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 flex flex-col justify-between"
+                className="group cursor-pointer relative p-8 rounded-2xl bg-card/75 backdrop-blur-md border border-border/80 hover:border-blue-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
@@ -95,8 +97,9 @@ export function DockwarePillars({ onPillarHover }: PillarsProps) {
                     <IconComponent className="w-6 h-6 text-blue-500" />
                   </div>
 
-                  <h3 className="font-display text-xl font-bold text-foreground tracking-tight mb-3 group-hover:text-blue-500 transition-colors">
-                    {p.title}
+                  <h3 className="font-display text-xl font-bold text-foreground tracking-tight mb-3 group-hover:text-blue-500 transition-colors flex items-center justify-between">
+                    <span>{p.title}</span>
+                    <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-blue-500" />
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed font-normal mb-6">
                     {p.desc}
@@ -114,6 +117,9 @@ export function DockwarePillars({ onPillarHover }: PillarsProps) {
                       </span>
                     ))}
                   </div>
+                  <span className="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-blue-500 mt-4 group-hover:underline">
+                    Inspect Architectural Specs →
+                  </span>
                 </div>
               </div>
             );

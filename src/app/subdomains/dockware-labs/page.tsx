@@ -5,17 +5,28 @@ import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { TechBackground } from "@/components/dockware-labs/tech-background";
 import { DockwarePillars } from "@/components/dockware-labs/pillars";
+import { PillarDrawer } from "@/components/dockware-labs/pillar-drawer";
+import { SampleAppsShowcase } from "@/components/dockware-labs/sample-apps-showcase";
+import { ArchitectureConfigurator } from "@/components/dockware-labs/architecture-configurator";
+import { TechStackMatrix } from "@/components/dockware-labs/tech-stack-matrix";
 import { DockwareProcess } from "@/components/dockware-labs/process";
 import { DockwareEnquiry } from "@/components/dockware-labs/enquiry-section";
 import { Cpu, ArrowRight, ShieldCheck, Activity, Terminal } from "lucide-react";
 
 export default function DockwareLabsSubdomainPage() {
   const [activePillarIndex, setActivePillarIndex] = useState<number | null>(null);
+  const [selectedPillarId, setSelectedPillarId] = useState<string | null>(null);
 
   return (
     <div className="relative min-h-screen">
       {/* Viewport-wide Full Page Background Interactive Motion Engine */}
       <TechBackground activePillarIndex={activePillarIndex} />
+
+      {/* Slide-over Deep-Dive Drawer for Selected Pillar */}
+      <PillarDrawer
+        pillarId={selectedPillarId}
+        onClose={() => setSelectedPillarId(null)}
+      />
 
       {/* ── HERO SECTION ── */}
       <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 min-h-[85vh] flex items-center z-10">
@@ -82,9 +93,27 @@ export default function DockwareLabsSubdomainPage() {
         </Container>
       </section>
 
-      {/* ── 5 SERVICE PILLARS ── */}
+      {/* ── 5 SERVICE PILLARS (CLICKABLE TO OPEN DEEP-DIVE DRAWERS) ── */}
       <div className="relative z-10">
-        <DockwarePillars onPillarHover={setActivePillarIndex} />
+        <DockwarePillars
+          onPillarHover={setActivePillarIndex}
+          onPillarSelect={(pillarId) => setSelectedPillarId(pillarId)}
+        />
+      </div>
+
+      {/* ── INTERACTIVE SAMPLE APPS SHOWCASE ── */}
+      <div className="relative z-10">
+        <SampleAppsShowcase />
+      </div>
+
+      {/* ── SYSTEM ARCHITECTURE CONFIGURATOR TOOL ── */}
+      <div className="relative z-10">
+        <ArchitectureConfigurator />
+      </div>
+
+      {/* ── PROVEN TECH STACK MATRIX ── */}
+      <div className="relative z-10">
+        <TechStackMatrix />
       </div>
 
       {/* ── HOW WE WORK ── */}
