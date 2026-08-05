@@ -25,16 +25,16 @@ const STAGES = [
 
 export function DockwareProcess() {
   return (
-    <section id="process" className="py-20 bg-[#070a10] relative">
+    <section id="process" className="py-20 bg-background relative">
       <Container>
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <p className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-blue-400 mb-3">
+          <p className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-blue-500 mb-3">
             Execution Methodology
           </p>
-          <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight text-white mb-4">
+          <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
             How We Work
           </h2>
-          <p className="text-slate-400 font-light">
+          <p className="text-muted-foreground font-light">
             Pragmatic software engineering focused on reliability, security, and measurable outcomes.
           </p>
         </div>
@@ -43,15 +43,15 @@ export function DockwareProcess() {
           {STAGES.map((s) => (
             <div
               key={s.step}
-              className="p-7 rounded-2xl bg-[#0b0f19] border border-slate-800/60 relative group hover:border-blue-500/40 transition-all duration-300"
+              className="p-7 rounded-2xl bg-card border border-border relative group hover:border-blue-500/40 transition-all duration-300 shadow-sm"
             >
               <div className="font-mono text-5xl font-bold text-blue-500/20 group-hover:text-blue-500/40 transition-colors mb-4">
                 {s.step}
               </div>
-              <h3 className="font-display text-lg font-bold text-white mb-2">
+              <h3 className="font-display text-lg font-bold text-foreground mb-2">
                 {s.title}
               </h3>
-              <p className="text-sm text-slate-400 leading-relaxed font-light">
+              <p className="text-sm text-muted-foreground leading-relaxed font-light">
                 {s.desc}
               </p>
             </div>

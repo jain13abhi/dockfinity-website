@@ -38,7 +38,7 @@ export default function DockwareLabsSubdomainLayout({
 }) {
   return (
     <div
-      className={`${inter.variable} ${syne.variable} ${jetbrains.variable} font-sans bg-[#090d14] text-slate-100 min-h-screen flex flex-col antialiased dark`}
+      className={`${inter.variable} ${syne.variable} ${jetbrains.variable} font-sans bg-background text-foreground min-h-screen flex flex-col antialiased selection:bg-blue-600 selection:text-white`}
     >
       <DockwareNav />
       <main className="flex-1 pt-20">{children}</main>
