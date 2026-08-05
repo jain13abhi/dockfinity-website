@@ -2,15 +2,25 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { SUBDOMAINS, getSubdomainFromHost } from "@/lib/subdomains";
 
+export function proxy(req: NextRequest) {
+  return handleRouting(req);
+}
+
 export function middleware(req: NextRequest) {
+  return handleRouting(req);
+}
+
+function handleRouting(req: NextRequest) {
   const url = req.nextUrl.clone();
-  const host = req.headers.get("x-forwarded-host") || req.headers.get("host");
+  
+  // Direct Hostname from NextRequest or Headers (Vercel Edge Compatible)
+  const host = req.nextUrl.hostname || req.headers.get("x-forwarded-host") || req.headers.get("host");
 
   // Skip static assets, internal Next.js paths, and public files
   if (
     url.pathname.startsWith("/_next") ||
     url.pathname.startsWith("/api") ||
-    url.pathname.includes(".") // e.g. favicon.ico, images, icons
+    url.pathname.includes(".")
   ) {
     return NextResponse.next();
   }
@@ -32,7 +42,6 @@ export function middleware(req: NextRequest) {
   );
 
   if (legacySubdomain && !activeSubdomainKey) {
-    // Redirect to subdomain
     const targetHost = process.env.NODE_ENV === "production"
       ? `${legacySubdomain.id}.dockfinity.com`
       : `${legacySubdomain.id}.localhost:3000`;
@@ -46,12 +55,6 @@ export function middleware(req: NextRequest) {
 
 export const config = {
   matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
     "/((?!_next/static|_next/image|favicon.ico).*)",
   ],
 };

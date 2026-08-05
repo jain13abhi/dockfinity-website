@@ -5,14 +5,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
-import { Header } from "@/components/layout/header";
-import { Footer } from "@/components/layout/footer";
 
-// Seeds the theme localStorage key from the visitor's local clock before
-// next-themes' own script runs, so a first-time visitor (no stored
-// preference yet) gets dark ~7pm-7am and light otherwise — the manual
-// toggle still always wins from that point on, exactly like it already
-// overrides the OS-preference default. Never touches an existing choice.
 const THEME_TIME_SEED_SCRIPT = `
 (function () {
   try {
@@ -24,7 +17,6 @@ const THEME_TIME_SEED_SCRIPT = `
 })();
 `;
 
-// Display / Heading Font — Syne (bold, distinctive, modern)
 const syne = Syne({
   subsets: ['latin'],
   variable: '--font-display',
@@ -32,14 +24,12 @@ const syne = Syne({
   weight: ['400', '500', '600', '700', '800'],
 });
 
-// Body Font — Inter (clean, readable)
 const inter = Inter({
   subsets: ['latin'],
   variable: '--font-sans',
   display: 'swap',
 });
 
-// Mono Font — JetBrains Mono (labels, code, badges)
 const jetbrainsMono = JetBrains_Mono({
   subsets: ['latin'],
   variable: '--font-mono',
@@ -118,13 +108,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="relative flex flex-col min-h-screen">
-            <Header />
-            <main className="flex-grow pt-20">
-              {children}
-            </main>
-            <Footer />
-          </div>
+          {children}
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />
