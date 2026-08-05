@@ -31,7 +31,7 @@ export function TechBackground({ activePillarIndex }: TechBackgroundProps) {
 
     window.addEventListener("resize", handleResize);
 
-    // Mouse coordinates with spring physics
+    // Mouse coordinates with smooth lerp
     let mouseX = width / 2;
     let mouseY = height / 3;
     let targetMouseX = width / 2;
@@ -53,30 +53,19 @@ export function TechBackground({ activePillarIndex }: TechBackgroundProps) {
 
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
 
-    // Grid config
-    const gridSize = 64;
-    const gridCols = Math.ceil(width / gridSize) + 2;
-    const gridRows = Math.ceil(height / gridSize) + 2;
+    // Precision Architectural Grid Config
+    const gridSize = 72;
+    const gridCols = Math.ceil(width / gridSize) + 1;
+    const gridRows = Math.ceil(height / gridSize) + 1;
 
-    // Ambient floating structural nodes
-    const nodeCount = 35;
-    const nodes = Array.from({ length: nodeCount }, () => ({
-      x: Math.random() * width,
-      y: Math.random() * height,
-      vx: (Math.random() - 0.5) * 0.4,
-      vy: (Math.random() - 0.5) * 0.4,
-      radius: 1.5 + Math.random() * 2,
-      alpha: 0.2 + Math.random() * 0.5,
-    }));
-
-    // Data pulse waves along grid
-    const pulseCount = 12;
-    const pulses = Array.from({ length: pulseCount }, () => ({
+    // Structured Data Packets moving strictly on Orthogonal Axes
+    const packetCount = 14;
+    const packets = Array.from({ length: packetCount }, () => ({
       col: Math.floor(Math.random() * gridCols),
       row: Math.floor(Math.random() * gridRows),
-      dir: Math.random() > 0.5 ? "horizontal" : "vertical",
+      axis: Math.random() > 0.5 ? "X" : "Y",
       progress: Math.random(),
-      speed: 0.003 + Math.random() * 0.005,
+      speed: 0.004 + Math.random() * 0.006,
     }));
 
     let time = 0;
@@ -84,143 +73,119 @@ export function TechBackground({ activePillarIndex }: TechBackgroundProps) {
     const render = () => {
       time += 0.015;
 
-      // Mouse smooth lerp
-      mouseX += (targetMouseX - mouseX) * 0.06;
-      mouseY += (targetMouseY - mouseY) * 0.06;
+      mouseX += (targetMouseX - mouseX) * 0.07;
+      mouseY += (targetMouseY - mouseY) * 0.07;
 
       ctx.clearRect(0, 0, width, height);
 
-      // --- 1. AMBIENT VIEWPORT RADIAL GLOW ---
+      // --- 1. AMBIENT BACKGROUND SUBTLE GRADIENT ---
       if (isDark) {
-        // Dark Mode: Deep Midnight ambient aura
-        const primaryGlow = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, Math.max(width, height) * 0.5);
-        primaryGlow.addColorStop(0, "rgba(37, 99, 235, 0.12)");
-        primaryGlow.addColorStop(0.5, "rgba(15, 23, 42, 0.05)");
-        primaryGlow.addColorStop(1, "rgba(9, 13, 20, 0)");
-        ctx.fillStyle = primaryGlow;
+        const bgGrad = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, Math.max(width, height) * 0.5);
+        bgGrad.addColorStop(0, "rgba(37, 99, 235, 0.09)");
+        bgGrad.addColorStop(0.6, "rgba(15, 23, 42, 0.04)");
+        bgGrad.addColorStop(1, "rgba(9, 13, 20, 0)");
+        ctx.fillStyle = bgGrad;
         ctx.fillRect(0, 0, width, height);
       } else {
-        // Light Mode: Clean Titanium Slate glow with subtle cobalt aura around mouse
-        const lightGlow = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, Math.max(width, height) * 0.45);
-        lightGlow.addColorStop(0, "rgba(37, 99, 235, 0.06)");
-        lightGlow.addColorStop(0.6, "rgba(241, 245, 249, 0.02)");
-        lightGlow.addColorStop(1, "rgba(248, 250, 252, 0)");
-        ctx.fillStyle = lightGlow;
+        const bgGrad = ctx.createRadialGradient(mouseX, mouseY, 0, mouseX, mouseY, Math.max(width, height) * 0.4);
+        bgGrad.addColorStop(0, "rgba(37, 99, 235, 0.05)");
+        bgGrad.addColorStop(0.7, "rgba(248, 250, 252, 0)");
+        ctx.fillStyle = bgGrad;
         ctx.fillRect(0, 0, width, height);
       }
 
-      // --- 2. FULL-PAGE SYSTEM GRID ARCHITECTURE ---
-      const gridStroke = isDark
+      // --- 2. ORTHOGONAL SYSTEM GRID LINES ---
+      const baseLineColor = isDark
         ? "rgba(148, 163, 184, 0.07)"
         : "rgba(71, 85, 105, 0.06)";
-      const highlightGridStroke = isDark
-        ? "rgba(59, 130, 246, 0.35)"
-        : "rgba(37, 99, 235, 0.25)";
+      const highlightLineColor = isDark
+        ? "rgba(59, 130, 246, 0.28)"
+        : "rgba(37, 99, 235, 0.22)";
 
       ctx.lineWidth = 1;
 
-      // Draw Grid Verticals
+      // Vertical Grid Lines
       for (let c = 0; c <= gridCols; c++) {
-        const gx = c * gridSize;
+        const x = c * gridSize;
         ctx.beginPath();
-        ctx.strokeStyle = gridStroke;
-
-        for (let r = 0; r <= gridRows; r++) {
-          const gy = r * gridSize;
-
-          // Warp grid point near mouse
-          const dx = gx - mouseX;
-          const dy = gy - mouseY;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const warpRadius = 220;
-
-          let finalX = gx;
-          let finalY = gy;
-
-          if (dist < warpRadius && mouseActive) {
-            const factor = (1 - dist / warpRadius) * 12;
-            finalX += (dx / dist) * factor;
-            finalY += (dy / dist) * factor;
-          }
-
-          if (r === 0) {
-            ctx.moveTo(finalX, finalY);
-          } else {
-            ctx.lineTo(finalX, finalY);
-          }
-        }
+        ctx.strokeStyle = baseLineColor;
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, height);
         ctx.stroke();
       }
 
-      // Draw Grid Horizontals
+      // Horizontal Grid Lines
       for (let r = 0; r <= gridRows; r++) {
-        const gy = r * gridSize;
+        const y = r * gridSize;
         ctx.beginPath();
-        ctx.strokeStyle = gridStroke;
-
-        for (let c = 0; c <= gridCols; c++) {
-          const gx = c * gridSize;
-
-          const dx = gx - mouseX;
-          const dy = gy - mouseY;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          const warpRadius = 220;
-
-          let finalX = gx;
-          let finalY = gy;
-
-          if (dist < warpRadius && mouseActive) {
-            const factor = (1 - dist / warpRadius) * 12;
-            finalX += (dx / dist) * factor;
-            finalY += (dy / dist) * factor;
-          }
-
-          if (c === 0) {
-            ctx.moveTo(finalX, finalY);
-          } else {
-            ctx.lineTo(finalX, finalY);
-          }
-        }
+        ctx.strokeStyle = baseLineColor;
+        ctx.moveTo(0, y);
+        ctx.lineTo(width, y);
         ctx.stroke();
       }
 
-      // --- 3. CURSOR REACTION RINGS & MOUSE GLOW ---
+      // --- 3. PRECISION CROSSHAIRS (+) AT INTERSECTIONS & MOUSE HIGHLIGHT ---
+      const crossSize = 3.5;
+      const crossColor = isDark
+        ? "rgba(148, 163, 184, 0.22)"
+        : "rgba(100, 116, 139, 0.25)";
+
+      for (let c = 0; c <= gridCols; c++) {
+        for (let r = 0; r <= gridRows; r++) {
+          const x = c * gridSize;
+          const y = r * gridSize;
+
+          const dx = x - mouseX;
+          const dy = y - mouseY;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          const activeRadius = 180;
+
+          const isNearMouse = dist < activeRadius && mouseActive;
+
+          ctx.save();
+          ctx.beginPath();
+          ctx.strokeStyle = isNearMouse ? highlightLineColor : crossColor;
+          ctx.lineWidth = isNearMouse ? 1.5 : 0.8;
+
+          // Horizontal bar of +
+          ctx.moveTo(x - crossSize, y);
+          ctx.lineTo(x + crossSize, y);
+          // Vertical bar of +
+          ctx.moveTo(x, y - crossSize);
+          ctx.lineTo(x, y + crossSize);
+          ctx.stroke();
+          ctx.restore();
+        }
+      }
+
+      // --- 4. MOUSE CURSOR TARGET ALIGNMENT FRAME ---
       if (mouseActive) {
         ctx.save();
-        ctx.beginPath();
-        ctx.arc(mouseX, mouseY, 160, 0, Math.PI * 2);
-        ctx.strokeStyle = isDark ? "rgba(59, 130, 246, 0.18)" : "rgba(37, 99, 235, 0.12)";
-        ctx.lineWidth = 1.5;
-        ctx.setLineDash([6, 6]);
-        ctx.stroke();
+        // Mouse coordinate crosshair
+        const snapX = Math.round(mouseX / gridSize) * gridSize;
+        const snapY = Math.round(mouseY / gridSize) * gridSize;
 
+        // Snapped grid target square
+        ctx.strokeStyle = isDark ? "rgba(59, 130, 246, 0.35)" : "rgba(37, 99, 235, 0.25)";
+        ctx.lineWidth = 1;
+        ctx.strokeRect(snapX - gridSize / 2, snapY - gridSize / 2, gridSize, gridSize);
+
+        // Center reticle
         ctx.beginPath();
-        ctx.arc(mouseX, mouseY, 4, 0, Math.PI * 2);
+        ctx.arc(mouseX, mouseY, 3, 0, Math.PI * 2);
         ctx.fillStyle = isDark ? "#60a5fa" : "#2563eb";
         ctx.shadowColor = isDark ? "#3b82f6" : "#2563eb";
-        ctx.shadowBlur = 10;
+        ctx.shadowBlur = 8;
         ctx.fill();
         ctx.restore();
       }
 
-      // --- 4. PILLAR CARD HOVER HIGHLIGHT ENGINES ---
+      // --- 5. CARD HOVER LAYER HIGHLIGHT ---
       if (activePillarIndex !== undefined && activePillarIndex !== null) {
         const pillarYRatio = 0.35 + activePillarIndex * 0.12;
         const targetY = height * pillarYRatio;
 
         ctx.save();
-        const pillarGlow = ctx.createRadialGradient(width / 2, targetY, 0, width / 2, targetY, 450);
-        if (isDark) {
-          pillarGlow.addColorStop(0, "rgba(59, 130, 246, 0.18)");
-          pillarGlow.addColorStop(1, "rgba(9, 13, 20, 0)");
-        } else {
-          pillarGlow.addColorStop(0, "rgba(37, 99, 235, 0.08)");
-          pillarGlow.addColorStop(1, "rgba(248, 250, 252, 0)");
-        }
-        ctx.fillStyle = pillarGlow;
-        ctx.fillRect(0, 0, width, height);
-
-        // Horizontal scan line across hovered pillar height
         ctx.beginPath();
         ctx.moveTo(0, targetY);
         ctx.lineTo(width, targetY);
@@ -228,53 +193,42 @@ export function TechBackground({ activePillarIndex }: TechBackgroundProps) {
         ctx.lineWidth = 1;
         ctx.setLineDash([8, 8]);
         ctx.stroke();
+
+        ctx.font = "10px 'JetBrains Mono', monospace";
+        ctx.fillStyle = isDark ? "#60a5fa" : "#2563eb";
+        ctx.fillText(`SYSTEM PILLAR 0${activePillarIndex + 1} // ACTIVE STATE`, 32, targetY - 6);
         ctx.restore();
       }
 
-      // --- 5. CONTINUOUS DATA PULSE STREAMS ALONG GRID ---
-      pulses.forEach((p) => {
+      // --- 6. STRUCTURED DATA PACKETS ON AXES ---
+      packets.forEach((p) => {
         p.progress += p.speed;
         if (p.progress > 1) {
           p.progress = 0;
           p.col = Math.floor(Math.random() * gridCols);
           p.row = Math.floor(Math.random() * gridRows);
+          p.axis = Math.random() > 0.5 ? "X" : "Y";
         }
 
         ctx.save();
         ctx.beginPath();
-        if (p.dir === "horizontal") {
-          const px = (p.col + p.progress) * gridSize;
-          const py = p.row * gridSize;
-          ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+
+        let px = 0;
+        let py = 0;
+
+        if (p.axis === "X") {
+          px = (p.col + p.progress) * gridSize;
+          py = p.row * gridSize;
+          ctx.rect(px - 4, py - 1.5, 8, 3);
         } else {
-          const px = p.col * gridSize;
-          const py = (p.row + p.progress) * gridSize;
-          ctx.arc(px, py, 2.5, 0, Math.PI * 2);
+          px = p.col * gridSize;
+          py = (p.row + p.progress) * gridSize;
+          ctx.rect(px - 1.5, py - 4, 3, 8);
         }
 
-        ctx.fillStyle = isDark ? "#60a5fa" : "#2563eb";
+        ctx.fillStyle = isDark ? "rgba(96, 165, 250, 0.85)" : "rgba(37, 99, 235, 0.85)";
         ctx.shadowColor = isDark ? "#3b82f6" : "#2563eb";
-        ctx.shadowBlur = 8;
-        ctx.fill();
-        ctx.restore();
-      });
-
-      // --- 6. FLOATING AMBIENT STRUCTURAL NODES ---
-      nodes.forEach((n) => {
-        n.x += n.vx;
-        n.y += n.vy;
-
-        if (n.x < 0) n.x = width;
-        if (n.x > width) n.x = 0;
-        if (n.y < 0) n.y = height;
-        if (n.y > height) n.y = 0;
-
-        ctx.save();
-        ctx.beginPath();
-        ctx.arc(n.x, n.y, n.radius, 0, Math.PI * 2);
-        ctx.fillStyle = isDark
-          ? `rgba(148, 163, 184, ${n.alpha * 0.4})`
-          : `rgba(71, 85, 105, ${n.alpha * 0.3})`;
+        ctx.shadowBlur = 6;
         ctx.fill();
         ctx.restore();
       });

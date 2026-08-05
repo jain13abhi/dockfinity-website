@@ -36,7 +36,7 @@ export function DockwareNav() {
               Dockware <span className="text-blue-500">Labs</span>
             </span>
             <span className="text-[10px] font-mono tracking-wider uppercase text-muted-foreground">
-              Technology Division
+              Technology Arm of Dockfinity
             </span>
           </div>
         </Link>
@@ -45,33 +45,48 @@ export function DockwareNav() {
         <nav className="hidden md:flex items-center gap-8">
           <a
             href="#services"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors font-sans"
           >
             Services & Pillars
           </a>
           <a
             href="#process"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors font-sans"
           >
             How We Work
           </a>
           <a
             href="#contact"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors font-sans"
           >
             Contact
           </a>
 
           <div className="h-4 w-px bg-border" />
 
-          {/* Direct Link Back to Main Dockfinity Site */}
+          {/* Official Dockfinity Brand Link with Emblem Logo */}
           <a
             href="https://dockfinity.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-mono tracking-wider uppercase text-muted-foreground hover:text-blue-500 flex items-center gap-1 transition-colors"
+            className="text-xs font-mono tracking-wider uppercase text-muted-foreground hover:text-blue-500 flex items-center gap-2 px-3 py-1.5 rounded-lg bg-secondary/60 hover:bg-secondary border border-border transition-all"
           >
-            dockfinity.com <ArrowUpRight className="w-3.5 h-3.5" />
+            {/* Dockfinity Emblem Mark */}
+            <svg
+              className="w-4 h-4 text-brand dark:text-brand"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <rect x="3" y="3" width="18" height="18" rx="4" />
+              <path d="M7 12h10" />
+              <path d="M12 7v10" />
+            </svg>
+            <span className="font-display text-xs font-bold text-foreground">Dockfinity.com</span>
+            <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground" />
           </a>
 
           <ThemeToggle />
@@ -125,7 +140,7 @@ export function DockwareNav() {
             href="https://dockfinity.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="block text-sm font-mono text-blue-500 flex items-center gap-1 pt-2 border-t border-border"
+            className="block text-sm font-mono text-blue-500 flex items-center gap-2 pt-2 border-t border-border"
           >
             Visit main site (dockfinity.com) <ArrowUpRight className="w-4 h-4" />
           </a>
