@@ -93,35 +93,34 @@ export default function DockwareLabsSubdomainPage() {
               </div>
             </div>
 
-            {/* Right Hero Column: Interactive System Telemetry Console */}
+            {/* Right Hero Column: Engineering Standards Console */}
             <div className="lg:col-span-5 bg-card border border-border rounded-3xl p-6 md:p-8 shadow-2xl space-y-5 relative overflow-hidden">
               <div className="flex items-center justify-between pb-3 border-b border-border font-mono text-xs">
                 <span className="font-bold text-foreground flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse inline-block" />
-                  DOCKWARE ARCHITECTURE TELEMETRY
+                  ENGINEERING STANDARDS & TARGETS
                 </span>
-                <span className="text-muted-foreground">LIVE</span>
+                <span className="text-muted-foreground uppercase">SPECIFICATION</span>
               </div>
 
               <div className="space-y-3 font-mono text-xs">
                 <div className="p-3.5 rounded-xl bg-secondary/80 border border-border/80 flex items-center justify-between">
-                  <span className="text-muted-foreground uppercase font-semibold">ENGINEERING SLA</span>
-                  <span className="font-bold text-emerald-600 dark:text-emerald-400">99.95% Uptime SLA</span>
+                  <span className="text-muted-foreground uppercase font-semibold">AVAILABILITY DESIGN</span>
+                  <span className="font-bold text-foreground">High Availability Architecture</span>
                 </div>
 
                 <div className="p-3.5 rounded-xl bg-secondary/80 border border-border/80 flex items-center justify-between">
                   <span className="text-muted-foreground uppercase font-semibold">SECURITY STANDARD</span>
-                  <span className="font-bold text-blue-500">ISO 27001:2022</span>
+                  <span className="font-bold text-blue-500">ISO 27001 Preparedness</span>
                 </div>
 
                 <div className="p-3.5 rounded-xl bg-secondary/80 border border-border/80 flex items-center justify-between">
                   <span className="text-muted-foreground uppercase font-semibold">MULTI-TENANCY</span>
-                  <span className="font-bold text-foreground">Strict Row-Level Partition</span>
+                  <span className="font-bold text-foreground">Row-Level Data Partitioning</span>
                 </div>
 
                 <div className="p-3.5 rounded-xl bg-secondary/80 border border-border/80 flex items-center justify-between">
-                  <span className="text-muted-foreground uppercase font-semibold">LATENCY BENCHMARK</span>
-                  <span className="font-bold text-blue-500">&lt;12ms Edge Gateway</span>
+                  <span className="text-muted-foreground uppercase font-semibold">PERFORMANCE GOAL</span>
+                  <span className="font-bold text-blue-500">Edge Network Optimization</span>
                 </div>
               </div>
 
@@ -129,7 +128,7 @@ export default function DockwareLabsSubdomainPage() {
                 <span className="flex items-center gap-1.5">
                   <Server className="w-3.5 h-3.5 text-blue-500" /> PostgreSQL / Node / Docker
                 </span>
-                <span className="text-emerald-500 font-semibold">Verified Stack</span>
+                <span className="text-blue-500 font-semibold">Production Ready</span>
               </div>
             </div>
           </div>

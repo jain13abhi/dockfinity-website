@@ -28,7 +28,7 @@ const SCALES = [
 const TOPOLOGIES: Record<string, { nodes: { id: string; name: string; type: string; icon: any }[]; summary: string; sla: string }> = {
   saas: {
     summary: "Multi-tenant SaaS topology with tenant-key data partitioning and real-time Kafka event streams.",
-    sla: "99.95% Multi-Region Availability",
+    sla: "Multi-Region High Availability",
     nodes: [
       { id: "client", name: "Headless Web / Mobile", type: "Client Layer", icon: Globe },
       { id: "gateway", name: "GraphQL & REST Gateway", type: "API Layer", icon: Server },
@@ -39,7 +39,7 @@ const TOPOLOGIES: Record<string, { nodes: { id: string; name: string; type: stri
   },
   manufacturing: {
     summary: "Edge-to-cloud IoT pipeline connecting factory sensor hardware with enterprise ERP modules.",
-    sla: "99.9% Operational Continuity SLA",
+    sla: "High-Continuity Hardware Pipeline",
     nodes: [
       { id: "client", name: "Factory Sensor Gateways", type: "Hardware Layer", icon: Cpu },
       { id: "gateway", name: "MQTT Broker & Broker", type: "Ingestion Layer", icon: Server },
@@ -50,7 +50,7 @@ const TOPOLOGIES: Record<string, { nodes: { id: string; name: string; type: stri
   },
   retail: {
     summary: "High-throughput e-commerce inventory sync engine built for sub-100ms global edge response.",
-    sla: "<100ms Global Edge Response",
+    sla: "Edge-Optimized Low Latency",
     nodes: [
       { id: "client", name: "Next.js PWA Storefront", type: "Client Layer", icon: Globe },
       { id: "gateway", name: "Cloudflare Edge Workers", type: "API Layer", icon: Server },
@@ -61,7 +61,7 @@ const TOPOLOGIES: Record<string, { nodes: { id: string; name: string; type: stri
   },
   logistics: {
     summary: "Geospatial fleet routing system with offline mobile sync engine and real-time GPS streaming.",
-    sla: "100% Offline-First Client Guarantee",
+    sla: "Offline-First Reliable Sync",
     nodes: [
       { id: "client", name: "React Native Drivers App", type: "Client Layer", icon: Globe },
       { id: "gateway", name: "Websockets GPS Stream", type: "API Layer", icon: Server },

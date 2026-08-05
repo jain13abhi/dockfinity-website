@@ -78,10 +78,19 @@ export function DockwarePillars({ onPillarHover, onPillarSelect }: PillarsProps)
             return (
               <div
                 key={p.id}
+                role="button"
+                tabIndex={0}
+                aria-label={`Inspect ${p.title} architectural specifications`}
                 onClick={() => onPillarSelect?.(p.id)}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    onPillarSelect?.(p.id);
+                  }
+                }}
                 onMouseEnter={() => onPillarHover(idx)}
                 onMouseLeave={() => onPillarHover(null)}
-                className="group cursor-pointer relative p-8 rounded-2xl bg-card/75 backdrop-blur-md border border-border/80 hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-blue-500/10 flex flex-col justify-between overflow-hidden"
+                className="group cursor-pointer relative p-8 rounded-2xl bg-card/75 backdrop-blur-md border border-border/80 hover:border-blue-500/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-blue-500/10 flex flex-col justify-between overflow-hidden"
               >
                 {/* Top Glowing Shimmer Accent Line on Hover */}
                 <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />

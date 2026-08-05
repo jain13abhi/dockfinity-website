@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { X, Server, Smartphone, Cpu, LifeBuoy, Globe, CheckCircle2, ArrowRight, Shield, Zap } from "lucide-react";
 
@@ -37,7 +37,7 @@ const PILLAR_DETAILS: Record<string, PillarDetail> = {
       "ISO 27001 Security Audit & Automated CI/CD Pipelines",
     ],
     techStack: ["PostgreSQL", "Node.js", "Python FastAPI", "Redis", "Docker", "Kubernetes", "AWS / Azure"],
-    sla: "99.95% Multi-Region Availability Guarantee",
+    sla: "High-Availability Multi-Region Architecture",
   },
   "app-development": {
     id: "app-development",
@@ -59,7 +59,7 @@ const PILLAR_DETAILS: Record<string, PillarDetail> = {
       "Automated End-to-End Test Suite (Playwright/Jest)",
     ],
     techStack: ["React Native", "Next.js 16", "TypeScript", "Tailwind CSS v4", "GraphQL", "Node.js"],
-    sla: "<100ms Global Edge Response Time",
+    sla: "Edge-Optimized Low Latency Design",
   },
   "automation-iot": {
     id: "automation-iot",
@@ -81,7 +81,7 @@ const PILLAR_DETAILS: Record<string, PillarDetail> = {
       "Automated WhatsApp & Email Alert Triggers",
     ],
     techStack: ["Python", "TimescaleDB", "MQTT", "LangChain / OpenAI", "Redis Streams", "Go"],
-    sla: "Sub-Second Sensor Ingestion & Alert Dispatch",
+    sla: "Real-Time Sensor Telemetry & Alerts",
   },
   "it-consulting": {
     id: "it-consulting",
@@ -103,7 +103,7 @@ const PILLAR_DETAILS: Record<string, PillarDetail> = {
       "SLA Managed Support Agreement",
     ],
     techStack: ["AWS Security Hub", "Cloudflare WAF", "Terraform", "Prometheus / Grafana", "Docker"],
-    sla: "24/7 Monitoring with <15 Min Incident Response",
+    sla: "24/7 Monitoring & Proactive Support",
   },
   "digital-presence": {
     id: "digital-presence",
@@ -125,7 +125,7 @@ const PILLAR_DETAILS: Record<string, PillarDetail> = {
       "Resend & Turnstile Server Actions Integration",
     ],
     techStack: ["Next.js 16", "TypeScript", "Tailwind CSS v4", "Vercel Edge", "Resend API"],
-    sla: "100% Core Web Vitals Pass Rate",
+    sla: "Core Web Vitals Performance Optimization",
   },
 };
 
@@ -135,17 +135,23 @@ interface PillarDrawerProps {
 }
 
 export function PillarDrawer({ pillarId, onClose }: PillarDrawerProps) {
+  const closeButtonRef = useRef<HTMLButtonElement | null>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
+
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
     if (pillarId) {
+      previousFocusRef.current = document.activeElement as HTMLElement;
       document.body.style.overflow = "hidden";
       window.addEventListener("keydown", handleKeyDown);
+      setTimeout(() => closeButtonRef.current?.focus(), 50);
     }
     return () => {
       document.body.style.overflow = "auto";
       window.removeEventListener("keydown", handleKeyDown);
+      previousFocusRef.current?.focus();
     };
   }, [pillarId, onClose]);
 
@@ -159,8 +165,13 @@ export function PillarDrawer({ pillarId, onClose }: PillarDrawerProps) {
       {/* Click Outside Backdrop */}
       <div className="absolute inset-0" onClick={onClose} />
 
-      {/* Drawer Content Panel with Smooth Slide-In */}
-      <div className="relative z-10 w-full max-w-2xl bg-card border-l border-border h-full overflow-y-auto p-6 md:p-10 shadow-2xl flex flex-col justify-between transform transition-transform duration-300 ease-out translate-x-0">
+      {/* Drawer Content Panel with Smooth Slide-In & Dialog Semantics */}
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="pillar-drawer-title"
+        className="relative z-10 w-full max-w-2xl bg-card border-l border-border h-full overflow-y-auto p-6 md:p-10 shadow-2xl flex flex-col justify-between transform transition-transform duration-300 ease-out translate-x-0"
+      >
         <div className="space-y-8">
           {/* Header */}
           <div className="flex items-start justify-between pb-6 border-b border-border">
@@ -172,14 +183,16 @@ export function PillarDrawer({ pillarId, onClose }: PillarDrawerProps) {
                 <span className="text-xs font-mono font-bold uppercase tracking-wider text-blue-500 block">
                   Pillar Specification
                 </span>
-                <h2 className="font-display text-2xl font-bold text-foreground tracking-tight">
+                <h2 id="pillar-drawer-title" className="font-display text-2xl font-bold text-foreground tracking-tight">
                   {detail.title}
                 </h2>
               </div>
             </div>
             <button
+              ref={closeButtonRef}
               onClick={onClose}
-              className="p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+              aria-label="Close specification drawer"
+              className="p-2 rounded-xl text-muted-foreground hover:text-foreground hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 transition-colors"
             >
               <X className="w-6 h-6" />
             </button>
@@ -232,7 +245,7 @@ export function PillarDrawer({ pillarId, onClose }: PillarDrawerProps) {
           {/* Tech Stack & SLA */}
           <div className="p-4 rounded-xl bg-blue-500/10 border border-blue-500/20 space-y-3">
             <div className="flex items-center justify-between text-xs font-mono">
-              <span className="text-muted-foreground uppercase font-bold">Target Reliability SLA</span>
+              <span className="text-muted-foreground uppercase font-bold">Target Architecture Profile</span>
               <span className="font-bold text-blue-500">{detail.sla}</span>
             </div>
             <div>
