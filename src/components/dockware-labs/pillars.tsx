@@ -81,8 +81,11 @@ export function DockwarePillars({ onPillarHover, onPillarSelect }: PillarsProps)
                 onClick={() => onPillarSelect?.(p.id)}
                 onMouseEnter={() => onPillarHover(idx)}
                 onMouseLeave={() => onPillarHover(null)}
-                className="group cursor-pointer relative p-8 rounded-2xl bg-card/75 backdrop-blur-md border border-border/80 hover:border-blue-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 flex flex-col justify-between"
+                className="group cursor-pointer relative p-8 rounded-2xl bg-card/75 backdrop-blur-md border border-border/80 hover:border-blue-500/50 transition-all duration-300 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-blue-500/10 flex flex-col justify-between overflow-hidden"
               >
+                {/* Top Glowing Shimmer Accent Line on Hover */}
+                <div className="absolute top-0 inset-x-0 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
                 <div>
                   <div className="flex items-center justify-between mb-6">
                     <span className="text-[11px] font-mono text-blue-500 font-semibold tracking-wider">
@@ -93,13 +96,13 @@ export function DockwarePillars({ onPillarHover, onPillarSelect }: PillarsProps)
                     </span>
                   </div>
 
-                  <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-5 group-hover:bg-blue-500/20 group-hover:border-blue-500/40 transition-all">
+                  <div className="w-12 h-12 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center mb-5 group-hover:bg-blue-500/20 group-hover:border-blue-500/40 group-hover:scale-110 transition-all duration-300">
                     <IconComponent className="w-6 h-6 text-blue-500" />
                   </div>
 
                   <h3 className="font-display text-xl font-bold text-foreground tracking-tight mb-3 group-hover:text-blue-500 transition-colors flex items-center justify-between">
                     <span>{p.title}</span>
-                    <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all text-blue-500" />
+                    <ArrowRight className="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300 text-blue-500" />
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed font-normal mb-6">
                     {p.desc}
@@ -117,7 +120,7 @@ export function DockwarePillars({ onPillarHover, onPillarSelect }: PillarsProps)
                       </span>
                     ))}
                   </div>
-                  <span className="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-blue-500 mt-4 group-hover:underline">
+                  <span className="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-blue-500 mt-4 group-hover:translate-x-1 transition-transform duration-300">
                     Inspect Architectural Specs →
                   </span>
                 </div>

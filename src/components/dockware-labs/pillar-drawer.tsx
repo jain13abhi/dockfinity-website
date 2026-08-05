@@ -42,8 +42,8 @@ const PILLAR_DETAILS: Record<string, PillarDetail> = {
   "app-development": {
     id: "app-development",
     title: "Custom Software & App Development",
-    icon: Smartphone,
     subtitle: "High-Performance Mobile & Web Apps Built From MVP to Enterprise Scale",
+    icon: Smartphone,
     overview:
       "We build responsive web platforms and native/cross-platform mobile applications that users love. From high-concurrency B2B portals to offline-first field apps, we focus on lightning-fast load times, intuitive UX, and clean maintainable codebases.",
     deepDiveSpecs: [
@@ -64,8 +64,8 @@ const PILLAR_DETAILS: Record<string, PillarDetail> = {
   "automation-iot": {
     id: "automation-iot",
     title: "Automation & IoT Systems",
-    icon: Cpu,
     subtitle: "Autonomous AI Agents & Hardware-to-Cloud Data Pipelines",
+    icon: Cpu,
     overview:
       "Connect physical operations with cloud intelligence. We build custom workflow automation tools, autonomous AI agents, and IoT sensor gateways that stream physical telemetry straight into business dashboards and automated action queues.",
     deepDiveSpecs: [
@@ -86,8 +86,8 @@ const PILLAR_DETAILS: Record<string, PillarDetail> = {
   "it-consulting": {
     id: "it-consulting",
     title: "IT Consulting & Managed Support",
-    icon: LifeBuoy,
     subtitle: "Technical Advisory, Security Hardening & 24/7 Managed Operations",
+    icon: LifeBuoy,
     overview:
       "Protect your technical investments and eliminate operational downtime. We act as your external technical advisory team — conducting system security audits, optimizing cloud infrastructure costs, and delivering SLA-backed 24/7 managed support.",
     deepDiveSpecs: [
@@ -108,8 +108,8 @@ const PILLAR_DETAILS: Record<string, PillarDetail> = {
   "digital-presence": {
     id: "digital-presence",
     title: "Digital Presence & Web Engineering",
-    icon: Globe,
     subtitle: "Enterprise-Grade Web Platforms That Drive Measurable Conversions",
+    icon: Globe,
     overview:
       "A great digital presence is engineered, not just painted. We build custom corporate web platforms designed for speed, SEO dominance, and high-conversion user journeys. Every site is built with semantic HTML5, zero bloat, and perfect Core Web Vitals scores.",
     deepDiveSpecs: [
@@ -155,12 +155,12 @@ export function PillarDrawer({ pillarId, onClose }: PillarDrawerProps) {
   const IconComp = detail.icon;
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-sm animate-fade-in">
+    <div className="fixed inset-0 z-50 flex justify-end bg-black/60 backdrop-blur-md animate-fade-in transition-opacity duration-300">
       {/* Click Outside Backdrop */}
       <div className="absolute inset-0" onClick={onClose} />
 
-      {/* Drawer Content Panel */}
-      <div className="relative z-10 w-full max-w-2xl bg-card border-l border-border h-full overflow-y-auto p-6 md:p-10 shadow-2xl flex flex-col justify-between">
+      {/* Drawer Content Panel with Smooth Slide-In */}
+      <div className="relative z-10 w-full max-w-2xl bg-card border-l border-border h-full overflow-y-auto p-6 md:p-10 shadow-2xl flex flex-col justify-between transform transition-transform duration-300 ease-out translate-x-0">
         <div className="space-y-8">
           {/* Header */}
           <div className="flex items-start justify-between pb-6 border-b border-border">
@@ -202,7 +202,7 @@ export function PillarDrawer({ pillarId, onClose }: PillarDrawerProps) {
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               {detail.deepDiveSpecs.map((spec) => (
-                <div key={spec.title} className="p-4 rounded-xl bg-secondary/70 border border-border/80 space-y-1">
+                <div key={spec.title} className="p-4 rounded-xl bg-secondary/70 border border-border/80 space-y-1 hover:border-blue-500/40 transition-colors">
                   <span className="font-display text-sm font-bold text-foreground block">
                     {spec.title}
                   </span>

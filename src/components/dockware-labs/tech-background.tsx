@@ -7,7 +7,7 @@ interface TechBackgroundProps {
 export function TechBackground({ activePillarIndex }: TechBackgroundProps) {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none z-0">
-      {/* Clean Subtle Grid Pattern */}
+      {/* Clean Ambient SVG Grid Pattern */}
       <div
         className="absolute inset-0 opacity-[0.04] dark:opacity-[0.07] bg-repeat"
         style={{

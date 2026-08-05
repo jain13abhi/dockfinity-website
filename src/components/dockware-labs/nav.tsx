@@ -70,7 +70,7 @@ export function DockwareNav() {
             href="https://dockfinity.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-mono tracking-wider uppercase text-muted-foreground hover:text-blue-500 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-secondary/80 hover:bg-secondary border border-border/80 transition-all shadow-xs"
+            className="text-xs font-mono tracking-wider uppercase text-muted-foreground hover:text-blue-500 flex items-center gap-2 transition-colors py-1"
           >
             <Image
               src="/logo-mark-navy.png"
