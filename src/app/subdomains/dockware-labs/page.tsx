@@ -31,7 +31,7 @@ export default function DockwareLabsSubdomainPage() {
       {/* ── HERO SECTION ── */}
       <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 min-h-[85vh] flex items-center z-10">
         <Container className="relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             {/* Left Hero Column */}
             <div className="lg:col-span-7 space-y-6">
               {/* Category Badge */}
