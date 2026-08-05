@@ -9,8 +9,7 @@
   - App Development (/verticals/dockware-labs/app-development) — web and mobile application development
   - Automation & IoT (/verticals/dockware-labs/automation-iot) — workflow automation, AI agents, IoT and smart hardware, process monitoring
   - IT Consulting & Managed Support (/verticals/dockware-labs/it-consulting) — technical advisory, managed IT support, system audits, vendor management
-  - Digital Presence — websites, marketing, and social media (see Digital Services below)
-- **Digital Services** (/digital-services) — Websites, digital marketing, and social media presence for businesses.
+  - Digital Presence (/digital-services) — websites, digital marketing, and social media presence for businesses
 - **Trading Dock** (/verticals/trading-dock) — Financial markets analytics and trading education.
 - **Impressio Dock** (/verticals/impressio-dock) — Corporate gifting and printing (currently on hold).
 

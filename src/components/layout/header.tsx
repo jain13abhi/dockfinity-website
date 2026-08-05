@@ -17,7 +17,6 @@ const navigation = [
         href: "/verticals",
         children: [
             { name: "Dockware Labs", href: "/verticals/dockware-labs", desc: "Enterprise SaaS & Automation", color: "text-blue-500" },
-            { name: "Digital Services", href: "/digital-services", desc: "Websites & Marketing", color: "text-blue-500" },
             { name: "Trading Dock", href: "/verticals/trading-dock", desc: "Market Analytics & Education", color: "text-emerald-500" },
             { name: "Impressio Dock", href: "/verticals/impressio-dock", desc: "Corporate Gifting & Printing", color: "text-amber-500" },
         ],
