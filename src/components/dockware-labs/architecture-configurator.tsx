@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
-import { Sliders, Database, Server, Cloud, ShieldCheck, ArrowRight, Layers, Cpu, Globe, CheckCircle2 } from "lucide-react";
+import { Sliders, Database, Server, Cloud, ShieldCheck, ArrowRight, Layers, Cpu, Globe, CheckCircle2, type LucideIcon } from "lucide-react";
 
 const INDUSTRIES = [
   { id: "saas", name: "SaaS & B2B Tech" },
@@ -25,7 +25,7 @@ const SCALES = [
   { id: "enterprise", name: "Enterprise (100k+ Concurrency)" },
 ];
 
-const TOPOLOGIES: Record<string, { nodes: { id: string; name: string; type: string; icon: any }[]; summary: string; sla: string }> = {
+const TOPOLOGIES: Record<string, { nodes: { id: string; name: string; type: string; icon: LucideIcon }[]; summary: string; sla: string }> = {
   saas: {
     summary: "Multi-tenant SaaS topology with tenant-key data partitioning and real-time Kafka event streams.",
     sla: "Multi-Region High Availability",

@@ -215,7 +215,7 @@ export function SampleAppsShowcase() {
               ) : (
                 <div className="p-5 rounded-2xl bg-[#090d14] text-blue-400 font-mono text-xs leading-relaxed border border-slate-800 space-y-2">
                   <div className="text-slate-500 text-[10px] pb-2 border-b border-slate-800 font-bold uppercase">
-                    // Dockware Architecture Concept Snippet
+                    {"// Dockware Architecture Concept Snippet"}
                   </div>
                   <pre className="overflow-x-auto text-slate-200">
                     <code>{selectedApp.mockupUi.codeSnippet}</code>
