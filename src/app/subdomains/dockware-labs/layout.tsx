@@ -1,0 +1,48 @@
+import "@/app/globals.css";
+import { Inter, Syne, JetBrains_Mono } from "next/font/google";
+import { DockwareNav } from "@/components/dockware-labs/nav";
+import { DockwareFooter } from "@/components/dockware-labs/footer";
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+});
+
+const syne = Syne({
+  subsets: ["latin"],
+  variable: "--font-display",
+});
+
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+});
+
+export const metadata = {
+  title: "Dockware Labs | Technology & Software Division of Dockfinity",
+  description:
+    "Enterprise ERP/CRM, app development, automation, AI agents, IoT systems, IT consulting, and digital presence by Dockware Labs.",
+  openGraph: {
+    title: "Dockware Labs | Technology & Software Division",
+    description:
+      "Enterprise software systems, custom applications, and technology advisory.",
+    url: "https://dockwarelabs.dockfinity.com",
+    siteName: "Dockware Labs",
+  },
+};
+
+export default function DockwareLabsSubdomainLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <div
+      className={`${inter.variable} ${syne.variable} ${jetbrains.variable} font-sans bg-[#090d14] text-slate-100 min-h-screen flex flex-col antialiased dark`}
+    >
+      <DockwareNav />
+      <main className="flex-1 pt-20">{children}</main>
+      <DockwareFooter />
+    </div>
+  );
+}
