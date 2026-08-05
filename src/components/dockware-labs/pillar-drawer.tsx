@@ -2,7 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { X, Server, Smartphone, Cpu, LifeBuoy, Globe, CheckCircle2, ArrowRight, Shield, Zap } from "lucide-react";
+import { X, Server, Smartphone, Bot, Cpu, LifeBuoy, Globe, CheckCircle2, ArrowRight, Shield, Zap } from "lucide-react";
 
 interface PillarDetail {
   id: string;
@@ -61,27 +61,49 @@ const PILLAR_DETAILS: Record<string, PillarDetail> = {
     techStack: ["React Native", "Next.js 16", "TypeScript", "Tailwind CSS v4", "GraphQL", "Node.js"],
     sla: "Edge-Optimized Low Latency Design",
   },
-  "automation-iot": {
-    id: "automation-iot",
-    title: "Automation & IoT Systems",
-    subtitle: "Autonomous AI Agents & Hardware-to-Cloud Data Pipelines",
+  "workflow-ai": {
+    id: "workflow-ai",
+    title: "Workflow Automation & AI Agents",
+    subtitle: "Autonomous LLM Agents, Document Intelligence & Automated API Pipelines",
+    icon: Bot,
+    overview:
+      "Eliminate manual data bottlenecks. We build custom workflow automation tools, autonomous AI agents, and document processing engines that parse unstructured data, classify support tickets, and trigger automated API workflows.",
+    deepDiveSpecs: [
+      { title: "Autonomous AI Agents", desc: "LLM-powered agents that parse invoices, classify support tickets, and execute multi-step API actions." },
+      { title: "Workflow ETL Pipelines", desc: "Automate repetitive data transfers between legacy databases, third-party APIs, and cloud analytics." },
+      { title: "Intelligent Document Processing", desc: "Extract structured JSON schema from PDFs, images, and unstructured emails automatically." },
+      { title: "Custom API & Webhook Triggers", desc: "Instant automated notifications, CRM updates, and transaction logging." },
+    ],
+    deliverables: [
+      "AI Agent Orchestration & Prompt Memory Engine",
+      "Automated Document Extraction Microservices",
+      "API & Webhook Integration Pipeline",
+      "Automated WhatsApp & Email Alert Triggers",
+    ],
+    techStack: ["Python", "LangChain / OpenAI", "FastAPI", "Redis Streams", "Celery", "Go"],
+    sla: "Sub-Second Workflow Trigger & Alert Execution",
+  },
+  "iot-systems": {
+    id: "iot-systems",
+    title: "IoT & Embedded Systems",
+    subtitle: "Hardware Sensor Gateways & Real-Time Telemetry Data Pipelines",
     icon: Cpu,
     overview:
-      "Connect physical operations with cloud intelligence. We build custom workflow automation tools, autonomous AI agents, and IoT sensor gateways that stream physical telemetry straight into business dashboards and automated action queues.",
+      "Connect physical operations with cloud software. We engineer custom hardware sensor gateways, MQTT protocol integration, and real-time telemetry streaming that feeds equipment data directly into cloud dashboards.",
     deepDiveSpecs: [
-      { title: "Autonomous AI Agents", desc: "LLM-powered agents that parse unstructured invoices, classify customer support tickets, and trigger API actions." },
       { title: "IoT Sensor & Hardware Gateways", desc: "MQTT/HTTP protocol integration for temperature, pressure, RFID, and GPS tracking hardware." },
-      { title: "Workflow ETL Pipelines", desc: "Automate repetitive data transfers between legacy databases, third-party APIs, and cloud analytics." },
-      { title: "Predictive Telemetry Alerts", desc: "Machine-learning models that analyze equipment sensor patterns to flag maintenance needs before breakdowns." },
+      { title: "Real-Time Telemetry Ingestion", desc: "High-throughput time-series data pipelines capable of handling thousands of sensor messages per second." },
+      { title: "Predictive Equipment Maintenance", desc: "Machine-learning models that analyze equipment sensor patterns to flag maintenance needs." },
+      { title: "Edge Computing & Local Cache", desc: "Hardware gateways that process data locally and sync with cloud databases when connected." },
     ],
     deliverables: [
       "IoT Hardware Gateway Software",
-      "AI Agent Orchestration & Prompt Memory Engine",
-      "Real-Time Telemetry Dashboard",
-      "Automated WhatsApp & Email Alert Triggers",
+      "MQTT & WebSockets Ingestion Cluster",
+      "Real-Time Equipment Telemetry Dashboard",
+      "Audit Trail & Device Health Logs",
     ],
-    techStack: ["Python", "TimescaleDB", "MQTT", "LangChain / OpenAI", "Redis Streams", "Go"],
-    sla: "Real-Time Sensor Telemetry & Alerts",
+    techStack: ["Python", "TimescaleDB", "MQTT", "Timescale", "Docker Edge", "AWS IoT Core"],
+    sla: "Low-Latency Sensor Ingestion & Alert Dispatch",
   },
   "it-consulting": {
     id: "it-consulting",

@@ -1,7 +1,7 @@
 "use client";
 
 import { Container } from "@/components/ui/container";
-import { Server, Smartphone, Cpu, LifeBuoy, Globe, ArrowRight } from "lucide-react";
+import { Server, Smartphone, Bot, Cpu, LifeBuoy, Globe, ArrowRight } from "lucide-react";
 
 const PILLARS = [
   {
@@ -9,7 +9,7 @@ const PILLARS = [
     layerCode: "01 // INFRASTRUCTURE & CLOUD",
     title: "Enterprise Solutions",
     icon: Server,
-    desc: "Custom ERP and CRM platforms, alongside our own in-house SaaS products. Engineered to streamline operations, unify data silos, and scale cloud infrastructure.",
+    desc: "Custom ERP and CRM platforms, alongside in-house SaaS products. Engineered to streamline operations, unify data silos, and scale cloud infrastructure.",
     capabilities: ["Custom ERP & CRM Systems", "In-House SaaS Products", "Cloud & Database Architecture"],
     badge: "Operational Core",
   },
@@ -18,36 +18,45 @@ const PILLARS = [
     layerCode: "02 // DATA & STATE CORE",
     title: "Custom Software & App Development",
     icon: Smartphone,
-    desc: "High-performance web applications and native/cross-platform mobile apps built with modern tech stacks. From MVP architecture to enterprise-scale deployment.",
+    desc: "High-performance web applications and native/cross-platform mobile apps built with modern tech stacks. From MVP architecture to enterprise deployment.",
     capabilities: ["Web & SaaS Applications", "iOS & Android Mobile Apps", "Scalable Microservices"],
     badge: "User Experience",
   },
   {
-    id: "automation-iot",
-    layerCode: "03 // MICROSERVICES & AI",
-    title: "Automation & IoT",
+    id: "workflow-ai",
+    layerCode: "03 // AI & WORKFLOW ENGINE",
+    title: "Workflow Automation & AI Agents",
+    icon: Bot,
+    desc: "Autonomous LLM agents, Intelligent Document Processing (IDP), and automated ETL workflow pipelines that eliminate repetitive manual data entry.",
+    capabilities: ["Autonomous AI Agents", "Workflow ETL Pipelines", "Document & Invoice Parsing"],
+    badge: "Automation Core",
+  },
+  {
+    id: "iot-systems",
+    layerCode: "04 // HARDWARE & TELEMETRY",
+    title: "IoT & Embedded Systems",
     icon: Cpu,
-    desc: "Intelligent workflow automation pipelines, autonomous AI agents, and IoT smart-hardware integrations that connect physical hardware with cloud software.",
-    capabilities: ["Workflow Automation Pipelines", "Autonomous AI Agents", "IoT & Embedded Systems"],
-    badge: "Intelligent Systems",
+    desc: "Hardware sensor gateways, MQTT protocol integration, and real-time telemetry streaming connecting physical equipment with cloud software.",
+    capabilities: ["Hardware Sensor Gateways", "MQTT Telemetry Streams", "Predictive Equipment Alerts"],
+    badge: "Edge Hardware",
   },
   {
     id: "it-consulting",
-    layerCode: "04 // APPLICATIONS & INTERFACES",
+    layerCode: "05 // SYSTEM RESILIENCE",
     title: "IT Consulting & Managed Support",
     icon: LifeBuoy,
-    desc: "Strategic technical advisory, infrastructure audits, security hardening, and 24/7 managed support to keep mission-critical systems resilient and compliant.",
-    capabilities: ["Technical Advisory & Audits", "Managed Support SLAs", "Security & Compliance"],
+    desc: "Strategic technical advisory, infrastructure audits, security hardening, and 24/7 managed support to keep mission-critical systems resilient.",
+    capabilities: ["Technical Advisory & Audits", "Managed Support SLAs", "ISO 27001 Security Hardening"],
     badge: "System Resilience",
   },
   {
     id: "digital-presence",
-    layerCode: "05 // INTERACTION LAYER",
+    layerCode: "06 // INTERACTION LAYER",
     title: "Digital Presence & Experiences",
     icon: Globe,
-    desc: "Custom website design and digital brand platforms that give enterprise capabilities a high-credibility digital storefront. High-performance, SEO-optimized, and conversion-focused.",
-    capabilities: ["Custom Website Engineering", "Performance & Technical SEO", "Digital Experience Design"],
-    badge: "1 of 5 Offerings",
+    desc: "Custom corporate web platforms engineered for speed, SEO dominance, and high-conversion user journeys. Semantic, accessible, and zero bloat.",
+    capabilities: ["Custom Web Engineering", "Performance & Technical SEO", "Digital Experience Design"],
+    badge: "Web Engineering",
   },
 ];
 
@@ -65,10 +74,10 @@ export function DockwarePillars({ onPillarHover, onPillarSelect }: PillarsProps)
             Core Service Architecture
           </p>
           <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-6">
-            Five Capabilities.<br />One Focused Technology Arm.
+            Six Capabilities.<br />One Focused Technology Arm.
           </h2>
           <p className="text-lg text-muted-foreground leading-relaxed font-normal">
-            Dockware Labs delivers complete technical scope. Click any pillar below to inspect deep-dive architecture specs, deliverables, and SLAs.
+            Dockware Labs delivers complete technical scope. Click any pillar below to inspect deep-dive architecture specs, deliverables, and targets.
           </p>
         </div>
 
