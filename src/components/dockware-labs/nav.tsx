@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Button } from "@/components/ui/button";
 import { ThemeToggle } from "@/components/layout/theme-toggle";
@@ -64,28 +65,28 @@ export function DockwareNav() {
 
           <div className="h-4 w-px bg-border" />
 
-          {/* Official Dockfinity Brand Link with Emblem Logo */}
+          {/* Official Dockfinity Brand Link with Official Logo Mark */}
           <a
             href="https://dockfinity.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-xs font-mono tracking-wider uppercase text-muted-foreground hover:text-blue-500 flex items-center gap-2 px-3 py-1.5 rounded-lg bg-secondary/60 hover:bg-secondary border border-border transition-all"
+            className="text-xs font-mono tracking-wider uppercase text-muted-foreground hover:text-blue-500 flex items-center gap-2 px-3 py-1.5 rounded-xl bg-secondary/80 hover:bg-secondary border border-border/80 transition-all shadow-xs"
           >
-            {/* Dockfinity Emblem Mark */}
-            <svg
-              className="w-4 h-4 text-brand dark:text-brand"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <rect x="3" y="3" width="18" height="18" rx="4" />
-              <path d="M7 12h10" />
-              <path d="M12 7v10" />
-            </svg>
-            <span className="font-display text-xs font-bold text-foreground">Dockfinity.com</span>
+            <Image
+              src="/logo-mark-navy.png"
+              alt="Dockfinity"
+              width={24}
+              height={14}
+              className="h-4 w-auto dark:hidden"
+            />
+            <Image
+              src="/logo-mark-white.png"
+              alt="Dockfinity"
+              width={24}
+              height={14}
+              className="h-4 w-auto hidden dark:block"
+            />
+            <span className="font-display text-xs font-bold text-foreground tracking-tight">DOCKFINITY.COM</span>
             <ArrowUpRight className="w-3.5 h-3.5 text-muted-foreground" />
           </a>
 
@@ -142,7 +143,22 @@ export function DockwareNav() {
             rel="noopener noreferrer"
             className="block text-sm font-mono text-blue-500 flex items-center gap-2 pt-2 border-t border-border"
           >
-            Visit main site (dockfinity.com) <ArrowUpRight className="w-4 h-4" />
+            <Image
+              src="/logo-mark-navy.png"
+              alt="Dockfinity"
+              width={20}
+              height={12}
+              className="h-3.5 w-auto dark:hidden"
+            />
+            <Image
+              src="/logo-mark-white.png"
+              alt="Dockfinity"
+              width={20}
+              height={12}
+              className="h-3.5 w-auto hidden dark:block"
+            />
+            <span>Visit main site (dockfinity.com)</span>
+            <ArrowUpRight className="w-4 h-4" />
           </a>
         </div>
       )}
