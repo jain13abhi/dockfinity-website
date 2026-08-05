@@ -25,7 +25,7 @@ const STAGES = [
 
 export function DockwareProcess() {
   return (
-    <section id="process" className="py-20 bg-background relative">
+    <section id="process" className="py-20 relative">
       <Container>
         <div className="text-center max-w-2xl mx-auto mb-16">
           <p className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-blue-500 mb-3">
@@ -43,7 +43,7 @@ export function DockwareProcess() {
           {STAGES.map((s) => (
             <div
               key={s.step}
-              className="p-7 rounded-2xl bg-card border border-border relative group hover:border-blue-500/40 transition-all duration-300 shadow-sm"
+              className="p-7 rounded-2xl bg-card/75 backdrop-blur-md border border-border/80 relative group hover:border-blue-500/40 transition-all duration-300 shadow-sm"
             >
               <div className="font-mono text-5xl font-bold text-blue-500/20 group-hover:text-blue-500/40 transition-colors mb-4">
                 {s.step}

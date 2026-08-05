@@ -13,12 +13,12 @@ export default function DockwareLabsSubdomainPage() {
   const [activePillarIndex, setActivePillarIndex] = useState<number | null>(null);
 
   return (
-    <>
-      {/* ── HERO SECTION ── */}
-      <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 overflow-hidden min-h-[85vh] flex items-center">
-        {/* Volumetric 3D Architectural Systems Engine Canvas */}
-        <TechBackground activePillarIndex={activePillarIndex} />
+    <div className="relative min-h-screen">
+      {/* Viewport-wide Full Page Background Interactive Motion Engine */}
+      <TechBackground activePillarIndex={activePillarIndex} />
 
+      {/* ── HERO SECTION ── */}
+      <section className="relative pt-24 pb-20 md:pt-32 md:pb-28 min-h-[85vh] flex items-center z-10">
         <Container className="relative z-10">
           <div className="max-w-4xl">
             {/* Top Category Badge */}
@@ -57,7 +57,7 @@ export default function DockwareLabsSubdomainPage() {
               <Button
                 asChild
                 variant="outline"
-                className="rounded-full px-8 h-14 text-base font-semibold border-border bg-card text-foreground hover:bg-secondary"
+                className="rounded-full px-8 h-14 text-base font-semibold border-border bg-card/80 backdrop-blur-sm text-foreground hover:bg-secondary"
               >
                 <a href="#services">Explore Capabilities</a>
               </Button>
@@ -65,15 +65,15 @@ export default function DockwareLabsSubdomainPage() {
 
             {/* Live System Telemetry Strip */}
             <div className="mt-12 flex flex-wrap items-center gap-4 text-xs font-mono text-muted-foreground">
-              <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-card border border-border">
+              <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-card/80 backdrop-blur-sm border border-border">
                 <ShieldCheck className="w-4 h-4 text-blue-500 shrink-0" />
                 <span>ISO 27001:2022 Certified</span>
               </div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-card border border-border">
+              <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-card/80 backdrop-blur-sm border border-border">
                 <Activity className="w-4 h-4 text-emerald-500 shrink-0" />
                 <span>SLA-Backed Systems Support</span>
               </div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-card border border-border">
+              <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-card/80 backdrop-blur-sm border border-border">
                 <Terminal className="w-4 h-4 text-blue-500 shrink-0" />
                 <span>Custom Architecture Stack</span>
               </div>
@@ -83,13 +83,19 @@ export default function DockwareLabsSubdomainPage() {
       </section>
 
       {/* ── 5 SERVICE PILLARS ── */}
-      <DockwarePillars onPillarHover={setActivePillarIndex} />
+      <div className="relative z-10">
+        <DockwarePillars onPillarHover={setActivePillarIndex} />
+      </div>
 
       {/* ── HOW WE WORK ── */}
-      <DockwareProcess />
+      <div className="relative z-10">
+        <DockwareProcess />
+      </div>
 
       {/* ── CONTACT / ENQUIRY ── */}
-      <DockwareEnquiry />
-    </>
+      <div className="relative z-10">
+        <DockwareEnquiry />
+      </div>
+    </div>
   );
 }

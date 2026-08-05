@@ -57,9 +57,7 @@ interface PillarsProps {
 
 export function DockwarePillars({ onPillarHover }: PillarsProps) {
   return (
-    <section id="services" className="py-20 bg-secondary/30 relative">
-      <div className="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-blue-500/20 to-transparent" />
-
+    <section id="services" className="py-20 relative">
       <Container>
         <div className="max-w-3xl mb-16">
           <p className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-blue-500 mb-3">
@@ -81,7 +79,7 @@ export function DockwarePillars({ onPillarHover }: PillarsProps) {
                 key={p.id}
                 onMouseEnter={() => onPillarHover(idx)}
                 onMouseLeave={() => onPillarHover(null)}
-                className="group relative p-8 rounded-2xl bg-card border border-border hover:border-blue-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 flex flex-col justify-between"
+                className="group relative p-8 rounded-2xl bg-card/75 backdrop-blur-md border border-border/80 hover:border-blue-500/50 transition-all duration-300 hover:shadow-xl hover:shadow-blue-500/10 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-6">
@@ -110,7 +108,7 @@ export function DockwarePillars({ onPillarHover }: PillarsProps) {
                     {p.capabilities.map((cap) => (
                       <span
                         key={cap}
-                        className="text-[11px] font-mono text-muted-foreground bg-secondary px-2.5 py-1 rounded-md border border-border/50"
+                        className="text-[11px] font-mono text-muted-foreground bg-secondary/80 px-2.5 py-1 rounded-md border border-border/50"
                       >
                         {cap}
                       </span>
