@@ -6,7 +6,7 @@ const THEME_SCRIPT_HASH = "sha256-hPVHFcAQfpXEplmAsJV/h0s9KuuAYkjTEQQ6pVvnJrg=";
 
 const cspHeader = `
   default-src 'self';
-  script-src 'self' '${THEME_SCRIPT_HASH}' https://challenges.cloudflare.com https://va.vercel-scripts.com;
+  script-src 'self' 'wasm-unsafe-eval' '${THEME_SCRIPT_HASH}' https://challenges.cloudflare.com https://va.vercel-scripts.com;
   style-src 'self' 'unsafe-inline';
   img-src 'self' blob: data: https:;
   font-src 'self' data:;
