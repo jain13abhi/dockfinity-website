@@ -22,8 +22,8 @@ export function DockwareEnquiry() {
     try {
       await submitContactForm(formData);
       setSuccess(true);
-    } catch (err: any) {
-      setErrorMsg(err.message || "An unexpected error occurred. Please try again.");
+    } catch (err) {
+      setErrorMsg(err instanceof Error ? err.message : "An unexpected error occurred. Please try again.");
     } finally {
       setPending(false);
     }

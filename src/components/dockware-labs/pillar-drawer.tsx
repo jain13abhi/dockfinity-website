@@ -2,13 +2,13 @@
 
 import { useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
-import { X, Server, Smartphone, Bot, Cpu, LifeBuoy, Globe, CheckCircle2, ArrowRight, Shield, Zap } from "lucide-react";
+import { X, Server, Smartphone, Bot, Cpu, LifeBuoy, Globe, CheckCircle2, ArrowRight, Shield, Zap, type LucideIcon } from "lucide-react";
 
 interface PillarDetail {
   id: string;
   title: string;
   subtitle: string;
-  icon: any;
+  icon: LucideIcon;
   overview: string;
   deepDiveSpecs: { title: string; desc: string }[];
   deliverables: string[];
