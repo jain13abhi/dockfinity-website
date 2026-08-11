@@ -4,7 +4,7 @@ import { Cpu, ArrowUpRight } from "lucide-react";
 
 export function DockwareFooter() {
   return (
-    <footer className="bg-secondary/40 border-t border-border pt-16 pb-12 text-muted-foreground">
+    <footer className="bg-secondary border-t border-border pt-16 pb-12 text-muted-foreground">
       <Container>
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-border">
           {/* Brand Info */}

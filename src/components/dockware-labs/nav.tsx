@@ -11,10 +11,22 @@ import { useState, useEffect } from "react";
 export function DockwareNav() {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [isInternalReferrer, setIsInternalReferrer] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 12);
     window.addEventListener("scroll", handleScroll);
+
+    if (typeof window !== "undefined" && document.referrer) {
+      try {
+        const refUrl = new URL(document.referrer);
+        const host = refUrl.hostname.toLowerCase();
+        if (host === "dockfinity.com" || host.endsWith(".dockfinity.com") || host === "localhost") {
+          setIsInternalReferrer(true);
+        }
+      } catch (e) {}
+    }
+
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -22,7 +34,7 @@ export function DockwareNav() {
     <header
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-background/85 backdrop-blur-md border-b border-border shadow-sm"
+          ? "bg-background border-b border-border shadow-sm"
           : "bg-transparent border-b border-border/40"
       }`}
     >
@@ -68,8 +80,8 @@ export function DockwareNav() {
           {/* Official Dockfinity Brand Link with Official Logo Mark */}
           <a
             href="https://dockfinity.com"
-            target="_blank"
-            rel="noopener noreferrer"
+            target={isInternalReferrer ? "_self" : "_blank"}
+            rel={isInternalReferrer ? undefined : "noopener noreferrer"}
             className="text-xs font-mono tracking-wider uppercase text-muted-foreground hover:text-blue-500 flex items-center gap-2 transition-colors py-1"
           >
             <Image
@@ -139,8 +151,8 @@ export function DockwareNav() {
           </a>
           <a
             href="https://dockfinity.com"
-            target="_blank"
-            rel="noopener noreferrer"
+            target={isInternalReferrer ? "_self" : "_blank"}
+            rel={isInternalReferrer ? undefined : "noopener noreferrer"}
             className="block text-sm font-mono text-blue-500 flex items-center gap-2 pt-2 border-t border-border"
           >
             <Image

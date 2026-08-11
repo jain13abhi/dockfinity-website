@@ -1,12 +1,8 @@
 import type { NextConfig } from "next";
 
-// Note: If THEME_TIME_SEED_SCRIPT in src/app/layout.tsx is ever updated,
-// this sha256 hash MUST be recomputed and updated here.
-const THEME_SCRIPT_HASH = "sha256-hPVHFcAQfpXEplmAsJV/h0s9KuuAYkjTEQQ6pVvnJrg=";
-
 const strictCsp = `
   default-src 'self';
-  script-src 'self' '${THEME_SCRIPT_HASH}' https://va.vercel-scripts.com;
+  script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com;
   style-src 'self' 'unsafe-inline';
   img-src 'self' blob: data: https:;
   font-src 'self' data:;
