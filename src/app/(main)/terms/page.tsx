@@ -6,6 +6,9 @@ import { ArrowLeft } from "lucide-react";
 export const metadata = {
     title: "Terms of Service | Dockfinity",
     description: "Terms and Conditions for using Dockfinity services.",
+    alternates: {
+        canonical: "/terms",
+    },
 };
 
 export default function TermsPage() {

@@ -6,6 +6,19 @@ import Link from "next/link";
 export const metadata = {
     title: "Trading Dock | Dockfinity",
     description: "Institutional-grade market analytics, financial education, and tools for disciplined investors.",
+    alternates: {
+        canonical: "/verticals/trading-dock",
+    },
+};
+
+const BREADCRUMB_JSON_LD = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://dockfinity.com' },
+        { '@type': 'ListItem', position: 2, name: 'Verticals', item: 'https://dockfinity.com/verticals' },
+        { '@type': 'ListItem', position: 3, name: 'Trading Dock', item: 'https://dockfinity.com/verticals/trading-dock' },
+    ],
 };
 
 const offerings = [
@@ -24,6 +37,10 @@ const approach = [
 export default function TradingDockPage() {
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_JSON_LD) }}
+            />
             {/* HERO */}
             <section className="relative pt-28 pb-16 overflow-hidden">
                 <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />

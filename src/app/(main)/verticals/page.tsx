@@ -6,6 +6,18 @@ import Link from "next/link";
 export const metadata = {
     title: "Our Verticals",
     description: "Explore the three specialized business verticals under Dockfinity — enterprise software, financial education, and corporate gifting.",
+    alternates: {
+        canonical: "/verticals",
+    },
+};
+
+const BREADCRUMB_JSON_LD = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://dockfinity.com' },
+        { '@type': 'ListItem', position: 2, name: 'Verticals', item: 'https://dockfinity.com/verticals' },
+    ],
 };
 
 const verticals = [
@@ -65,6 +77,10 @@ const verticals = [
 export default function VerticalsPage() {
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_JSON_LD) }}
+            />
             {/* ── PAGE HERO ── */}
             <section className="relative pt-28 pb-14 overflow-hidden">
                 <div className="absolute inset-0 bg-grid-pattern pointer-events-none" />

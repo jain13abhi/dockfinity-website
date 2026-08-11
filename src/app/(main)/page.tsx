@@ -1,6 +1,13 @@
+import type { Metadata } from "next";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/ui/container";
 import Link from "next/link";
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 import {
   ArrowRight,
   Globe,

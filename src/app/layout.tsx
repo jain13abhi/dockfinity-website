@@ -43,11 +43,30 @@ export const metadata: Metadata = {
   },
   description: 'Dockfinity Private Limited is a technology-first holding company engineering the next generation of SaaS, financial intelligence, and corporate experiences.',
   metadataBase: new URL('https://dockfinity.com'),
+  alternates: {
+    canonical: '/',
+  },
   keywords: ['Dockfinity', 'holding company', 'SaaS', 'enterprise software', 'corporate gifting', 'financial education', 'India startup'],
   openGraph: {
     title: 'Dockfinity Private Limited',
     description: 'Building Tomorrow\'s Enterprise — SaaS, Financial Intelligence & Corporate Experiences.',
     type: 'website',
+    url: 'https://dockfinity.com',
+    siteName: 'Dockfinity',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Dockfinity — Building Tomorrow\'s Enterprise',
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Dockfinity Private Limited',
+    description: 'Building Tomorrow\'s Enterprise — SaaS, Financial Intelligence & Corporate Experiences.',
+    images: ['/og-image.png'],
   },
 };
 
@@ -95,9 +114,10 @@ export default function RootLayout({
         />
       </head>
       <body className={`${syne.variable} ${inter.variable} ${jetbrainsMono.variable} font-sans antialiased min-h-screen bg-background text-foreground relative selection:bg-brand selection:text-brand-foreground`}>
-        <Script id="theme-time-seed" strategy="beforeInteractive">
-          {THEME_TIME_SEED_SCRIPT}
-        </Script>
+        <script
+          id="theme-time-seed"
+          dangerouslySetInnerHTML={{ __html: THEME_TIME_SEED_SCRIPT }}
+        />
 
         {/* Global noise texture */}
         <div className="fixed inset-0 z-[-1] bg-noise-subtle mix-blend-overlay pointer-events-none" aria-hidden="true" />

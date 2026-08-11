@@ -6,6 +6,9 @@ import Link from "next/link";
 export const metadata = {
     title: "About Us",
     description: "Dockfinity Private Limited — a forward-thinking holding company building technology-driven ventures across SaaS, finance, and corporate experiences.",
+    alternates: {
+        canonical: "/about",
+    },
 };
 
 const values = [
