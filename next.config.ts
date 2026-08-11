@@ -10,7 +10,7 @@ const strictCsp = `
   style-src 'self' 'unsafe-inline';
   img-src 'self' blob: data: https:;
   font-src 'self' data:;
-  connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com;
+  connect-src 'self' https://*.dockfinity.com https://dockfinity.com https://vitals.vercel-insights.com https://va.vercel-scripts.com;
   object-src 'none';
   base-uri 'self';
   form-action 'self';
@@ -24,7 +24,7 @@ const contactCsp = `
   style-src 'self' 'unsafe-inline';
   img-src 'self' blob: data: https:;
   font-src 'self' data:;
-  connect-src 'self' https://challenges.cloudflare.com https://vitals.vercel-insights.com https://va.vercel-scripts.com;
+  connect-src 'self' https://*.dockfinity.com https://dockfinity.com https://challenges.cloudflare.com https://vitals.vercel-insights.com https://va.vercel-scripts.com;
   frame-src 'self' https://challenges.cloudflare.com;
   object-src 'none';
   base-uri 'self';
