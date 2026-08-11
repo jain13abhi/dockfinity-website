@@ -6,6 +6,9 @@ import { ArrowLeft } from "lucide-react";
 export const metadata = {
     title: "Refund Policy | Dockfinity",
     description: "Refund and Cancellation Policy for Dockfinity services.",
+    alternates: {
+        canonical: "/refund-policy",
+    },
 };
 
 export default function RefundPolicyPage() {

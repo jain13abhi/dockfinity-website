@@ -13,14 +13,14 @@ export function middleware(req: NextRequest) {
 function handleRouting(req: NextRequest) {
   const url = req.nextUrl.clone();
   
-  // Direct Hostname from NextRequest or Headers (Vercel Edge Compatible)
-  const host = req.nextUrl.hostname || req.headers.get("x-forwarded-host") || req.headers.get("host");
+  // Direct Hostname from Headers or NextRequest (Vercel Edge & Subdomain Proxy Compatible)
+  const host = req.headers.get("x-forwarded-host") || req.headers.get("host") || req.nextUrl.hostname;
 
-  // Skip static assets, internal Next.js paths, and public files
+  // Skip static assets and internal Next.js paths
   if (
     url.pathname.startsWith("/_next") ||
     url.pathname.startsWith("/api") ||
-    url.pathname.includes(".")
+    /\.(png|jpg|jpeg|gif|ico|svg|css|js|woff2?)$/.test(url.pathname)
   ) {
     return NextResponse.next();
   }

@@ -6,6 +6,9 @@ import { ArrowLeft } from "lucide-react";
 export const metadata = {
     title: "Privacy Policy | Dockfinity",
     description: "Privacy Policy for Dockfinity Private Limited.",
+    alternates: {
+        canonical: "/privacy-policy",
+    },
 };
 
 export default function PrivacyPolicyPage() {

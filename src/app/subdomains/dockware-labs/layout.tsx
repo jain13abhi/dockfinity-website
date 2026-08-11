@@ -3,9 +3,13 @@ import { DockwareNav } from "@/components/dockware-labs/nav";
 import { DockwareFooter } from "@/components/dockware-labs/footer";
 
 export const metadata = {
+  metadataBase: new URL("https://dockwarelabs.dockfinity.com"),
   title: "Dockware Labs | Technology & Software Division of Dockfinity",
   description:
     "Enterprise ERP/CRM, app development, automation, AI agents, IoT systems, IT consulting, and digital presence by Dockware Labs.",
+  alternates: {
+    canonical: "https://dockwarelabs.dockfinity.com",
+  },
   openGraph: {
     title: "Dockware Labs | Technology & Software Division",
     description:

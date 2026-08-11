@@ -6,6 +6,9 @@ import { ArrowLeft, Truck, Clock, MapPin } from "lucide-react";
 export const metadata = {
     title: "Shipping Policy | Dockfinity",
     description: "Shipping and Fulfillment Policy for Dockfinity.",
+    alternates: {
+        canonical: "/shipping-policy",
+    },
 };
 
 export default function ShippingPolicyPage() {

@@ -9,6 +9,49 @@ import Link from "next/link";
 export const metadata = {
     title: "Digital Services — Websites & Marketing | Dockfinity",
     description: "Business websites, e-commerce, SEO, social media, and digital marketing — from Dockware Labs, the technology arm of Dockfinity.",
+    alternates: {
+        canonical: "/digital-services",
+    },
+};
+
+const BREADCRUMB_JSON_LD = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://dockfinity.com' },
+        { '@type': 'ListItem', position: 2, name: 'Digital Services', item: 'https://dockfinity.com/digital-services' },
+    ],
+};
+
+const FAQ_JSON_LD = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+        {
+            '@type': 'Question',
+            name: 'What website development services does Dockfinity offer?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Dockfinity provides business websites, e-commerce online stores, focused campaign landing pages, website redesigns, and ongoing maintenance & hosting support.',
+            },
+        },
+        {
+            '@type': 'Question',
+            name: 'What digital marketing services does Dockfinity provide?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'Digital marketing services include SEO, Google Business Profile and local directory listings, social media marketing, paid Google and Meta advertising, WhatsApp marketing, and branding & content creation.',
+            },
+        },
+        {
+            '@type': 'Question',
+            name: 'What is the workflow for digital services projects?',
+            acceptedAnswer: {
+                '@type': 'Answer',
+                text: 'The process involves four key steps: Discovery (understanding goals), Plan (defining scope and timeline), Build & Launch (design, development, and setup), and Grow & Support (ongoing optimization).',
+            },
+        },
+    ],
 };
 
 const websiteServices = [
@@ -38,6 +81,14 @@ const process = [
 export default function DigitalServicesPage() {
     return (
         <>
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(BREADCRUMB_JSON_LD) }}
+            />
+            <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(FAQ_JSON_LD) }}
+            />
             {/* HERO */}
             <section className="relative pt-28 pb-16 overflow-hidden">
                 <div className="absolute inset-0 bg-grid-pattern opacity-[0.05] pointer-events-none" />

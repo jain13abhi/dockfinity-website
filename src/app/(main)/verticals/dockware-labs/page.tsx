@@ -6,6 +6,9 @@ import { Cpu, ArrowRight } from "lucide-react";
 export const metadata = {
   title: "Dockware Labs | Dockfinity Technology Division",
   description: "Enterprise software, apps, automation, IoT, IT consulting, and digital presence by Dockware Labs.",
+  alternates: {
+    canonical: "https://dockwarelabs.dockfinity.com",
+  },
 };
 
 export default function DockwareLabsLegacyRedirectPage() {
