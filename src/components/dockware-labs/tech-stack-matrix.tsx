@@ -42,14 +42,14 @@ export function TechStackMatrix() {
     <section className="py-20 relative bg-secondary/20 border-t border-border/60">
       <Container>
         <div className="max-w-3xl mb-12">
-          <p className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-blue-500 mb-3">
-            Technology Matrix
-          </p>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary border border-border text-xs font-mono font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+            <span>Stack Reference Benchmarks</span>
+          </div>
           <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
-            Proven Engineering Stack
+            Core Technologies & Stack Benchmarks
           </h2>
           <p className="text-muted-foreground font-normal leading-relaxed text-base">
-            We work with Battle-tested frameworks, cloud infrastructure, and security standards tailored to your business scale.
+            Reference capabilities, theoretical throughput limits, and architecture standards supported by our underlying technology stack. Metrics indicate benchmark specifications the technologies are engineered to achieve under optimal configurations, rather than measured results from individual delivered client deployments.
           </p>
         </div>
 
@@ -90,7 +90,7 @@ export function TechStackMatrix() {
               </div>
 
               <div className="pt-3 border-t border-border/60 flex items-center justify-between">
-                <span className="text-[10px] font-mono text-muted-foreground uppercase font-medium">Benchmark</span>
+                <span className="text-[10px] font-mono text-muted-foreground uppercase font-medium">Stack Benchmark</span>
                 <span className="text-[11px] font-mono font-bold text-blue-500">{item.metric}</span>
               </div>
             </div>

@@ -83,14 +83,14 @@ export function ArchitectureConfigurator() {
     <section className="py-20 relative bg-background">
       <Container>
         <div className="max-w-3xl mb-14">
-          <p className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-blue-500 mb-3">
-            Interactive Architecture Generator
-          </p>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary border border-border text-xs font-mono font-semibold uppercase tracking-wider text-muted-foreground mb-3">
+            <span>Illustrative Architecture Configurator</span>
+          </div>
           <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
             System Architecture Configurator
           </h2>
           <p className="text-muted-foreground font-normal leading-relaxed text-base">
-            Select your industry, operational bottleneck, and scale parameters to generate an interactive system topology diagram.
+            Select your industry, operational bottleneck, and scale parameters to generate an interactive system topology blueprint showing reference architecture patterns.
           </p>
         </div>
 
@@ -188,12 +188,17 @@ export function ArchitectureConfigurator() {
           {/* Interactive Topology Visualizer (Right Column) */}
           <div className="lg:col-span-7 bg-card border border-border rounded-3xl p-8 shadow-2xl space-y-6 relative overflow-hidden flex flex-col justify-between">
             <div className="space-y-6">
-              <div className="flex items-center justify-between pb-3 border-b border-border">
-                <span className="font-mono text-xs font-bold uppercase tracking-wider text-blue-500">
-                  System Topology Blueprint
-                </span>
+              <div className="flex items-center justify-between pb-3 border-b border-border flex-wrap gap-2">
+                <div className="flex items-center gap-2">
+                  <span className="font-mono text-xs font-bold uppercase tracking-wider text-blue-500">
+                    System Topology Blueprint
+                  </span>
+                  <span className="px-2 py-0.5 rounded text-[10px] font-mono font-semibold uppercase tracking-wider bg-secondary border border-border text-muted-foreground">
+                    Illustrative Blueprint
+                  </span>
+                </div>
                 <span className="text-[10px] font-mono uppercase px-2.5 py-0.5 rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 font-bold">
-                  {activeTopology.sla}
+                  Target: {activeTopology.sla}
                 </span>
               </div>
 

@@ -93,33 +93,33 @@ export default function DockwareLabsSubdomainPage() {
               </div>
             </div>
 
-            {/* Right Hero Column: Engineering Standards Console */}
+            {/* Right Hero Column: Engineering Standards & Architecture Targets Console */}
             <div className="lg:col-span-5 lg:mt-24 bg-card border border-border rounded-3xl p-6 md:p-8 shadow-2xl space-y-5 relative overflow-hidden">
               <div className="flex items-center justify-between pb-3 border-b border-border font-mono text-xs">
                 <span className="font-bold text-foreground flex items-center gap-2">
-                  ENGINEERING STANDARDS & TARGETS
+                  ENGINEERING TARGETS & CERTIFICATIONS
                 </span>
-                <span className="text-muted-foreground uppercase">SPECIFICATION</span>
+                <span className="text-muted-foreground uppercase text-[10px]">BASELINE SPEC</span>
               </div>
 
               <div className="space-y-3 font-mono text-xs">
                 <div className="p-3.5 rounded-xl bg-secondary/80 border border-border/80 flex items-center justify-between">
-                  <span className="text-muted-foreground uppercase font-semibold">AVAILABILITY DESIGN</span>
-                  <span className="font-bold text-foreground">High Availability Architecture</span>
-                </div>
-
-                <div className="p-3.5 rounded-xl bg-secondary/80 border border-border/80 flex items-center justify-between">
-                  <span className="text-muted-foreground uppercase font-semibold">SECURITY STANDARD</span>
+                  <span className="text-muted-foreground uppercase font-semibold">SECURITY STANDARD (AUDITED)</span>
                   <span className="font-bold text-blue-500">ISO 27001:2022 Certified</span>
                 </div>
 
                 <div className="p-3.5 rounded-xl bg-secondary/80 border border-border/80 flex items-center justify-between">
-                  <span className="text-muted-foreground uppercase font-semibold">MULTI-TENANCY</span>
+                  <span className="text-muted-foreground uppercase font-semibold">AVAILABILITY (DESIGN TARGET)</span>
+                  <span className="font-bold text-foreground">High Availability Architecture</span>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-secondary/80 border border-border/80 flex items-center justify-between">
+                  <span className="text-muted-foreground uppercase font-semibold">DATA ISOLATION (PATTERN)</span>
                   <span className="font-bold text-foreground">Row-Level Data Partitioning</span>
                 </div>
 
                 <div className="p-3.5 rounded-xl bg-secondary/80 border border-border/80 flex items-center justify-between">
-                  <span className="text-muted-foreground uppercase font-semibold">PERFORMANCE GOAL</span>
+                  <span className="text-muted-foreground uppercase font-semibold">PERFORMANCE (STACK BENCHMARK)</span>
                   <span className="font-bold text-blue-500">Edge Network Optimization</span>
                 </div>
               </div>
@@ -128,7 +128,7 @@ export default function DockwareLabsSubdomainPage() {
                 <span className="flex items-center gap-1.5">
                   <Server className="w-3.5 h-3.5 text-blue-500" /> PostgreSQL / Node / Docker
                 </span>
-                <span className="text-blue-500 font-semibold">Production Ready</span>
+                <span className="text-[10px] text-muted-foreground uppercase font-semibold">Stack Design Specifications</span>
               </div>
             </div>
           </div>

@@ -108,14 +108,14 @@ export function SampleAppsShowcase() {
     <section className="py-20 bg-secondary/20 relative border-y border-border/60">
       <Container>
         <div className="max-w-3xl mb-14">
-          <p className="text-xs font-mono font-bold uppercase tracking-[0.2em] text-blue-500 mb-3">
-            SYSTEM ARCHITECTURE BLUEPRINTS
-          </p>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-xs font-mono font-semibold uppercase tracking-wider text-blue-500 mb-3">
+            <span>Illustrative Architecture Blueprints</span>
+          </div>
           <h2 className="font-display text-4xl md:text-5xl font-bold tracking-tight text-foreground mb-4">
             How We Architect Systems
           </h2>
           <p className="text-muted-foreground font-normal leading-relaxed text-base">
-            Illustrative blueprints showing how Dockware Labs designs and structures custom enterprise applications.
+            These blueprints are <strong className="text-foreground font-semibold">illustrative architectural concepts</strong> demonstrating how Dockware Labs patterns, isolates, and structures custom enterprise applications.
           </p>
         </div>
 
@@ -151,6 +151,9 @@ export function SampleAppsShowcase() {
               <span className="w-3 h-3 rounded-full bg-emerald-500/80 inline-block" />
               <span className="font-mono text-xs text-muted-foreground ml-3 hidden sm:inline">
                 {selectedApp.mockupUi.url}
+              </span>
+              <span className="px-2.5 py-0.5 rounded-md bg-secondary text-[10px] font-mono font-semibold uppercase tracking-wider text-muted-foreground border border-border">
+                Illustrative Concept
               </span>
             </div>
 
