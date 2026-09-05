@@ -26,7 +26,7 @@ const STACK_ITEMS = [
   { name: "Docker & Kubernetes", category: "cloud", desc: "Container orchestration, automated scaling", metric: "Zero Downtime Deploy" },
   { name: "AI Agents & LangChain", category: "ai", desc: "LLM agents, vector embeddings, RAG pipelines", metric: "Autonomous Workflows" },
   { name: "MQTT & Industrial IoT", category: "ai", desc: "Hardware sensor gateways, telemetry streams", metric: "Real-Time Ingestion" },
-  { name: "ISO 27001 Security", category: "security", desc: "Encrypted data at rest (AES-256) and transit (TLS 1.3)", metric: "Audited Standards" },
+  { name: "ISO 27001:2022 Certified", category: "security", desc: "Information security management, encrypted data at rest (AES-256) and transit (TLS 1.3)", metric: "Audited Standards" },
   { name: "WAF & Cloudflare Enterprise", category: "security", desc: "DDoS mitigation, bot protection, Turnstile", metric: "Edge Shielding" },
 ];
 

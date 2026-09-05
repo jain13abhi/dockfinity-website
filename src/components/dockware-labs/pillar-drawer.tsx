@@ -113,7 +113,7 @@ const PILLAR_DETAILS: Record<string, PillarDetail> = {
     overview:
       "Protect your technical investments and eliminate operational downtime. We act as your external technical advisory team — conducting system security audits, optimizing cloud infrastructure costs, and delivering SLA-backed 24/7 managed support.",
     deepDiveSpecs: [
-      { title: "System Security & Compliance Audits", desc: "Vulnerability assessments, code audits, and ISO 27001:2022 compliance readiness checks." },
+      { title: "System Security & Compliance Audits", desc: "Vulnerability assessments, code audits, and ISO 27001:2022 compliance audits and security validation." },
       { title: "Infrastructure Cost Optimization", desc: "Audit cloud resource utilization (AWS/Azure/GCP) to eliminate idle instances and slash monthly bills." },
       { title: "Disaster Recovery & Backup SLAs", desc: "Automated database snapshot backups, point-in-time recovery, and RTO/RPO failover drills." },
       { title: "24/7 Monitoring & Managed Ops", desc: "Round-the-clock uptime telemetry with immediate engineering incident response." },

@@ -80,7 +80,7 @@ export default function DockwareLabsSubdomainPage() {
               <div className="pt-4 flex flex-wrap items-center gap-3 text-xs font-mono font-medium text-muted-foreground">
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-card border border-border">
                   <ShieldCheck className="w-4 h-4 text-blue-500 shrink-0" />
-                  <span>ISO 27001 Certified</span>
+                  <span>ISO 27001:2022 Certified</span>
                 </div>
                 <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-card border border-border">
                   <Activity className="w-4 h-4 text-emerald-500 shrink-0" />
@@ -110,7 +110,7 @@ export default function DockwareLabsSubdomainPage() {
 
                 <div className="p-3.5 rounded-xl bg-secondary/80 border border-border/80 flex items-center justify-between">
                   <span className="text-muted-foreground uppercase font-semibold">SECURITY STANDARD</span>
-                  <span className="font-bold text-blue-500">ISO 27001 Preparedness</span>
+                  <span className="font-bold text-blue-500">ISO 27001:2022 Certified</span>
                 </div>
 
                 <div className="p-3.5 rounded-xl bg-secondary/80 border border-border/80 flex items-center justify-between">

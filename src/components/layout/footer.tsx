@@ -24,9 +24,9 @@ const legalLinks = [
 
 const certs = [
     { label: "DPIIT", sub: "Startup India" },
-    { label: "ISO 9001", sub: "Quality" },
-    { label: "ISO 27001", sub: "Security" },
-    { label: "ISO 20000-1", sub: "IT Mgmt" },
+    { label: "ISO 9001:2015", sub: "Quality" },
+    { label: "ISO 27001:2022", sub: "Security" },
+    { label: "ISO 20000-1:2018", sub: "IT Mgmt" },
 ];
 
 export function Footer() {
