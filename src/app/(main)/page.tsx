@@ -35,9 +35,8 @@ const trustItems = [
 
 /* ─── Stats ──────────────────────────────────────────── */
 const stats = [
-  { value: "3+", label: "Active Verticals", sub: "Across Tech, Finance & Gifting" },
+  { value: "3", label: "Active Verticals", sub: "Across Tech, Finance & Gifting" },
   { value: "3×", label: "ISO Certified", sub: "27001 · 9001 · 20000-1" },
-  { value: "100%", label: "Compliance", sub: "All Regulatory Standards Met" },
   { value: "2025", label: "Established", sub: "DPIIT Recognized Startup" },
 ];
 
@@ -141,10 +140,10 @@ export default function Home() {
 
             {/* Stats row */}
             <div className="animate-reveal delay-400 w-full">
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-6 max-w-3xl mx-auto">
                 {stats.map((s) => (
                   <div
-                    key={s.value}
+                    key={s.label}
                     className="flex flex-col items-center text-center p-5 rounded-2xl bg-card/60 border border-border/50 backdrop-blur-sm hover:border-border transition-colors"
                   >
                     <span className="stat-number text-3xl md:text-4xl text-foreground mb-1">{s.value}</span>
