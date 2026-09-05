@@ -74,7 +74,7 @@ export default function PrivacyPolicyPage() {
 
                     <h2 className="text-2xl font-bold tracking-tight mt-12 mb-6 text-foreground">7. Contact Us</h2>
                     <p>
-                        If you have any questions about this privacy policy or our privacy practices, please contact us at: <a href="mailto:dockfinity@gmail.com" className="text-primary hover:underline">dockfinity@gmail.com</a>.
+                        If you have any questions about this privacy policy or our privacy practices, please contact us at: <a href="mailto:info@dockfinity.com" className="text-primary hover:underline">info@dockfinity.com</a>.
                     </p>
                 </div>
             </Container>

@@ -23,8 +23,8 @@ const contactDetails = [
     {
         icon: Mail,
         label: "Email",
-        value: "dockfinity@gmail.com",
-        href: "mailto:dockfinity@gmail.com",
+        value: "info@dockfinity.com",
+        href: "mailto:info@dockfinity.com",
         color: "text-amber-500",
         bg: "bg-amber-500/10",
     },
@@ -61,7 +61,7 @@ export default function ContactPage() {
             setErrorMessage(
                 error instanceof Error
                     ? error.message
-                    : "Something went wrong. Please email us directly at dockfinity@gmail.com or call +91 99117 21100."
+                    : "Something went wrong. Please email us directly at info@dockfinity.com or call +91 99117 21100."
             );
             resetTurnstile();
         } finally {

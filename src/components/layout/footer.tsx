@@ -68,9 +68,9 @@ export function Footer() {
                                 <Phone className="w-3.5 h-3.5 shrink-0 group-hover:text-brand transition-colors" />
                                 +91 99117 21100
                             </a>
-                            <a href="mailto:dockfinity@gmail.com" className="flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors group">
+                            <a href="mailto:info@dockfinity.com" className="flex items-center gap-2 text-foreground/60 hover:text-foreground transition-colors group">
                                 <Mail className="w-3.5 h-3.5 shrink-0 group-hover:text-brand transition-colors" />
-                                dockfinity@gmail.com
+                                info@dockfinity.com
                             </a>
                         </div>
                     </div>

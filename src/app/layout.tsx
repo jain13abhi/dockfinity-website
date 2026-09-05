@@ -72,8 +72,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: '(prefers-color-scheme: light)', color: '#f8f7f4' },
-    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' },
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#030711' },
   ],
 };
 
@@ -93,7 +93,7 @@ const ORGANIZATION_JSON_LD = {
     {
       '@type': 'ContactPoint',
       telephone: '+91-99117-21100',
-      email: 'dockfinity@gmail.com',
+      email: 'info@dockfinity.com',
       contactType: 'customer service',
       areaServed: 'IN',
     },

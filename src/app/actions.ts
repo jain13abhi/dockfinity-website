@@ -3,7 +3,7 @@
 import { Resend } from 'resend'
 import { google } from 'googleapis'
 
-const NOTIFY_EMAIL = process.env.CONTACT_NOTIFY_EMAIL || 'dockfinity@gmail.com'
+const NOTIFY_EMAIL = process.env.CONTACT_NOTIFY_EMAIL || 'info@dockfinity.com'
 const FROM_EMAIL = process.env.RESEND_FROM_EMAIL || 'Dockfinity Website <onboarding@resend.dev>'
 const SHEET_TAB = process.env.GOOGLE_SHEET_TAB_NAME || 'Sheet1'
 const PHONE_DIGITS_PATTERN = /^\d{10}$/
@@ -68,7 +68,7 @@ export async function submitContactForm(formData: FormData) {
     // lead because one of two channels had a transient failure is worse
     // than an occasional missed email/sheet row.
     if (emailResult.status === 'rejected' && sheetResult.status === 'rejected') {
-        throw new Error('Something went wrong sending your message. Please email us directly at dockfinity@gmail.com or call +91 99117 21100.')
+        throw new Error('Something went wrong sending your message. Please email us directly at info@dockfinity.com or call +91 99117 21100.')
     }
 
     return { success: true }
@@ -154,7 +154,7 @@ async function sendAcknowledgmentEmail({ name, email, subject }: ContactSubmissi
             '',
             'For urgent queries, you can also reach us directly:',
             'Phone: +91 99117 21100',
-            'Email: dockfinity@gmail.com',
+            'Email: info@dockfinity.com',
             '',
             'Best regards,',
             'Team Dockfinity',

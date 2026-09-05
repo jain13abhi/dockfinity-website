@@ -71,7 +71,7 @@ export default function TermsPage() {
 
                     <h2 className="text-2xl font-bold tracking-tight mt-12 mb-6 text-foreground">7. Contact Us</h2>
                     <p>
-                        If you have any questions about these Terms, please contact us at <a href="mailto:dockfinity@gmail.com" className="text-primary hover:underline">dockfinity@gmail.com</a>.
+                        If you have any questions about these Terms, please contact us at <a href="mailto:info@dockfinity.com" className="text-primary hover:underline">info@dockfinity.com</a>.
                     </p>
                 </div>
             </Container>
