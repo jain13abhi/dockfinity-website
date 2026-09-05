@@ -68,6 +68,12 @@ export function DockwareNav() {
           >
             How We Work
           </a>
+          <Link
+            href="/work"
+            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors font-sans"
+          >
+            Work
+          </Link>
           <a
             href="#contact"
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors font-sans"
@@ -142,6 +148,13 @@ export function DockwareNav() {
           >
             How We Work
           </a>
+          <Link
+            href="/work"
+            onClick={() => setIsOpen(false)}
+            className="block text-base font-medium text-foreground"
+          >
+            Work
+          </Link>
           <a
             href="#contact"
             onClick={() => setIsOpen(false)}

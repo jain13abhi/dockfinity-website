@@ -21,6 +21,7 @@ const navigation = [
             { name: "Impressio Dock", href: "/verticals/impressio-dock", desc: "Corporate Gifting & Printing", color: "text-amber-500" },
         ],
     },
+    { name: "Work", href: "/work" },
     { name: "Contact", href: "/contact" },
 ];
 

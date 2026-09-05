@@ -4,6 +4,7 @@ const BASE_URL = "https://dockwarelabs.dockfinity.com";
 
 const routes = [
   { path: "", priority: 1.0, changeFrequency: "weekly" as const },
+  { path: "/work", priority: 0.9, changeFrequency: "weekly" as const },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

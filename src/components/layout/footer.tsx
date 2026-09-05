@@ -12,6 +12,7 @@ const verticalLinks = [
 const companyLinks = [
     { name: "About Us", href: "/about" },
     { name: "All Verticals", href: "/verticals" },
+    { name: "Delivered Work", href: "/work" },
     { name: "Contact", href: "/contact" },
 ];
 
