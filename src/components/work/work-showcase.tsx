@@ -6,14 +6,7 @@ import {
   Calculator,
   Layers,
   Ship,
-  TrendingUp,
-  Activity,
   ArrowRight,
-  CheckCircle2,
-  Lock,
-  Code2,
-  Clock,
-  Sparkles,
 } from "lucide-react";
 
 export function WorkShowcase() {
@@ -93,6 +86,23 @@ export function WorkShowcase() {
                 ))}
               </div>
             </div>
+
+            {/* Market Brief Callout */}
+            <div className="pt-2">
+              <div className="p-4 rounded-xl bg-secondary/50 border border-border">
+                <a
+                  href="https://metaldock.co.in/market-brief"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs md:text-sm text-blue-500 dark:text-blue-400 hover:underline flex items-start justify-between gap-3 leading-relaxed"
+                >
+                  <span>
+                    Metal Dock publishes a daily stainless steel market brief — exchange benchmarks, Indian domestic signals and live trade-policy status, every figure carrying its source and date.
+                  </span>
+                  <ExternalLink className="w-4 h-4 shrink-0 mt-0.5 text-muted-foreground" />
+                </a>
+              </div>
+            </div>
           </div>
 
           {/* Right: The 3 Live Interactive Tools */}
@@ -108,7 +118,7 @@ export function WorkShowcase() {
                   <div className="w-8 h-8 rounded-lg bg-blue-500/10 text-blue-500 flex items-center justify-center">
                     <Calculator className="w-4 h-4" />
                   </div>
-                  <span>Weight & Gauge Calculator</span>
+                  <span>Stainless Steel Weight & Gauge Calculator</span>
                 </div>
                 <a
                   href="https://metaldock.co.in#calculator"
@@ -120,7 +130,7 @@ export function WorkShowcase() {
                 </a>
               </div>
               <p className="text-xs text-muted-foreground leading-relaxed">
-                Calculates precise weight and tonnage for SS Circles, Sheets, and Slit Coils using exact metallurgical density formulas (7.93 g/cm³ for 304/316, 7.80 g/cm³ for 430, 7.82 g/cm³ for 202) across standard SWG gauges.
+                Calculates precise weight and tonnage for SS Circles, Sheets, and Slit Coils using exact metallurgical density formulas (7.93 g/cm³ for SS 304/316, 7.86 g/cm³ for SS 201/202, and 7.75 g/cm³ for SS 410/430) across standard SWG gauges.
               </p>
             </div>
 
@@ -131,7 +141,7 @@ export function WorkShowcase() {
                   <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-500 flex items-center justify-center">
                     <Layers className="w-4 h-4" />
                   </div>
-                  <span>Grade, Finish & Gauge Lab</span>
+                  <span>Grade, Finish & Gauge Inspector</span>
                 </div>
                 <a
                   href="https://metaldock.co.in#grade-lab"
@@ -259,33 +269,9 @@ export function WorkShowcase() {
               Engineering Complexity — Why It Was Hard
             </h3>
 
-            <div className="p-5 rounded-2xl bg-secondary/50 border border-border space-y-3">
-              <div className="flex items-center gap-2 font-semibold text-foreground text-sm">
-                <Activity className="w-4 h-4 text-emerald-500" />
-                <span>Zero UI Degradation Under High Frequency</span>
-              </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Maintaining uninterrupted 60 FPS UI rendering and zero chart stutter during rapid state updates, preventing React component re-render cascades across heavy analytical layouts.
-              </p>
-            </div>
-
-            <div className="p-5 rounded-2xl bg-secondary/50 border border-border space-y-3">
-              <div className="flex items-center gap-2 font-semibold text-foreground text-sm">
-                <TrendingUp className="w-4 h-4 text-brand" />
-                <span>Multi-Timeframe Synchronization</span>
-              </div>
-              <p className="text-xs text-muted-foreground leading-relaxed">
-                Synchronizing complex statistical calculations across different time aggregations simultaneously on the client while maintaining strict numerical consistency and low memory footprints.
-              </p>
-            </div>
-
-            <div className="p-4 rounded-xl bg-secondary/30 border border-border text-xs text-muted-foreground space-y-2">
-              <div className="flex items-center gap-2 font-mono font-medium text-foreground">
-                <Lock className="w-3.5 h-3.5 text-muted-foreground" />
-                <span>Proprietary System Notice</span>
-              </div>
-              <p className="text-[11px] leading-relaxed">
-                Per trading operation security and intellectual property guidelines, operational feed sources, internal latency benchmarks, and proprietary analytical models are withheld from public documentation.
+            <div className="p-6 rounded-2xl bg-secondary/50 border border-border">
+              <p className="text-sm text-muted-foreground leading-relaxed">
+                Built for Trading Dock — in active development, not publicly released. The hard part is continuous ingestion from multiple market data sources with strict correctness requirements: instrument definitions change, contracts roll and expire, exchange rules shift, and a single silent mismatch corrupts everything downstream. The system is built around that failure mode.
               </p>
             </div>
           </div>
