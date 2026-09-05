@@ -21,7 +21,7 @@ export default function DockwareLabsLegacyRedirectPage() {
   redirect(subdomainUrl);
 
   return (
-    <div className="py-32 bg-[#090d14] text-white min-h-[70vh] flex items-center justify-center">
+    <div className="py-32 bg-background text-foreground min-h-[70vh] flex items-center justify-center">
       <Container className="text-center max-w-xl">
         <div className="w-14 h-14 bg-blue-500/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
           <Cpu className="w-7 h-7 text-blue-500" />
