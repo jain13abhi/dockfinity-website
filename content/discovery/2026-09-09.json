@@ -1,0 +1,67 @@
+{
+  "date": "2026-09-09",
+  "title": "The new edge in agent tooling is control inside the runtime",
+  "summary": "Three releases in three days moved on the same axis: event surfaces, sandbox escalation, authorization and scheduling. Capability is no longer the differentiator; what happens while an agent is running is.",
+  "thesis": "The strongest releases this week hardened the mechanics that keep an agent useful after the demo, not the mechanics that make the demo work.",
+  "sections": ["TOOLING", "TEARDOWN"],
+  "items": [
+    {
+      "name": "Pydantic AI Harness",
+      "kind": "tooling",
+      "version": "0.30.0",
+      "releaseDate": "2026-09-08",
+      "licence": "MIT",
+      "platform": "Python 3.10+; the project does not state an OS matrix",
+      "repoUrl": "https://github.com/pydantic/pydantic-ai-harness",
+      "releaseUrl": "https://github.com/pydantic/pydantic-ai-harness/releases/tag/v0.30.0",
+      "what": "FileSystem traversal events now reach RepoContext through @on_event, and a repo-defined Pydantic AI agent can run inside GitHub Agentic Workflows.",
+      "whyDifferent": "Evented plumbing plus a route to run the agent inside GitHub Actions, rather than another capability bolted onto the harness.",
+      "isLead": true,
+      "source": "Source: Pydantic, 8 Sep 2026 - https://github.com/pydantic/pydantic-ai-harness/releases/tag/v0.30.0"
+    },
+    {
+      "name": "GitHub Copilot CLI",
+      "kind": "tooling",
+      "version": "1.0.84-2",
+      "releaseDate": "2026-09-08",
+      "licence": "GitHub Copilot CLI License",
+      "platform": "Windows, macOS and Linux; PowerShell v6+ on Windows",
+      "repoUrl": "https://github.com/github/copilot-cli",
+      "releaseUrl": "https://github.com/github/copilot-cli/releases/tag/v1.0.84-2",
+      "what": "Windows sandbox runs can record blocked access and take a constrained escalation before any full bypass, and Vim mode is now generally available. This is a pre-release.",
+      "whyDifferent": "Sandbox policy is enforced inside the coding-agent loop rather than around it, so a blocked call becomes an observable event instead of a failure.",
+      "isLead": false,
+      "source": "Source: GitHub, 8 Sep 2026 - https://github.com/github/copilot-cli/releases/tag/v1.0.84-2"
+    },
+    {
+      "name": "Hermes Agent",
+      "kind": "tooling",
+      "version": "0.21.1",
+      "releaseDate": "2026-09-07",
+      "licence": "MIT",
+      "platform": "Native Windows 10/11 supported but documented as early beta; WSL2, Linux and macOS are more established",
+      "repoUrl": "https://github.com/NousResearch/hermes-agent",
+      "releaseUrl": "https://github.com/NousResearch/hermes-agent/releases/tag/v2026.9.7",
+      "what": "The patch rolls up desktop session controls, MCP authorization, cron scheduling and delivery fixes, and delegation reliability work.",
+      "whyDifferent": "A broad always-on runtime with session, authorization and scheduling in one place, rather than a narrow coding harness.",
+      "isLead": false,
+      "source": "Source: Nous Research, 7 Sep 2026 - https://github.com/NousResearch/hermes-agent/releases/tag/v2026.9.7"
+    },
+    {
+      "name": "Mastra Factory Beta",
+      "kind": "teardown",
+      "releaseDate": "2026-09-08",
+      "productUrl": "https://mastra.ai/blog/announcing-mastra-factory-beta",
+      "what": "An open-source software factory that connects GitHub, Linear and Slack, moving issue intake, planning, implementation and PR review through configurable agent stages.",
+      "whyDifferent": "Mastra publishes its own alpha counts rather than only a headline range: 277 of 1,627 merged PRs authored (17.0%) and 222 of 778 issues closed (28.5%). The same post also claims 25-35% of PRs and 50-60% of issues; where a claim and its underlying table disagree, the table is the figure worth carrying.",
+      "isLead": false,
+      "source": "Source: Mastra, 8 Sep 2026 - https://mastra.ai/blog/announcing-mastra-factory-beta"
+    }
+  ],
+  "readThrough": "Teams evaluating agents should now inspect event surfaces, sandbox policy, authorization, scheduling and recovery — not just model quality or tool count. The question has moved from what an agent can do to whether it stays governed while doing it.",
+  "sources": {
+    "attribution": "Pydantic, 8 Sep 2026 - https://github.com/pydantic/pydantic-ai-harness/releases/tag/v0.30.0 | GitHub, 8 Sep 2026 - https://github.com/github/copilot-cli/releases/tag/v1.0.84-2 | Nous Research, 7 Sep 2026 - https://github.com/NousResearch/hermes-agent/releases/tag/v2026.9.7 | Nous Research licence - https://github.com/NousResearch/hermes-agent/blob/main/LICENSE | Mastra, 8 Sep 2026 - https://mastra.ai/blog/announcing-mastra-factory-beta",
+    "surveyDate": "2026-09-09",
+    "disclaimer": "Independent technology analysis published by Dockfinity. Every release, version, licence and figure carries the primary source it was read from."
+  }
+}
