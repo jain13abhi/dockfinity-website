@@ -229,7 +229,7 @@ def parse_iso_date(v):
     except ValueError as e: raise RenderError(f'Expected YYYY-MM-DD date, got {v!r}') from e
 def display_date(v):
     dt=parse_iso_date(v); return f"{dt.day} {dt.strftime('%b %Y').upper()}"
-REQUIRED_ITEM_FIELDS={'name','version','release_date','licence','platform','repo_url'}
+REQUIRED_ITEM_FIELDS={'name','release_date'}
 def validate_brief(brief):
     required={'date','layout','slide_count','thesis','accent_phrase','read_through','items','footer_sources'}
     missing=required-set(brief)
@@ -270,7 +270,7 @@ def distribute_column(heights,column_name):
 
 def item_card_measure(item,width):
     nf=get_font('display_semibold',FONT_SIZE['item_name']); mf=get_font('regular',FONT_SIZE['item_meta']); tw=width-2*ITEM_PAD_X-ITEM_NUMBER_W
-    lines=wrap_plain(str(item['name']),nf,tw,tracking=TRACKING['item_name']); meta=f"{item['version']}  ·  {display_date(str(item['release_date']))}"
+    lines=wrap_plain(str(item['name']),nf,tw,tracking=TRACKING['item_name']); meta=(f"{item['version']}  ·  " if item.get('version') else '')+display_date(str(item['release_date']))
     h=ITEM_PAD_Y+wrapped_height(lines,nf,1.08)+ITEM_TEXT_GAP+base_line_height(mf,1.05)+ITEM_PAD_Y
     return int(math.ceil(h)),lines,meta
 
@@ -278,7 +278,9 @@ def render_item_card(draw,x,y,width,index,item,fill=CARD):
     height,lines,meta=item_card_measure(item,width); draw.rounded_rectangle([x,y,x+width,y+height],radius=CARD_RADIUS,fill=fill)
     numf=get_font('semibold',FONT_SIZE['item_number']); nf=get_font('display_semibold',FONT_SIZE['item_name']); mf=get_font('regular',FONT_SIZE['item_meta']); tx=x+ITEM_PAD_X+ITEM_NUMBER_W; cy=y+ITEM_PAD_Y
     draw_tracked_text(draw,x+ITEM_PAD_X,cy+4,f'{index:02d}',numf,ACCENT,0.4); logical,_=draw_plain_lines(draw,tx,cy,lines,nf,TEXT,tracking=TRACKING['item_name'],leading=1.08); my=logical+ITEM_TEXT_GAP
-    v=str(item['version']); d=display_date(str(item['release_date'])); ve=draw_tracked_text(draw,tx,my,v,mf,ACCENT,0); se=draw_tracked_text(draw,ve,my,'  ·  ',mf,FAINT,0); draw_tracked_text(draw,se,my,d,mf,MUTED,0)
+    d=display_date(str(item['release_date']))
+    if item.get('version'): ve=draw_tracked_text(draw,tx,my,str(item['version']),mf,ACCENT,0); se=draw_tracked_text(draw,ve,my,'  ·  ',mf,FAINT,0); draw_tracked_text(draw,se,my,d,mf,MUTED,0)
+    else: draw_tracked_text(draw,tx,my,d,mf,MUTED,0)
     bottom=float(draw.textbbox((tx,my),meta,font=mf)[3]); return float(y+height)-bottom
 
 def readthrough_measure(text,width):
@@ -298,7 +300,7 @@ def render_single_thesis(draw,brief):
     tf=get_font('display_bold',FONT_SIZE['thesis']); bottom,_=draw_accent_paragraph(draw,x=SINGLE_THESIS_X,y=SINGLE_THESIS_Y,text=str(brief['thesis']),accent_phrase=str(brief['accent_phrase']),font=tf,normal_fill=TEXT,accent_fill=ACCENT,max_width=SINGLE_THESIS_W,tracking=TRACKING['thesis'],leading=1.08)
     if bottom>HEADER_CONTENT_LIMIT: raise RenderError(f'Thesis does not fit above fixed content region.\nThesis bottom: {bottom:.1f}px\nMaximum: {HEADER_CONTENT_LIMIT}px')
 
-def item_footer_metadata(item,index): return f"{index:02d} · {item['licence']} · {item['platform']} · {item['repo_url']}"
+def item_footer_metadata(item,index): return ' · '.join([f'{index:02d}']+[str(item[k]) for k in ('licence','platform','repo_url','product_url') if item.get(k)])
 def draw_footer_column(draw,x,y,width,label,entries):
     lf=get_font('semibold',FONT_SIZE['footer_label']); bf=get_font('regular',FONT_SIZE['footer']); draw_tracked_text(draw,x,y,label.upper(),lf,MUTED,TRACKING['footer_label']); cy=y+24; lh=base_line_height(bf,1.18); last=float(cy)
     for ei,entry in enumerate(entries):
