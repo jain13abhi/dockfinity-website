@@ -1,8 +1,13 @@
 name: Publish discovery brief
 
 # Paste the day's section 7 JSON into an issue titled "brief: <date>".
-# This validates it with the site's own validator and commits it to
-# content/discovery/. A bad brief is reported on the issue and never lands.
+# This validates it with the site's own validator, renders the day's slide,
+# and commits both to the repository. A bad brief is reported on the issue
+# and never lands.
+#
+# The render runs in this job rather than in a workflow of its own, because a
+# commit made with GITHUB_TOKEN does not trigger other workflows — a separate
+# render workflow would simply never fire.
 
 on:
   issues:
@@ -11,6 +16,15 @@ on:
 permissions:
   contents: write
   issues: write
+
+env:
+  # Pinned. A different release of either face changes the metrics, which
+  # changes where the text wraps, which changes the layout. Both were verified
+  # against the figures the scheduled task produced for the same brief.
+  INTER_VERSION: "4.1"
+  SYNE_COMMIT: "54fb97bd69162b95b2aa2c3996ffd71466c1aec2"
+  PILLOW_VERSION: "12.1.1"
+  LOGO_URL: "https://raw.githubusercontent.com/jain13abhi/slide-renderers/main/assets/dockfinity/logo-colour.png"
 
 jobs:
   publish:
@@ -36,28 +50,59 @@ jobs:
           set -o pipefail
           npx --yes tsx scripts/publish-brief.mjs 2>error.txt | tee result.txt
 
+      - name: Read what was written
+        id: meta
+        run: |
+          for key in file date title action; do
+            echo "$key=$(grep "^$key=" result.txt | cut -d= -f2-)" >> "$GITHUB_OUTPUT"
+          done
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install Pillow
+        run: pip install "Pillow==${PILLOW_VERSION}"
+
+      - name: Install the website's typefaces
+        run: |
+          mkdir -p ~/.fonts
+          curl -fsSL -o inter.zip \
+            "https://github.com/rsms/inter/releases/download/v${INTER_VERSION}/Inter-${INTER_VERSION}.zip"
+          unzip -j -o inter.zip 'extras/otf/*.otf' -d ~/.fonts
+          curl -fsSL -o "$HOME/.fonts/Syne[wght].ttf" \
+            "https://raw.githubusercontent.com/google/fonts/${SYNE_COMMIT}/ofl/syne/Syne%5Bwght%5D.ttf"
+          ls ~/.fonts | wc -l
+
+      - name: Render the slide
+        run: |
+          set -o pipefail
+          curl -fsSL -o logo.png "$LOGO_URL"
+          python scripts/render-brief.py "${{ steps.meta.outputs.date }}" \
+            --logo logo.png --out-dir public/briefs 2>>error.txt | tee -a render.txt
+
       - name: Commit
         id: commit
+        env:
+          FILE: ${{ steps.meta.outputs.file }}
+          DATE: ${{ steps.meta.outputs.date }}
+          TITLE: ${{ steps.meta.outputs.title }}
+          ACTION: ${{ steps.meta.outputs.action }}
         run: |
-          file=$(grep '^file=' result.txt | cut -d= -f2-)
-          date=$(grep '^date=' result.txt | cut -d= -f2-)
-          title=$(grep '^title=' result.txt | cut -d= -f2-)
-          action=$(grep '^action=' result.txt | cut -d= -f2-)
+          slide="public/briefs/dockfinity-discovery-${DATE}.png"
 
-          echo "file=$file" >> "$GITHUB_OUTPUT"
-          echo "date=$date" >> "$GITHUB_OUTPUT"
-
-          if git diff --quiet -- "$file"; then
+          if git diff --quiet -- "$FILE" && git diff --quiet -- "$slide" \
+             && [ -z "$(git ls-files --others --exclude-standard -- "$slide")" ]; then
             echo "changed=false" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add "$file"
-          git commit -m "content($action): discovery brief $date
+          git add "$FILE" "$slide"
+          git commit -m "content(${ACTION}): discovery brief ${DATE}
 
-          $title
+          ${TITLE}
 
           Published from issue #${{ github.event.issue.number }}."
           git push
@@ -67,14 +112,27 @@ jobs:
         if: success()
         uses: actions/github-script@v7
         env:
-          FILE: ${{ steps.commit.outputs.file }}
-          DATE: ${{ steps.commit.outputs.date }}
+          FILE: ${{ steps.meta.outputs.file }}
+          DATE: ${{ steps.meta.outputs.date }}
           CHANGED: ${{ steps.commit.outputs.changed }}
         with:
           script: |
+            const fs = require('fs');
             const { FILE, DATE, CHANGED } = process.env;
+
+            let figures = '';
+            try { figures = fs.readFileSync('render.txt', 'utf-8').trim(); } catch {}
+
             const body = CHANGED === 'true'
-              ? `Published **${DATE}** to \`${FILE}\`.\n\nThe site rebuilds automatically. It will appear at [/discovery](https://dockfinity.com/discovery) and at [/discovery/${DATE}](https://dockfinity.com/discovery/${DATE}) within a few minutes.`
+              ? [
+                  `Published **${DATE}** to \`${FILE}\`, with the slide.`,
+                  '',
+                  'The site rebuilds automatically. It will appear at ' +
+                  `[/discovery](https://dockfinity.com/discovery) and at ` +
+                  `[/discovery/${DATE}](https://dockfinity.com/discovery/${DATE}) within a few minutes.`,
+                  '',
+                  figures ? '```\n' + figures + '\n```' : '',
+                ].join('\n')
               : `**${DATE}** is already published and identical to what you pasted. Nothing was committed.`;
 
             await github.rest.issues.createComment({
