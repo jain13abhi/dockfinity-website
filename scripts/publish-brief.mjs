@@ -12,6 +12,7 @@
 import fs from "node:fs";
 import path from "node:path";
 import { validateDiscoveryBrief } from "../src/lib/discovery.ts";
+import { checkUrls, describe } from "./check-urls.mjs";
 
 const CONTENT_DIR = path.join(process.cwd(), "content", "discovery");
 
@@ -32,7 +33,7 @@ function extractJson(body) {
   return candidate.slice(start, end + 1);
 }
 
-function main() {
+async function main() {
   const body = process.env.BRIEF_BODY;
   if (!body || !body.trim()) {
     throw new Error("The issue body is empty. Paste the section 7 JSON into it.");
@@ -52,6 +53,19 @@ function main() {
   // The site's own validator — the same one that runs at build time.
   validateDiscoveryBrief(brief, `${brief.date}.json`);
 
+  // And the addresses it cites, which the validator can only check the shape
+  // of. On 9 September a release tag with a perfectly valid shape reached a
+  // slide and returned 404.
+  const urls = await checkUrls(brief);
+  if (urls.dead.length > 0) {
+    throw new Error(`The brief cites addresses that do not exist.
+
+${describe(urls)}`);
+  }
+  if (urls.unverified.length > 0) {
+    console.error(describe(urls));
+  }
+
   const filePath = path.join(CONTENT_DIR, `${brief.date}.json`);
   const existed = fs.existsSync(filePath);
 
@@ -66,9 +80,7 @@ function main() {
   console.log(`action=${existed ? "replaced" : "added"}`);
 }
 
-try {
-  main();
-} catch (err) {
+main().catch((err) => {
   console.error(err.message);
   process.exit(1);
-}
+});
