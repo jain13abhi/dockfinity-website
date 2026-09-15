@@ -73,7 +73,7 @@ export default async function DiscoveryDatePage({ params }: Params) {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(articleSchema) }}
       />
       <Container className="max-w-3xl">
-        <DiscoveryView brief={brief} />
+        <DiscoveryView brief={brief} slide={getSlidePath(brief.date)} />
       </Container>
     </div>
   );
