@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Container } from "@/components/ui/container";
 import { DiscoveryView } from "@/components/discovery/discovery-view";
-import { getAllDates, getBriefByDate, formatBriefDate } from "@/lib/discovery";
+import { getAllDates, getBriefByDate, formatBriefDate, getSlidePath } from "@/lib/discovery";
 
 type Params = { params: Promise<{ date: string }> };
 
@@ -19,6 +19,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   }
 
   const url = `https://dockfinity.com/discovery/${brief.date}`;
+  const slide = getSlidePath(brief.date);
 
   return {
     title: `${brief.title} — ${formatBriefDate(brief.date)} | Dockfinity`,
@@ -30,7 +31,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
       url,
       type: "article",
       publishedTime: `${brief.date}T00:00:00.000Z`,
+      // The day's own slide, so a shared link previews as the card that goes
+      // out on social rather than as the site-wide default.
+      ...(slide
+        ? { images: [{ url: slide, width: 1080, height: 1350, alt: brief.title }] }
+        : {}),
     },
+    ...(slide ? { twitter: { card: "summary_large_image" as const, images: [slide] } } : {}),
   };
 }
 
