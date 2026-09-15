@@ -1,0 +1,55 @@
+{
+  "date": "2026-09-14",
+  "title": "Agent products collapse workflow boundaries",
+  "summary": "Agent products are moving closer to the systems where work happens: knowledge stores, mobile devices, and live conversations. Controls and execution reliability are becoming part of product quality.",
+  "thesis": "Agent products are collapsing workflow boundaries.",
+  "accentPhrase": "collapsing workflow boundaries",
+  "sections": [
+    "TOOLING",
+    "TEARDOWN"
+  ],
+  "items": [
+    {
+      "name": "GPT-Live-1 API",
+      "kind": "teardown",
+      "releaseDate": "2026-09-10",
+      "productUrl": "https://openai.com/index/introducing-gpt-live-1-in-the-api/",
+      "price": "Front-end voice layer $0.05/minute; backend model and tool usage charged separately",
+      "priceUrl": "https://openai.com/index/introducing-gpt-live-1-in-the-api/",
+      "what": "Brings full-duplex voice to the API so a voice layer can listen and speak simultaneously while delegating deeper reasoning and tool calls to a backend model.",
+      "whyDifferent": "It reduces the handoffs of chained speech-to-text, reasoning, and text-to-speech architectures while keeping deeper agent work delegated behind the conversation.",
+      "isLead": true,
+      "source": "Source: OpenAI, 10 Sep 2026 - https://openai.com/index/introducing-gpt-live-1-in-the-api/"
+    },
+    {
+      "name": "Dify",
+      "kind": "tooling",
+      "version": "v1.17.1",
+      "releaseDate": "2026-09-10",
+      "licence": "Dify Open Source License (modified Apache-2.0 with additional conditions)",
+      "platform": "Docker Compose v2.24+; OS matrix not stated",
+      "repoUrl": "https://github.com/langgenius/dify",
+      "releaseUrl": "https://github.com/langgenius/dify/releases/tag/1.17.1",
+      "what": "Adds dataset-scoped knowledge-base API keys and fixes agent, workflow, retrieval, extraction, and provider issues; bundled-Weaviate self-hosters require a staged upgrade.",
+      "whyDifferent": "Per-knowledge-base keys reduce integration blast radius while the release also hardens production agent and retrieval behavior.",
+      "isLead": false,
+      "source": "Source: Dify GitHub Release, 10 Sep 2026 - https://github.com/langgenius/dify/releases/tag/1.17.1"
+    },
+    {
+      "name": "QApilot MCP for Android",
+      "kind": "teardown",
+      "releaseDate": "2026-09-12",
+      "productUrl": "https://qapilot.io/mcp/guide",
+      "what": "Lets Claude, Cursor, Codex, and other MCP clients drive local Android devices or emulators, execute plain-English test flows, and save passed runs as replayable test cases.",
+      "whyDifferent": "It brings mobile verification into the coding-agent workflow while keeping app execution local instead of requiring a cloud device tunnel.",
+      "isLead": false,
+      "source": "Source: Product Hunt, 12 Sep 2026 - https://www.producthunt.com/products/qapilot"
+    }
+  ],
+  "readThrough": "Dify tightens knowledge access, QApilot brings Android verification into coding agents, and GPT-Live-1 moves full-duplex voice into the API. The shared shift is toward interfaces that let agents operate closer to real workflows. Teams now need to judge controls, reliability and integration friction alongside model quality.",
+  "sources": {
+    "attribution": "Dify v1.17.1, 10 Sep 2026 - https://github.com/langgenius/dify/releases/tag/1.17.1 | Dify LICENSE, surveyed 14 Sep 2026 - https://github.com/langgenius/dify/blob/main/LICENSE | QApilot MCP Product Hunt launch, 12 Sep 2026 - https://www.producthunt.com/products/qapilot | QApilot MCP guide, surveyed 14 Sep 2026 - https://qapilot.io/mcp/guide | GPT-Live-1 API, 10 Sep 2026 - https://openai.com/index/introducing-gpt-live-1-in-the-api/ | OpenAI model catalog, surveyed 14 Sep 2026 - https://developers.openai.com/api/docs/models",
+    "surveyDate": "2026-09-14",
+    "disclaimer": "Independent technology analysis published by Dockfinity. Every release, version, licence and figure carries the primary source it was read from."
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "date": "2026-09-15",
+  "title": "Agent interfaces become stateful operating layers",
+  "summary": "Coding agents and browser agents are converging on the same requirement: durable state across sessions and real actions. Session recovery, credentials, approvals and local memory are becoming part of the product surface.",
+  "thesis": "Agent interfaces are becoming stateful operating layers.",
+  "accentPhrase": "becoming stateful operating layers",
+  "sections": [
+    "TOOLING",
+    "TEARDOWN"
+  ],
+  "items": [
+    {
+      "name": "OpenCode",
+      "kind": "tooling",
+      "version": "v1.18.31",
+      "releaseDate": "2026-09-14",
+      "licence": "MIT",
+      "platform": "Windows; macOS; Linux",
+      "repoUrl": "https://github.com/anomalyco/opencode",
+      "releaseUrl": "https://github.com/anomalyco/opencode/releases/tag/v1.18.31",
+      "what": "Restores ACP session model, effort, mode and reasoning chunk boundaries when loading, resuming or forking sessions, and requests summarized adaptive thinking for GitHub Copilot models.",
+      "whyDifferent": "It treats session continuity as part of the coding-agent interface, reducing state loss when work is resumed or forked across clients.",
+      "isLead": false,
+      "source": "Source: OpenCode GitHub Release, 14 Sep 2026 - https://github.com/anomalyco/opencode/releases/tag/v1.18.31"
+    },
+    {
+      "name": "Aside",
+      "kind": "teardown",
+      "releaseDate": "2026-09-14",
+      "productUrl": "https://aside.com/",
+      "price": "Free $0 forever; Pro $20/month; Max $200/month; Enterprise contact sales",
+      "priceUrl": "https://aside.com/pricing",
+      "what": "A browser agent that works across logged-in websites, local files and communications while keeping credentials out of the model and gating sensitive actions for confirmation.",
+      "whyDifferent": "It combines credentialed browser execution, local memory and approval controls in the browser itself instead of depending on per-service integrations.",
+      "isLead": true,
+      "source": "Source: Product Hunt, 14 Sep 2026 - https://www.producthunt.com/products/aside-6"
+    }
+  ],
+  "readThrough": "Teams now need to evaluate how agent systems preserve state across sessions and real actions, not only how well a model answers. Session recovery, credentials, approvals and local memory become product-level requirements when agents operate inside production workflows.",
+  "sources": {
+    "attribution": "OpenCode v1.18.31, 14 Sep 2026 - https://github.com/anomalyco/opencode/releases/tag/v1.18.31 | OpenCode README, surveyed 15 Sep 2026 - https://github.com/anomalyco/opencode | Aside Product Hunt launch, 14 Sep 2026 - https://www.producthunt.com/products/aside-6 | Aside product page, surveyed 15 Sep 2026 - https://aside.com/ | Aside pricing, surveyed 15 Sep 2026 - https://aside.com/pricing",
+    "surveyDate": "2026-09-15",
+    "disclaimer": "Independent technology analysis published by Dockfinity. Every release, version, licence and figure carries the primary source it was read from."
+  }
+}

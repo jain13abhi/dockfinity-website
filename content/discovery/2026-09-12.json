@@ -1,0 +1,45 @@
+{
+  "date": "2026-09-12",
+  "title": "Agent infrastructure moves closer to the interface",
+  "summary": "Agent tooling is standardizing the interfaces between coding runtimes and the live data agents consume. The integration layer is becoming a product surface of its own.",
+  "thesis": "Agent infrastructure is moving closer to the interface.",
+  "accentPhrase": "moving closer to the interface",
+  "sections": [
+    "TOOLING",
+    "TEARDOWN"
+  ],
+  "items": [
+    {
+      "name": "codex-acp",
+      "kind": "tooling",
+      "version": "v1.11.0",
+      "releaseDate": "2026-09-09",
+      "licence": "Apache-2.0",
+      "platform": "Node.js/npm; OS support not stated",
+      "repoUrl": "https://github.com/agentclientprotocol/codex-acp",
+      "releaseUrl": "https://github.com/agentclientprotocol/codex-acp/releases/tag/v1.11.0",
+      "what": "Adds recommended model and reasoning-effort configuration advertisement, fixes standalone MCP elicitation permission requests, and paginates thread history when loading or forking sessions.",
+      "whyDifferent": "It gives ACP clients a standard adapter to Codex App Server, reducing client-specific integration work around configuration, permissions and session continuity.",
+      "isLead": false,
+      "source": "Source: Agent Client Protocol GitHub Release, 9 Sep 2026 - https://github.com/agentclientprotocol/codex-acp/releases/tag/v1.11.0"
+    },
+    {
+      "name": "Anysite.io",
+      "kind": "teardown",
+      "releaseDate": "2026-09-11",
+      "productUrl": "https://anysite.io/",
+      "price": "MCP Unlimited $30/month; Starter $49/month; Growth $200/month; Scale $300/month; Pro $549/month; Enterprise $1,199+/month",
+      "priceUrl": "https://anysite.io/pricing/",
+      "what": "Provides a B2B data layer that lets agents request companies, people, titles, emails and other current web data through MCP, CLI or REST interfaces.",
+      "whyDifferent": "It packages structured web extraction and pipeline execution behind interfaces agents already use, reducing custom scraper and collection plumbing.",
+      "isLead": true,
+      "source": "Source: Product Hunt, 11 Sep 2026 - https://www.producthunt.com/products/anysite"
+    }
+  ],
+  "readThrough": "Codex ACP standardizes how IDEs and clients talk to a coding agent, while Anysite makes live web data directly callable from those agents. The competitive layer is shifting toward reliable interfaces between agents, tools and current external data.",
+  "sources": {
+    "attribution": "codex-acp v1.11.0, 9 Sep 2026 - https://github.com/agentclientprotocol/codex-acp/releases/tag/v1.11.0 | codex-acp repository and LICENSE, 12 Sep 2026 - https://github.com/agentclientprotocol/codex-acp | Anysite.io Product Hunt launch, 11 Sep 2026 - https://www.producthunt.com/products/anysite | Anysite.io pricing, 12 Sep 2026 - https://anysite.io/pricing/",
+    "surveyDate": "2026-09-12",
+    "disclaimer": "Independent technology analysis published by Dockfinity. Every release, version, licence and figure carries the primary source it was read from."
+  }
+}
