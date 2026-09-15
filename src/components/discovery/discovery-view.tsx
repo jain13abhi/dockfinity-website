@@ -114,7 +114,14 @@ function ItemCard({ item }: { item: DiscoveryItem }) {
   );
 }
 
-export function DiscoveryView({ brief }: { brief: DiscoveryBrief }) {
+export function DiscoveryView({
+  brief,
+  showArchiveLink = true,
+}: {
+  brief: DiscoveryBrief;
+  /** Off on the index, where the list of every brief is already below. */
+  showArchiveLink?: boolean;
+}) {
   return (
     <div>
       <header className="mb-10">
@@ -171,14 +178,16 @@ export function DiscoveryView({ brief }: { brief: DiscoveryBrief }) {
         <p className="mt-5 text-sm text-muted-foreground leading-relaxed max-w-2xl">
           {brief.sources.disclaimer}
         </p>
-        <p className="mt-5">
-          <Link
-            href="/discovery"
-            className="font-mono text-xs text-muted-foreground underline underline-offset-4 hover:text-brand"
-          >
-            All briefs
-          </Link>
-        </p>
+        {showArchiveLink && (
+          <p className="mt-5">
+            <Link
+              href="/discovery"
+              className="font-mono text-xs text-muted-foreground underline underline-offset-4 hover:text-brand"
+            >
+              All briefs
+            </Link>
+          </p>
+        )}
       </footer>
     </div>
   );
