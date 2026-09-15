@@ -88,6 +88,14 @@ export interface DiscoveryBrief {
   summary: string;
   /** The connecting thread, one sentence */
   thesis: string;
+  /**
+   * A phrase that already appears verbatim inside `thesis`.
+   *
+   * The slide colours it in place, so it cannot be a phrase written for the
+   * accent — it has to be part of the sentence, or the renderer has nothing
+   * to find.
+   */
+  accentPhrase: string;
   /** Only the sections that actually carried an item today */
   sections: DiscoverySection[];
   /** The day's items, ranked */
@@ -188,6 +196,16 @@ export function validateDiscoveryBrief(brief: DiscoveryBrief, filename?: string)
   if (!brief.summary?.trim()) fail("summary", "summary is required.");
   if (!brief.thesis?.trim()) fail("thesis", "thesis is required.");
   if (!brief.readThrough?.trim()) fail("readThrough", "readThrough is required.");
+  if (!brief.accentPhrase?.trim()) {
+    fail("accentPhrase", "accentPhrase is required; the slide cannot render without it.");
+  }
+  if (brief.thesis && brief.accentPhrase && !brief.thesis.includes(brief.accentPhrase)) {
+    fail(
+      "accentPhrase",
+      "accentPhrase must appear verbatim inside thesis; the slide colours it in place.",
+      brief.accentPhrase
+    );
+  }
   if (!Array.isArray(brief.items) || brief.items.length === 0) {
     fail("items", "at least one item is required.");
   }
