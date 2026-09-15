@@ -338,3 +338,18 @@ export function formatBriefDate(date: string): string {
     timeZone: "UTC",
   });
 }
+
+/**
+ * The public path of a day's rendered slide, when one exists.
+ *
+ * The slide is rendered in CI and committed beside the brief, so a date
+ * published before that existed simply has none. Returning null rather than a
+ * path keeps the share card on the site default instead of pointing at a 404,
+ * which renders as a broken preview rather than no preview.
+ */
+export function getSlidePath(date: string): string | null {
+  const relative = `/briefs/dockfinity-discovery-${date}.png`;
+  return fs.existsSync(path.join(process.cwd(), "public", relative))
+    ? relative
+    : null;
+}
