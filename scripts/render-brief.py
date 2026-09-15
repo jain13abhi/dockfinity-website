@@ -21,6 +21,7 @@ import json
 import sys
 import tempfile
 import urllib.request
+from datetime import datetime
 from pathlib import Path
 
 RENDERER_URL = (
@@ -67,10 +68,9 @@ def source_line(item: dict) -> str:
 
 
 def display_date(iso: str) -> str:
-    from datetime import datetime
-
-    return datetime.strptime(iso, "%Y-%m-%d").strftime("%-d %b %Y") \
-        if sys.platform != "win32" else datetime.strptime(iso, "%Y-%m-%d").strftime("%d %b %Y").lstrip("0")
+    """2026-09-08 becomes 8 Sep 2026, without a platform-specific format flag."""
+    when = datetime.strptime(iso, "%Y-%m-%d")
+    return f"{when.day} {when.strftime('%b %Y')}"
 
 
 def build_brief(brief: dict) -> dict:
