@@ -13,6 +13,7 @@ const companyLinks = [
     { name: "About Us", href: "/about" },
     { name: "All Verticals", href: "/verticals" },
     { name: "Delivered Work", href: "/work" },
+    { name: "Discovery", href: "/discovery" },
     { name: "Contact", href: "/contact" },
 ];
 
