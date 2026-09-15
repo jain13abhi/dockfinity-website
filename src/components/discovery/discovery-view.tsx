@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ExternalLink, Scale, MonitorCog } from "lucide-react";
 import type { DiscoveryBrief, DiscoveryItem } from "@/lib/discovery";
@@ -116,9 +117,13 @@ function ItemCard({ item }: { item: DiscoveryItem }) {
 
 export function DiscoveryView({
   brief,
+  slide,
   showArchiveLink = true,
 }: {
   brief: DiscoveryBrief;
+  /** The day's rendered card, when one exists. Dates published before it was
+   *  rendered in CI have none, and the section is simply left out. */
+  slide?: string | null;
   /** Off on the index, where the list of every brief is already below. */
   showArchiveLink?: boolean;
 }) {
@@ -167,6 +172,27 @@ export function DiscoveryView({
         </h2>
         <p className="text-foreground text-lg leading-relaxed">{brief.readThrough}</p>
       </section>
+
+      {slide && (
+        <section className="mt-10">
+          <h2 className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground mb-3">
+            The card
+          </h2>
+          <a href={slide} target="_blank" rel="noopener noreferrer" className="block group">
+            <Image
+              src={slide}
+              alt={`${brief.title} — the card published on ${formatBriefDate(brief.date)}`}
+              width={1080}
+              height={1350}
+              sizes="(max-width: 768px) 100vw, 420px"
+              className="w-full max-w-[420px] rounded-xl border border-border group-hover:border-brand transition-colors"
+            />
+          </a>
+          <p className="mt-3 font-mono text-xs text-muted-foreground">
+            The same card posted on social. Open it for the full size.
+          </p>
+        </section>
+      )}
 
       <footer className="mt-10 pt-6 border-t border-border">
         <h2 className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground mb-3">

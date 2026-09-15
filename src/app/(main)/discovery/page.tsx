@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Container } from "@/components/ui/container";
 import { DiscoveryView } from "@/components/discovery/discovery-view";
-import { getAllBriefs, formatBriefDate } from "@/lib/discovery";
+import { getAllBriefs, formatBriefDate, getSlidePath } from "@/lib/discovery";
 
 export const metadata: Metadata = {
   title: "Build & Market Discovery | Dockfinity",
@@ -31,7 +31,7 @@ export default function DiscoveryPage() {
     <div className="pt-28 pb-20">
       <Container className="max-w-3xl">
         {latest ? (
-          <DiscoveryView brief={latest} showArchiveLink={false} />
+          <DiscoveryView brief={latest} slide={getSlidePath(latest.date)} showArchiveLink={false} />
         ) : (
           <div className="py-16">
             <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-4">
