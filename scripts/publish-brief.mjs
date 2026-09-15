@@ -50,6 +50,13 @@ async function main() {
     );
   }
 
+  // The run sometimes writes sources.attribution as a list and sometimes as
+  // one string. Both say the same thing; the page renders a paragraph, so the
+  // list is joined here rather than teaching the schema two shapes.
+  if (Array.isArray(brief.sources?.attribution)) {
+    brief.sources.attribution = brief.sources.attribution.join(" | ");
+  }
+
   // The site's own validator — the same one that runs at build time.
   validateDiscoveryBrief(brief, `${brief.date}.json`);
 

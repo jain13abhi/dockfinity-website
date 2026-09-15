@@ -1,0 +1,57 @@
+{
+  "date": "2026-09-11",
+  "title": "Agents move into live workflows",
+  "summary": "Managed agent infrastructure, retrieval controls and code-native design are moving AI systems closer to the workflows where work actually happens. The differentiator is increasingly the operational layer around the model.",
+  "thesis": "Agents are moving into live workflows.",
+  "accentPhrase": "moving into live workflows",
+  "sections": [
+    "TOOLING",
+    "TEARDOWN"
+  ],
+  "items": [
+    {
+      "name": "OpenAI Agents API",
+      "kind": "teardown",
+      "releaseDate": "2026-09-10",
+      "productUrl": "https://openai.com/index/introducing-the-agents-api/",
+      "price": "Agents API $0 additional fee; model and tool usage billed separately at standard API rates",
+      "priceUrl": "https://developers.openai.com/api/docs/pricing",
+      "what": "Brings the managed Codex harness to developers in public beta with durable sessions, hosted or self-hosted environments, MCP, tool search, multi-agent execution and long-session context management.",
+      "whyDifferent": "It turns agent harness and execution infrastructure into a managed platform primitive instead of infrastructure every team must operate itself.",
+      "isLead": true,
+      "source": "Source: OpenAI, 10 Sep 2026 - https://openai.com/index/introducing-the-agents-api/"
+    },
+    {
+      "name": "RAGFlow",
+      "kind": "tooling",
+      "version": "v0.27.2",
+      "releaseDate": "2026-09-10",
+      "licence": "Apache-2.0",
+      "platform": "Windows amd64/arm64; macOS amd64/arm64; Linux amd64/arm64",
+      "repoUrl": "https://github.com/infiniflow/ragflow",
+      "releaseUrl": "https://github.com/infiniflow/ragflow/releases/tag/v0.27.2",
+      "what": "Refactors Agentic RAG retrieval and adds runtime settings plus rate limiting for knowledge compilation, alongside sitemap ingestion and knowledge-graph improvements.",
+      "whyDifferent": "It moves retrieval infrastructure toward governed agent context execution, where runtime controls matter alongside retrieval quality.",
+      "isLead": false,
+      "source": "Source: RAGFlow GitHub Release, 10 Sep 2026 - https://github.com/infiniflow/ragflow/releases/tag/v0.27.2"
+    },
+    {
+      "name": "Modeinspect",
+      "kind": "teardown",
+      "releaseDate": "2026-09-10",
+      "productUrl": "https://modeinspect.com/",
+      "price": "Hobby $0/month; Pro $20/month; Teams & enterprises custom",
+      "priceUrl": "https://modeinspect.com/pricing",
+      "what": "Lets product teams design directly against an existing codebase using real components, tokens, data, states and breakpoints, then send changes for engineering review.",
+      "whyDifferent": "It treats the existing product system as the design surface, reducing translation between AI-generated interface work and production code.",
+      "isLead": false,
+      "source": "Source: Product Hunt, 10 Sep 2026 - https://www.producthunt.com/products/modeinspect-1-0"
+    }
+  ],
+  "readThrough": "Teams are no longer evaluating only model quality. New agent products now sit inside managed execution, retrieval and production code, making context control, permissions and review paths part of product quality. The competitive layer is shifting toward how reliably an agent works inside a real workflow.",
+  "sources": {
+    "attribution": "OpenAI Agents API, 10 Sep 2026 - https://openai.com/index/introducing-the-agents-api/ | OpenAI API pricing, 11 Sep 2026 - https://developers.openai.com/api/docs/pricing | RAGFlow v0.27.2, 10 Sep 2026 - https://github.com/infiniflow/ragflow/releases/tag/v0.27.2 | RAGFlow LICENSE, 12 Dec 2023 - https://github.com/infiniflow/ragflow/blob/main/LICENSE | Modeinspect Product Hunt, 10 Sep 2026 - https://www.producthunt.com/products/modeinspect-1-0 | Modeinspect pricing, 11 Sep 2026 - https://modeinspect.com/pricing",
+    "surveyDate": "2026-09-11",
+    "disclaimer": "Independent technology analysis published by Dockfinity. Every release, version, licence and figure carries the primary source it was read from."
+  }
+}

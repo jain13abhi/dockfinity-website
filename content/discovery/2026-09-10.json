@@ -1,0 +1,55 @@
+{
+  "date": "2026-09-10",
+  "title": "Agent systems become the operating layer",
+  "summary": "Agent products are moving beyond isolated model interactions into persistent systems that coordinate state, permissions and actions. Today's releases show that shift across developer tooling, product infrastructure and consumer agents.",
+  "thesis": "Agent systems are becoming the new operating layer.",
+  "accentPhrase": "becoming the new operating layer",
+  "sections": [
+    "TOOLING",
+    "TEARDOWN"
+  ],
+  "items": [
+    {
+      "name": "OpenAI Codex",
+      "kind": "tooling",
+      "version": "0.154.0",
+      "releaseDate": "2026-09-09",
+      "licence": "Apache-2.0",
+      "platform": "Windows, macOS, Linux",
+      "repoUrl": "https://github.com/openai/codex",
+      "releaseUrl": "https://github.com/openai/codex/releases/tag/rust-v0.154.0",
+      "what": "Adds experimental worktrees, inline answers while Codex continues working, and shared background-server support for Windows sessions.",
+      "whyDifferent": "Codex is moving from isolated terminal turns toward persistent, parallel agent sessions with stronger session coordination.",
+      "isLead": false,
+      "source": "Source: OpenAI Codex GitHub Release, 9 Sep 2026 - https://github.com/openai/codex/releases/tag/rust-v0.154.0"
+    },
+    {
+      "name": "Noodle Seed",
+      "kind": "teardown",
+      "releaseDate": "2026-09-09",
+      "productUrl": "https://noodleseed.com/",
+      "price": "Free $0/month; Pro $30/month; Scale $300/month; Enterprise custom",
+      "priceUrl": "https://noodleseed.com/pricing",
+      "what": "Lets software teams define TypeScript workflows once and expose them through an embedded branded assistant and external AI agents.",
+      "whyDifferent": "Identity, permissions, secrets, audit and operations are packaged as a governed runtime instead of separate agent-integration plumbing.",
+      "isLead": false,
+      "source": "Source: Product Hunt, 9 Sep 2026 - https://www.producthunt.com/products/noodle-seed"
+    },
+    {
+      "name": "Meta Muse",
+      "kind": "teardown",
+      "releaseDate": "2026-09-08",
+      "productUrl": "https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/",
+      "what": "A US consumer agent on iOS, Android, web and WhatsApp that can keep working in the background and act across connected services.",
+      "whyDifferent": "Meta is turning consumer AI from a chat surface into a cross-service action layer with approvals, persistent work and mass distribution.",
+      "isLead": true,
+      "source": "Source: Meta Newsroom, 8 Sep 2026 - https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/"
+    }
+  ],
+  "readThrough": "Teams now need to evaluate the system around the agent, not only the model itself. Runtime isolation, permissions, orchestration and failure handling increasingly determine whether agentic software is safe and useful in production. The operating environment around the model is becoming the competitive unit.",
+  "sources": {
+    "attribution": "OpenAI Codex GitHub Release, 9 Sep 2026 - https://github.com/openai/codex/releases/tag/rust-v0.154.0 | OpenAI Codex LICENSE, 16 Apr 2025 - https://github.com/openai/codex/blob/main/LICENSE | OpenAI Codex repository, 10 Sep 2026 - https://github.com/openai/codex | Noodle Seed Product Hunt launch, 9 Sep 2026 - https://www.producthunt.com/products/noodle-seed | Noodle Seed pricing, 10 Sep 2026 - https://noodleseed.com/pricing | Meta Newsroom, 8 Sep 2026 - https://about.fb.com/news/2026/09/introducing-muse-personal-ai-agent/ | Reuters via Investing.com, 8 Sep 2026 - https://www.investing.com/news/stock-market-news/meta-launches-ai-agent-that-can-access-other-apps-to-send-emails-make-payments-4892258",
+    "surveyDate": "2026-09-10",
+    "disclaimer": "Independent technology analysis published by Dockfinity. Every release, version, licence and figure carries the primary source it was read from."
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "date": "2026-09-13",
+  "title": "Agents move into operational systems",
+  "summary": "Agent products are moving beyond model access into governed execution, verification, and enterprise data workflows. The competitive layer is increasingly the system that controls how agents act inside real work.",
+  "thesis": "Agents are moving into operational systems.",
+  "accentPhrase": "moving into operational systems",
+  "sections": [
+    "TOOLING",
+    "TEARDOWN"
+  ],
+  "items": [
+    {
+      "name": "OpenAI Data agent",
+      "kind": "teardown",
+      "releaseDate": "2026-09-10",
+      "productUrl": "https://openai.com/index/put-data-to-work/",
+      "price": "Business Standard $20/month billed annually or $25/month billed monthly; Business Premium $100/month billed annually or $125/month billed monthly; Enterprise custom",
+      "priceUrl": "https://openai.com/business/pricing/",
+      "what": "Connects ChatGPT Work to governed company data, investigates business questions, builds interactive dashboards, and can work with existing BI tools and approved actions.",
+      "whyDifferent": "It moves conversational analytics from uploaded files into live enterprise data and governed dashboard workflows inside the agent surface.",
+      "isLead": true,
+      "source": "Source: OpenAI, 10 Sep 2026 - https://openai.com/index/put-data-to-work/"
+    },
+    {
+      "name": "GitHub Agentic Workflows",
+      "kind": "tooling",
+      "version": "v0.89.10",
+      "releaseDate": "2026-09-13",
+      "licence": "MIT",
+      "platform": "GitHub Actions; GitHub CLI extension; local OS matrix not stated",
+      "repoUrl": "https://github.com/github/gh-aw",
+      "releaseUrl": "https://github.com/github/gh-aw/releases/tag/v0.89.10",
+      "what": "Adds shared JavaScript modules for packaged agentic workflows, coordinated rate-limit handling for multi-target logs, and more accurate AI-credit accounting for failed or zero-token runs.",
+      "whyDifferent": "It makes repository agents more reusable and operationally predictable while keeping execution inside standard GitHub Actions workflows.",
+      "isLead": false,
+      "source": "Source: GitHub Agentic Workflows Release, 13 Sep 2026 - https://github.com/github/gh-aw/releases/tag/v0.89.10"
+    },
+    {
+      "name": "EasySpecs.ai",
+      "kind": "teardown",
+      "releaseDate": "2026-09-11",
+      "productUrl": "https://easyspecs.ai/",
+      "price": "Free Trial with 3 one-time credits; Workbench EUR 5/repository/month promotional, normally EUR 10; Factory EUR 150/month with 15 credits; Enterprise custom",
+      "priceUrl": "https://easyspecs.ai/pricing",
+      "what": "Grounds product and engineering specifications in the current codebase, pairs them with validators, oracles, and rubrics, and exposes approved specs to coding agents through MCP.",
+      "whyDifferent": "It moves quality control before code generation, giving product managers and engineering leads a checkable specification layer for agent-written changes.",
+      "isLead": false,
+      "source": "Source: Product Hunt, 11 Sep 2026 - https://www.producthunt.com/products/easyspecs-ai"
+    }
+  ],
+  "readThrough": "The winning layer is shifting from model access toward systems that control context, verification and execution. GitHub hardens repository agents, EasySpecs moves review before code generation, and OpenAI turns governed enterprise data into an agent surface.",
+  "sources": {
+    "attribution": "OpenAI Data agent, 10 Sep 2026 - https://openai.com/index/put-data-to-work/ | OpenAI Business pricing, 13 Sep 2026 - https://openai.com/business/pricing/ | GitHub Agentic Workflows v0.89.10, 13 Sep 2026 - https://github.com/github/gh-aw/releases/tag/v0.89.10 | GitHub Agentic Workflows repository and MIT licence, 13 Sep 2026 - https://github.com/github/gh-aw | EasySpecs.ai Product Hunt launch, 11 Sep 2026 - https://www.producthunt.com/products/easyspecs-ai | EasySpecs.ai pricing, 13 Sep 2026 - https://easyspecs.ai/pricing",
+    "surveyDate": "2026-09-13",
+    "disclaimer": "Independent technology analysis published by Dockfinity. Every release, version, licence and figure carries the primary source it was read from."
+  }
+}
