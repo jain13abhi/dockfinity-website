@@ -25,13 +25,13 @@ export const metadata: Metadata = {
 
 export default function DiscoveryPage() {
   const briefs = getAllBriefs();
-  const [latest, ...archive] = briefs;
+  const [latest] = briefs;
 
   return (
     <div className="pt-28 pb-20">
       <Container className="max-w-3xl">
         {latest ? (
-          <DiscoveryView brief={latest} />
+          <DiscoveryView brief={latest} showArchiveLink={false} />
         ) : (
           <div className="py-16">
             <h1 className="font-display text-3xl sm:text-4xl font-bold tracking-tight text-foreground mb-4">
@@ -45,24 +45,31 @@ export default function DiscoveryPage() {
           </div>
         )}
 
-        {archive.length > 0 && (
-          <section className="mt-16 pt-10 border-t border-border">
+        {briefs.length > 0 && (
+          <section id="all" className="mt-16 pt-10 border-t border-border">
             <h2 className="font-mono text-[11px] uppercase tracking-wider text-muted-foreground mb-6">
-              Archive
+              Every brief
             </h2>
             <ul className="grid gap-px bg-border rounded-lg overflow-hidden">
-              {archive.map((brief) => (
+              {briefs.map((brief) => (
                 <li key={brief.date} className="bg-background">
                   <Link
                     href={`/discovery/${brief.date}`}
                     className="group flex flex-col gap-1 p-5 hover:bg-secondary transition-colors"
                   >
-                    <time
-                      dateTime={brief.date}
-                      className="font-mono text-xs text-muted-foreground"
-                    >
-                      {formatBriefDate(brief.date)}
-                    </time>
+                    <span className="flex items-center gap-2">
+                      <time
+                        dateTime={brief.date}
+                        className="font-mono text-xs text-muted-foreground"
+                      >
+                        {formatBriefDate(brief.date)}
+                      </time>
+                      {brief.date === latest?.date && (
+                        <span className="font-mono text-[10px] uppercase tracking-wider text-brand">
+                          Latest
+                        </span>
+                      )}
+                    </span>
                     <span className="font-display text-lg font-semibold tracking-tight text-foreground group-hover:text-brand transition-colors text-balance">
                       {brief.title}
                     </span>
