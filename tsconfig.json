@@ -30,5 +30,12 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules",
+    // Build tooling, not shipped code. It imports the site's own modules
+    // by their .ts path, which next build refuses to typecheck; the
+    // scripts are run with tsx, which resolves them fine. Metal Dock
+    // excludes its scripts for the same reason.
+    "scripts"
+  ]
 }

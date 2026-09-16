@@ -110,6 +110,40 @@ export interface DiscoveryBrief {
     /** Fixed disclaimer string */
     disclaimer: string;
   };
+  /**
+   * The captions the slide is posted with. Written with the brief so that the
+   * words and the findings come from one source; a caption composed later,
+   * away from the brief, is a caption nobody checked against it.
+   *
+   * Optional only for briefs dated before SOCIAL_REQUIRED_FROM, which were
+   * published before this field existed.
+   */
+  social?: SocialCaptions;
+}
+
+/**
+ * The caption for each place the slide is posted.
+ *
+ * Every limit below is the platform's own, checked here rather than at posting
+ * time. A caption that will not fit is a fact about the caption, and the place
+ * to catch it is where the caption is written — not on a morning when the post
+ * silently fails to go out.
+ */
+export interface SocialCaptions {
+  /** LinkedIn body. The long form; the findings may be spelled out. */
+  linkedin: string;
+  /** Instagram and WhatsApp share one caption; both are read on a phone. */
+  instagram: string;
+  /**
+   * X body, without hashtags and without any URL.
+   *
+   * The URL rule is commercial, not stylistic: a plain post costs $0.015 and
+   * a post carrying a link costs $0.20 — thirteen times as much, every day,
+   * for a link that belongs in the profile instead.
+   */
+  x: string;
+  /** Appended per platform, as many as fit. Each begins with "#". */
+  hashtags: string[];
 }
 
 const CONTENT_DIR = path.join(process.cwd(), "content", "discovery");
@@ -152,7 +186,7 @@ const FORBIDDEN_PATTERNS: { pattern: RegExp; reason: string }[] = [
   { pattern: /\btreat\s+(?:this|it)\s+as\b/i, reason: "pipeline instruction leaked into content" },
 ];
 
-const REQUIRED_DISCLAIMER =
+export const REQUIRED_DISCLAIMER =
   "Independent technology analysis published by Dockfinity. Every release, " +
   "version, licence and figure carries the primary source it was read from.";
 
@@ -169,6 +203,85 @@ const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
  * Every error names the file, the field and the offending text, so a bad
  * commit is diagnosable from the build log alone.
  */
+/**
+ * The first brief that must carry its captions. Everything published before
+ * this was written when the captions lived only in the chat that produced
+ * them, and those briefs stay valid.
+ */
+export const SOCIAL_REQUIRED_FROM = "2026-09-17";
+
+/** Each platform's own limit. */
+const CAPTION_LIMITS: Record<keyof Omit<SocialCaptions, "hashtags">, number> = {
+  linkedin: 3000,
+  instagram: 2200,
+  x: 280,
+};
+
+const URL_IN_TEXT = /\bhttps?:\/\/|\bwww\.\S|\b[a-z0-9-]+\.(com|in|io|co|org|net)\b/i;
+
+function validateSocial(
+  brief: DiscoveryBrief,
+  fail: (field: string, message: string, text?: string) => never
+): void {
+  const social = brief.social;
+
+  if (!social) {
+    if (brief.date >= SOCIAL_REQUIRED_FROM) {
+      fail(
+        "social",
+        `a brief dated ${brief.date} must carry its captions. Add "social" with ` +
+          `linkedin, instagram, x and hashtags. Captions written only in the chat ` +
+          `never reach the posting queue.`
+      );
+    }
+    return;
+  }
+
+  for (const platform of Object.keys(CAPTION_LIMITS) as (keyof typeof CAPTION_LIMITS)[]) {
+    const text = social[platform];
+    const at = `social.${platform}`;
+
+    if (typeof text !== "string" || !text.trim()) {
+      fail(at, `the ${platform} caption is required and must not be empty.`);
+    }
+
+    const limit = CAPTION_LIMITS[platform];
+    if (text.length > limit) {
+      fail(
+        at,
+        `the ${platform} caption is ${text.length} characters and the limit is ` +
+          `${limit}. Shorten it here; a caption trimmed at posting time is a ` +
+          `caption nobody read.`
+      );
+    }
+  }
+
+  // See SocialCaptions.x - this one is about the bill, not about taste.
+  const link = social.x.match(URL_IN_TEXT);
+  if (link) {
+    fail(
+      "social.x",
+      `a post carrying a link costs $0.20 against $0.015 without one. Put the ` +
+        `address in the profile, not the post.`,
+      link[0]
+    );
+  }
+
+  if (!Array.isArray(social.hashtags) || social.hashtags.length === 0) {
+    fail("social.hashtags", "at least one hashtag is required.");
+  }
+  social.hashtags.forEach((tag, index) => {
+    if (typeof tag !== "string" || !/^#[A-Za-z0-9_]+$/.test(tag)) {
+      fail(
+        `social.hashtags[${index}]`,
+        `each hashtag must start with # and carry only letters, digits or ` +
+          `underscores - no spaces and no punctuation.`,
+        String(tag)
+      );
+    }
+  });
+}
+
 export function validateDiscoveryBrief(brief: DiscoveryBrief, filename?: string): void {
   const file = filename ?? `${brief.date}.json`;
   const fail = (field: string, message: string, text?: string): never => {
@@ -230,6 +343,8 @@ export function validateDiscoveryBrief(brief: DiscoveryBrief, filename?: string)
   if (!ISO_DATE.test(brief.sources?.surveyDate ?? "")) {
     fail("sources.surveyDate", "surveyDate must be YYYY-MM-DD.", brief.sources?.surveyDate);
   }
+
+  validateSocial(brief, fail);
 
   // ---- items -----------------------------------------------------------
   const leads = brief.items.filter((item) => item.isLead);
