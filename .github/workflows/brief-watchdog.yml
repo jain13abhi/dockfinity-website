@@ -1,0 +1,69 @@
+name: Did today's brief arrive
+
+# Metal Dock went quiet on 10 September and nobody noticed for six days. The
+# task had stopped, the bridge had never once run, and nothing anywhere said
+# so. The first sign was somebody going to look.
+#
+# This looks instead. It runs after both morning runs have had time to land,
+# checks whether today's file is in the repository, and says so on Telegram
+# when it is not. A quiet morning now produces a message rather than silence.
+
+on:
+  schedule:
+    # 07:00 UTC is 12:30 IST — an hour and a half after the later of the two
+    # runs, which leaves room for a late task and the bridge's ten-minute tick.
+    - cron: "0 7 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Look for today's brief
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          # IST, because that is the timezone the tasks are scheduled in and
+          # the date the brief is filed under.
+          DATE=$(TZ=Asia/Kolkata date +%F)
+          FILE="content/discovery/${DATE}.json"
+
+          if [ -f "$FILE" ]; then
+            echo "Found $FILE"
+            exit 0
+          fi
+
+          echo "No brief for ${DATE}."
+
+          if [ -z "$TELEGRAM_BOT_TOKEN" ] || [ -z "$TELEGRAM_CHAT_ID" ]; then
+            echo "Telegram is not configured, so nobody was told."
+            exit 1
+          fi
+
+          MSG=$(printf '%s\n' \
+            "Dockfinity — no brief for ${DATE}." \
+            "" \
+            "Nothing reached the site this morning. Check, in this order:" \
+            "" \
+            "1. Did the scheduled task run, and what did its first line say?" \
+            "2. Is there a draft sitting in the mailbox?" \
+            "3. Is there an open issue titled 'brief: ${DATE}' on jain13abhi/dockfinity-website?" \
+            "" \
+            "Whichever of those is empty is where it stopped.")
+
+          # --data-urlencode so newlines and ampersands in the text cannot
+          # break the request or truncate the message.
+          curl -sS -o /dev/null -X POST \
+            "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+            --data-urlencode "text=${MSG}"
+
+          # Fails on purpose: the run also shows red in Actions, so a missing
+          # brief is visible in two places rather than one.
+          exit 1
