@@ -1,0 +1,42 @@
+name: Telegram test
+
+# Sends an already-published brief to Telegram, by hand, without republishing
+# anything. For checking the token, the chat and the message shape without
+# waiting for a morning run.
+#
+#   Actions -> Telegram test -> Run workflow -> enter a date
+#
+# It only ever reads. Nothing is committed and nothing is published.
+
+on:
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Brief date, YYYY-MM-DD"
+        required: true
+
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Send it
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          DATE: ${{ inputs.date }}
+        run: |
+          test -f "content/discovery/${DATE}.json" || {
+            echo "No brief published for ${DATE}."
+            exit 1
+          }
+          node scripts/notify-telegram.mjs \
+            --brief "content/discovery/${DATE}.json" \
+            --slides "public/briefs/dockfinity-discovery-${DATE}.png" \
+            --label "Dockfinity" \
+            --url "https://dockfinity.com/discovery/${DATE}"
