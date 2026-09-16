@@ -1,0 +1,45 @@
+{
+  "date": "2026-09-16",
+  "title": "Agent workflows absorb infrastructure boundaries",
+  "summary": "Gemini CLI is hardening security boundaries inside the agent runtime while tiun packages auth, billing and customer infrastructure behind an agent-native backend. Teams gain less integration work but inherit more concentrated trust boundaries.",
+  "thesis": "Agent workflows are absorbing infrastructure boundaries.",
+  "accentPhrase": "absorbing infrastructure boundaries",
+  "sections": [
+    "TOOLING",
+    "TEARDOWN"
+  ],
+  "items": [
+    {
+      "name": "Gemini CLI",
+      "kind": "tooling",
+      "version": "v0.60.0",
+      "releaseDate": "2026-09-15",
+      "licence": "Apache-2.0",
+      "platform": "Windows 11 24H2+; macOS 15+; Ubuntu 20.04+",
+      "repoUrl": "https://github.com/google-gemini/gemini-cli",
+      "releaseUrl": "https://github.com/google-gemini/gemini-cli/releases/tag/v0.60.0",
+      "what": "Hardens MCP OAuth issuer validation, extension and workspace path boundaries, environment-change consent, web-fetch routing, and system configuration permissions.",
+      "whyDifferent": "It pushes more agent security policy into the terminal runtime itself, reducing how much safe execution depends on prompts or surrounding integration glue.",
+      "isLead": true,
+      "source": "Source: Gemini CLI GitHub Release, 15 Sep 2026 - https://github.com/google-gemini/gemini-cli/releases/tag/v0.60.0"
+    },
+    {
+      "name": "tiun.",
+      "kind": "teardown",
+      "releaseDate": "2026-09-15",
+      "productUrl": "https://tiun.io/",
+      "price": "Free: 2.9% + $0.30 per transaction, +0.5% subscription payments, monthly payouts with $200 minimum, 1.5% payout fee, $15 per dispute, AI-Native analytics $17/month add-on; Enterprise: best transaction, subscription and payout rates, custom payout schedule and dispute pricing",
+      "priceUrl": "https://tiun.io/pricing",
+      "what": "Combines authentication, Merchant of Record payments, customer data and analytics in one backend with SDK and MCP integration for AI and SaaS builders.",
+      "whyDifferent": "It reduces multi-vendor integration work but concentrates payments, identity and customer data behind one platform; its maker also says hosting is not yet fully European despite the site's European-hosting claim.",
+      "isLead": false,
+      "source": "Source: Product Hunt, 15 Sep 2026 - https://www.producthunt.com/products/tiun-2"
+    }
+  ],
+  "readThrough": "Agent products are taking ownership of boundaries that used to sit outside them: runtime security on one side, and monetization and customer infrastructure on the other. Teams can move faster, but should evaluate the resulting concentration of permissions, payment obligations, data residency and recovery.",
+  "sources": {
+    "attribution": "Gemini CLI v0.60.0, 15 Sep 2026 - https://github.com/google-gemini/gemini-cli/releases/tag/v0.60.0 | Gemini CLI repository and Apache-2.0 licence, surveyed 16 Sep 2026 - https://github.com/google-gemini/gemini-cli | Gemini CLI installation requirements, surveyed 16 Sep 2026 - https://geminicli.com/docs/get-started/installation/ | Product Hunt tiun. launch, 15 Sep 2026 - https://www.producthunt.com/products/tiun-2 | tiun product page, surveyed 16 Sep 2026 - https://tiun.io/ | tiun pricing, surveyed 16 Sep 2026 - https://tiun.io/pricing",
+    "surveyDate": "2026-09-16",
+    "disclaimer": "Independent technology analysis published by Dockfinity. Every release, version, licence and figure carries the primary source it was read from."
+  }
+}
