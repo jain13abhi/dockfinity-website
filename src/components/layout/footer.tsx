@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/ui/container";
 import { Mail, Phone } from "lucide-react";
+import SocialLinks from "@/components/SocialLinks";
 
 const verticalLinks = [
     { name: "Dockware Labs", href: "/verticals/dockware-labs", color: "hover:text-blue-400" },
@@ -75,6 +76,8 @@ export function Footer() {
                                 info@dockfinity.com
                             </a>
                         </div>
+
+                        <SocialLinks />
                     </div>
 
                     {/* Links columns */}

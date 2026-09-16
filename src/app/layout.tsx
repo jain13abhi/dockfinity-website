@@ -5,6 +5,7 @@ import { Analytics } from '@vercel/analytics/next';
 import { SpeedInsights } from '@vercel/speed-insights/next';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
+import { sameAs } from '@/lib/social';
 
 const THEME_TIME_SEED_SCRIPT = `
 (function () {
@@ -98,6 +99,11 @@ const ORGANIZATION_JSON_LD = {
       areaServed: 'IN',
     },
   ],
+  // Every profile that is actually ours, so a search engine can tie them to
+  // this site rather than treating each as a stranger's page. Built from the
+  // same list the footer renders, so the two cannot disagree. Omitted
+  // entirely rather than declared empty when there is nothing to declare.
+  ...(sameAs().length > 0 ? { sameAs: sameAs() } : {}),
 };
 
 export default function RootLayout({
