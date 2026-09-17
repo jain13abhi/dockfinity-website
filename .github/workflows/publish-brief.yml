@@ -163,6 +163,38 @@ jobs:
               state_reason: 'completed',
             });
 
+      - name: Say on Telegram that it was refused
+        if: failure()
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          ISSUE: ${{ github.event.issue.number }}
+          TITLE: ${{ github.event.issue.title }}
+        run: |
+          if [ -z "$TELEGRAM_BOT_TOKEN" ] || [ -z "$TELEGRAM_CHAT_ID" ]; then
+            echo "Telegram is not configured; the issue comment is the only record."
+            exit 0
+          fi
+
+          DETAIL=$(tail -c 1200 error.txt 2>/dev/null)
+          [ -n "$DETAIL" ] || DETAIL="It failed before the brief could be checked. See the run log."
+
+          MSG=$(printf '%s\n' \
+            "Dockfinity — not published." \
+            "" \
+            "${TITLE}" \
+            "" \
+            "$DETAIL" \
+            "" \
+            "Nothing was committed and the site is unchanged." \
+            "https://github.com/${GITHUB_REPOSITORY}/issues/${ISSUE}")
+
+          curl -sS -o /dev/null -X POST \
+            "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+            --data-urlencode "text=${MSG}" \
+            --data-urlencode "disable_web_page_preview=true"
+
       - name: Report the failure on the issue
         if: failure()
         uses: actions/github-script@v7
