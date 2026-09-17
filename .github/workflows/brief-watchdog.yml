@@ -10,9 +10,16 @@ name: Did today's brief arrive
 
 on:
   schedule:
-    # 07:00 UTC is 12:30 IST — an hour and a half after the later of the two
-    # runs, which leaves room for a late task and the bridge's ten-minute tick.
-    - cron: "0 7 * * *"
+    # 06:43 UTC is 12:13 IST, an hour and a bit after the later morning run.
+    #
+    # Deliberately not on the hour. A scheduled workflow is best effort and
+    # GitHub delays the ones queued at :00 the most - on 17 September this
+    # fired at 12:30 UTC against a 07:00 cron, five and a half hours late, so
+    # the alarm arrived at six in the evening.
+    #
+    # Even off the hour this is approximate. Treat it as the backstop; the
+    # punctual check is the Apps Script one, which runs every ten minutes.
+    - cron: "43 6 * * *"
   workflow_dispatch:
 
 permissions:
