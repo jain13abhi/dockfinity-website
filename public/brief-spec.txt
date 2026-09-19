@@ -71,9 +71,18 @@ in the next run.
 
   An item is late only once. If it was carried in an earlier run, it is done.
 
-AT MOST SIX ITEMS across all lanes. In practice a good day is two or three.
-Six is a ceiling, not a target, and a brief padded to reach it is worse than a
-short one.
+AT MOST THREE ITEMS across all lanes, and at least one.
+
+  This is the slide, not a preference. The brief renders as a single image
+  with a fixed card region, and that region holds one, two or three cards.
+  A fourth is refused and the day does not publish.
+
+  An older version of these rules said six. That came from a carousel layout
+  this brief no longer uses, and it was wrong: every one of the eight briefs
+  published so far carried two or three.
+
+  Two or three is a good day. A brief padded to reach three is worse than a
+  short one, and one strong item beats three weak ones.
 
 
 2. SCOPE — THE FOUR LANES
@@ -299,8 +308,19 @@ and no direction, metricType or section field on an item. Do not import them.
                 Count the characters and print the count in the self-check.
   accentPhrase  a phrase that ALREADY EXISTS inside thesis, word for word.
                 The slide colours it in place. It is never a phrase written in
-                order to be accented, and the validator checks that thesis
-                contains it exactly.
+                order to be accented.
+
+                THREE TO FIVE WORDS. Not two, not six. The renderer enforces
+                this and the website's validator does not, so a six-word
+                phrase passes every check and then kills the image. It did
+                exactly that on 17 and 18 September 2026.
+
+                It must appear EXACTLY ONCE in the thesis, and it must start
+                and end on word boundaries - a phrase that begins or ends in
+                the middle of a word is refused.
+
+                The eight briefs published so far all used four words, give
+                or take one.
   sections      array naming only the sections that carried an item today,
                 each one of: TOOLING | TEARDOWN | CREDITS | PRICING.
                 A section the brief skipped does not appear.
@@ -439,8 +459,22 @@ concern and none of it can block the brief.
 
 The two things you do owe the image are ordinary content rules:
 
-  - accentPhrase is a phrase that already exists in the thesis sentence
+  - accentPhrase is a phrase that already exists in the thesis sentence,
+    three to five words long
   - no method language anywhere, because it would be printed
+  - one, two or three items, never four
+
+WHAT THE IMAGE COMFORTABLY HOLDS. These are not limits the renderer checks
+one by one; they are the sizes the eight published briefs actually used, and
+the layout was built around them. Write to these and the image renders. Write
+far past them and the column overfills and the day is refused.
+
+  thesis         38 to 56 characters   (58 is the hard ceiling)
+  accentPhrase   3 to 5 words          (enforced)
+  readThrough    225 to 324 characters
+  what           80 to 200 characters per item
+  whyDifferent   120 to 350 characters per item
+  platform       20 to 65 characters
 
 
 8. SELF-CHECK
@@ -462,6 +496,9 @@ pass on a check you did not run is worse than reporting a failure.
   7. Exactly one item has isLead true. Print the item's name.
   8. accentPhrase appears verbatim inside thesis. Print both.
   8a. The thesis is 58 characters or fewer. Print the count.
+  8b. accentPhrase is three to five words and appears exactly once in the
+      thesis. Print the phrase and its word count.
+  8c. There are one, two or three items. Print the count.
   9. sections names only the sections that carried an item today.
  10. The disclaimer matches the required string character for character.
  11. Nothing from the confidential, method or pipeline-leakage lists appears
