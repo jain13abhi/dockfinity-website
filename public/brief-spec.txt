@@ -282,7 +282,21 @@ and no direction, metricType or section field on an item. Do not import them.
   date          run date, YYYY-MM-DD, matching the filename
   title         the day's thesis as a short headline
   summary       one or two sentences, used for meta tags and RSS
-  thesis        the connecting thread, one sentence
+  thesis        the connecting thread, one sentence, AT MOST 58 CHARACTERS.
+
+                This is a hard limit and the slide enforces it. The thesis is
+                the hero line, set at a fixed 54px on every slide, and at
+                that size 58 characters is two lines and 66 is three. Three
+                does not fit above the content region and the render is
+                refused, so the brief does not publish.
+
+                The eight briefs published so far run between 38 and 56
+                characters. Aim there. "Agent workflows are absorbing
+                infrastructure boundaries." is 56 and renders with 4px to
+                spare. On 17 September 2026 an 86-character thesis cost the
+                whole day.
+
+                Count the characters and print the count in the self-check.
   accentPhrase  a phrase that ALREADY EXISTS inside thesis, word for word.
                 The slide colours it in place. It is never a phrase written in
                 order to be accented, and the validator checks that thesis
@@ -447,6 +461,7 @@ pass on a check you did not run is worse than reporting a failure.
   6. No placeholder stands in for a figure anywhere.
   7. Exactly one item has isLead true. Print the item's name.
   8. accentPhrase appears verbatim inside thesis. Print both.
+  8a. The thesis is 58 characters or fewer. Print the count.
   9. sections names only the sections that carried an item today.
  10. The disclaimer matches the required string character for character.
  11. Nothing from the confidential, method or pipeline-leakage lists appears
