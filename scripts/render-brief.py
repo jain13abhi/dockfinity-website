@@ -76,10 +76,18 @@ def display_date(iso: str) -> str:
 def build_brief(brief: dict) -> dict:
     """Map the published brief onto the dictionary the renderer expects."""
     items = brief["items"]
-    if not 1 <= len(items) <= 3:
+    # Two, not one. A single card leaves the left column 675px tall with
+    # about 100px in it, and the renderer refuses a column that empty - the
+    # message it gives is a spacing figure in pixels, which nobody can act
+    # on. Three briefs were refused that way on 19 September 2026. Say it
+    # here instead, in items, before anything is drawn.
+    if not 2 <= len(items) <= 3:
         raise SystemExit(
-            f"{len(items)} items. The single layout holds one to three; a carousel "
-            f"needs its own slide_count. Nothing rendered."
+            f"{len(items)} item(s). The slide holds two or three.
+"
+            f"One card cannot fill the left column and the render is refused; "
+            f"four do not fit.
+Add or drop an item. Nothing was rendered."
         )
 
     accent = brief.get("accentPhrase")

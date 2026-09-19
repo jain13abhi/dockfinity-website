@@ -71,11 +71,18 @@ in the next run.
 
   An item is late only once. If it was carried in an earlier run, it is done.
 
-AT MOST THREE ITEMS across all lanes, and at least one.
+TWO OR THREE ITEMS across all lanes. Never one, never four.
 
   This is the slide, not a preference. The brief renders as a single image
-  with a fixed card region, and that region holds one, two or three cards.
-  A fourth is refused and the day does not publish.
+  with a fixed card region.
+
+  ONE ITEM IS NOT ENOUGH. The card carries only the metadata - name, version,
+  licence, platform - so a single card is about 100px of content in a column
+  675px tall, and the renderer refuses a column that empty. On 19 September
+  2026 all three backfill briefs were refused for exactly this, after a
+  rewrite dropped their second item.
+
+  FOUR DO NOT FIT. The region holds three.
 
   An older version of these rules said six. That came from a carousel layout
   this brief no longer uses, and it was wrong: every one of the eight briefs
@@ -498,7 +505,7 @@ pass on a check you did not run is worse than reporting a failure.
   8a. The thesis is 58 characters or fewer. Print the count.
   8b. accentPhrase is three to five words and appears exactly once in the
       thesis. Print the phrase and its word count.
-  8c. There are one, two or three items. Print the count.
+  8c. There are two or three items, never one. Print the count.
   9. sections names only the sections that carried an item today.
  10. The disclaimer matches the required string character for character.
  11. Nothing from the confidential, method or pipeline-leakage lists appears
