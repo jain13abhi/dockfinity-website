@@ -1,0 +1,61 @@
+{
+  "date": "2026-09-17",
+  "title": "Test the boundaries, not just the model",
+  "summary": "Cline hardens a Windows execution boundary while MCPJam turns cross-client MCP behavior into a testing workflow. Both matter where plausible agent output meets real tools.",
+  "thesis": "Agent safety is moving into execution boundaries.",
+  "accentPhrase": "moving into execution boundaries",
+  "sections": [
+    "TOOLING",
+    "TEARDOWN"
+  ],
+  "items": [
+    {
+      "name": "Cline",
+      "kind": "tooling",
+      "version": "v4.1.19",
+      "releaseDate": "2026-09-17",
+      "licence": "Apache-2.0",
+      "platform": "VS Code extension and JetBrains integration; Windows-specific executable-search fix.",
+      "repoUrl": "https://github.com/cline/cline",
+      "releaseUrl": "https://github.com/cline/cline/releases/tag/v4.1.19",
+      "what": "Cline v4.1.19 prevents Windows workspace-local executables from shadowing system tools and improves long-task context compaction.",
+      "whyDifferent": "The security fix applies in both VS Code and JetBrains; teams reviewing agent safety should test executable resolution as well as model behavior.",
+      "isLead": true,
+      "source": "Source: Cline v4.1.19 release notes, 17 Sep 2026 - https://github.com/cline/cline/releases/tag/v4.1.19"
+    },
+    {
+      "name": "MCPJam",
+      "kind": "teardown",
+      "releaseDate": "2026-09-17",
+      "platform": "Web, local CLI and desktop apps for macOS and Windows.",
+      "productUrl": "https://www.mcpjam.com/features/cross-client-testing",
+      "price": "Free $0/month, 200 credits/day; Pro $24/month billed annually ($288/year), 5,000 credits/month; Team $199/month billed annually ($2,388/year), 50,000 credits/month; Enterprise custom. Unlimited seats on all tiers. Top-ups per 1,000 credits: Pro $10, Team $9, Enterprise $10.",
+      "priceUrl": "https://www.mcpjam.com/pricing",
+      "what": "MCPJam expands MCP-server testing into cross-client evaluations, simulated user journeys and CI/CD gates.",
+      "whyDifferent": "It tests how outside AI clients use your server rather than only evaluating an agent you control; the paid buyer is the team maintaining that integration.",
+      "isLead": false,
+      "source": "Source: MCPJam maker launch post, 17 Sep 2026 - https://www.producthunt.com/products/mcpjam-inspector"
+    }
+  ],
+  "readThrough": "Agent-facing teams should separate model-quality tests from execution-boundary and client-behavior tests. A correct tool response is not, by itself, evidence that the whole user journey succeeded.",
+  "social": {
+    "linkedin": "The failure boundary for an agent is often outside the model.\n\nCline v4.1.19 addresses Windows executable resolution and improves context compaction for long tasks. MCPJam's launch takes a different angle: testing how the same MCP server behaves across clients, then turning those user journeys into repeatable evaluations and release gates.\n\nThe useful distinction is between a tool responding correctly and a user completing the intended task. Those are not interchangeable acceptance criteria. A clean API response can still leave the surrounding workflow wrong.\n\nFor teams shipping agent-facing products, the practical move is to write tests around the handoffs: which executable runs, which tool gets selected, and whether the interaction ends in the expected outcome. Keep model-quality evaluation, but add the surrounding execution and client behavior to the release checklist.\n\nSources: Cline v4.1.19 release notes; MCPJam launch and product pages.",
+    "instagram": "Agent reliability depends on more than the model.\nCline v4.1.19 hardens Windows executable lookup.\nMCPJam turns cross-client MCP journeys into repeatable tests and release gates.\nSources: Cline release notes; MCPJam.",
+    "x": "Agent reliability lives at the handoffs. Cline v4.1.19 hardens Windows executable lookup; MCPJam adds cross-client testing and release gates for MCP servers. Sources: Cline release notes; MCPJam.",
+    "hashtags": [
+      "#Dockfinity",
+      "#DeveloperTools",
+      "#AIAgents",
+      "#MCP",
+      "#SoftwareTesting",
+      "#Cline",
+      "#MCPJam",
+      "#AgentReliability"
+    ]
+  },
+  "sources": {
+    "attribution": "Cline release notes, 17 Sep 2026 - https://github.com/cline/cline/releases/tag/v4.1.19; Cline repository and licence, accessed 20 Sep 2026 - https://github.com/cline/cline; MCPJam launch listing, 17 Sep 2026 - https://www.producthunt.com/leaderboard/daily/2026/9/17; MCPJam maker launch post, 17 Sep 2026 - https://www.producthunt.com/products/mcpjam-inspector; MCPJam product and platforms, accessed 20 Sep 2026 - https://www.mcpjam.com/; MCPJam cross-client testing, accessed 20 Sep 2026 - https://www.mcpjam.com/features/cross-client-testing; MCPJam pricing, accessed 20 Sep 2026 - https://www.mcpjam.com/pricing",
+    "surveyDate": "2026-09-17",
+    "disclaimer": "Independent technology analysis published by Dockfinity. Every release, version, licence and figure carries the primary source it was read from."
+  }
+}
