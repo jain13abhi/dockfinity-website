@@ -75,9 +75,31 @@ ${describe(urls)}`);
 
   const filePath = path.join(CONTENT_DIR, `${brief.date}.json`);
   const existed = fs.existsSync(filePath);
+  const contents = `${JSON.stringify(brief, null, 2)}\n`;
+
+  // Replacing a brief that is already published is a correction, and a
+  // correction is something somebody decided to make. It must say so.
+  //
+  // Ported from Metal Dock, where on 19 September 2026 the day's brief
+  // published at 10:11 and a second run at 11:01 quietly overwrote it with
+  // a thinner one. Both were valid, both passed every check, and the only
+  // outward sign was a second Telegram message that looked like the first.
+  if (existed && fs.readFileSync(filePath, "utf-8") !== contents) {
+    if (!/^\s*CORRECTION:/m.test(body)) {
+      throw new Error(
+        `${brief.date} is already published and this differs from what is ` +
+          `on the site, so nothing was written.\n\n` +
+          `If this is a deliberate correction, put a line beginning ` +
+          `"CORRECTION:" in the issue, outside the JSON fence, saying what ` +
+          `is being corrected and why.\n\n` +
+          `If you did not mean to file this date twice, the brief on the ` +
+          `site is the one that stands and there is nothing to do.`
+      );
+    }
+  }
 
   fs.mkdirSync(CONTENT_DIR, { recursive: true });
-  fs.writeFileSync(filePath, `${JSON.stringify(brief, null, 2)}\n`, "utf-8");
+  fs.writeFileSync(filePath, contents, "utf-8");
 
   const relative = path.relative(process.cwd(), filePath).split(path.sep).join("/");
 
