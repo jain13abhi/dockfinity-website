@@ -83,11 +83,10 @@ def build_brief(brief: dict) -> dict:
     # here instead, in items, before anything is drawn.
     if not 2 <= len(items) <= 3:
         raise SystemExit(
-            f"{len(items)} item(s). The slide holds two or three.
-"
-            f"One card cannot fill the left column and the render is refused; "
-            f"four do not fit.
-Add or drop an item. Nothing was rendered."
+            f"{len(items)} item(s). The slide holds two or three. "
+            f"One card cannot fill the left column and the render is "
+            f"refused; four do not fit.\nAdd or drop an item. "
+            f"Nothing was rendered."
         )
 
     accent = brief.get("accentPhrase")
