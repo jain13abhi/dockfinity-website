@@ -139,6 +139,37 @@ test("generateBrief retries one malformed layout draft with explicit correction"
   assert.match(calls[3].contents[0].parts[0].text, /readThrough is 339 characters/i);
 });
 
+test("generateBrief deterministically pads a short readThrough without inventing facts", async () => {
+  const calls = [];
+  const fakeFetch = async (_url, options) => {
+    calls.push(JSON.parse(options.body));
+    const text = calls.length === 1
+      ? "verified research dossier"
+      : JSON.stringify({
+          date: "2026-09-20",
+          thesis: "A concise layout-safe thesis",
+          readThrough: "x".repeat(198),
+        });
+    return {
+      ok: true,
+      json: async () => ({ candidates: [{ content: { parts: [{ text }] } }] }),
+    };
+  };
+
+  const result = await generateBrief({
+    apiKey: "test-key",
+    date: "2026-09-20",
+    specification: "SPEC",
+    publishedNames: [],
+    evidence: "PRIMARY RELEASE EVIDENCE",
+    fetchImpl: fakeFetch,
+  });
+
+  assert.equal(calls.length, 2);
+  assert.ok(result.readThrough.length >= 260 && result.readThrough.length <= 324);
+  assert.match(result.readThrough, /teams should/i);
+});
+
 test("generateBrief fails before making a request when the free-tier key is missing", async () => {
   let called = false;
   await assert.rejects(

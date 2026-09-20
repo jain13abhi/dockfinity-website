@@ -24,6 +24,7 @@ Date: 20 September 2026
 | Fixed two-line thesis header | Live run `35506527470` failed closed when a 62-character thesis wrapped to three lines; the retry test failed because only read-through length was guarded | The same pre-render correction loop now rejects thesis copy above the renderer's 58-character ceiling |
 | Bounded multi-defect correction | Live run `35506826373` corrected the thesis but its second and final draft overshot read-through to 339 characters; the expanded regression then failed after that second draft | The bounded draft budget is now three attempts, enough to feed the second deterministic defect back once without permitting an open-ended API loop |
 | Exact GitHub tags containing `/` | Live run `35507044504` failed closed on GitHub's valid scoped tag `%40langchain/vue%401.1.1`; the new validator test reproduced the rejection | The exact `/releases/tag/` rule now accepts the complete non-whitespace tag suffix while continuing to reject the releases index |
+| Free-model character counting | Live run `35507390577` exhausted three drafts with a final 198-character read-through; the new normalizer test reproduced that failure | Short editorial copy is now extended with the shortest neutral adoption-check clause that reaches 260–324 characters; it adds no product fact and makes no additional API call |
 
 `npm run test:coverage` reported 96.08% line, 74.70% branch and 85.00%
 function coverage for the tested runtime modules. The production Next.js build
