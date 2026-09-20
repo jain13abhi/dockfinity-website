@@ -15,12 +15,17 @@ test("parseResearchIssueTitle accepts only an ISO-dated research issue", () => {
   assert.throws(() => parseResearchIssueTitle("research: 20-09-2026"), /YYYY-MM-DD/);
 });
 
-test("research request enables Google Search without asking for structured output", () => {
-  const request = buildResearchRequest({ date: "2026-09-20", specification: "SPEC" });
+test("research request uses the collected evidence packet without a paid search tool", () => {
+  const request = buildResearchRequest({
+    date: "2026-09-20",
+    specification: "SPEC",
+    evidence: "PRIMARY RELEASE EVIDENCE",
+  });
 
-  assert.deepEqual(request.tools, [{ google_search: {} }]);
+  assert.equal(request.tools, undefined);
   assert.match(request.contents[0].parts[0].text, /2026-09-20/);
   assert.match(request.contents[0].parts[0].text, /SPEC/);
+  assert.match(request.contents[0].parts[0].text, /PRIMARY RELEASE EVIDENCE/);
   assert.equal(request.generationConfig?.responseMimeType, undefined);
 });
 
@@ -65,15 +70,16 @@ test("generateBrief performs a grounded research pass then a structured drafting
     date: "2026-09-20",
     specification: "SPEC",
     publishedNames: [],
+    evidence: "PRIMARY RELEASE EVIDENCE",
     fetchImpl: fakeFetch,
   });
 
   assert.deepEqual(result, { date: "2026-09-20" });
   assert.equal(calls.length, 2);
-  assert.match(calls[0].url, /gemini-2\.5-flash-lite:generateContent$/);
-  assert.match(calls[1].url, /gemini-2\.5-flash-lite:generateContent$/);
+  assert.match(calls[0].url, /gemini-3\.5-flash-lite:generateContent$/);
+  assert.match(calls[1].url, /gemini-3\.5-flash-lite:generateContent$/);
   assert.equal(calls[0].options.headers["x-goog-api-key"], "test-key");
-  assert.deepEqual(calls[0].body.tools, [{ google_search: {} }]);
+  assert.equal(calls[0].body.tools, undefined);
   assert.equal(calls[1].body.generationConfig.responseMimeType, "application/json");
 });
 
@@ -85,6 +91,7 @@ test("generateBrief fails before making a request when the free-tier key is miss
       date: "2026-09-20",
       specification: "SPEC",
       publishedNames: [],
+      evidence: "PRIMARY RELEASE EVIDENCE",
       fetchImpl: async () => {
         called = true;
       },
@@ -101,8 +108,9 @@ test("generateBrief identifies the model when the network request fails", async 
       date: "2026-09-20",
       specification: "SPEC",
       publishedNames: [],
+      evidence: "PRIMARY RELEASE EVIDENCE",
       fetchImpl: async () => { throw new Error("offline"); },
     }),
-    /gemini-2\.5-flash-lite request failed before a response: offline/
+    /gemini-3\.5-flash-lite request failed before a response: offline/
   );
 });

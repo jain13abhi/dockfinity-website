@@ -21,14 +21,16 @@ Date: 20 September 2026
 | Validator loads across ESM/tsx module shapes | Reproduced named-export runtime failure | Native ESM, CommonJS shape and missing-export tests passed |
 | Production filing specification names the new route | Filing-contract test failed on the former Gmail instructions | Filing-contract test passed after section 9 changed |
 
-`npm run test:coverage` reported 96.34% line, 89.80% branch and 92.31%
+`npm run test:coverage` reported 97.36% line, 77.14% branch and 84.21%
 function coverage for the tested runtime modules. The production Next.js build
 completed successfully. Changed scripts passed ESLint.
 
-The first controlled GitHub request proved that Google no longer exposes
-`gemini-2.5-flash` to new API users. A regression test was changed first and
-failed against that default; the runtime then moved the grounded research pass
-to `gemini-2.5-flash-lite`, which Google still documents with free-tier Google
-Search grounding. The separate schema pass continues to use Flash-Lite.
+The first two controlled GitHub requests proved that Google no longer exposes
+either Gemini 2.5 Flash model to new API users. New tests were written first
+for a no-paid-search evidence boundary and failed against the old defaults.
+The runtime now gathers primary GitHub release evidence itself and uses the
+current free `gemini-3.5-flash-lite` for separate analysis and schema passes.
+The collector was also exercised against live GitHub data and returned 13
+eligible release records for the target date.
 
 Implementation checkpoint: `0724471` (`feat: add Gemini research runtime`).
