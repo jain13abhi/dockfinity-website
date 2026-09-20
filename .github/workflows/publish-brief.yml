@@ -1,9 +1,11 @@
-name: Publish discovery brief
+name: Research and publish discovery brief
 
-# Paste the day's section 7 JSON into an issue titled "brief: <date>".
-# This validates it with the site's own validator, renders the day's slide,
-# and commits both to the repository. A bad brief is reported on the issue
-# and never lands.
+# Production route: Apps Script opens "research: <date>". Gemini researches
+# and drafts the JSON here, then the site's own validator checks it, the fixed
+# renderer draws the slide, and both files are committed together.
+#
+# Recovery route: paste JSON into "brief: <date>". It skips Gemini and enters
+# the same validation/render/publication path.
 #
 # The render runs in this job rather than in a workflow of its own, because a
 # commit made with GITHUB_TOKEN does not trigger other workflows — a separate
@@ -11,7 +13,7 @@ name: Publish discovery brief
 
 on:
   issues:
-    types: [opened, edited]
+    types: [opened, edited, reopened]
 
 permissions:
   contents: write
@@ -28,7 +30,9 @@ env:
 
 jobs:
   publish:
-    if: startsWith(github.event.issue.title, 'brief:')
+    if: >-
+      startsWith(github.event.issue.title, 'research:') ||
+      startsWith(github.event.issue.title, 'brief:')
     runs-on: ubuntu-latest
 
     steps:
@@ -42,13 +46,24 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Research and draft with Gemini
+        if: startsWith(github.event.issue.title, 'research:')
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          RESEARCH_TITLE: ${{ github.event.issue.title }}
+        run: |
+          set -o pipefail
+          npx --no-install tsx scripts/research-brief.mjs --out generated-brief.json \
+            2>error.txt | tee research.txt
+
       - name: Validate and write the brief
         id: publish
         env:
           BRIEF_BODY: ${{ github.event.issue.body }}
+          BRIEF_FILE: ${{ startsWith(github.event.issue.title, 'research:') && 'generated-brief.json' || '' }}
         run: |
           set -o pipefail
-          npx --yes tsx scripts/publish-brief.mjs 2>error.txt | tee result.txt
+          npx --no-install tsx scripts/publish-brief.mjs 2>error.txt | tee result.txt
 
       - name: Read what was written
         id: meta
@@ -216,6 +231,8 @@ jobs:
                 detail,
                 '```',
                 '',
-                'Fix the JSON and edit this issue — the check runs again on every edit.',
+                context.payload.issue.title.startsWith('research:')
+                  ? 'Edit this issue to retry after fixing the reported configuration, quota or evidence problem.'
+                  : 'Fix the JSON and edit this issue — the check runs again on every edit.',
               ].join('\n'),
             });

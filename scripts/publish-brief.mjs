@@ -11,8 +11,9 @@
 
 import fs from "node:fs";
 import path from "node:path";
-import { validateDiscoveryBrief } from "../src/lib/discovery.ts";
 import { checkUrls, describe } from "./check-urls.mjs";
+import { loadDiscoveryValidator } from "./discovery-validator.mjs";
+import { readBriefInput } from "./publish-brief-input.mjs";
 
 const CONTENT_DIR = path.join(process.cwd(), "content", "discovery");
 
@@ -34,10 +35,8 @@ function extractJson(body) {
 }
 
 async function main() {
-  const body = process.env.BRIEF_BODY;
-  if (!body || !body.trim()) {
-    throw new Error("The issue body is empty. Paste the section 7 JSON into it.");
-  }
+  const body = readBriefInput();
+  const validateDiscoveryBrief = await loadDiscoveryValidator();
 
   const raw = extractJson(body);
 
