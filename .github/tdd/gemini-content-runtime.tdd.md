@@ -23,6 +23,7 @@ Date: 20 September 2026
 | Fixed-panel read-through fit | Live run `35504714197` reached the renderer but failed with a 340 px panel against its 355 px minimum; the new regression test then failed because no length contract existed | The schema description and prompt now require 260–324 characters, and the adapter retries one rejected draft with the exact deterministic failure |
 | Fixed two-line thesis header | Live run `35506527470` failed closed when a 62-character thesis wrapped to three lines; the retry test failed because only read-through length was guarded | The same pre-render correction loop now rejects thesis copy above the renderer's 58-character ceiling |
 | Bounded multi-defect correction | Live run `35506826373` corrected the thesis but its second and final draft overshot read-through to 339 characters; the expanded regression then failed after that second draft | The bounded draft budget is now three attempts, enough to feed the second deterministic defect back once without permitting an open-ended API loop |
+| Exact GitHub tags containing `/` | Live run `35507044504` failed closed on GitHub's valid scoped tag `%40langchain/vue%401.1.1`; the new validator test reproduced the rejection | The exact `/releases/tag/` rule now accepts the complete non-whitespace tag suffix while continuing to reject the releases index |
 
 `npm run test:coverage` reported 96.08% line, 74.70% branch and 85.00%
 function coverage for the tested runtime modules. The production Next.js build
