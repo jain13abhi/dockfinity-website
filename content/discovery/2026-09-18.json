@@ -1,0 +1,75 @@
+{
+  "date": "2026-09-18",
+  "title": "Terminal agents absorb project instructions and sandbox rules",
+  "summary": "Claude Code and Codex both land targeted terminal updates while UV expands python packaging controls.",
+  "thesis": "Terminal coding agents tighten project configurations.",
+  "accentPhrase": "Terminal coding agents",
+  "sections": [
+    "TOOLING"
+  ],
+  "items": [
+    {
+      "name": "claude-code",
+      "kind": "tooling",
+      "version": "v2.1.277",
+      "releaseDate": "2026-09-18",
+      "licence": "NOASSERTION",
+      "platform": "Darwin, Linux, Windows",
+      "repoUrl": "https://github.com/anthropics/claude-code",
+      "releaseUrl": "https://github.com/anthropics/claude-code/releases/tag/v2.1.277",
+      "what": "Agentic coding tool that runs in the terminal and executes natural language commands.",
+      "whyDifferent": "Adds AGENTS.md support as a fallback project instruction source when CLAUDE.md is absent.",
+      "isLead": true,
+      "source": "Source: anthropics/claude-code, 18 Sep 2026 - https://github.com/anthropics/claude-code/releases/tag/v2.1.277"
+    },
+    {
+      "name": "codex",
+      "kind": "tooling",
+      "version": "rust-v0.155.1",
+      "releaseDate": "2026-09-18",
+      "licence": "Apache-2.0",
+      "platform": "Darwin, Linux, Windows",
+      "repoUrl": "https://github.com/openai/codex",
+      "releaseUrl": "https://github.com/openai/codex/releases/tag/rust-v0.155.1",
+      "what": "Lightweight coding agent that runs in the terminal.",
+      "whyDifferent": "Disables reasoning summaries by default for new local TUI sessions to prevent provider rejections.",
+      "isLead": false,
+      "source": "Source: openai/codex, 18 Sep 2026 - https://github.com/openai/codex/releases/tag/rust-v0.155.1"
+    },
+    {
+      "name": "uv",
+      "kind": "tooling",
+      "version": "0.12.17",
+      "releaseDate": "2026-09-18",
+      "licence": "Apache-2.0",
+      "platform": "Darwin, Linux, Windows",
+      "repoUrl": "https://github.com/astral-sh/uv",
+      "releaseUrl": "https://github.com/astral-sh/uv/releases/tag/0.12.17",
+      "what": "Extremely fast Python package and project manager written in Rust.",
+      "whyDifferent": "Adds minimum glibc and musl version constraints for universal resolutions and fixes lockfile git paths.",
+      "isLead": false,
+      "source": "Source: astral-sh/uv, 18 Sep 2026 - https://github.com/astral-sh/uv/releases/tag/0.12.17"
+    }
+  ],
+  "readThrough": "Terminal development tooling is rapidly standardising around explicit configuration contracts. As coding agents take on larger multi-file workflows, structured instruction files and robust environment boundaries keep execution deterministic and predictable across disparate developer environments.",
+  "social": {
+    "linkedin": "Terminal coding agents and package managers are refining their configuration boundaries. Claude Code introduces fallback support for AGENTS.md project instructions, Codex adjusts TUI reasoning defaults to prevent upstream request failures, and uv adds libc version controls for universal Python resolutions. Together, these updates help engineering teams maintain predictable agent behaviour and dependency resolution across heterogeneous developer environments.",
+    "instagram": "Terminal coding agents tighten configurations: Claude Code adds AGENTS.md support, Codex refines TUI reasoning defaults, and uv adds libc version constraints.",
+    "x": "Terminal agents refine configurations as Claude Code adds AGENTS.md support, Codex adjusts reasoning defaults, and uv tightens Python packaging rules.",
+    "hashtags": [
+      "#DeveloperTools",
+      "#Python",
+      "#ArtificialIntelligence",
+      "#SoftwareEngineering",
+      "#OpenSource",
+      "#DevOps",
+      "#CodingAgents",
+      "#Programming"
+    ]
+  },
+  "sources": {
+    "attribution": "anthropics/claude-code release v2.1.277 (https://github.com/anthropics/claude-code/releases/tag/v2.1.277); openai/codex release rust-v0.155.1 (https://github.com/openai/codex/releases/tag/rust-v0.155.1); astral-sh/uv release 0.12.17 (https://github.com/astral-sh/uv/releases/tag/0.12.17)",
+    "surveyDate": "2026-09-18",
+    "disclaimer": "Independent technology analysis published by Dockfinity. Every release, version, licence and figure carries the primary source it was read from."
+  }
+}
