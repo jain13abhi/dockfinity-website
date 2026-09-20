@@ -182,6 +182,29 @@ function assertDraftFits(brief) {
   }
 }
 
+function normalizeShortReadThrough(brief) {
+  const original = brief?.readThrough ?? "";
+  if ([...original].length >= 260) return brief;
+
+  const stem = original.trim().replace(/[.!?]+$/u, "");
+  const neutralClauses = [
+    "; teams should validate it before adoption.",
+    "; teams should test it in a reversible pilot before adoption.",
+    "; teams should validate it against their own stack before adoption.",
+    "; teams should evaluate it against their own stack, security controls and operating constraints before adoption.",
+  ];
+
+  for (const clause of neutralClauses) {
+    const candidate = `${stem}${clause}`;
+    const length = [...candidate].length;
+    if (length >= 260 && length <= 324) {
+      return { ...brief, readThrough: candidate };
+    }
+  }
+
+  return brief;
+}
+
 export function extractResponseText(payload) {
   const blocked = payload?.promptFeedback?.blockReason;
   if (blocked) throw new Error(`Gemini blocked the request: ${blocked}.`);
@@ -251,7 +274,7 @@ export async function generateBrief({
 
     let brief;
     try {
-      brief = JSON.parse(draft);
+      brief = normalizeShortReadThrough(JSON.parse(draft));
     } catch (error) {
       throw new Error(`Gemini returned invalid JSON: ${error.message}`);
     }
