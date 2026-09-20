@@ -1,0 +1,61 @@
+{
+  "date": "2026-09-20",
+  "title": "Structured Tracing and Stable Workflows",
+  "summary": "LangChain.js lands structured tool argument tracing while n8n patches critical instance key encryption bugs in stable.",
+  "thesis": "Agent runtimes solidify structured tracing boundaries.",
+  "accentPhrase": "structured tracing boundaries",
+  "sections": [
+    "TOOLING"
+  ],
+  "items": [
+    {
+      "name": "langchainjs",
+      "kind": "tooling",
+      "version": "@langchain/core@1.2.12",
+      "releaseDate": "2026-09-20",
+      "licence": "MIT",
+      "platform": "Node.js, TypeScript",
+      "repoUrl": "https://github.com/langchain-ai/langchainjs",
+      "releaseUrl": "https://github.com/langchain-ai/langchainjs/releases/tag/%40langchain%2Fcore%401.2.12",
+      "what": "Preserves structured tool arguments directly in tracer run inputs.",
+      "whyDifferent": "Ensures downstream observers inspect exact payloads without serialisation loss.",
+      "isLead": true,
+      "source": "Source: langchain-ai/langchainjs, 20 Sep 2026 - https://github.com/langchain-ai/langchainjs/releases/tag/%40langchain%2Fcore%401.2.12"
+    },
+    {
+      "name": "n8n",
+      "kind": "tooling",
+      "version": "2.39.8",
+      "releaseDate": "2026-09-18",
+      "licence": "NOASSERTION",
+      "platform": "Node.js, Docker, self-hosted",
+      "repoUrl": "https://github.com/n8n-io/n8n",
+      "releaseUrl": "https://github.com/n8n-io/n8n/releases/tag/stable",
+      "what": "Repairs data-encryption keys stored as raw instance keys and sweeps parked sub-execution parents.",
+      "whyDifferent": "Secures multi-tenant instance key handling and prevents dangling sub-workflow deadlocks.",
+      "isLead": false,
+      "source": "Source: n8n-io/n8n, 18 Sep 2026 - https://github.com/n8n-io/n8n/releases/tag/stable"
+    }
+  ],
+  "readThrough": "Agent instrumentation requires precise payload visibility. These updates ensure that tracing systems retain structured tool inputs and workflow engines preserve encryption integrity under load; teams should evaluate it against their own stack, security controls and operating constraints before adoption.",
+  "social": {
+    "linkedin": "Agent runtimes solidify structured tracing boundaries. LangChain.js version @langchain/core@1.2.12 preserves structured tool arguments in tracer run inputs, ensuring downstream observability platforms inspect exact payloads without format loss. Meanwhile, n8n stable 2.39.8 fixes data-encryption keys stored as raw instance keys and resolves sub-execution sweep leaks. Engineering teams building agentic loops rely on exact audit trails and secure instance state; these updates address silent telemetry gaps and key management risks across distributed node environments.",
+    "instagram": "Agent runtimes solidify structured tracing boundaries. LangChain.js @langchain/core@1.2.12 preserves structured tool arguments in tracer inputs, and n8n 2.39.8 repairs raw instance encryption keys.",
+    "x": "Agent runtimes solidify structured tracing boundaries with langchainjs preserving tool arguments and n8n patching encryption keys.",
+    "hashtags": [
+      "#AgenticAI",
+      "#TypeScript",
+      "#WorkflowAutomation",
+      "#Observability",
+      "#DevOps",
+      "#OpenSource",
+      "#SoftwareEngineering",
+      "#Backend"
+    ]
+  },
+  "sources": {
+    "attribution": "langchain-ai/langchainjs release @langchain/core@1.2.12 published 20 Sep 2026 - https://github.com/langchain-ai/langchainjs/releases/tag/%40langchain%2Fcore%401.2.12; n8n-io/n8n release stable (2.39.8) published 18 Sep 2026 - https://github.com/n8n-io/n8n/releases/tag/stable",
+    "surveyDate": "2026-09-20",
+    "disclaimer": "Independent technology analysis published by Dockfinity. Every release, version, licence and figure carries the primary source it was read from."
+  }
+}
