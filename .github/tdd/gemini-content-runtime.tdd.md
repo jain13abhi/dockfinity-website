@@ -21,8 +21,9 @@ Date: 20 September 2026
 | Validator loads across ESM/tsx module shapes | Reproduced named-export runtime failure | Native ESM, CommonJS shape and missing-export tests passed |
 | Production filing specification names the new route | Filing-contract test failed on the former Gmail instructions | Filing-contract test passed after section 9 changed |
 | Fixed-panel read-through fit | Live run `35504714197` reached the renderer but failed with a 340 px panel against its 355 px minimum; the new regression test then failed because no length contract existed | The schema description and prompt now require 260–324 characters, and the adapter retries one rejected draft with the exact deterministic failure |
+| Fixed two-line thesis header | Live run `35506527470` failed closed when a 62-character thesis wrapped to three lines; the retry test failed because only read-through length was guarded | The same pre-render correction loop now rejects thesis copy above the renderer's 58-character ceiling |
 
-`npm run test:coverage` reported 97.07% line, 76.25% branch and 85.00%
+`npm run test:coverage` reported 96.08% line, 74.70% branch and 85.00%
 function coverage for the tested runtime modules. The production Next.js build
 completed successfully. Changed scripts passed ESLint.
 
