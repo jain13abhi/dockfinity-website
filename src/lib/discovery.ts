@@ -193,7 +193,7 @@ export const REQUIRED_DISCLAIMER =
 const VALID_KINDS: DiscoveryItemKind[] = ["tooling", "teardown", "credits", "pricing"];
 const VALID_SECTIONS: DiscoverySection[] = ["TOOLING", "TEARDOWN", "CREDITS", "PRICING"];
 
-const RELEASE_TAG_URL = /^https:\/\/github\.com\/[^/]+\/[^/]+\/releases\/tag\/[^/]+$/;
+const RELEASE_TAG_URL = /^https:\/\/github\.com\/[^/]+\/[^/]+\/releases\/tag\/\S+$/;
 const ISO_DATE = /^\d{4}-\d{2}-\d{2}$/;
 
 /**
