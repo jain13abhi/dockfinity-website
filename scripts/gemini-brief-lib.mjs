@@ -1,6 +1,6 @@
 const API_ROOT = "https://generativelanguage.googleapis.com/v1beta/models";
-const DEFAULT_RESEARCH_MODEL = "gemini-2.5-flash-lite";
-const DEFAULT_DRAFT_MODEL = "gemini-2.5-flash-lite";
+const DEFAULT_RESEARCH_MODEL = "gemini-3.5-flash-lite";
+const DEFAULT_DRAFT_MODEL = "gemini-3.5-flash-lite";
 
 const DISCLAIMER =
   "Independent technology analysis published by Dockfinity. Every release, " +
@@ -108,19 +108,21 @@ export function parseResearchIssueTitle(title) {
   return date;
 }
 
-export function buildResearchRequest({ date, specification }) {
+export function buildResearchRequest({ date, specification, evidence }) {
   const prompt = `You are the evidence-gathering pass for the Dockfinity daily discovery brief dated ${date}.
 
-Use Google Search to research from scratch. Follow the complete editorial specification below. Find two or three qualifying shipped items from the preceding seven days, including significant missed items that have not already been published. Prefer primary sources: exact GitHub release-tag pages and LICENSE files for tooling; official product, pricing, newsroom, or programme pages for all other facts.
+Research from the primary GitHub release evidence collected immediately before this request. Follow the complete editorial specification below. Find two or three qualifying shipped items from the preceding seven days, including significant missed items that have not already been published.
 
 For every candidate, open the exact pages needed to prove release status, date, version, licence, platform, availability, and the complete price ladder when a price exists. Reject announcements, future availability, inaccessible evidence, and facts that are only inferred. Return a concise research dossier, not a publishable article. Include the exact human-readable source URL beside every fact. Do not fabricate or reconstruct URLs. If fewer than two fully evidenced items exist, say so plainly; the run must fail rather than pad the brief.
+
+PRIMARY RELEASE EVIDENCE
+${evidence}
 
 COMPLETE SPECIFICATION
 ${specification}`;
 
   return {
     contents: [{ role: "user", parts: [{ text: prompt }] }],
-    tools: [{ google_search: {} }],
     generationConfig: { temperature: 0.1, maxOutputTokens: 12000 },
   };
 }
@@ -192,6 +194,7 @@ export async function generateBrief({
   date,
   specification,
   publishedNames,
+  evidence,
   fetchImpl = fetch,
   researchModel = DEFAULT_RESEARCH_MODEL,
   draftModel = DEFAULT_DRAFT_MODEL,
@@ -205,7 +208,7 @@ export async function generateBrief({
   const research = await callGemini({
     apiKey,
     model: researchModel,
-    body: buildResearchRequest({ date, specification }),
+    body: buildResearchRequest({ date, specification, evidence }),
     fetchImpl,
   });
   const draft = await callGemini({

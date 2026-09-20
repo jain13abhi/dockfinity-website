@@ -1,8 +1,8 @@
 name: Research and publish discovery brief
 
-# Production route: Apps Script opens "research: <date>". Gemini researches
-# and drafts the JSON here, then the site's own validator checks it, the fixed
-# renderer draws the slide, and both files are committed together.
+# Production route: Apps Script opens "research: <date>". The repository
+# collects primary release evidence, Gemini analyses and drafts the JSON, then
+# the site's own validator and fixed renderer guard publication.
 #
 # Recovery route: paste JSON into "brief: <date>". It skips Gemini and enters
 # the same validation/render/publication path.
@@ -50,6 +50,7 @@ jobs:
         if: startsWith(github.event.issue.title, 'research:')
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GITHUB_TOKEN: ${{ github.token }}
           RESEARCH_TITLE: ${{ github.event.issue.title }}
         run: |
           set -o pipefail

@@ -1,9 +1,9 @@
 /**
  * Generates one Dockfinity discovery brief with the official Gemini API.
  *
- * Pass 1 uses Gemini 2.5 Flash-Lite with Google Search to assemble an evidence
- * dossier. Pass 2 uses the same model with structured output to produce the
- * website JSON. The website's validator remains the final authority.
+ * Public GitHub release APIs collect primary evidence without a paid search
+ * tool. Gemini 3.5 Flash-Lite analyses that packet, then a separate structured
+ * pass produces the website JSON. The validator remains the final authority.
  */
 
 import fs from "node:fs";
@@ -11,6 +11,7 @@ import path from "node:path";
 
 import { loadDiscoveryValidator } from "./discovery-validator.mjs";
 import { generateBrief, parseResearchIssueTitle } from "./gemini-brief-lib.mjs";
+import { collectDockfinityEvidence } from "./public-evidence.mjs";
 
 function option(name, fallback) {
   const index = process.argv.indexOf(name);
@@ -41,12 +42,18 @@ async function main() {
   const root = process.cwd();
   const specification = fs.readFileSync(path.join(root, "public", "brief-spec.txt"), "utf-8");
   const publishedNames = publishedItemNames(path.join(root, "content", "discovery"));
+  const evidence = await collectDockfinityEvidence({
+    date,
+    githubToken: process.env.GITHUB_TOKEN,
+    publishedNames,
+  });
 
   const brief = await generateBrief({
     apiKey: process.env.GEMINI_API_KEY,
     date,
     specification,
     publishedNames,
+    evidence,
     researchModel: process.env.GEMINI_RESEARCH_MODEL || undefined,
     draftModel: process.env.GEMINI_DRAFT_MODEL || undefined,
   });
