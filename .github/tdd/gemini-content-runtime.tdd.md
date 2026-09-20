@@ -20,8 +20,9 @@ Date: 20 September 2026
 | Generated-file input with manual fallback | New tests failed because `publish-brief-input.mjs` was absent | Generated, manual and missing-input cases passed |
 | Validator loads across ESM/tsx module shapes | Reproduced named-export runtime failure | Native ESM, CommonJS shape and missing-export tests passed |
 | Production filing specification names the new route | Filing-contract test failed on the former Gmail instructions | Filing-contract test passed after section 9 changed |
+| Fixed-panel read-through fit | Live run `35504714197` reached the renderer but failed with a 340 px panel against its 355 px minimum; the new regression test then failed because no length contract existed | The schema description and prompt now require 260–324 characters, and the adapter retries one rejected draft with the exact deterministic failure |
 
-`npm run test:coverage` reported 97.36% line, 77.14% branch and 84.21%
+`npm run test:coverage` reported 97.07% line, 76.25% branch and 85.00%
 function coverage for the tested runtime modules. The production Next.js build
 completed successfully. Changed scripts passed ESLint.
 

@@ -50,7 +50,9 @@ export function briefSchema(date) {
         maxItems: 4,
       },
       items: { type: "array", items: itemSchema(), minItems: 2, maxItems: 3 },
-      readThrough: string("One or two sentences on what changes for a team."),
+      readThrough: string(
+        "Two or three sentences on what changes for a team, 260 to 324 characters inclusive."
+      ),
       social: {
         type: "object",
         additionalProperties: false,
@@ -127,11 +129,21 @@ ${specification}`;
   };
 }
 
-export function buildDraftRequest({ date, specification, research, publishedNames }) {
+export function buildDraftRequest({
+  date,
+  specification,
+  research,
+  publishedNames,
+  correction,
+}) {
   const published = publishedNames.length ? publishedNames.join("\n- ") : "(none)";
+  const correctionBlock = correction
+    ? `\n\nThe previous draft was rejected by the deterministic layout check: ${correction}\n` +
+      "Regenerate the complete JSON and correct that defect."
+    : "";
   const prompt = `Create the final Dockfinity website JSON for ${date} from the research dossier below.
 
-Use only facts and exact URLs present in the dossier. Do not fill gaps from memory. Exclude anything already published unless the dossier proves a distinct new release. Produce exactly two or three items, exactly one lead, and obey every content, confidentiality, caption, and length rule in the complete specification. Optional item fields must be omitted when inapplicable; never emit null or an empty placeholder. The local validator and renderer are authoritative and will reject the run if anything is wrong.
+Use only facts and exact URLs present in the dossier. Do not fill gaps from memory. Exclude anything already published unless the dossier proves a distinct new release. Produce exactly two or three items, exactly one lead, and obey every content, confidentiality, caption, and length rule in the complete specification. The readThrough field must be two or three sentences and 260 to 324 characters inclusive so it fills the fixed slide panel. Optional item fields must be omitted when inapplicable; never emit null or an empty placeholder. The local validator and renderer are authoritative and will reject the run if anything is wrong.${correctionBlock}
 
 ALREADY-PUBLISHED ITEM NAMES
 - ${published}
@@ -151,6 +163,15 @@ ${specification}`;
       responseJsonSchema: briefSchema(date),
     },
   };
+}
+
+function assertReadThroughFits(brief) {
+  const length = [...(brief?.readThrough ?? "")].length;
+  if (length < 260 || length > 324) {
+    throw new Error(
+      `readThrough is ${length} characters; the fixed slide panel requires 260 to 324.`
+    );
+  }
 }
 
 export function extractResponseText(payload) {
@@ -211,16 +232,30 @@ export async function generateBrief({
     body: buildResearchRequest({ date, specification, evidence }),
     fetchImpl,
   });
-  const draft = await callGemini({
-    apiKey,
-    model: draftModel,
-    body: buildDraftRequest({ date, specification, research, publishedNames }),
-    fetchImpl,
-  });
+  let correction;
+  for (let attempt = 0; attempt < 2; attempt += 1) {
+    const draft = await callGemini({
+      apiKey,
+      model: draftModel,
+      body: buildDraftRequest({ date, specification, research, publishedNames, correction }),
+      fetchImpl,
+    });
 
-  try {
-    return JSON.parse(draft);
-  } catch (error) {
-    throw new Error(`Gemini returned invalid JSON: ${error.message}`);
+    let brief;
+    try {
+      brief = JSON.parse(draft);
+    } catch (error) {
+      throw new Error(`Gemini returned invalid JSON: ${error.message}`);
+    }
+
+    try {
+      assertReadThroughFits(brief);
+      return brief;
+    } catch (error) {
+      if (attempt === 1) throw error;
+      correction = error.message;
+    }
   }
+
+  throw new Error("Gemini did not produce a layout-safe brief.");
 }
