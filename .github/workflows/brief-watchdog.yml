@@ -17,8 +17,8 @@ on:
     # fired at 12:30 UTC against a 07:00 cron, five and a half hours late, so
     # the alarm arrived at six in the evening.
     #
-    # Even off the hour this is approximate. Treat it as the backstop; the
-    # punctual check is the Apps Script one, which runs every ten minutes.
+    # Even off the hour this is approximate. This is the independent backstop
+    # for the native publish schedule in publish-brief.yml.
     - cron: "43 6 * * *"
   workflow_dispatch:
 
@@ -58,9 +58,9 @@ jobs:
             "" \
             "Nothing reached the site this morning. Check, in this order:" \
             "" \
-            "1. Is there an issue titled 'research: ${DATE}' on jain13abhi/dockfinity-website?" \
-            "2. Did its Actions run report Gemini quota, evidence, validation or render failure?" \
-            "3. Did the Apps Script trigger run near 11:00 IST?" \
+            "1. Did 'Research and publish discovery brief' run near 11:07 IST?" \
+            "2. Did its log report Gemini, evidence, validation or render failure?" \
+            "3. If no run exists, launch that workflow manually for ${DATE}." \
             "" \
             "Whichever of those is empty is where it stopped.")
 

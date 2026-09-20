@@ -1,8 +1,9 @@
 name: Research and publish discovery brief
 
-# Production route: Apps Script opens "research: <date>". The repository
+# Production route: GitHub schedules the daily run itself. The repository
 # collects primary release evidence, Gemini analyses and drafts the JSON, then
-# the site's own validator and fixed renderer guard publication.
+# the site's own validator and fixed renderer guard publication. A research
+# issue remains available as an explicit operator-triggered run.
 #
 # Recovery route: paste JSON into "brief: <date>". It skips Gemini and enters
 # the same validation/render/publication path.
@@ -14,6 +15,16 @@ name: Research and publish discovery brief
 on:
   issues:
     types: [opened, edited, reopened]
+  schedule:
+    # 05:37 UTC is 11:07 IST. Avoid :00, when GitHub's scheduled queue is
+    # busiest. The watchdog checks later and alerts Telegram if this is late.
+    - cron: "37 5 * * *"
+  workflow_dispatch:
+    inputs:
+      date:
+        description: "Optional publication date (YYYY-MM-DD); defaults to today in IST"
+        required: false
+        type: string
 
 permissions:
   contents: write
@@ -31,42 +42,79 @@ env:
 jobs:
   publish:
     if: >-
-      (startsWith(github.event.issue.title, 'research:') && github.event.action == 'opened') ||
-      startsWith(github.event.issue.title, 'brief:')
+      github.event_name == 'schedule' ||
+      github.event_name == 'workflow_dispatch' ||
+      ((startsWith(github.event.issue.title, 'research:') && github.event.action == 'opened') ||
+      startsWith(github.event.issue.title, 'brief:'))
     runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v4
 
+      - name: Resolve the run and skip an already-published date
+        id: preflight
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          REQUESTED_DATE: ${{ inputs.date }}
+        run: |
+          if [ "$EVENT_NAME" = "issues" ]; then
+            TITLE="$ISSUE_TITLE"
+            DATE="${TITLE##*: }"
+            echo "skip=false" >> "$GITHUB_OUTPUT"
+          else
+            DATE="${REQUESTED_DATE:-$(TZ=Asia/Kolkata date +%F)}"
+            if ! [[ "$DATE" =~ ^[0-9]{4}-[0-9]{2}-[0-9]{2}$ ]]; then
+              echo "Date must be YYYY-MM-DD, got: $DATE" >&2
+              exit 1
+            fi
+            TITLE="research: ${DATE}"
+            if [ -f "content/discovery/${DATE}.json" ]; then
+              echo "${DATE} is already published; no Gemini call is needed."
+              echo "skip=true" >> "$GITHUB_OUTPUT"
+            else
+              echo "skip=false" >> "$GITHUB_OUTPUT"
+            fi
+          fi
+
+          echo "date=$DATE" >> "$GITHUB_OUTPUT"
+          echo "research_title=$TITLE" >> "$GITHUB_OUTPUT"
+
       - uses: actions/setup-node@v4
+        if: steps.preflight.outputs.skip != 'true'
         with:
           node-version: 20
           cache: npm
 
       - name: Install dependencies
+        if: steps.preflight.outputs.skip != 'true'
         run: npm ci
 
       - name: Research and draft with Gemini
-        if: startsWith(github.event.issue.title, 'research:')
+        if: >-
+          steps.preflight.outputs.skip != 'true' &&
+          (github.event_name != 'issues' || startsWith(github.event.issue.title, 'research:'))
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GITHUB_TOKEN: ${{ github.token }}
-          RESEARCH_TITLE: ${{ github.event.issue.title }}
+          RESEARCH_TITLE: ${{ steps.preflight.outputs.research_title }}
         run: |
           set -o pipefail
           npx --no-install tsx scripts/research-brief.mjs --out generated-brief.json \
             2>error.txt | tee research.txt
 
       - name: Validate and write the brief
+        if: steps.preflight.outputs.skip != 'true'
         id: publish
         env:
           BRIEF_BODY: ${{ github.event.issue.body }}
-          BRIEF_FILE: ${{ startsWith(github.event.issue.title, 'research:') && 'generated-brief.json' || '' }}
+          BRIEF_FILE: ${{ (github.event_name != 'issues' || startsWith(github.event.issue.title, 'research:')) && 'generated-brief.json' || '' }}
         run: |
           set -o pipefail
           npx --no-install tsx scripts/publish-brief.mjs 2>error.txt | tee result.txt
 
       - name: Read what was written
+        if: steps.preflight.outputs.skip != 'true'
         id: meta
         run: |
           for key in file date title action; do
@@ -74,13 +122,16 @@ jobs:
           done
 
       - uses: actions/setup-python@v5
+        if: steps.preflight.outputs.skip != 'true'
         with:
           python-version: "3.12"
 
       - name: Install Pillow
+        if: steps.preflight.outputs.skip != 'true'
         run: pip install "Pillow==${PILLOW_VERSION}"
 
       - name: Install the website's typefaces
+        if: steps.preflight.outputs.skip != 'true'
         run: |
           mkdir -p ~/.fonts
           curl -fsSL -o inter.zip \
@@ -91,6 +142,7 @@ jobs:
           ls ~/.fonts | wc -l
 
       - name: Render the slide
+        if: steps.preflight.outputs.skip != 'true'
         run: |
           set -o pipefail
           curl -fsSL -o logo.png "$LOGO_URL"
@@ -98,12 +150,15 @@ jobs:
             --logo logo.png --out-dir public/briefs 2>>error.txt | tee -a render.txt
 
       - name: Commit
+        if: steps.preflight.outputs.skip != 'true'
         id: commit
         env:
           FILE: ${{ steps.meta.outputs.file }}
           DATE: ${{ steps.meta.outputs.date }}
           TITLE: ${{ steps.meta.outputs.title }}
           ACTION: ${{ steps.meta.outputs.action }}
+          SOURCE_EVENT: ${{ github.event_name }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
         run: |
           slide="public/briefs/dockfinity-discovery-${DATE}.png"
 
@@ -115,17 +170,22 @@ jobs:
 
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ "$SOURCE_EVENT" = "issues" ]; then
+            SOURCE="issue #${ISSUE_NUMBER}"
+          else
+            SOURCE="${SOURCE_EVENT} run"
+          fi
           git add "$FILE" "$slide"
           git commit -m "content(${ACTION}): discovery brief ${DATE}
 
           ${TITLE}
 
-          Published from issue #${{ github.event.issue.number }}."
+          Published from ${SOURCE}."
           git push
           echo "changed=true" >> "$GITHUB_OUTPUT"
 
       - name: Send the slides and captions to Telegram
-        if: steps.commit.outputs.changed == 'true'
+        if: steps.preflight.outputs.skip != 'true' && steps.commit.outputs.changed == 'true'
         env:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
@@ -138,7 +198,7 @@ jobs:
             --url "https://dockfinity.com/discovery/${DATE}"
 
       - name: Comment and close
-        if: success()
+        if: success() && github.event_name == 'issues'
         uses: actions/github-script@v7
         env:
           FILE: ${{ steps.meta.outputs.file }}
@@ -185,7 +245,7 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
           ISSUE: ${{ github.event.issue.number }}
-          TITLE: ${{ github.event.issue.title }}
+          TITLE: ${{ github.event_name == 'issues' && github.event.issue.title || steps.preflight.outputs.research_title }}
         run: |
           if [ -z "$TELEGRAM_BOT_TOKEN" ] || [ -z "$TELEGRAM_CHAT_ID" ]; then
             echo "Telegram is not configured; the issue comment is the only record."
@@ -195,6 +255,11 @@ jobs:
           DETAIL=$(tail -c 1200 error.txt 2>/dev/null)
           [ -n "$DETAIL" ] || DETAIL="It failed before the brief could be checked. See the run log."
 
+          LINK=""
+          if [ -n "$ISSUE" ]; then
+            LINK="https://github.com/${GITHUB_REPOSITORY}/issues/${ISSUE}"
+          fi
+
           MSG=$(printf '%s\n' \
             "Dockfinity — not published." \
             "" \
@@ -203,7 +268,7 @@ jobs:
             "$DETAIL" \
             "" \
             "Nothing was committed and the site is unchanged." \
-            "https://github.com/${GITHUB_REPOSITORY}/issues/${ISSUE}")
+            "$LINK")
 
           curl -sS -o /dev/null -X POST \
             "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
@@ -212,7 +277,7 @@ jobs:
             --data-urlencode "disable_web_page_preview=true"
 
       - name: Report the failure on the issue
-        if: failure()
+        if: failure() && github.event_name == 'issues'
         uses: actions/github-script@v7
         with:
           script: |
