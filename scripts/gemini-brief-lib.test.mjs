@@ -42,6 +42,11 @@ test("draft request uses JSON structured output and no search tool", () => {
   assert.deepEqual(request.generationConfig.responseJsonSchema.properties.date.enum, ["2026-09-20"]);
   assert.equal(request.generationConfig.responseJsonSchema.properties.items.minItems, 2);
   assert.equal(request.generationConfig.responseJsonSchema.properties.items.maxItems, 3);
+  assert.match(
+    request.generationConfig.responseJsonSchema.properties.readThrough.description,
+    /260 to 324 characters/
+  );
+  assert.match(request.contents[0].parts[0].text, /260 to 324 characters/);
   assert.match(request.contents[0].parts[0].text, /RESEARCH/);
   assert.match(request.contents[0].parts[0].text, /Old Tool/);
 });
@@ -61,7 +66,14 @@ test("generateBrief performs a grounded research pass then a structured drafting
     calls.push({ url, options, body: JSON.parse(options.body) });
     const response = calls.length === 1
       ? { candidates: [{ content: { parts: [{ text: "verified research dossier" }] } }] }
-      : { candidates: [{ content: { parts: [{ text: JSON.stringify({ date: "2026-09-20" }) }] } }] };
+      : {
+          candidates: [{
+            content: { parts: [{ text: JSON.stringify({
+              date: "2026-09-20",
+              readThrough: "x".repeat(260),
+            }) }] },
+          }],
+        };
     return { ok: true, json: async () => response };
   };
 
@@ -74,13 +86,44 @@ test("generateBrief performs a grounded research pass then a structured drafting
     fetchImpl: fakeFetch,
   });
 
-  assert.deepEqual(result, { date: "2026-09-20" });
+  assert.deepEqual(result, { date: "2026-09-20", readThrough: "x".repeat(260) });
   assert.equal(calls.length, 2);
   assert.match(calls[0].url, /gemini-3\.5-flash-lite:generateContent$/);
   assert.match(calls[1].url, /gemini-3\.5-flash-lite:generateContent$/);
   assert.equal(calls[0].options.headers["x-goog-api-key"], "test-key");
   assert.equal(calls[0].body.tools, undefined);
   assert.equal(calls[1].body.generationConfig.responseMimeType, "application/json");
+});
+
+test("generateBrief retries one malformed layout draft with explicit correction", async () => {
+  const calls = [];
+  const fakeFetch = async (_url, options) => {
+    calls.push(JSON.parse(options.body));
+    const text = calls.length === 1
+      ? "verified research dossier"
+      : JSON.stringify({
+          date: "2026-09-20",
+          readThrough: calls.length === 2 ? "too short" : "x".repeat(260),
+        });
+    return {
+      ok: true,
+      json: async () => ({ candidates: [{ content: { parts: [{ text }] } }] }),
+    };
+  };
+
+  const result = await generateBrief({
+    apiKey: "test-key",
+    date: "2026-09-20",
+    specification: "SPEC",
+    publishedNames: [],
+    evidence: "PRIMARY RELEASE EVIDENCE",
+    fetchImpl: fakeFetch,
+  });
+
+  assert.equal(calls.length, 3);
+  assert.equal(result.readThrough.length, 260);
+  assert.match(calls[2].contents[0].parts[0].text, /previous draft was rejected/i);
+  assert.match(calls[2].contents[0].parts[0].text, /9 characters/);
 });
 
 test("generateBrief fails before making a request when the free-tier key is missing", async () => {
