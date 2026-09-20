@@ -25,7 +25,10 @@ Date: 20 September 2026
 function coverage for the tested runtime modules. The production Next.js build
 completed successfully. Changed scripts passed ESLint.
 
-The first real API request remains a controlled GitHub integration test because
-the key exists only as the repository secret `GEMINI_API_KEY`.
+The first controlled GitHub request proved that Google no longer exposes
+`gemini-2.5-flash` to new API users. A regression test was changed first and
+failed against that default; the runtime then moved the grounded research pass
+to `gemini-2.5-flash-lite`, which Google still documents with free-tier Google
+Search grounding. The separate schema pass continues to use Flash-Lite.
 
 Implementation checkpoint: `0724471` (`feat: add Gemini research runtime`).

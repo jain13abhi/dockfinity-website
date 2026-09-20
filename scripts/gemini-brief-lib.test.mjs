@@ -70,7 +70,7 @@ test("generateBrief performs a grounded research pass then a structured drafting
 
   assert.deepEqual(result, { date: "2026-09-20" });
   assert.equal(calls.length, 2);
-  assert.match(calls[0].url, /gemini-2\.5-flash:generateContent$/);
+  assert.match(calls[0].url, /gemini-2\.5-flash-lite:generateContent$/);
   assert.match(calls[1].url, /gemini-2\.5-flash-lite:generateContent$/);
   assert.equal(calls[0].options.headers["x-goog-api-key"], "test-key");
   assert.deepEqual(calls[0].body.tools, [{ google_search: {} }]);
@@ -103,6 +103,6 @@ test("generateBrief identifies the model when the network request fails", async 
       publishedNames: [],
       fetchImpl: async () => { throw new Error("offline"); },
     }),
-    /gemini-2\.5-flash request failed before a response: offline/
+    /gemini-2\.5-flash-lite request failed before a response: offline/
   );
 });
