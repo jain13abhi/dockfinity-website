@@ -1,8 +1,8 @@
 /**
  * Generates one Dockfinity discovery brief with the official Gemini API.
  *
- * Pass 1 uses Gemini 2.5 Flash with Google Search to assemble an evidence
- * dossier. Pass 2 uses Gemini 2.5 Flash-Lite structured output to produce the
+ * Pass 1 uses Gemini 2.5 Flash-Lite with Google Search to assemble an evidence
+ * dossier. Pass 2 uses the same model with structured output to produce the
  * website JSON. The website's validator remains the final authority.
  */
 

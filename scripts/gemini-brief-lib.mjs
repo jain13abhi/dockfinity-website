@@ -1,5 +1,5 @@
 const API_ROOT = "https://generativelanguage.googleapis.com/v1beta/models";
-const DEFAULT_RESEARCH_MODEL = "gemini-2.5-flash";
+const DEFAULT_RESEARCH_MODEL = "gemini-2.5-flash-lite";
 const DEFAULT_DRAFT_MODEL = "gemini-2.5-flash-lite";
 
 const DISCLAIMER =
