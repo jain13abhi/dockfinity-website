@@ -1,6 +1,7 @@
 const API_ROOT = "https://generativelanguage.googleapis.com/v1beta/models";
 const DEFAULT_RESEARCH_MODEL = "gemini-3.5-flash-lite";
 const DEFAULT_DRAFT_MODEL = "gemini-3.5-flash-lite";
+const MAX_DRAFT_ATTEMPTS = 3;
 
 const DISCLAIMER =
   "Independent technology analysis published by Dockfinity. Every release, " +
@@ -240,7 +241,7 @@ export async function generateBrief({
     fetchImpl,
   });
   let correction;
-  for (let attempt = 0; attempt < 2; attempt += 1) {
+  for (let attempt = 0; attempt < MAX_DRAFT_ATTEMPTS; attempt += 1) {
     const draft = await callGemini({
       apiKey,
       model: draftModel,
@@ -259,7 +260,7 @@ export async function generateBrief({
       assertDraftFits(brief);
       return brief;
     } catch (error) {
-      if (attempt === 1) throw error;
+      if (attempt === MAX_DRAFT_ATTEMPTS - 1) throw error;
       correction = error.message;
     }
   }
