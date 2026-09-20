@@ -111,11 +111,11 @@ test("generateBrief retries one malformed layout draft with explicit correction"
     const text = calls.length === 1
       ? "verified research dossier"
       : JSON.stringify({
-        date: "2026-09-20",
+          date: "2026-09-20",
           thesis: calls.length === 2
             ? "This deliberately overlong thesis must be rejected before rendering"
             : "A concise layout-safe thesis",
-          readThrough: "x".repeat(260),
+          readThrough: calls.length === 3 ? "x".repeat(339) : "x".repeat(260),
         });
     return {
       ok: true,
@@ -132,10 +132,11 @@ test("generateBrief retries one malformed layout draft with explicit correction"
     fetchImpl: fakeFetch,
   });
 
-  assert.equal(calls.length, 3);
+  assert.equal(calls.length, 4);
   assert.equal(result.readThrough.length, 260);
-  assert.match(calls[2].contents[0].parts[0].text, /previous draft was rejected/i);
+  assert.match(calls[3].contents[0].parts[0].text, /previous draft was rejected/i);
   assert.match(calls[2].contents[0].parts[0].text, /thesis is 67 characters/i);
+  assert.match(calls[3].contents[0].parts[0].text, /readThrough is 339 characters/i);
 });
 
 test("generateBrief fails before making a request when the free-tier key is missing", async () => {
