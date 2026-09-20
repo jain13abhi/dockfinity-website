@@ -46,6 +46,10 @@ test("draft request uses JSON structured output and no search tool", () => {
     request.generationConfig.responseJsonSchema.properties.readThrough.description,
     /260 to 324 characters/
   );
+  assert.match(
+    request.generationConfig.responseJsonSchema.properties.thesis.description,
+    /58 characters/
+  );
   assert.match(request.contents[0].parts[0].text, /260 to 324 characters/);
   assert.match(request.contents[0].parts[0].text, /RESEARCH/);
   assert.match(request.contents[0].parts[0].text, /Old Tool/);
@@ -70,6 +74,7 @@ test("generateBrief performs a grounded research pass then a structured drafting
           candidates: [{
             content: { parts: [{ text: JSON.stringify({
               date: "2026-09-20",
+              thesis: "A concise layout-safe thesis",
               readThrough: "x".repeat(260),
             }) }] },
           }],
@@ -86,7 +91,11 @@ test("generateBrief performs a grounded research pass then a structured drafting
     fetchImpl: fakeFetch,
   });
 
-  assert.deepEqual(result, { date: "2026-09-20", readThrough: "x".repeat(260) });
+  assert.deepEqual(result, {
+    date: "2026-09-20",
+    thesis: "A concise layout-safe thesis",
+    readThrough: "x".repeat(260),
+  });
   assert.equal(calls.length, 2);
   assert.match(calls[0].url, /gemini-3\.5-flash-lite:generateContent$/);
   assert.match(calls[1].url, /gemini-3\.5-flash-lite:generateContent$/);
@@ -102,8 +111,11 @@ test("generateBrief retries one malformed layout draft with explicit correction"
     const text = calls.length === 1
       ? "verified research dossier"
       : JSON.stringify({
-          date: "2026-09-20",
-          readThrough: calls.length === 2 ? "too short" : "x".repeat(260),
+        date: "2026-09-20",
+          thesis: calls.length === 2
+            ? "This deliberately overlong thesis must be rejected before rendering"
+            : "A concise layout-safe thesis",
+          readThrough: "x".repeat(260),
         });
     return {
       ok: true,
@@ -123,7 +135,7 @@ test("generateBrief retries one malformed layout draft with explicit correction"
   assert.equal(calls.length, 3);
   assert.equal(result.readThrough.length, 260);
   assert.match(calls[2].contents[0].parts[0].text, /previous draft was rejected/i);
-  assert.match(calls[2].contents[0].parts[0].text, /9 characters/);
+  assert.match(calls[2].contents[0].parts[0].text, /thesis is 67 characters/i);
 });
 
 test("generateBrief fails before making a request when the free-tier key is missing", async () => {
