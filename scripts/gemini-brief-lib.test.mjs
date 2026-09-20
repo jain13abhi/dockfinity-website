@@ -115,7 +115,7 @@ test("generateBrief retries one malformed layout draft with explicit correction"
           thesis: calls.length === 2
             ? "This deliberately overlong thesis must be rejected before rendering"
             : "A concise layout-safe thesis",
-          readThrough: calls.length === 3 ? "x".repeat(339) : "x".repeat(260),
+          readThrough: "x".repeat(260),
         });
     return {
       ok: true,
@@ -132,11 +132,37 @@ test("generateBrief retries one malformed layout draft with explicit correction"
     fetchImpl: fakeFetch,
   });
 
-  assert.equal(calls.length, 4);
+  assert.equal(calls.length, 3);
   assert.equal(result.readThrough.length, 260);
-  assert.match(calls[3].contents[0].parts[0].text, /previous draft was rejected/i);
   assert.match(calls[2].contents[0].parts[0].text, /thesis is 67 characters/i);
-  assert.match(calls[3].contents[0].parts[0].text, /readThrough is 339 characters/i);
+});
+
+test("generateBrief stops after one corrected draft", async () => {
+  const calls = [];
+  const fakeFetch = async (_url, options) => {
+    calls.push(JSON.parse(options.body));
+    const text = calls.length === 1
+      ? "verified research dossier"
+      : JSON.stringify({
+          date: "2026-09-20",
+          thesis: "This deliberately overlong thesis must be rejected before rendering",
+          readThrough: "x".repeat(260),
+        });
+    return { ok: true, json: async () => ({ candidates: [{ content: { parts: [{ text }] } }] }) };
+  };
+
+  await assert.rejects(
+    generateBrief({
+      apiKey: "test-key",
+      date: "2026-09-20",
+      specification: "SPEC",
+      publishedNames: [],
+      evidence: "PRIMARY RELEASE EVIDENCE",
+      fetchImpl: fakeFetch,
+    }),
+    /thesis is 67 characters/i
+  );
+  assert.equal(calls.length, 3, "one research call plus at most two draft calls");
 });
 
 test("generateBrief deterministically pads a short readThrough without inventing facts", async () => {

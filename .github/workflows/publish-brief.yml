@@ -31,7 +31,7 @@ env:
 jobs:
   publish:
     if: >-
-      startsWith(github.event.issue.title, 'research:') ||
+      (startsWith(github.event.issue.title, 'research:') && github.event.action == 'opened') ||
       startsWith(github.event.issue.title, 'brief:')
     runs-on: ubuntu-latest
 
@@ -233,7 +233,7 @@ jobs:
                 '```',
                 '',
                 context.payload.issue.title.startsWith('research:')
-                  ? 'Edit this issue to retry after fixing the reported configuration, quota or evidence problem.'
+                  ? 'Editing this issue will not spend API quota again. Use a validated `brief:` recovery issue, or explicitly open a new research issue only after checking quota.'
                   : 'Fix the JSON and edit this issue — the check runs again on every edit.',
               ].join('\n'),
             });

@@ -1,7 +1,9 @@
 const API_ROOT = "https://generativelanguage.googleapis.com/v1beta/models";
 const DEFAULT_RESEARCH_MODEL = "gemini-3.5-flash-lite";
 const DEFAULT_DRAFT_MODEL = "gemini-3.5-flash-lite";
-const MAX_DRAFT_ATTEMPTS = 3;
+// One initial draft and one layout-guided correction. A new workflow run is
+// never an acceptable retry loop for a free-tier key.
+const MAX_DRAFT_ATTEMPTS = 2;
 
 const DISCLAIMER =
   "Independent technology analysis published by Dockfinity. Every release, " +
