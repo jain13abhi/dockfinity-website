@@ -1,0 +1,61 @@
+{
+  "date": "2026-09-19",
+  "title": "Agent Workflows and MCP Inspectors Advance",
+  "summary": "Recent releases across Vercel AI SDK, LangGraph.js, and MCP Inspector bring critical stability fixes, robust testing capabilities, and extended protocol features for developer workflows.",
+  "thesis": "Agent workflows are absorbing infrastructure boundaries.",
+  "accentPhrase": "absorbing infrastructure boundaries",
+  "sections": [
+    "TOOLING"
+  ],
+  "items": [
+    {
+      "name": "ai",
+      "kind": "tooling",
+      "version": "7.0.107",
+      "releaseDate": "2026-09-18",
+      "licence": "licence not confirmed",
+      "platform": "Node.js, Next.js, Svelte, Vue, TypeScript",
+      "repoUrl": "https://github.com/vercel/ai",
+      "releaseUrl": "https://github.com/vercel/ai/releases/tag/ai%407.0.107",
+      "what": "The AI Toolkit for TypeScript, providing core primitives for building AI-powered applications and agents.",
+      "whyDifferent": "Brings targeted bug fixes to wrapProvider APIs, chat reconnect URLs, and multi-cookie Node stream responses.",
+      "isLead": true,
+      "source": "Source: vercel/ai, 18 Sep 2026 - https://github.com/vercel/ai/releases/tag/ai%407.0.107"
+    },
+    {
+      "name": "inspector",
+      "kind": "tooling",
+      "version": "2.7.0",
+      "releaseDate": "2026-09-16",
+      "licence": "licence not confirmed",
+      "platform": "Cross-platform CLI, Web, TUI",
+      "repoUrl": "https://github.com/modelcontextprotocol/inspector",
+      "releaseUrl": "https://github.com/modelcontextprotocol/inspector/releases/tag/2.7.0",
+      "what": "Visual testing tool for Model Context Protocol (MCP) servers.",
+      "whyDifferent": "Adds protocol era launch flags, timeout boundaries for OAuth requests, and configurable public addresses for MCP Apps listeners.",
+      "isLead": false,
+      "source": "Source: modelcontextprotocol/inspector, 16 Sep 2026 - https://github.com/modelcontextprotocol/inspector/releases/tag/2.7.0"
+    }
+  ],
+  "readThrough": "These updates significantly tighten the control loops for LLM integrations, directly improving connection stability and establishing stronger security bounds for production agent applications. Engineering teams can now deploy with greater reliability across complex distributed tool environments.",
+  "social": {
+    "linkedin": "Agent infrastructure and model interaction tools receive crucial patches this week. Vercel AI SDK 7.0.107 and MCP Inspector 2.7.0 introduce vital connection safeguards, OAuth timeout management, and improved protocol configuration for developers building complex applications.",
+    "instagram": "Agent tools get stronger with Vercel AI SDK 7.0.107 and MCP Inspector 2.7.0, bringing critical timeout boundaries, protocol flags, and stream fixes for production setups.",
+    "x": "Vercel AI and MCP Inspector drop major stability and protocol updates for production agent workflows.",
+    "hashtags": [
+      "#ArtificialIntelligence",
+      "#TypeScript",
+      "#DeveloperTools",
+      "#OpenSource",
+      "#WebDev",
+      "#SoftwareEngineering",
+      "#TechNews",
+      "#Automation"
+    ]
+  },
+  "sources": {
+    "attribution": "Source: vercel/ai, 18 Sep 2026 - https://github.com/vercel/ai/releases/tag/ai%407.0.107; Source: modelcontextprotocol/inspector, 16 Sep 2026 - https://github.com/modelcontextprotocol/inspector/releases/tag/2.7.0",
+    "surveyDate": "2026-09-19",
+    "disclaimer": "Independent technology analysis published by Dockfinity. Every release, version, licence and figure carries the primary source it was read from."
+  }
+}
