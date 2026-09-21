@@ -12,6 +12,7 @@ import path from "node:path";
 import { loadDiscoveryValidator } from "./discovery-validator.mjs";
 import { generateBrief, parseResearchIssueTitle } from "./gemini-brief-lib.mjs";
 import { collectDockfinityEvidence } from "./public-evidence.mjs";
+import { validateFixedRenderer } from "./renderer-preflight.mjs";
 
 function option(name, fallback) {
   const index = process.argv.indexOf(name);
@@ -56,6 +57,10 @@ async function main() {
     evidence,
     researchModel: process.env.GEMINI_RESEARCH_MODEL || undefined,
     draftModel: process.env.GEMINI_DRAFT_MODEL || undefined,
+    validateDraft(candidate) {
+      validateDiscoveryBrief(candidate, `${date}.json`);
+      validateFixedRenderer({ brief: candidate, date });
+    },
   });
 
   validateDiscoveryBrief(brief, `${date}.json`);

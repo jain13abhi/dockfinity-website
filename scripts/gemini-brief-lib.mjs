@@ -1,6 +1,7 @@
 const API_ROOT = "https://generativelanguage.googleapis.com/v1beta/models";
 const DEFAULT_RESEARCH_MODEL = "gemini-3.5-flash-lite";
 const DEFAULT_DRAFT_MODEL = "gemini-3.5-flash-lite";
+const MAX_REQUEST_ATTEMPTS = 3;
 // One initial draft and one layout-guided correction. A new workflow run is
 // never an acceptable retry loop for a free-tier key.
 const MAX_DRAFT_ATTEMPTS = 2;
@@ -138,11 +139,14 @@ export function buildDraftRequest({
   research,
   publishedNames,
   correction,
+  rejectedDraft,
 }) {
   const published = publishedNames.length ? publishedNames.join("\n- ") : "(none)";
   const correctionBlock = correction
-    ? `\n\nThe previous draft was rejected by the deterministic layout check: ${correction}\n` +
-      "Regenerate the complete JSON and correct that defect."
+    ? `\n\nThe previous draft was rejected by an authoritative local gate: ${correction}\n` +
+      "Repair the rejected draft below and return the complete JSON. Change only what the gate " +
+      "requires. Never alter a sourced release fact merely to satisfy a layout check.\n\n" +
+      `REJECTED DRAFT TO REPAIR\n${rejectedDraft}`
     : "";
   const prompt = `Create the final Dockfinity website JSON for ${date} from the research dossier below.
 
@@ -219,28 +223,57 @@ export function extractResponseText(payload) {
   return text;
 }
 
-async function callGemini({ apiKey, model, body, fetchImpl }) {
-  let response;
-  try {
-    response = await fetchImpl(`${API_ROOT}/${encodeURIComponent(model)}:generateContent`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-goog-api-key": apiKey,
-      },
-      body: JSON.stringify(body),
-    });
-  } catch (error) {
-    throw new Error(
-      `Gemini ${model} request failed before a response: ${error.message ?? error}`
-    );
-  }
-  const payload = await response.json();
-  if (!response.ok) {
+const defaultSleep = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+
+function isTransientStatus(status) {
+  return status === 408 || status === 429 || (status >= 500 && status <= 599);
+}
+
+async function callGemini({ apiKey, model, body, fetchImpl, sleepImpl }) {
+  const url = `${API_ROOT}/${encodeURIComponent(model)}:generateContent`;
+  for (let attempt = 1; attempt <= MAX_REQUEST_ATTEMPTS; attempt += 1) {
+    let response;
+    try {
+      response = await fetchImpl(url, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-goog-api-key": apiKey,
+        },
+        body: JSON.stringify(body),
+      });
+    } catch (error) {
+      if (attempt === MAX_REQUEST_ATTEMPTS) {
+        throw new Error(
+          `Gemini ${model} request failed before a response after ${attempt} attempts: ` +
+          `${error.message ?? error}`
+        );
+      }
+      console.log(`gemini_retry=model:${model} attempt:${attempt + 1} reason:network`);
+      await sleepImpl(1000 * (2 ** (attempt - 1)));
+      continue;
+    }
+
+    let payload;
+    try {
+      payload = await response.json();
+    } catch (error) {
+      payload = { error: { message: `HTTP ${response.status}; invalid JSON: ${error.message}` } };
+    }
+    if (response.ok) return extractResponseText(payload);
+
     const message = payload?.error?.message ?? `HTTP ${response.status}`;
-    throw new Error(`Gemini ${model} request failed: ${message}`);
+    if (!isTransientStatus(response.status) || attempt === MAX_REQUEST_ATTEMPTS) {
+      throw new Error(
+        `Gemini ${model} request failed${attempt > 1 ? ` after ${attempt} attempts` : ""}: ${message}`
+      );
+    }
+    console.log(
+      `gemini_retry=model:${model} attempt:${attempt + 1} reason:http_${response.status}`
+    );
+    await sleepImpl(1000 * (2 ** (attempt - 1)));
   }
-  return extractResponseText(payload);
+  throw new Error(`Gemini ${model} request exhausted its retry budget.`);
 }
 
 export async function generateBrief({
@@ -250,8 +283,10 @@ export async function generateBrief({
   publishedNames,
   evidence,
   fetchImpl = fetch,
+  sleepImpl = defaultSleep,
   researchModel = DEFAULT_RESEARCH_MODEL,
   draftModel = DEFAULT_DRAFT_MODEL,
+  validateDraft,
 }) {
   if (!apiKey?.trim()) {
     throw new Error(
@@ -264,29 +299,44 @@ export async function generateBrief({
     model: researchModel,
     body: buildResearchRequest({ date, specification, evidence }),
     fetchImpl,
+    sleepImpl,
   });
   let correction;
+  let rejectedDraft;
   for (let attempt = 0; attempt < MAX_DRAFT_ATTEMPTS; attempt += 1) {
     const draft = await callGemini({
       apiKey,
       model: draftModel,
-      body: buildDraftRequest({ date, specification, research, publishedNames, correction }),
+      body: buildDraftRequest({
+        date,
+        specification,
+        research,
+        publishedNames,
+        correction,
+        rejectedDraft,
+      }),
       fetchImpl,
+      sleepImpl,
     });
 
     let brief;
     try {
       brief = normalizeShortReadThrough(JSON.parse(draft));
-    } catch (error) {
-      throw new Error(`Gemini returned invalid JSON: ${error.message}`);
-    }
-
-    try {
       assertDraftFits(brief);
+      await validateDraft?.(brief);
       return brief;
     } catch (error) {
-      if (attempt === MAX_DRAFT_ATTEMPTS - 1) throw error;
-      correction = error.message;
+      if (error?.retryableByModel === false) throw error;
+      if (attempt === MAX_DRAFT_ATTEMPTS - 1) {
+        if (error instanceof SyntaxError) {
+          throw new Error(`Gemini returned invalid JSON: ${error.message}`);
+        }
+        throw error;
+      }
+      correction = error instanceof SyntaxError
+        ? `Gemini returned invalid JSON: ${error.message}`
+        : error.message;
+      rejectedDraft = draft;
     }
   }
 

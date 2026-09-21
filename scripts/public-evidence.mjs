@@ -21,16 +21,32 @@ const DEFAULT_REPOSITORIES = [
   "denoland/deno",
 ];
 
-async function githubJson(url, { token, fetchImpl }) {
+const defaultSleep = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
+
+function isTransientStatus(status) {
+  return status === 408 || status === 429 || (status >= 500 && status <= 599);
+}
+
+async function githubJson(url, { token, fetchImpl, sleepImpl }) {
   const headers = {
     Accept: "application/vnd.github+json",
     "User-Agent": "dockfinity-evidence-collector",
     "X-GitHub-Api-Version": "2022-11-28",
   };
   if (token?.trim()) headers.Authorization = `Bearer ${token.trim()}`;
-  const response = await fetchImpl(url, { headers });
-  if (!response.ok) return null;
-  return response.json();
+  for (let attempt = 1; attempt <= 3; attempt += 1) {
+    try {
+      const response = await fetchImpl(url, { headers });
+      if (response.ok) return response.json();
+      if (!isTransientStatus(response.status) || attempt === 3) return null;
+      console.log(`evidence_retry=url:${url} attempt:${attempt + 1} status:${response.status}`);
+    } catch {
+      if (attempt === 3) return null;
+      console.log(`evidence_retry=url:${url} attempt:${attempt + 1} reason:network`);
+    }
+    await sleepImpl(750 * attempt);
+  }
+  return null;
 }
 
 export async function collectDockfinityEvidence({
@@ -39,6 +55,7 @@ export async function collectDockfinityEvidence({
   publishedNames = [],
   repositories = DEFAULT_REPOSITORIES,
   fetchImpl = fetch,
+  sleepImpl = defaultSleep,
 }) {
   const end = new Date(`${date}T23:59:59Z`);
   const start = new Date(end);
@@ -48,7 +65,7 @@ export async function collectDockfinityEvidence({
   const candidates = await Promise.all(repositories.map(async (repository) => {
     const releases = await githubJson(
       `https://api.github.com/repos/${repository}/releases?per_page=5`,
-      { token: githubToken, fetchImpl }
+      { token: githubToken, fetchImpl, sleepImpl }
     );
     if (!Array.isArray(releases)) return null;
     const release = releases.find((item) => {
@@ -60,6 +77,7 @@ export async function collectDockfinityEvidence({
     const metadata = await githubJson(`https://api.github.com/repos/${repository}`, {
       token: githubToken,
       fetchImpl,
+      sleepImpl,
     });
     if (!metadata || excluded.has(String(metadata.name ?? "").toLowerCase())) return null;
 
