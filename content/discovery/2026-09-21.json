@@ -1,0 +1,61 @@
+{
+  "date": "2026-09-21",
+  "title": "Deno 2.9.7 Patches Runtime Stability and Node.js Compatibility",
+  "summary": "Deno 2.9.7 ships fixes for CA store handling, HTTP traceparent extraction, and Node.js process signaling. Ollama 0.34.2 adds first-run sign-in and local setup flows.",
+  "thesis": "Runtimes tighten network and compatibility boundaries.",
+  "accentPhrase": "tighten network and compatibility",
+  "sections": [
+    "TOOLING"
+  ],
+  "items": [
+    {
+      "name": "deno",
+      "kind": "tooling",
+      "version": "v2.9.7",
+      "releaseDate": "2026-09-17",
+      "licence": "MIT",
+      "platform": "macOS, Linux, Windows (Rust, V8)",
+      "repoUrl": "https://github.com/denoland/deno",
+      "releaseUrl": "https://github.com/denoland/deno/releases/tag/v2.9.7",
+      "what": "Modern runtime for JavaScript and TypeScript with built-in tooling and secure defaults.",
+      "whyDifferent": "Fixes CA store honoring, traceparent extraction in Deno.serve, and Node.js IPC and DNS compatibility edge cases without changing the core execution model.",
+      "isLead": true,
+      "source": "Source: GitHub, 17 Sep 2026 - https://github.com/denoland/deno/releases/tag/v2.9.7"
+    },
+    {
+      "name": "ollama",
+      "kind": "tooling",
+      "version": "v0.34.2",
+      "releaseDate": "2026-09-15",
+      "licence": "MIT",
+      "platform": "macOS, Linux, Windows",
+      "repoUrl": "https://github.com/ollama/ollama",
+      "releaseUrl": "https://github.com/ollama/ollama/releases/tag/v0.34.2",
+      "what": "Get up and running with large language models locally.",
+      "whyDifferent": "Introduces first-run setup options to sign in or run locally, adds ollama://apps URI handling, and fixes long-generation memory growth in MLX speculative decoding.",
+      "isLead": false,
+      "source": "Source: GitHub, 15 Sep 2026 - https://github.com/ollama/ollama/releases/tag/v0.34.2"
+    }
+  ],
+  "readThrough": "Engineering teams adopting modern runtimes must account for stricter network rule validation, certificate store correctness, and memory management during long inference runs. Upgrading ensures compatibility without altering existing deployment topologies; teams should validate it before adoption.",
+  "social": {
+    "linkedin": "Runtime updates across Deno and Ollama this week focus on hardening network behavior, compatibility, and resource management. Deno 2.9.7 fixes CA store handling, HTTP traceparent extraction, and Node.js compatibility edge cases. Meanwhile, Ollama 0.34.2 introduces a streamlined first-run setup flow for desktop and CLI users alongside fixes for long-generation memory growth under MLX speculative decoding. For teams operating local models or TypeScript services, these point releases close out persistent edge cases without altering production deployment patterns.",
+    "instagram": "Deno 2.9.7 and Ollama v0.34.2 ship important runtime fixes, hardening network compliance, Node.js compatibility, and local LLM memory management.",
+    "x": "Deno 2.9.7 and Ollama 0.34.2 ship stability, network compliance, and memory management fixes for runtime and local AI workloads.",
+    "hashtags": [
+      "#Deno",
+      "#Ollama",
+      "#TypeScript",
+      "#NodeJS",
+      "#LocalAI",
+      "#Runtime",
+      "#DevOps",
+      "#Engineering"
+    ]
+  },
+  "sources": {
+    "attribution": "Source: GitHub, Deno v2.9.7 Release, 17 Sep 2026 - https://github.com/denoland/deno/releases/tag/v2.9.7; Source: GitHub, Ollama v0.34.2 Release, 15 Sep 2026 - https://github.com/ollama/ollama/releases/tag/v0.34.2",
+    "surveyDate": "2026-09-21",
+    "disclaimer": "Independent technology analysis published by Dockfinity. Every release, version, licence and figure carries the primary source it was read from."
+  }
+}
