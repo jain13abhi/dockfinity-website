@@ -142,6 +142,12 @@ export interface SocialCaptions {
    * for a link that belongs in the profile instead.
    */
   x: string;
+  /** Facebook body, written for a broader business audience. */
+  facebook?: string;
+  /** Threads body, capped at 500 characters. */
+  threads?: string;
+  /** Google Business Profile Update; the website URL is added as a Learn more CTA. */
+  googleBusiness?: string;
   /** Appended per platform, as many as fit. Each begins with "#". */
   hashtags: string[];
 }
@@ -215,7 +221,15 @@ const CAPTION_LIMITS: Record<keyof Omit<SocialCaptions, "hashtags">, number> = {
   linkedin: 3000,
   instagram: 2200,
   x: 280,
+  facebook: 2200,
+  threads: 500,
+  googleBusiness: 1500,
 };
+
+const ORIGINAL_PLATFORMS = ["linkedin", "instagram", "x"] as const;
+
+/** Facebook, Threads and Google Business Profile join the package from this run. */
+export const EXPANDED_SOCIAL_REQUIRED_FROM = "2026-09-22";
 
 const URL_IN_TEXT = /\bhttps?:\/\/|\bwww\.\S|\b[a-z0-9-]+\.(com|in|io|co|org|net)\b/i;
 
@@ -237,7 +251,11 @@ function validateSocial(
     return;
   }
 
-  for (const platform of Object.keys(CAPTION_LIMITS) as (keyof typeof CAPTION_LIMITS)[]) {
+  const required = brief.date >= EXPANDED_SOCIAL_REQUIRED_FROM
+    ? (Object.keys(CAPTION_LIMITS) as (keyof typeof CAPTION_LIMITS)[])
+    : [...ORIGINAL_PLATFORMS];
+
+  for (const platform of required) {
     const text = social[platform];
     const at = `social.${platform}`;
 

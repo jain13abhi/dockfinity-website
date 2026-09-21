@@ -64,6 +64,11 @@ export function briefSchema(date) {
           linkedin: string("120 to 180 words, no emojis."),
           instagram: string("Three to four lines."),
           x: string("At most 280 characters, no URL or bare domain."),
+          facebook: string("80 to 120 words and at most 2200 characters."),
+          threads: string("At most 500 characters."),
+          googleBusiness: string(
+            "Google Business Profile Update: 80 to 120 words, at most 1500 characters, no hashtags; the Learn more button carries the brief URL."
+          ),
           hashtags: {
             type: "array",
             items: string("A hashtag beginning with # and containing no spaces."),
@@ -71,7 +76,9 @@ export function briefSchema(date) {
             maxItems: 8,
           },
         },
-        required: ["linkedin", "instagram", "x", "hashtags"],
+        required: [
+          "linkedin", "instagram", "x", "facebook", "threads", "googleBusiness", "hashtags",
+        ],
       },
       sources: {
         type: "object",
@@ -150,7 +157,7 @@ export function buildDraftRequest({
     : "";
   const prompt = `Create the final Dockfinity website JSON for ${date} from the research dossier below.
 
-Use only facts and exact URLs present in the dossier. Do not fill gaps from memory. Exclude anything already published unless the dossier proves a distinct new release. Produce exactly two or three items, exactly one lead, and obey every content, confidentiality, caption, and length rule in the complete specification. The thesis must be no more than 58 characters (38 to 56 is preferred), and the readThrough field must be two or three sentences and 260 to 324 characters inclusive so both fit the fixed slide. Optional item fields must be omitted when inapplicable; never emit null or an empty placeholder. The local validator and renderer are authoritative and will reject the run if anything is wrong.${correctionBlock}
+Use only facts and exact URLs present in the dossier. Do not fill gaps from memory. Exclude anything already published unless the dossier proves a distinct new release. Produce exactly two or three items, exactly one lead, all six social captions, and obey every content, confidentiality, caption, and length rule in the complete specification. The thesis must be no more than 58 characters (38 to 56 is preferred), and the readThrough field must be two or three sentences and 260 to 324 characters inclusive so both fit the fixed slide. Optional item fields must be omitted when inapplicable; never emit null or an empty placeholder. The local validator and renderer are authoritative and will reject the run if anything is wrong.${correctionBlock}
 
 ALREADY-PUBLISHED ITEM NAMES
 - ${published}

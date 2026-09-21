@@ -163,21 +163,31 @@ async function main() {
 
   const tags = (social.hashtags ?? []).join(" ");
 
-  // Each caption goes in its own message, ready to copy. Three in one would
-  // run past Telegram's 4,096 and be cut off mid-sentence.
-  for (const [platform, text, limit] of [
-    ["LinkedIn", social.linkedin, 3000],
-    ["Instagram / WhatsApp", social.instagram, 2200],
-    ["X", social.x, 280],
-  ]) {
-    const full = `${text}\n\n${tags}`;
+  // Each caption goes in its own message, ready to copy. Older briefs carry
+  // only the original three captions, so new destinations are skipped when
+  // replaying one of those archived files.
+  const captions = [
+    ["LinkedIn", social.linkedin, 3000, true],
+    ["Instagram / WhatsApp", social.instagram, 2200, true],
+    ["Facebook", social.facebook, 2200, true],
+    ["X", social.x, 280, true],
+    ["Threads", social.threads, 500, true],
+    ["Google Business Profile", social.googleBusiness, 1500, false],
+  ].filter(([, text]) => typeof text === "string" && text.trim());
+
+  for (const [platform, text, limit, includeHashtags] of captions) {
+    const full = includeHashtags && tags ? `${text}\n\n${tags}` : text;
     // The site checks the caption alone against the platform limit; hashtags
     // are added here. On X that difference decides whether it fits at all.
     const over = full.length > limit ? `  OVER by ${full.length - limit}` : "";
     await sendText(
       token,
       chat,
-      `${platform} — ${full.length} of ${limit} characters with hashtags${over}\n` +
+      `${platform} — ${full.length} of ${limit} characters` +
+        (includeHashtags ? " with hashtags" : "") + `${over}\n` +
+        (platform === "Google Business Profile"
+          ? `Post type: Update | Button: Learn more${url ? ` | Link: ${url}` : ""}\n`
+          : "") +
         `${"-".repeat(30)}\n${full}`
     );
   }

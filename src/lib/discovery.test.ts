@@ -35,3 +35,35 @@ test("the GitHub releases index is not an exact release source", () => {
     /must cite the \/releases\/tag\/ page/
   );
 });
+
+test("briefs from 22 September carry Facebook, Threads and Google Business Profile copy", () => {
+  const brief = publishedFixture();
+  brief.date = "2026-09-22";
+
+  assert.throws(
+    () => validateDiscoveryBrief(brief, "2026-09-22.json"),
+    /social\.facebook/
+  );
+
+  Object.assign(brief.social!, {
+    facebook: "A focused Facebook update for technology teams.",
+    threads: "A concise Threads update for builders.",
+    googleBusiness: "A concise local business update for prospective clients.",
+  });
+  assert.doesNotThrow(() => validateDiscoveryBrief(brief, "2026-09-22.json"));
+});
+
+test("Google Business Profile copy uses the 1500-character house limit", () => {
+  const brief = publishedFixture();
+  brief.date = "2026-09-22";
+  Object.assign(brief.social!, {
+    facebook: "Facebook copy.",
+    threads: "Threads copy.",
+    googleBusiness: "x".repeat(1501),
+  });
+
+  assert.throws(
+    () => validateDiscoveryBrief(brief, "2026-09-22.json"),
+    /googleBusiness caption is 1501 characters and the limit is 1500/
+  );
+});

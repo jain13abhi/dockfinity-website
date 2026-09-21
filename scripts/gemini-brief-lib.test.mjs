@@ -2,12 +2,22 @@ import assert from "node:assert/strict";
 import test from "node:test";
 
 import {
+  briefSchema,
   buildDraftRequest,
   buildResearchRequest,
   extractResponseText,
   generateBrief,
   parseResearchIssueTitle,
 } from "./gemini-brief-lib.mjs";
+
+test("new drafts carry the complete manual social publishing package", () => {
+  const social = briefSchema("2026-09-22").properties.social;
+  assert.deepEqual(
+    social.required,
+    ["linkedin", "instagram", "x", "facebook", "threads", "googleBusiness", "hashtags"]
+  );
+  assert.match(social.properties.googleBusiness.description, /Google Business Profile/i);
+});
 
 test("parseResearchIssueTitle accepts only an ISO-dated research issue", () => {
   assert.equal(parseResearchIssueTitle("research: 2026-09-20"), "2026-09-20");
