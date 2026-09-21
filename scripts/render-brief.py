@@ -18,15 +18,17 @@ from __future__ import annotations
 import argparse
 import importlib.util
 import json
+import os
 import sys
 import tempfile
 import urllib.request
 from datetime import datetime
 from pathlib import Path
 
+SLIDE_RENDERER_COMMIT = os.environ.get("SLIDE_RENDERER_COMMIT", "main")
 RENDERER_URL = (
-    "https://raw.githubusercontent.com/jain13abhi/slide-renderers/main/"
-    "dockfinity/render-slides.py"
+    "https://raw.githubusercontent.com/jain13abhi/slide-renderers/"
+    f"{SLIDE_RENDERER_COMMIT}/dockfinity/render-slides.py"
 )
 
 
@@ -126,16 +128,21 @@ def build_brief(brief: dict) -> dict:
 def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("date", help="brief date, YYYY-MM-DD")
+    parser.add_argument("--brief-file", type=Path, help="unpublished candidate JSON")
     parser.add_argument("--logo", required=True, type=Path)
     parser.add_argument("--out-dir", type=Path, default=Path("public/briefs"))
     parser.add_argument("--renderer", type=Path, help="local renderer, for testing")
     args = parser.parse_args()
 
-    brief_path = Path("content/discovery") / f"{args.date}.json"
+    brief_path = args.brief_file or Path("content/discovery") / f"{args.date}.json"
     if not brief_path.is_file():
         raise SystemExit(f"No brief at {brief_path}.")
 
     brief = json.loads(brief_path.read_text(encoding="utf-8"))
+    if brief.get("date") != args.date:
+        raise SystemExit(
+            f"Brief date {brief.get('date')!r} does not match requested date {args.date!r}."
+        )
     renderer = load_renderer(args.renderer)
 
     renderer.BRIEF = build_brief(brief)

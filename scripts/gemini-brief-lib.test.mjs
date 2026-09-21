@@ -135,6 +135,7 @@ test("generateBrief retries one malformed layout draft with explicit correction"
   assert.equal(calls.length, 3);
   assert.equal(result.readThrough.length, 260);
   assert.match(calls[2].contents[0].parts[0].text, /thesis is 67 characters/i);
+  assert.match(calls[2].contents[0].parts[0].text, /deliberately overlong thesis/i);
 });
 
 test("generateBrief stops after one corrected draft", async () => {
@@ -223,7 +224,88 @@ test("generateBrief identifies the model when the network request fails", async 
       publishedNames: [],
       evidence: "PRIMARY RELEASE EVIDENCE",
       fetchImpl: async () => { throw new Error("offline"); },
+      sleepImpl: async () => {},
     }),
-    /gemini-3\.5-flash-lite request failed before a response: offline/
+    /gemini-3\.5-flash-lite request failed before a response after 3 attempts: offline/
   );
+});
+
+test("generateBrief retries transient Gemini failures without repeating completed research", async () => {
+  const calls = [];
+  const sleeps = [];
+  const fakeFetch = async (_url, options) => {
+    calls.push(JSON.parse(options.body));
+    if (calls.length === 1) throw new Error("temporary reset");
+    const text = calls.length === 2
+      ? "verified research dossier"
+      : JSON.stringify({
+          date: "2026-09-21",
+          thesis: "A concise layout-safe thesis",
+          readThrough: "x".repeat(260),
+        });
+    return {
+      ok: true,
+      status: 200,
+      json: async () => ({ candidates: [{ content: { parts: [{ text }] } }] }),
+    };
+  };
+
+  const result = await generateBrief({
+    apiKey: "test-key",
+    date: "2026-09-21",
+    specification: "SPEC",
+    publishedNames: [],
+    evidence: "PRIMARY RELEASE EVIDENCE",
+    fetchImpl: fakeFetch,
+    sleepImpl: async (milliseconds) => sleeps.push(milliseconds),
+  });
+
+  assert.equal(result.date, "2026-09-21");
+  assert.equal(calls.length, 3);
+  assert.deepEqual(sleeps, [1000]);
+});
+
+test("generateBrief retries 429 but keeps infrastructure validation out of the LLM loop", async () => {
+  let calls = 0;
+  const fakeFetch = async () => {
+    calls += 1;
+    if (calls === 1) {
+      return {
+        ok: false,
+        status: 429,
+        json: async () => ({ error: { message: "temporarily throttled" } }),
+      };
+    }
+    const text = calls === 2
+      ? "verified research dossier"
+      : JSON.stringify({
+          date: "2026-09-21",
+          thesis: "A concise layout-safe thesis",
+          readThrough: "x".repeat(260),
+        });
+    return {
+      ok: true,
+      status: 200,
+      json: async () => ({ candidates: [{ content: { parts: [{ text }] } }] }),
+    };
+  };
+
+  await assert.rejects(
+    generateBrief({
+      apiKey: "test-key",
+      date: "2026-09-21",
+      specification: "SPEC",
+      publishedNames: [],
+      evidence: "PRIMARY RELEASE EVIDENCE",
+      fetchImpl: fakeFetch,
+      sleepImpl: async () => {},
+      validateDraft() {
+        const error = new Error("renderer process unavailable");
+        error.retryableByModel = false;
+        throw error;
+      },
+    }),
+    /renderer process unavailable/
+  );
+  assert.equal(calls, 3, "429 retry, research success, then one draft; no repair draft");
 });

@@ -30,6 +30,10 @@ permissions:
   contents: write
   issues: write
 
+concurrency:
+  group: dockfinity-daily-publish
+  cancel-in-progress: false
+
 env:
   # Pinned. A different release of either face changes the metrics, which
   # changes where the text wraps, which changes the layout. Both were verified
@@ -37,7 +41,8 @@ env:
   INTER_VERSION: "4.1"
   SYNE_COMMIT: "54fb97bd69162b95b2aa2c3996ffd71466c1aec2"
   PILLOW_VERSION: "12.1.1"
-  LOGO_URL: "https://raw.githubusercontent.com/jain13abhi/slide-renderers/main/assets/dockfinity/logo-colour.png"
+  SLIDE_RENDERER_COMMIT: "f2e32a3b4a3f61e698e7d6deddfe350b473c19dd"
+  LOGO_URL: "https://raw.githubusercontent.com/jain13abhi/slide-renderers/f2e32a3b4a3f61e698e7d6deddfe350b473c19dd/assets/dockfinity/logo-colour.png"
 
 jobs:
   publish:
@@ -90,6 +95,25 @@ jobs:
         if: steps.preflight.outputs.skip != 'true'
         run: npm ci
 
+      - uses: actions/setup-python@v5
+        if: steps.preflight.outputs.skip != 'true'
+        with:
+          python-version: "3.12"
+
+      - name: Install the locked renderer dependencies
+        if: steps.preflight.outputs.skip != 'true'
+        run: |
+          pip install "Pillow==${PILLOW_VERSION}"
+          mkdir -p ~/.fonts .renderer
+          curl -fsSL -o inter.zip \
+            "https://github.com/rsms/inter/releases/download/v${INTER_VERSION}/Inter-${INTER_VERSION}.zip"
+          unzip -j -o inter.zip 'extras/otf/*.otf' -d ~/.fonts
+          curl -fsSL -o "$HOME/.fonts/Syne[wght].ttf" \
+            "https://raw.githubusercontent.com/google/fonts/${SYNE_COMMIT}/ofl/syne/Syne%5Bwght%5D.ttf"
+          curl -fsSL -o .renderer/dockfinity.py \
+            "https://raw.githubusercontent.com/jain13abhi/slide-renderers/${SLIDE_RENDERER_COMMIT}/dockfinity/render-slides.py"
+          curl -fsSL -o logo.png "$LOGO_URL"
+
       - name: Research and draft with Gemini
         if: >-
           steps.preflight.outputs.skip != 'true' &&
@@ -98,6 +122,8 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GITHUB_TOKEN: ${{ github.token }}
           RESEARCH_TITLE: ${{ steps.preflight.outputs.research_title }}
+          DOCKFINITY_RENDERER: .renderer/dockfinity.py
+          DOCKFINITY_LOGO: logo.png
         run: |
           set -o pipefail
           npx --no-install tsx scripts/research-brief.mjs --out generated-brief.json \
@@ -121,32 +147,12 @@ jobs:
             echo "$key=$(grep "^$key=" result.txt | cut -d= -f2-)" >> "$GITHUB_OUTPUT"
           done
 
-      - uses: actions/setup-python@v5
-        if: steps.preflight.outputs.skip != 'true'
-        with:
-          python-version: "3.12"
-
-      - name: Install Pillow
-        if: steps.preflight.outputs.skip != 'true'
-        run: pip install "Pillow==${PILLOW_VERSION}"
-
-      - name: Install the website's typefaces
-        if: steps.preflight.outputs.skip != 'true'
-        run: |
-          mkdir -p ~/.fonts
-          curl -fsSL -o inter.zip \
-            "https://github.com/rsms/inter/releases/download/v${INTER_VERSION}/Inter-${INTER_VERSION}.zip"
-          unzip -j -o inter.zip 'extras/otf/*.otf' -d ~/.fonts
-          curl -fsSL -o "$HOME/.fonts/Syne[wght].ttf" \
-            "https://raw.githubusercontent.com/google/fonts/${SYNE_COMMIT}/ofl/syne/Syne%5Bwght%5D.ttf"
-          ls ~/.fonts | wc -l
-
       - name: Render the slide
         if: steps.preflight.outputs.skip != 'true'
         run: |
           set -o pipefail
-          curl -fsSL -o logo.png "$LOGO_URL"
           python scripts/render-brief.py "${{ steps.meta.outputs.date }}" \
+            --renderer .renderer/dockfinity.py \
             --logo logo.png --out-dir public/briefs 2>>error.txt | tee -a render.txt
 
       - name: Commit
@@ -275,6 +281,16 @@ jobs:
             --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
             --data-urlencode "text=${MSG}" \
             --data-urlencode "disable_web_page_preview=true"
+
+      - name: Print the failure diagnostic in the run log
+        if: failure()
+        run: |
+          echo "::error::Dockfinity publication failed; the exact diagnostic follows."
+          if [ -s error.txt ]; then
+            tail -c 4000 error.txt
+          else
+            echo "No diagnostic file was produced. Inspect the first failed step above."
+          fi
 
       - name: Report the failure on the issue
         if: failure() && github.event_name == 'issues'
