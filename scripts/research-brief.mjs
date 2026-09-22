@@ -19,17 +19,22 @@ function option(name, fallback) {
   return index === -1 ? fallback : process.argv[index + 1];
 }
 
-function publishedItemNames(contentDirectory) {
-  if (!fs.existsSync(contentDirectory)) return [];
+function publishedHistory(contentDirectory) {
   const names = new Set();
+  const releaseUrls = new Set();
+  if (!fs.existsSync(contentDirectory)) return { names: [], releaseUrls: [] };
   for (const filename of fs.readdirSync(contentDirectory)) {
     if (!filename.endsWith(".json")) continue;
     const brief = JSON.parse(fs.readFileSync(path.join(contentDirectory, filename), "utf-8"));
     for (const item of brief.items ?? []) {
       if (item?.name) names.add(item.name);
+      if (item?.releaseUrl) releaseUrls.add(item.releaseUrl);
     }
   }
-  return [...names].sort((a, b) => a.localeCompare(b));
+  return {
+    names: [...names].sort((a, b) => a.localeCompare(b)),
+    releaseUrls: [...releaseUrls].sort((a, b) => a.localeCompare(b)),
+  };
 }
 
 async function main() {
@@ -42,18 +47,18 @@ async function main() {
   const output = option("--out", "generated-brief.json");
   const root = process.cwd();
   const specification = fs.readFileSync(path.join(root, "public", "brief-spec.txt"), "utf-8");
-  const publishedNames = publishedItemNames(path.join(root, "content", "discovery"));
+  const published = publishedHistory(path.join(root, "content", "discovery"));
   const evidence = await collectDockfinityEvidence({
     date,
     githubToken: process.env.GITHUB_TOKEN,
-    publishedNames,
+    publishedReleaseUrls: published.releaseUrls,
   });
 
   const brief = await generateBrief({
     apiKey: process.env.GEMINI_API_KEY,
     date,
     specification,
-    publishedNames,
+    publishedNames: published.names,
     evidence,
     researchModel: process.env.GEMINI_RESEARCH_MODEL || undefined,
     draftModel: process.env.GEMINI_DRAFT_MODEL || undefined,

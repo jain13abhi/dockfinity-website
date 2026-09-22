@@ -124,7 +124,7 @@ export function parseResearchIssueTitle(title) {
 export function buildResearchRequest({ date, specification, evidence }) {
   const prompt = `You are the evidence-gathering pass for the Dockfinity daily discovery brief dated ${date}.
 
-Research from the primary GitHub release evidence collected immediately before this request. Follow the complete editorial specification below. Find two or three qualifying shipped items from the preceding seven days, including significant missed items that have not already been published.
+Research from the primary GitHub release evidence collected immediately before this request. Follow the complete editorial specification below. Find two or three qualifying shipped items from the preceding seven days, including significant missed items that have not already been published. A previously covered project remains eligible when the evidence proves a distinct new release URL and version; never reject a new version merely because the project name appeared before.
 
 For every candidate, open the exact pages needed to prove release status, date, version, licence, platform, availability, and the complete price ladder when a price exists. Reject announcements, future availability, inaccessible evidence, and facts that are only inferred. Return a concise research dossier, not a publishable article. Include the exact human-readable source URL beside every fact. Do not fabricate or reconstruct URLs. If fewer than two fully evidenced items exist, say so plainly; the run must fail rather than pad the brief.
 

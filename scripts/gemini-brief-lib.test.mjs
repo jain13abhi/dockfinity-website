@@ -36,6 +36,10 @@ test("research request uses the collected evidence packet without a paid search 
   assert.match(request.contents[0].parts[0].text, /2026-09-20/);
   assert.match(request.contents[0].parts[0].text, /SPEC/);
   assert.match(request.contents[0].parts[0].text, /PRIMARY RELEASE EVIDENCE/);
+  assert.match(
+    request.contents[0].parts[0].text,
+    /previously covered project.*distinct new release/i
+  );
   assert.equal(request.generationConfig?.responseMimeType, undefined);
 });
 
