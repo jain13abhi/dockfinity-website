@@ -21,6 +21,59 @@ const DEFAULT_REPOSITORIES = [
   "denoland/deno",
 ];
 
+const FALLBACK_REPOSITORIES = [
+  "openai/openai-node",
+  "openai/openai-python",
+  "openai/openai-go",
+  "googleapis/js-genai",
+  "googleapis/python-genai",
+  "anthropics/anthropic-sdk-typescript",
+  "anthropics/anthropic-sdk-python",
+  "modelcontextprotocol/python-sdk",
+  "modelcontextprotocol/go-sdk",
+  "pydantic/pydantic-ai",
+  "microsoft/autogen",
+  "microsoft/semantic-kernel",
+  "crewAIInc/crewAI",
+  "BerriAI/litellm",
+  "run-llama/llama_index",
+  "langchain-ai/langchain",
+  "langchain-ai/langchain-mcp-adapters",
+  "vllm-project/vllm",
+  "ggml-org/llama.cpp",
+  "sgl-project/sglang",
+  "huggingface/diffusers",
+  "huggingface/accelerate",
+  "huggingface/peft",
+  "gradio-app/gradio",
+  "streamlit/streamlit",
+  "open-webui/open-webui",
+  "FlowiseAI/Flowise",
+  "langflow-ai/langflow",
+  "pytorch/pytorch",
+  "tensorflow/tensorflow",
+  "jax-ml/jax",
+  "microsoft/onnxruntime",
+  "triton-lang/triton",
+  "kubernetes/kubernetes",
+  "docker/compose",
+  "hashicorp/terraform",
+  "pulumi/pulumi",
+  "supabase/supabase",
+  "prisma/prisma",
+  "drizzle-team/drizzle-orm",
+  "vitejs/vite",
+  "nodejs/node",
+  "oven-sh/bun",
+  "astral-sh/ruff",
+  "rust-lang/rust",
+  "grafana/grafana",
+  "prometheus/prometheus",
+];
+
+const MAX_EVIDENCE_ITEMS = 8;
+const EVIDENCE_CONCURRENCY = 8;
+
 const defaultSleep = (milliseconds) => new Promise((resolve) => setTimeout(resolve, milliseconds));
 
 function isTransientStatus(status) {
@@ -49,28 +102,42 @@ async function githubJson(url, { token, fetchImpl, sleepImpl }) {
   return null;
 }
 
-export async function collectDockfinityEvidence({
-  date,
-  githubToken = "",
-  publishedNames = [],
-  repositories = DEFAULT_REPOSITORIES,
-  fetchImpl = fetch,
-  sleepImpl = defaultSleep,
-}) {
-  const end = new Date(`${date}T23:59:59Z`);
-  const start = new Date(end);
-  start.setUTCDate(start.getUTCDate() - 7);
-  const excluded = new Set(publishedNames.map((name) => name.toLowerCase()));
+async function mapWithConcurrency(items, limit, mapper) {
+  const results = new Array(items.length);
+  let cursor = 0;
+  const workers = Array.from({ length: Math.min(limit, items.length) }, async () => {
+    while (cursor < items.length) {
+      const index = cursor;
+      cursor += 1;
+      results[index] = await mapper(items[index]);
+    }
+  });
+  await Promise.all(workers);
+  return results;
+}
 
-  const candidates = await Promise.all(repositories.map(async (repository) => {
+async function collectFromRepositories({
+  repositories,
+  start,
+  end,
+  excludedReleaseUrls,
+  githubToken,
+  fetchImpl,
+  sleepImpl,
+}) {
+  return mapWithConcurrency(repositories, EVIDENCE_CONCURRENCY, async (repository) => {
     const releases = await githubJson(
-      `https://api.github.com/repos/${repository}/releases?per_page=5`,
+      `https://api.github.com/repos/${repository}/releases?per_page=10`,
       { token: githubToken, fetchImpl, sleepImpl }
     );
     if (!Array.isArray(releases)) return null;
     const release = releases.find((item) => {
       const published = new Date(item.published_at ?? 0);
-      return !item.draft && !item.prerelease && published >= start && published <= end;
+      return !item.draft
+        && !item.prerelease
+        && published >= start
+        && published <= end
+        && !excludedReleaseUrls.has(String(item.html_url ?? "").toLowerCase());
     });
     if (!release) return null;
 
@@ -79,7 +146,7 @@ export async function collectDockfinityEvidence({
       fetchImpl,
       sleepImpl,
     });
-    if (!metadata || excluded.has(String(metadata.name ?? "").toLowerCase())) return null;
+    if (!metadata) return null;
 
     return {
       repository: metadata.full_name,
@@ -98,12 +165,66 @@ export async function collectDockfinityEvidence({
         assets: (release.assets ?? []).slice(0, 12).map((asset) => asset.name),
       },
     };
-  }));
+  });
+}
 
-  const usable = candidates.filter(Boolean);
+export async function collectDockfinityEvidence({
+  date,
+  githubToken = "",
+  publishedReleaseUrls = [],
+  repositories = DEFAULT_REPOSITORIES,
+  fallbackRepositories = FALLBACK_REPOSITORIES,
+  fetchImpl = fetch,
+  sleepImpl = defaultSleep,
+}) {
+  const end = new Date(`${date}T23:59:59Z`);
+  const start = new Date(end);
+  start.setUTCDate(start.getUTCDate() - 7);
+  const excludedReleaseUrls = new Set(
+    publishedReleaseUrls.map((url) => String(url).toLowerCase())
+  );
+  const primary = (await collectFromRepositories({
+    repositories,
+    start,
+    end,
+    excludedReleaseUrls,
+    githubToken,
+    fetchImpl,
+    sleepImpl,
+  })).filter(Boolean);
+
+  let candidates = primary;
+  if (candidates.length < 2 && fallbackRepositories.length) {
+    const primarySet = new Set(repositories.map((repository) => repository.toLowerCase()));
+    const expandedRepositories = fallbackRepositories.filter(
+      (repository) => !primarySet.has(repository.toLowerCase())
+    );
+    const fallback = (await collectFromRepositories({
+      repositories: expandedRepositories,
+      start,
+      end,
+      excludedReleaseUrls,
+      githubToken,
+      fetchImpl,
+      sleepImpl,
+    })).filter(Boolean);
+    candidates = [...primary, ...fallback];
+    console.log(
+      `evidence_fallback=expanded-catalog primary=${primary.length} total=${candidates.length}`
+    );
+  }
+
+  const usable = [...new Map(
+    candidates.map((candidate) => [candidate.release.url.toLowerCase(), candidate])
+  ).values()]
+    .sort((left, right) => (
+      new Date(right.release.publishedAt).getTime() - new Date(left.release.publishedAt).getTime()
+    ))
+    .slice(0, MAX_EVIDENCE_ITEMS);
   if (usable.length < 2) {
     throw new Error(
-      `Public evidence collection found fewer than two eligible primary releases for ${date}.`
+      `Public evidence collection found fewer than two eligible primary releases for ${date} `
+      + `after the verified fallback catalog (primary=${primary.length}, total=${usable.length}).`
     );
   }
   return JSON.stringify(usable, null, 2);
