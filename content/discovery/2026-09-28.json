@@ -1,0 +1,64 @@
+{
+  "date": "2026-09-28",
+  "title": "OpenAI ships Codex rust-v0.158.0",
+  "summary": "OpenAI releases Codex rust-v0.158.0 with TUI configuration improvements, MCP OAuth support, and robust WebSocket authentication.",
+  "thesis": "Agent runtimes harden authentication boundaries.",
+  "accentPhrase": "harden authentication boundaries",
+  "sections": [
+    "TOOLING"
+  ],
+  "items": [
+    {
+      "name": "codex",
+      "kind": "tooling",
+      "version": "0.158.0",
+      "releaseDate": "2026-09-28",
+      "licence": "Apache-2.0",
+      "platform": "macOS, Linux, Windows",
+      "repoUrl": "https://github.com/openai/codex",
+      "releaseUrl": "https://github.com/openai/codex/releases/tag/rust-v0.158.0",
+      "what": "Lightweight coding agent running in the terminal with improved TUI and MCP support.",
+      "whyDifferent": "Adds bearer token security for direct WebSocket connections and native MCP OAuth client secret connections.",
+      "isLead": true,
+      "source": "Source: openai/codex, 28 Sep 2026 - https://github.com/openai/codex/releases/tag/rust-v0.158.0"
+    },
+    {
+      "name": "langchainjs",
+      "kind": "tooling",
+      "version": "1.5.14",
+      "releaseDate": "2026-09-27",
+      "licence": "MIT",
+      "platform": "Node.js, TypeScript",
+      "repoUrl": "https://github.com/langchain-ai/langchainjs",
+      "releaseUrl": "https://github.com/langchain-ai/langchainjs/releases/tag/langchain%401.5.14",
+      "what": "Agent engineering platform updating createAgent error handling behavior.",
+      "whyDifferent": "Prevents run termination on failed returnDirect tool calls, routing schema errors back to the model for correction.",
+      "isLead": false,
+      "source": "Source: langchain-ai/langchainjs, 27 Sep 2026 - https://github.com/langchain-ai/langchainjs/releases/tag/langchain%401.5.14"
+    }
+  ],
+  "readThrough": "Agent runtimes and developer frameworks are tightening security controls and error recovery paths. Upgrading to these releases ensures robust WebSocket authentication and reliable tool execution retry handling; teams should test it in a reversible pilot before adoption.",
+  "social": {
+    "linkedin": "Agent runtimes and developer frameworks are tightening security controls and error recovery paths. OpenAI's Codex rust-v0.158.0 introduces bearer token protection for WebSocket connections alongside MCP OAuth support. Meanwhile, LangchainJS 1.5.14 refines agent execution loops by returning tool errors to models for correction rather than terminating runs outright. Upgrading gives teams tighter transport boundaries and more resilient autonomous workflows.",
+    "instagram": "Agent runtimes harden authentication and transport boundaries. Codex v0.158.0 adds secure WebSocket connections and MCP OAuth support, while LangchainJS 1.5.14 improves tool error recovery.",
+    "x": "Agent runtimes harden authentication boundaries with new secure WebSocket controls and resilient error recovery.",
+    "facebook": "Agent runtimes and developer frameworks are tightening security controls and error recovery paths. OpenAI's Codex rust-v0.158.0 introduces bearer token protection for direct WebSocket connections and pre-registered OAuth client secrets for MCP servers. Simultaneously, LangchainJS 1.5.14 refines agent execution loops by routing failed tool arguments back to the model for automated correction. These updates give engineering teams more secure transport boundaries and robust error handling.",
+    "threads": "Agent runtimes harden authentication boundaries with secure WebSocket controls and robust error recovery patterns.",
+    "googleBusiness": "Dockfinity daily discovery brief for September 28, 2026 covers agent runtime updates. OpenAI released Codex rust-v0.158.0 with secure WebSocket bearer tokens and MCP OAuth client support, while LangchainJS shipped 1.5.14 with improved tool error recovery loops. These updates provide engineering teams with more reliable transport security and robust agent execution handling.",
+    "hashtags": [
+      "#AI",
+      "#Agents",
+      "#OpenAI",
+      "#LangChain",
+      "#SoftwareEngineering",
+      "#Security",
+      "#DevOps",
+      "#WebSockets"
+    ]
+  },
+  "sources": {
+    "attribution": "openai/codex release tag rust-v0.158.0, https://github.com/openai/codex/releases/tag/rust-v0.158.0; langchain-ai/langchainjs release tag langchain@1.5.14, https://github.com/langchain-ai/langchainjs/releases/tag/langchain%401.5.14",
+    "surveyDate": "2026-09-28",
+    "disclaimer": "Independent technology analysis published by Dockfinity. Every release, version, licence and figure carries the primary source it was read from."
+  }
+}
