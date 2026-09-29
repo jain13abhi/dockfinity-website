@@ -1,0 +1,76 @@
+{
+  "date": "2026-09-29",
+  "title": "Claude Code Introduces Sonnet 5.5 With 1M Context",
+  "summary": "Anthropic ships Claude Code v2.1.284 featuring native Claude Sonnet 5.5 with a 1M context window, alongside major releases from Astral uv and Model Context Protocol TypeScript SDK.",
+  "thesis": "Agent workflows absorb expanded context limits.",
+  "accentPhrase": "expanded context limits",
+  "sections": [
+    "TOOLING",
+    "TEARDOWN"
+  ],
+  "items": [
+    {
+      "name": "claude-code",
+      "kind": "teardown",
+      "releaseDate": "2026-09-28",
+      "platform": "Cross-platform terminal environment (macOS, Linux, Windows)",
+      "productUrl": "https://code.claude.com/docs/en/overview",
+      "what": "Terminal-based agentic coding tool integrating codebase understanding and git workflows.",
+      "whyDifferent": "Adds native support for Claude Sonnet 5.5 featuring a 1M context window and updated API pricing.",
+      "isLead": true,
+      "source": "Source: anthropics/claude-code, 28 Sep 2026 - https://github.com/anthropics/claude-code/releases/tag/v2.1.284"
+    },
+    {
+      "name": "uv",
+      "kind": "tooling",
+      "version": "0.12.20",
+      "releaseDate": "2026-09-28",
+      "licence": "Apache-2.0",
+      "platform": "Cross-platform (macOS, Windows, Linux)",
+      "repoUrl": "https://github.com/astral-sh/uv",
+      "releaseUrl": "https://github.com/astral-sh/uv/releases/tag/0.12.20",
+      "what": "Extremely fast Python package and project manager written in Rust.",
+      "whyDifferent": "Introduces lockfile reuse optimization when dependency declarations are semantically equivalent.",
+      "isLead": false,
+      "source": "Source: astral-sh/uv, 28 Sep 2026 - https://github.com/astral-sh/uv/releases/tag/0.12.20"
+    },
+    {
+      "name": "typescript-sdk",
+      "kind": "tooling",
+      "version": "v2.2.0",
+      "releaseDate": "2026-09-28",
+      "licence": "NOASSERTION",
+      "platform": "Node.js / TypeScript runtime",
+      "repoUrl": "https://github.com/modelcontextprotocol/typescript-sdk",
+      "releaseUrl": "https://github.com/modelcontextprotocol/typescript-sdk/releases/tag/v2.2.0",
+      "what": "Official TypeScript SDK for Model Context Protocol servers and clients.",
+      "whyDifferent": "Updates pagination for list calls to automatically traverse cursors until completion.",
+      "isLead": false,
+      "source": "Source: modelcontextprotocol/typescript-sdk, 28 Sep 2026 - https://github.com/modelcontextprotocol/typescript-sdk/releases/tag/v2.2.0"
+    }
+  ],
+  "readThrough": "Recent releases push expanded context windows and automated pagination into production tooling. Teams running agentic workflows gain deeper repository introspection without manual intervention, while python and protocol ecosystems tighten lockfile efficiency; teams should validate it before adoption.",
+  "social": {
+    "linkedin": "Anthropic has shipped Claude Code v2.1.284, introducing native support for Claude Sonnet 5.5 with a 1M context window. Simultaneously, Astral released uv 0.12.20 with advanced lockfile reuse, and Model Context Protocol rolled out TypeScript SDK v2.2.0 featuring automatic cursor pagination. These updates collectively enhance context handling and dependency management for engineering teams.",
+    "instagram": "Claude Code v2.1.284 launches with 1M context support, joined by uv 0.12.20 and MCP TypeScript SDK v2.2.0.",
+    "x": "Claude Code v2.1.284 launches with 1M context support alongside uv 0.12.20 and MCP TypeScript SDK v2.2.0.",
+    "facebook": "Anthropic's Claude Code v2.1.284 brings native Claude Sonnet 5.5 with a 1M context window directly to terminal workflows. In parallel, Astral released uv 0.12.20 to optimize dependency lockfile reuse, and the Model Context Protocol team published TypeScript SDK v2.2.0 featuring automatic pagination for list calls. These updates improve efficiency and context depth across modern development stacks.",
+    "threads": "Claude Code v2.1.284 arrives with 1M context support, alongside updates to uv and the MCP TypeScript SDK.",
+    "googleBusiness": "Discover the latest developer software releases. Claude Code v2.1.284 introduces native 1M context support with Sonnet 5.5, Astral uv 0.12.20 optimizes package management, and the MCP TypeScript SDK v2.2.0 refines protocol pagination.",
+    "hashtags": [
+      "#SoftwareEngineering",
+      "#ArtificialIntelligence",
+      "#DeveloperTools",
+      "#Python",
+      "#TypeScript",
+      "#OpenSource",
+      "#CloudComputing",
+      "#TechNews"
+    ]
+  },
+  "sources": {
+    "attribution": "anthropics/claude-code release v2.1.284 (28 Sep 2026 - https://github.com/anthropics/claude-code/releases/tag/v2.1.284); astral-sh/uv release 0.12.20 (28 Sep 2026 - https://github.com/astral-sh/uv/releases/tag/0.12.20); modelcontextprotocol/typescript-sdk release v2.2.0 (28 Sep 2026 - https://github.com/modelcontextprotocol/typescript-sdk/releases/tag/v2.2.0)",
+    "surveyDate": "2026-09-29",
+    "disclaimer": "Independent technology analysis published by Dockfinity. Every release, version, licence and figure carries the primary source it was read from."
+  }
+}
