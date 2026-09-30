@@ -55,7 +55,7 @@ export function briefSchema(date) {
       },
       items: { type: "array", items: itemSchema(), minItems: 2, maxItems: 3 },
       readThrough: string(
-        "Two or three sentences on what changes for a team, 260 to 324 characters inclusive."
+        "Two or three sentences on what changes for a team, 260 to 300 characters inclusive."
       ),
       social: {
         type: "object",
@@ -157,7 +157,7 @@ export function buildDraftRequest({
     : "";
   const prompt = `Create the final Dockfinity website JSON for ${date} from the research dossier below.
 
-Use only facts and exact URLs present in the dossier. Do not fill gaps from memory. Exclude anything already published unless the dossier proves a distinct new release. Produce exactly two or three items, exactly one lead, all six social captions, and obey every content, confidentiality, caption, and length rule in the complete specification. The thesis must be no more than 58 characters (38 to 56 is preferred), and the readThrough field must be two or three sentences and 260 to 324 characters inclusive so both fit the fixed slide. Optional item fields must be omitted when inapplicable; never emit null or an empty placeholder. The local validator and renderer are authoritative and will reject the run if anything is wrong.${correctionBlock}
+Use only facts and exact URLs present in the dossier. Do not fill gaps from memory. Exclude anything already published unless the dossier proves a distinct new release. Produce exactly two or three items, exactly one lead, all six social captions, and obey every content, confidentiality, caption, and length rule in the complete specification. The thesis must be no more than 58 characters (38 to 56 is preferred), the accentPhrase must be an exact unique three-to-five-word span inside the thesis, and the readThrough field must be two or three sentences and 260 to 300 characters inclusive so both fit the fixed slide. Optional item fields must be omitted when inapplicable; never emit null or an empty placeholder. The local validator and renderer are authoritative and will reject the run if anything is wrong.${correctionBlock}
 
 ALREADY-PUBLISHED ITEM NAMES
 - ${published}
@@ -188,9 +188,9 @@ function assertDraftFits(brief) {
   }
 
   const readThroughLength = [...(brief?.readThrough ?? "")].length;
-  if (readThroughLength < 260 || readThroughLength > 324) {
+  if (readThroughLength < 260 || readThroughLength > 300) {
     throw new Error(
-      `readThrough is ${readThroughLength} characters; the fixed slide panel requires 260 to 324.`
+      `readThrough is ${readThroughLength} characters; the fixed slide panel requires 260 to 300.`
     );
   }
 }
@@ -216,6 +216,51 @@ function normalizeShortReadThrough(brief) {
   }
 
   return brief;
+}
+
+function exactPhraseCount(text, phrase) {
+  if (!phrase) return 0;
+  return text.split(phrase).length - 1;
+}
+
+function validAccentPhrase(thesis, phrase) {
+  const words = String(phrase ?? "").trim().split(/\s+/).filter(Boolean);
+  if (words.length < 3 || words.length > 5) return false;
+  const start = thesis.indexOf(phrase);
+  if (start < 0 || exactPhraseCount(thesis, phrase) !== 1) return false;
+  const end = start + phrase.length;
+  return !(start > 0 && /[A-Za-z0-9]/.test(thesis[start - 1])) &&
+    !(end < thesis.length && /[A-Za-z0-9]/.test(thesis[end]));
+}
+
+function chooseAccentPhrase(thesis) {
+  const tokens = [...thesis.matchAll(/\S+/g)];
+  for (const size of [4, 3, 5]) {
+    for (let index = 0; index + size <= tokens.length; index += 1) {
+      const start = tokens[index].index;
+      const last = tokens[index + size - 1];
+      const phrase = thesis.slice(start, last.index + last[0].length);
+      if (validAccentPhrase(thesis, phrase)) return phrase;
+    }
+  }
+  return null;
+}
+
+export function normalizeDraftLayout(candidate) {
+  if (!candidate || typeof candidate !== "object" || Array.isArray(candidate)) {
+    return { brief: candidate, repairs: [] };
+  }
+  let brief = normalizeShortReadThrough({ ...candidate });
+  const repairs = [];
+  const thesis = typeof brief.thesis === "string" ? brief.thesis : "";
+  if (thesis && !validAccentPhrase(thesis, brief.accentPhrase)) {
+    const accentPhrase = chooseAccentPhrase(thesis);
+    if (accentPhrase) {
+      brief = { ...brief, accentPhrase };
+      repairs.push("selected an exact unique three-to-five-word accent phrase from the thesis");
+    }
+  }
+  return { brief, repairs };
 }
 
 export function extractResponseText(payload) {
@@ -328,7 +373,11 @@ export async function generateBrief({
 
     let brief;
     try {
-      brief = normalizeShortReadThrough(JSON.parse(draft));
+      const normalized = normalizeDraftLayout(JSON.parse(draft));
+      brief = normalized.brief;
+      for (const repair of normalized.repairs) {
+        console.log(`layout_repair=${repair}`);
+      }
       assertDraftFits(brief);
       await validateDraft?.(brief);
       return brief;

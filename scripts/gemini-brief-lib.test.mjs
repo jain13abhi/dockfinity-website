@@ -59,13 +59,13 @@ test("draft request uses JSON structured output and no search tool", () => {
   assert.equal(request.generationConfig.responseJsonSchema.properties.items.maxItems, 3);
   assert.match(
     request.generationConfig.responseJsonSchema.properties.readThrough.description,
-    /260 to 324 characters/
+    /260 to 300 characters/
   );
   assert.match(
     request.generationConfig.responseJsonSchema.properties.thesis.description,
     /58 characters/
   );
-  assert.match(request.contents[0].parts[0].text, /260 to 324 characters/);
+  assert.match(request.contents[0].parts[0].text, /260 to 300 characters/);
   assert.match(request.contents[0].parts[0].text, /RESEARCH/);
   assert.match(request.contents[0].parts[0].text, /Old Tool/);
 });
@@ -109,6 +109,7 @@ test("generateBrief performs a grounded research pass then a structured drafting
   assert.deepEqual(result, {
     date: "2026-09-20",
     thesis: "A concise layout-safe thesis",
+    accentPhrase: "A concise layout-safe thesis",
     readThrough: "x".repeat(260),
   });
   assert.equal(calls.length, 2);
@@ -389,5 +390,5 @@ test("final draft attempt uses conservative read-through copy before renderer va
 
   assert.ok([...result.readThrough].length <= 300);
   assert.equal(calls.length, 3);
-  assert.match(calls[2].contents[0].parts[0].text, /overfull/i);
+  assert.match(calls[2].contents[0].parts[0].text, /fixed slide panel requires 260 to 300/i);
 });
