@@ -7,6 +7,7 @@ import {
   buildResearchRequest,
   extractResponseText,
   generateBrief,
+  normalizeDraftLayout,
   parseResearchIssueTitle,
 } from "./gemini-brief-lib.mjs";
 
@@ -322,4 +323,71 @@ test("generateBrief retries 429 but keeps infrastructure validation out of the L
     /renderer process unavailable/
   );
   assert.equal(calls, 3, "429 retry, research success, then one draft; no repair draft");
+});
+
+test("layout normalization replaces an invalid accent with an exact unique three-to-five-word thesis phrase", () => {
+  const result = normalizeDraftLayout({
+    thesis: "Open models move from experiments into production",
+    accentPhrase: "Open models",
+    readThrough: "x".repeat(280),
+  });
+
+  assert.match(result.brief.accentPhrase, /^\S+(?:\s+\S+){2,4}$/);
+  assert.equal(result.brief.thesis.split(result.brief.accentPhrase).length - 1, 1);
+  assert.match(result.repairs.join("\n"), /accent phrase/i);
+});
+
+test("layout normalization leaves a valid accent phrase unchanged", () => {
+  const candidate = {
+    thesis: "Open models move from experiments into production",
+    accentPhrase: "models move from experiments",
+    readThrough: "x".repeat(280),
+  };
+  const result = normalizeDraftLayout(candidate);
+
+  assert.equal(result.brief.accentPhrase, candidate.accentPhrase);
+  assert.deepEqual(result.repairs, []);
+});
+
+test("final draft attempt uses conservative read-through copy before renderer validation", async () => {
+  const calls = [];
+  const overfull = {
+    date: "2026-09-25",
+    thesis: "Open models move from experiments into production",
+    accentPhrase: "models move from experiments",
+    readThrough: "A sourced release changes how teams evaluate agent workflows. ".repeat(5).trim(),
+  };
+  const corrected = {
+    ...overfull,
+    readThrough: "Teams can evaluate the sourced release in a reversible pilot. ".repeat(4).trim(),
+  };
+  const fakeFetch = async (_url, options) => {
+    calls.push(JSON.parse(options.body));
+    const text = calls.length === 1
+      ? "verified research dossier"
+      : JSON.stringify(calls.length === 2 ? overfull : corrected);
+    return {
+      ok: true,
+      status: 200,
+      json: async () => ({ candidates: [{ content: { parts: [{ text }] } }] }),
+    };
+  };
+
+  const result = await generateBrief({
+    apiKey: "test-key",
+    date: "2026-09-25",
+    specification: "SPEC",
+    publishedNames: [],
+    evidence: "PRIMARY RELEASE EVIDENCE",
+    fetchImpl: fakeFetch,
+    validateDraft(brief) {
+      if ([...brief.readThrough].length > 300) {
+        throw new Error("Column 'right' is overfull; shorten readThrough.");
+      }
+    },
+  });
+
+  assert.ok([...result.readThrough].length <= 300);
+  assert.equal(calls.length, 3);
+  assert.match(calls[2].contents[0].parts[0].text, /overfull/i);
 });
