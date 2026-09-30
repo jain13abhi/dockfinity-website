@@ -1,0 +1,64 @@
+{
+  "date": "2026-09-30",
+  "title": "Decision models reach local runtimes",
+  "summary": "Ollama 0.35.0 adds native decision models for scoring and classification, while uv 0.12.21 refines lockfile output.",
+  "thesis": "Decision models reach local runtimes.",
+  "accentPhrase": "Decision models reach local",
+  "sections": [
+    "TOOLING"
+  ],
+  "items": [
+    {
+      "name": "ollama",
+      "kind": "tooling",
+      "version": "v0.35.0",
+      "releaseDate": "2026-09-28",
+      "licence": "MIT",
+      "platform": "macOS, Linux, Windows",
+      "repoUrl": "https://github.com/ollama/ollama",
+      "releaseUrl": "https://github.com/ollama/ollama/releases/tag/v0.35.0",
+      "what": "Local runtime supporting decision models via a dedicated systemone endpoint.",
+      "whyDifferent": "Returns probabilities and choices rather than text generation for classification tasks.",
+      "isLead": true,
+      "source": "Source: ollama/ollama, 28 Sep 2026 - https://github.com/ollama/ollama/releases/tag/v0.35.0"
+    },
+    {
+      "name": "uv",
+      "kind": "tooling",
+      "version": "0.12.21",
+      "releaseDate": "2026-09-29",
+      "licence": "Apache-2.0",
+      "platform": "macOS, Linux, Windows",
+      "repoUrl": "https://github.com/astral-sh/uv",
+      "releaseUrl": "https://github.com/astral-sh/uv/releases/tag/0.12.21",
+      "what": "Extremely fast Python package and project manager written in Rust.",
+      "whyDifferent": "Omits empty manifest tables from lockfiles and updates CPython bundled OpenSSL.",
+      "isLead": false,
+      "source": "Source: astral-sh/uv, 29 Sep 2026 - https://github.com/astral-sh/uv/releases/tag/0.12.21"
+    }
+  ],
+  "readThrough": "Local runtimes now support structured decision routing natively, reducing reliance on heavy text-generation pipelines for simple classification tasks; teams should evaluate it against their own stack, security controls and operating constraints before adoption.",
+  "social": {
+    "linkedin": "Local runtimes are expanding beyond simple text generation into structured decision routing. Ollama v0.35.0 introduces native support for decision models through a dedicated endpoint that returns probabilities, scores, and choices instead of prose. For engineering teams evaluating local architectures, this shifts ticket triage, model routing, and content classification away from large language models and onto lightweight classifiers. Meanwhile, Astral released uv 0.12.21, bringing cleaner lockfile generation and updated OpenSSL bindings for CPython.",
+    "instagram": "Ollama 0.35.0 introduces native decision models for local scoring and classification. Astral uv 0.12.21 ships lockfile improvements and OpenSSL updates.",
+    "x": "Ollama 0.35.0 brings decision models to local runtimes, returning probabilities and choices instead of text. Astral uv 0.12.21 refines lockfile generation.",
+    "facebook": "Local runtime capabilities took a distinct step forward with the release of Ollama 0.35.0, which adds native support for decision models that output structured probabilities and choices rather than free-form text. Alongside this, Astral released uv 0.12.21 with improved lockfile output and updated OpenSSL runtimes for Python management.",
+    "threads": "Ollama 0.35.0 brings decision models to local runtimes, enabling structured classification and scoring without text generation.",
+    "googleBusiness": "Ollama 0.35.0 brings decision models to local runtimes, offering structured classification and scoring. Astral uv 0.12.21 refines lockfile generation and package management.",
+    "hashtags": [
+      "#LocalAI",
+      "#Python",
+      "#Ollama",
+      "#DevOps",
+      "#SoftwareEngineering",
+      "#OpenSource",
+      "#MachineLearning",
+      "#Infrastructure"
+    ]
+  },
+  "sources": {
+    "attribution": "ollama/ollama v0.35.0 release notes, 28 Sep 2026 - https://github.com/ollama/ollama/releases/tag/v0.35.0; astral-sh/uv 0.12.21 release notes, 29 Sep 2026 - https://github.com/astral-sh/uv/releases/tag/0.12.21",
+    "surveyDate": "2026-09-30",
+    "disclaimer": "Independent technology analysis published by Dockfinity. Every release, version, licence and figure carries the primary source it was read from."
+  }
+}
