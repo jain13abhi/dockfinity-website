@@ -1,0 +1,64 @@
+{
+  "date": "2026-10-01",
+  "title": "Agent platforms tighten workflow control",
+  "summary": "LangChainJS and Anthropic Claude Code release updates that tighten interrupt preservation and multi-turn session resilience.",
+  "thesis": "Agent workflows demand explicit control.",
+  "accentPhrase": "demand explicit control",
+  "sections": [
+    "TOOLING"
+  ],
+  "items": [
+    {
+      "name": "langchainjs",
+      "kind": "tooling",
+      "version": "langchain@1.5.15",
+      "releaseDate": "2026-10-01",
+      "licence": "MIT",
+      "platform": "Node.js and TypeScript runtime environments",
+      "repoUrl": "https://github.com/langchain-ai/langchainjs",
+      "releaseUrl": "https://github.com/langchain-ai/langchainjs/releases/tag/langchain%401.5.15",
+      "what": "Preserves LangGraph interrupts inside tool retry middleware instead of treating them as failures.",
+      "whyDifferent": "Keeps paused tool calls resumable through checkpointers without converting them into erroneous tool states.",
+      "isLead": true,
+      "source": "Source: langchain-ai/langchainjs, 1 Oct 2026 - https://github.com/langchain-ai/langchainjs/releases/tag/langchain%401.5.15"
+    },
+    {
+      "name": "claude-code",
+      "kind": "tooling",
+      "version": "v2.1.286",
+      "releaseDate": "2026-09-30",
+      "licence": "licence not confirmed",
+      "platform": "Terminal environments supporting Node.js",
+      "repoUrl": "https://github.com/anthropics/claude-code",
+      "releaseUrl": "https://github.com/anthropics/claude-code/releases/tag/v2.1.286",
+      "what": "Terminal coding assistant adding session resume resilience and permission stack counters.",
+      "whyDifferent": "Prevents dropped turns after parallel tool calls and introduces structured mouse support for fullscreen list navigation.",
+      "isLead": false,
+      "source": "Source: anthropics/claude-code, 30 Sep 2026 - https://github.com/anthropics/claude-code/releases/tag/v2.1.286"
+    }
+  ],
+  "readThrough": "Agent engineering tooling is prioritizing interruption safety and state durability over simple execution speed. Teams building production LLM apps must adopt frameworks that cleanly handle paused tasks and interrupted tool histories without breaking checkpoint continuity.",
+  "social": {
+    "linkedin": "Agent platforms are shifting focus toward state durability and interrupt recovery. The latest releases from LangChainJS and Anthropic's Claude Code emphasize preserving tool execution state and maintaining continuity across interrupted turns. For engineering teams, this means agent architectures are maturing past simple retry loops into robust systems capable of pausing and resuming safely without corrupting checkpointer histories. Evaluation must now include how frameworks handle unexpected breaks during multi-step tool calls.",
+    "instagram": "Agent workflows require robust interrupt recovery and state durability. LangChainJS and Claude Code updates target session resilience.",
+    "x": "LangChainJS and Claude Code updates prioritize interrupt preservation and state durability for production agents.",
+    "facebook": "Agent platforms are placing new emphasis on workflow reliability and interrupt handling. Recent releases from LangChainJS and Anthropic focus on preserving tool states and preventing data loss during interrupted sessions. For development teams, this shift highlights the importance of robust checkpointer integration when building fault-tolerant AI applications.",
+    "threads": "Agent platforms are evolving past simple retry loops into systems built for robust interrupt handling and durable session history.",
+    "googleBusiness": "Dockfinity's daily discovery brief examines recent updates in agent engineering platforms. Shipped releases from LangChainJS and Anthropic highlight a broader industry shift toward robust interrupt handling, session durability, and reliable checkpointer integration. Contact our team to evaluate how these architectural patterns affect your LLM application roadmap.",
+    "hashtags": [
+      "#AgenticAI",
+      "#LangChain",
+      "#Anthropic",
+      "#LLMOps",
+      "#TypeScript",
+      "#SoftwareEngineering",
+      "#DeveloperTools",
+      "#Dockfinity"
+    ]
+  },
+  "sources": {
+    "attribution": "langchain-ai/langchainjs v1.5.15 release notes, 1 Oct 2026 - https://github.com/langchain-ai/langchainjs/releases/tag/langchain%401.5.15; anthropics/claude-code v2.1.286 release notes, 30 Sep 2026 - https://github.com/anthropics/claude-code/releases/tag/v2.1.286",
+    "surveyDate": "2026-10-01",
+    "disclaimer": "Independent technology analysis published by Dockfinity. Every release, version, licence and figure carries the primary source it was read from."
+  }
+}
